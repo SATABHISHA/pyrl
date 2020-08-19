@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ll_12"
+        >
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/app"
+            android:background="#2e5772"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#2e5772">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Insurance Detail"
+                    android:textColor="#fff"
+                    android:textSize="18sp"></TextView>
+
+            </androidx.appcompat.widget.Toolbar>
+            <!-- android:background="?attr/colorPrimary"-->
+
+        </com.google.android.material.appbar.AppBarLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_msg"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:textSize="19sp"
+            android:textColor="#000">
+
+        </TextView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/aaa"
+            android:layout_below="@id/app"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/app"
+                android:id="@+id/ll_1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="Policy Type"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:id="@+id/txt_policy_type"
+                    android:background="#E5E5E5"
+                    android:textColor="#000">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="15dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Provider"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/txt_provider_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Provider"
+                    android:textColor="#757575"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:background="#E5E5E5"
+                    android:layout_height="50dp"
+                    android:textStyle="bold"
+                    android:paddingLeft="10dp"
+                    android:textSize="15dp"
+                    android:paddingTop="5dp"
+                    android:textColor="#313131"
+                    android:layout_weight="1"
+                    android:text="Policy No">
+
+                </TextView>
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"></LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:background="#E5E5E5"
+                    android:textSize="15dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:layout_height="50dp"
+                    android:textStyle="bold"
+                    android:textColor="#313131"
+                    android:layout_weight="1"
+                    android:text="Sum Assured INR">
+
+
+                </TextView>
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"></LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:background="#E5E5E5"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="10dp"
+                    android:textColor="#313131"
+                    android:layout_weight="1"
+                    android:text="Expiry Date">
+
+                </TextView>
+
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="1dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_policy_no"
+                        android:layout_width="0dp"
+                        android:background="#F5F5F5"
+                        android:layout_height="60dp"
+                        android:paddingTop="5dp"
+                        android:textColor="#313131"
+                        android:layout_weight="1"
+                        android:text="Policy No">
+
+                    </TextView>
+                    <TextView
+                        android:id="@+id/txt_amount"
+                        android:layout_width="0dp"
+                        android:background="#F5F5F5"
+                        android:layout_height="60dp"
+                        android:textColor="#313131"
+                        android:textAlignment="textEnd"
+                        android:paddingTop="5dp"
+                        android:layout_marginLeft="1.5dp"
+                        android:layout_weight="1"
+                        android:text="Sum Assured INR">
+
+                    </TextView>
+                    <TextView
+                        android:id="@+id/txt_expiry_date"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:background="#F5F5F5"
+                        android:textColor="#313131"
+                        android:textAlignment="textEnd"
+                        android:layout_marginLeft="1.5dp"
+                        android:paddingTop="5dp"
+                        android:layout_weight="1"
+                        android:text="Expiry Date">
+
+                    </TextView>
+
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:text="Member(S)"
+                        android:background="#E5E5E5"
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        android:textSize="15sp">
+
+                    </TextView>
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Relationship"
+                        android:background="#E5E5E5"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:padding="10dp"
+                        android:layout_marginLeft="1.5dp"
+                        android:textColor="#000"
+                        android:textSize="15sp">
+
+                    </TextView>
+
+                </LinearLayout>
+
+                <ListView
+                    android:id="@+id/lv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#F5F5F5"
+
+                    ></ListView>
+
+
+
+            </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+
+                android:layout_alignParentBottom="true">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
+                    android:text="Previous"
+                    android:id="@+id/bt_privious">
+
+                </Button>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
+                    android:text="Close"
+                    android:layout_marginLeft="-5dp"
+                    android:id="@+id/bt_close">
+
+                </Button>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
+                    android:text="Next"
+                    android:layout_marginLeft="-5dp"
+                    android:visibility="visible"
+                    android:id="@+id/bt_next">
+
+                </Button>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

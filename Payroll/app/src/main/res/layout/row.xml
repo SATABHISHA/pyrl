@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="9dp"
+        android:paddingTop="-16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="15dp"
+
+            android:id="@+id/txt_count"
+
+            android:textSize="19sp"
+            android:textColor="#000">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/txt_holiday_name"
+
+            android:layout_toRightOf="@id/txt_count"
+            android:textSize="15sp"
+            android:textColor="#000">
+
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/txt_date"
+
+            android:layout_toRightOf="@id/txt_count"
+            android:layout_below="@id/txt_holiday_name"
+            android:textSize="19sp"
+            android:textColor="#A0A5AD">
+
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+
+            android:id="@+id/txt_day_name"
+
+            android:layout_toRightOf="@id/txt_date"
+            android:layout_below="@id/txt_holiday_name"
+            android:textSize="19sp"
+            android:textColor="#868B92">
+
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/txt_list"
+
+           android:layout_alignParentRight="true"
+            android:layout_marginRight="15sp"
+
+            android:textSize="19sp"
+            android:textColor="#000">
+
+        </TextView>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

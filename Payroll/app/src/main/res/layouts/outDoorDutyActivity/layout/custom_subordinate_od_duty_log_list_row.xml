@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:background="#ffffff">
+    <LinearLayout
+        android:id="@+id/ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="0dp"
+        android:paddingTop="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="5dp"
+        android:background="#dcdcdc">
+        <RelativeLayout
+            android:id="@+id/relative_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:paddingBottom="5dp"
+            android:background="#ffffff">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toLeftOf="@id/btn_view_time_log"
+                android:textSize="17sp"
+                android:textColor="#484848"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="Ashok Ghosh"/>
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_below="@id/tv_name"
+                android:layout_toLeftOf="@id/btn_view_time_log"
+                android:textSize="15sp"
+                android:textColor="#7B7A7A"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="2020-May-06"/>
+
+            <Button
+                android:id="@+id/btn_view_task"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:layout_marginTop="0dp"
+                android:textStyle="normal"
+                android:text="View Task"
+                android:textAllCaps="false"
+                android:textColor="#686666" />
+            <Button
+                android:id="@+id/btn_view_time_log"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginTop="0dp"
+                android:textAllCaps="false"
+                android:gravity="center"
+                android:layout_toLeftOf="@id/btn_view_task"
+                android:layout_marginRight="0dp"
+                android:textColor="#686666"
+                android:textStyle="normal"
+                android:text="View\nTime Log"/>
+           <!-- <LinearLayout
+                android:id="@+id/ll_border"
+                android:layout_below="@id/btn_view_task"
+                android:layout_width="match_parent"
+                android:layout_marginTop="6dp"
+                android:layout_height="1dp"
+                android:orientation="vertical"
+                android:background="#dcdcdc"/> -->
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

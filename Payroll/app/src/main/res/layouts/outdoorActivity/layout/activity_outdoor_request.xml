@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/app"
+        android:background="#2e5772"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#2e5772">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Outdoor Duty Request"
+                android:textColor="#ffffff"
+                android:textSize="20sp"></TextView>
+
+        </androidx.appcompat.widget.Toolbar>
+        <!-- android:background="?attr/colorPrimary"-->
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ll_button"
+            android:layout_marginBottom="20dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp">
+                <TextView
+                    android:id="@+id/tv_requisition_no_caption"
+                    android:layout_width="110dp"
+                    android:layout_height="35dp"
+                    android:text="Requisition No"
+                    android:gravity="center|left"
+                    android:textSize="15sp"
+                    android:textColor="#788087"/>
+                <TextView
+                    android:id="@+id/tv_requisition_no"
+                    android:layout_toRightOf="@id/tv_emp_name_caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:text="OD/2020/234675"
+                    android:gravity="left|center"
+                    android:textSize="15sp"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#788087"
+                    android:background="@drawable/layout6"
+                    android:layout_alignParentRight="true"/>
+                <TextView
+                    android:id="@+id/tv_emp_name_caption"
+                    android:layout_below="@id/tv_requisition_no_caption"
+                    android:layout_width="110dp"
+                    android:layout_height="35dp"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:text="Employee Name"
+                    android:textSize="15sp"
+                    android:textColor="#788087"/>
+                <TextView
+                    android:id="@+id/tv_emp_name"
+                    android:layout_toRightOf="@id/tv_emp_name_caption"
+                    android:layout_below="@id/tv_requisition_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Employee Name"
+                    android:gravity="left|center"
+                    android:paddingLeft="5dp"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#788087"
+                    android:background="@drawable/layout6"
+                    android:layout_alignParentRight="true"/>
+                <TextView
+                    android:id="@+id/tv_od_dutytype_caption"
+                    android:layout_below="@id/tv_emp_name_caption"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:text="OD Duty Type"
+                    android:textSize="15sp"
+                    android:textColor="#788087"/>
+                <LinearLayout
+                    android:id="@+id/ll_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="35dp"
+                    android:layout_marginTop="16.5dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/layout6"
+                    android:layout_below="@id/tv_emp_name"
+                    android:layout_toRightOf="@id/tv_od_dutytype_caption">
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_od_duty_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:paddingLeft="0dp"
+                        android:gravity="left"
+                        app:ms_multiline="false"
+                        app:ms_hint="Select Type"
+                        app:ms_hintTextSize="15sp"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_thickness="0dp"
+                        app:ms_arrowColor="#c2c2c2"
+                        app:ms_arrowSize="16dp"
+                        app:ms_alignLabels="false"
+                        android:layout_gravity="center"
+                        android:overlapAnchor="false"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_from_date_caption"
+                    android:layout_below="@id/tv_od_dutytype_caption"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="From Date"
+                    android:textSize="15sp"
+                    android:textColor="#788087"/>
+                <RelativeLayout
+                    android:id="@+id/rl_from_Date"
+                    android:layout_below="@id/ll_spinner"
+                    android:layout_toRightOf="@id/tv_from_date_caption"
+                    android:layout_toLeftOf="@id/ll_total_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="1dp"
+                    android:background="@drawable/layout6"
+                    android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edt_from_date_select"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toLeftOf="@id/imgBtnCalenderFrom"
+                            android:gravity="left|center_vertical"
+                            android:background="@drawable/ed_border_od_duty_request_calendar"
+                            android:paddingLeft="5dp"
+                            android:hint="Select Date"
+                            android:textSize="15sp"
+                            android:singleLine="true"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:imeOptions="actionDone" />
+
+
+
+                        <ImageButton
+                            android:id="@+id/imgBtnCalenderFrom"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="5dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerInParent="true"
+                            android:background="#ffffff"
+                            android:src="@drawable/calendar" />
+
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_to_date_caption"
+                    android:layout_below="@id/tv_from_date_caption"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="To Date"
+                    android:textSize="15sp"
+                    android:textColor="#788087"/>
+                <RelativeLayout
+                    android:id="@+id/rl_to_Date"
+                    android:layout_below="@id/rl_from_Date"
+                    android:layout_toRightOf="@id/tv_to_date_caption"
+                    android:layout_toLeftOf="@id/ll_total_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="1dp"
+                    android:background="@drawable/layout6">
+
+
+                        <EditText
+                            android:id="@+id/edt_date_to_select"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/ed_border_od_duty_request_calendar"
+                            android:layout_toLeftOf="@id/imgBtnCalenderTo"
+                            android:gravity="left|center_vertical"
+                            android:paddingLeft="5dp"
+                            android:hint="Select Date"
+                            android:textSize="15sp"
+                            android:singleLine="true"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:imeOptions="actionDone" />
+
+
+                    <ImageButton
+                        android:id="@+id/imgBtnCalenderTo"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="5dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="#ffffff"
+                        android:src="@drawable/calendar" />
+
+                </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/ll_total_day"
+                    android:layout_width="60dp"
+                    android:layout_height="85dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/ll_spinner"
+                    android:background="@drawable/layout6"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:text="Total"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:background="#E3D1B4"/>
+                    <TextView
+                        android:id="@+id/tv_total_days"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:textSize="20sp"
+                        android:text=""
+                        android:layout_gravity="center"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="Day(s)"
+                        android:layout_gravity="center"
+                        android:textStyle="normal"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_reason_caption"
+                    android:layout_below="@id/tv_to_date_caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Reason"
+                    android:textSize="15sp"
+                    android:textColor="#788087"/>
+                <EditText
+                    android:id="@+id/ed_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="0dp"
+                    android:padding="5dp"
+                    android:gravity="top"
+                    android:layout_below="@id/tv_reason_caption"
+                    android:background="@drawable/layout6"/>
+
+
+                <TextView
+                    android:id="@+id/tv_approval_caption"
+                    android:layout_below="@id/ed_reason"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Approval Remarks"
+                    android:textSize="15sp"
+                    android:gravity="top"
+                    android:textColor="#788087"/>
+                <EditText
+                    android:id="@+id/ed_approval"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="0dp"
+                    android:padding="5dp"
+                    android:layout_below="@id/tv_approval_caption"
+                    android:gravity="top"
+                    android:background="@drawable/layout6"/>
+
+                <TextView
+                    android:id="@+id/tv_hr_caption"
+                    android:layout_below="@id/ed_approval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="HR Remarks"
+                    android:visibility="gone"
+                    android:textSize="15sp"
+                    android:gravity="top"
+                    android:textColor="#788087"/>
+                <EditText
+                    android:id="@+id/ed_hr"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/tv_hr_caption"
+                    android:gravity="top"
+                    android:background="@drawable/layout6"/>
+
+                <TextView
+                    android:id="@+id/tv_actiontype_caption"
+                    android:layout_below="@id/ed_hr"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:text="Application Type"
+                    android:textSize="15sp"
+                    android:gravity="top"
+                    android:textColor="#788087"/>
+
+                <RadioGroup
+                    android:id="@+id/groupradio"
+                    android:layout_below="@id/ed_hr"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_toRightOf="@id/tv_actiontype_caption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radia_id1"
+                        android:text="Save"
+                        android:textColor="#808080"
+                        android:textStyle="normal"
+                        android:buttonTint="#1182d5"
+                        android:textSize="16sp"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:id="@+id/radia_id2"
+                        android:text="Submit"
+                        android:textColor="#808080"
+                        android:textStyle="normal"
+                        android:buttonTint="#1182d5"
+                        android:textSize="16sp"/>
+                </RadioGroup>
+                <TextView
+                    android:id="@+id/tv_request_caption"
+                    android:layout_below="@id/tv_actiontype_caption"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="33dp"
+                    android:text="Request Status"
+                    android:textSize="15sp"
+                    android:gravity="top"
+                    android:textColor="#788087"/>
+                <LinearLayout
+                    android:id="@+id/ll_spinner_request_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="35dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/layout6"
+                    android:layout_below="@id/groupradio"
+                    android:layout_toRightOf="@id/tv_od_dutytype_caption">
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_rqst_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:paddingLeft="10dp"
+                        app:ms_multiline="false"
+                        app:ms_hint="Select Status"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_thickness="0dp"
+                        app:ms_arrowColor="#c2c2c2"
+                        app:ms_arrowSize="16dp"
+                        app:ms_alignLabels="false"
+                        android:layout_gravity="center"
+                        android:overlapAnchor="false"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+        </ScrollView>
+        <LinearLayout
+            android:id="@+id/ll_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:text="Cancel"
+                android:textSize="15sp"
+                android:background="@drawable/layout6"
+                android:textColor="#2e5772"
+                />
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Save"
+                android:textAllCaps="false"
+                android:background="@drawable/layout6"
+                android:textSize="15sp"
+                android:textColor="#2e5772"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

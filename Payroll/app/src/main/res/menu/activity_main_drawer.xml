@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/emp_information"
+            android:icon="@drawable/eminfo"
+            android:title="Employee Information" />
+        <item
+            android:id="@+id/leave_balance"
+            android:icon="@drawable/leave"
+            android:title="Leave " />
+        <item
+            android:id="@+id/emp_facilities"
+            android:icon="@drawable/facilities"
+            android:title="Employee Fecilities" />
+        <item
+            android:id="@+id/emp_documents"
+            android:icon="@drawable/employee_docs"
+            android:title="Employee Documents" />
+        <item
+            android:id="@+id/cmp_documents"
+            android:icon="@drawable/organization_docs"
+            android:title="Company Documents" />
+        <item
+            android:id="@+id/insurance_detail"
+            android:icon="@drawable/insurance"
+            android:title="Insurance Detail" />
+        <item
+            android:id="@+id/holiday_detail"
+            android:icon="@drawable/holiday_list"
+            android:title="Holiday Detail" />
+        <item
+            android:id="@+id/nav_outdoor_duty_request"
+            android:icon="@drawable/od_request"
+            android:title="Outdoor Duty Request" />
+        <item
+            android:id="@+id/nav_outdoor_duty"
+            android:icon="@drawable/od_duty"
+            android:title="Outdoor Duty" />
+
+    </group>
+
+    <item android:title=""
+        android:visible="true">
+        <menu>
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="Logout" />
+        </menu>
+
+    </item>
+</menu>
+
+

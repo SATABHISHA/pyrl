@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Payroll</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <string name="dialog_message">Welcome to Alert Dialog</string>
+    <string name="dialog_title">Javatpoint Alert Dialog</string>
+    <string name="pressbackagain">Press Double Back to Exit</string>
+    <string-array name="Leave_Status">
+        <item>Approved</item>
+        <item>Return</item>
+        <item>Canceled</item>
+
+    </string-array>
+</resources>

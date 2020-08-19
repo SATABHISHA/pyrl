@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/coordinatorLayout"
+    android:layout_height="match_parent"
+    >
+<RelativeLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+
+<!--        android:orientation="vertical">-->
+
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/workplan"
+                android:id="@+id/workplan"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+
+                ></ImageView>
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Payroll"
+
+                android:layout_below="@id/workplan"
+                android:id="@+id/payroll"
+                android:textColor="#868F95"
+                android:textSize="25dp">
+            </TextView>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_below="@id/payroll"
+android:layout_centerInParent="true"
+    android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rl_corporate"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="100dp">
+
+            <RelativeLayout
+                android:id="@+id/rl_2"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:background="#2E84BD">
+                
+                <ImageView
+                    android:id="@+id/img_userid"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/corp_id"></ImageView>
+            </RelativeLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/layouts"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:hint="Corporate Id"
+                android:id="@+id/ed_userid"
+                android:layout_toRightOf="@id/rl_2"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:id="@+id/rl_user"
+            android:layout_below="@id/rl_corporate"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            >
+
+            <RelativeLayout
+                android:id="@+id/rl_3"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:background="#2E84BD">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/img_username"
+                    android:src="@drawable/username"
+                    >
+
+                </ImageView>
+
+            </RelativeLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/layouts"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:hint="User name"
+                android:id="@+id/ed_username"
+                android:layout_toRightOf="@id/rl_3"/>
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_below="@id/rl_user"
+            android:layout_marginTop="10dp"
+            >
+
+            <RelativeLayout
+                android:id="@+id/rl_4"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:background="#2E84BD">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/img_userpassword"
+                    android:src="@drawable/password">
+
+                </ImageView>
+
+            </RelativeLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/layouts"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:hint="Password"
+                android:id="@+id/ed_userpassword"
+                android:inputType="textPassword"
+                android:layout_toRightOf="@id/rl_4"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_below="@id/rl_pass"
+            android:layout_marginRight="25dp"
+            android:id="@+id/rl_login"
+            android:layout_marginTop="20dp">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#2E5871"
+                android:text="LOGIN"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:id="@+id/btn_login">
+
+            </Button>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:layout_below="@id/rl_login"
+            android:layout_marginLeft="25dp"
+
+            android:layout_marginTop="20dp">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/checked_sign"
+                android:text="Stay signed in"
+                android:textColor="#2E5871"
+                android:textStyle="bold"></CheckBox>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/checked_sign"
+                android:text="Can't access your account?"
+                android:gravity="right"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                ></TextView>
+
+
+
+        </RelativeLayout>
+
+<!--    </LinearLayout>-->
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@id/rl_5"
+                android:layout_marginBottom="10dp"
+                android:text="Version 1.2020.02.07">
+
+
+            </TextView>
+
+
+
+
+
+
+            <TextView
+                android:id="@+id/rl_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:text="Copyright \u00a9 2020 ARB India Pvt Ltd"
+                android:layout_marginBottom="10dp"
+                android:textStyle="bold"></TextView>
+
+
+</RelativeLayout>
+
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
