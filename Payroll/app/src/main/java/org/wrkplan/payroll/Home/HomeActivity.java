@@ -56,10 +56,11 @@ import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.OutDoorDuty.OutdoorListActivity;
 import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogListActivity;
 import org.wrkplan.payroll.R;
+import org.wrkplan.payroll.Timesheet.MyAttendanceActivity;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    ImageView img_emp_information, img_leave_balance, img_emp_facilities, img_emp_documents, img_company_documents, img_insurance_details, img_holiday_details, img_od_duty, img_info;
+    ImageView img_emp_information, img_leave_balance, img_emp_facilities, img_emp_documents, img_company_documents, img_insurance_details, img_holiday_details, img_od_duty, img_info, img_timesheet;
     TextView tv_emp_information, tv_leave_balance, tv_emp_facilitis, tv_emp_documemts, tv_cmp_documents,
             tv_insurance_details, tv_holiday_details;
     TextView tv_fullname,tv_companynam;
@@ -67,7 +68,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
-    LinearLayout Linear, ll_od_request;
+    LinearLayout Linear, ll_od_request, ll_timesheet;
     RelativeLayout ll_od_duty;
     CoordinatorLayout coordinatorLayout;
     Context context;
@@ -145,6 +146,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         img_od_duty=findViewById(R.id.img_od_duty);
         img_info=findViewById(R.id.img_info);
 
+        ll_timesheet=findViewById(R.id.ll_timesheet);
+        img_timesheet=findViewById(R.id.img_timesheet);
+
         //------------------End of Initialize views--------------//
 
         img_emp_information.setOnClickListener(this);
@@ -165,6 +169,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         ll_od_request.setOnClickListener(this);
         ll_od_duty.setOnClickListener(this);
         img_od_duty.setOnClickListener(this);
+        ll_timesheet.setOnClickListener(this);
+        img_timesheet.setOnClickListener(this);
 
         load_data_check_od_duty();
     }
@@ -376,6 +382,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.img_od_duty:
                 startActivity(new Intent(this, OdDutyLogListActivity.class));
+                break;
+            case R.id.ll_timesheet:
+                startActivity(new Intent(this, MyAttendanceActivity.class));
+                break;
+            case R.id.img_timesheet:
+                startActivity(new Intent(this, MyAttendanceActivity.class));
                 break;
             default:
                 break;
