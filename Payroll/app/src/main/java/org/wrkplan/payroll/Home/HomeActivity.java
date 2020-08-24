@@ -199,6 +199,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //                                a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                                 Intent intent=new Intent(HomeActivity.this,LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 finish();
 
