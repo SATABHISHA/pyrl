@@ -35,8 +35,8 @@
                 android:layout_marginTop="100dp"
                 android:textColor="#8B8B8B"
                 android:layout_centerHorizontal="true"
-                android:text="Payroll"
-                android:textSize="25dp"/>
+                android:text="             P A  Y  R  O  L  L"
+                android:textSize="16sp"/>
         </RelativeLayout>
 
 
