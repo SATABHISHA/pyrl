@@ -547,7 +547,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:src="@drawable/holidaylist"
                         ></ImageView>
 
@@ -599,7 +599,7 @@
                         android:layout_gravity="center"
                         android:textStyle="bold"
                         android:text="Timesheet"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:textColor="#2e5772"
                         ></TextView>
 

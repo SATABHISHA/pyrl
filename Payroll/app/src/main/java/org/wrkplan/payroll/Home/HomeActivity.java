@@ -385,10 +385,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, OdDutyLogListActivity.class));
                 break;
             case R.id.ll_timesheet:
-//                startActivity(new Intent(this, MyAttendanceActivity.class));
+                startActivity(new Intent(this, MyAttendanceActivity.class));
                 break;
             case R.id.img_timesheet:
-//                startActivity(new Intent(this, MyAttendanceActivity.class));
+                startActivity(new Intent(this, MyAttendanceActivity.class));
                 break;
             default:
                 break;
