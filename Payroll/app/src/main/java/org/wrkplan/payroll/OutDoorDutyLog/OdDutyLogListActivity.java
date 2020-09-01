@@ -99,8 +99,21 @@ public class OdDutyLogListActivity extends AppCompatActivity implements View.OnC
         tv_pause.setOnClickListener(this);
         tv_stop.setOnClickListener(this);
 
-        statusCheck();
+        statusCheck(); //--added on 1st sept
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        statusCheck();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        statusCheck();
+        recreate();
     }
 
     @Override
@@ -513,17 +526,17 @@ public class OdDutyLogListActivity extends AppCompatActivity implements View.OnC
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Please enable your GPS")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
 //                        startActivity(new Intent(HomeActivity.this, FingerprintActivity.class));
                     }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                });
+               /* .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         dialog.cancel();
                     }
-                });
+                });*/
         final AlertDialog alert = builder.create();
         alert.show();
     }

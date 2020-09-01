@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_login);
         setContentView(R.layout.activity_login_new);
-        statusCheck(); //---added by Satabhisha on 6th MAy
+//        statusCheck(); //---added by Satabhisha on 6th MAy //--commented on 1st sept
 
         //----Firebase code starts
 
