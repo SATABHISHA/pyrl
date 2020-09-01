@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
-            android:paddingRight="18dp"
+            android:paddingRight="20dp"
             android:paddingTop="20dp"
             android:visibility="visible">
             <TextView
@@ -217,15 +217,49 @@
                 </RelativeLayout>
             </LinearLayout>
             <TextView
+                android:id="@+id/tv_logtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_below="@id/ll_log_in_out"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 android:text="My Attendance Log"/>
-
+<LinearLayout
+    android:id="@+id/ll_line_attndnc"
+    android:layout_width="match_parent"
+    android:layout_height="0.8dp"
+    android:layout_below="@id/tv_logtitle"
+    android:orientation="horizontal"
+    android:layout_marginTop="5dp"
+    android:background="#454444"/>
+            <RelativeLayout
+                android:layout_below="@id/ll_line_attndnc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/tv_title_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date"/>
+                <TextView
+                    android:id="@+id/tv_title_in1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_toLeftOf="@id/tv_title_out1"
+                    android:layout_marginRight="150dp"
+                    android:text="IN"/>
+                <TextView
+                    android:id="@+id/tv_title_out1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:text="OUT"/>
+            </RelativeLayout>
         </RelativeLayout>
-    <!--    <androidx.cardview.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/rl_button"
@@ -250,8 +284,9 @@
                 android:id="@+id/ll_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="0dp"
-                android:paddingRight="0dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp"
                 android:visibility="gone"
                 android:orientation="vertical">
                 <androidx.recyclerview.widget.RecyclerView
@@ -261,7 +296,7 @@
                     android:layout_marginTop="0dp"
                     android:scrollbars="vertical" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView> -->
+        </androidx.cardview.widget.CardView>
         <RelativeLayout
             android:id="@+id/rl_button"
             android:layout_width="match_parent"

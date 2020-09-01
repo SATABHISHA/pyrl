@@ -539,6 +539,7 @@
                     android:layout_width="0dp"
                     android:layout_height="170dp"
                     android:layout_marginLeft="5dp"
+                    android:background="@drawable/layout6"
                     android:gravity="center"
                     android:visibility="visible"
                     android:layout_weight="1">
