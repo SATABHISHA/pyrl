@@ -2,6 +2,7 @@ package org.wrkplan.payroll.Leave_Balance;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,9 +36,10 @@ public class LeaveBalanceActivity extends AppCompatActivity {
 
     TextView tv_casual_leave,tv_earn_leav,tv_sick_leave,tv_matarnal_leave,tv_paternal_leave,tv_comp_off;
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
-  //  String url="http://192.168.10.175:9018/api/leaves/payroll_713/50/2019-2020";
+    //  String url="http://192.168.10.175:9018/api/leaves/payroll_713/50/2019-2020";
     ArrayList<String> arrayList = new ArrayList<>();
     Button bt_ok,btn_leave,btn_subordinate;
+    String year;
 
     @Override
     public void onBackPressed() {
@@ -58,11 +60,11 @@ public class LeaveBalanceActivity extends AppCompatActivity {
         tv_matarnal_leave=findViewById(R.id.tv_matarnal_leave);
         tv_paternal_leave=findViewById(R.id.tv_paternal_leave);
         tv_comp_off=findViewById(R.id.tv_comp_off);
-      //  bt_ok=findViewById(R.id.bt_ok);
+        //  bt_ok=findViewById(R.id.bt_ok);
         btn_leave=findViewById(R.id.btn_leave);
         btn_subordinate=findViewById(R.id.btn_subordinate);
-        Spinner spinner1 = findViewById(R.id.spinner1);
-       // bt_ok.setVisibility(View.GONE);
+        final Spinner spinner1 = findViewById(R.id.spinner1);
+        // bt_ok.setVisibility(View.GONE);
 
 
 
@@ -88,11 +90,14 @@ public class LeaveBalanceActivity extends AppCompatActivity {
         });
 
 
-btn_leave.setTransformationMethod(null);
-btn_subordinate.setTransformationMethod(null);
+        btn_leave.setTransformationMethod(null);
+        btn_subordinate.setTransformationMethod(null);
 
-        arrayList.add("2019 - 2020");
-        arrayList.add("2018 - 2019");
+        arrayList.add("2020");
+        arrayList.add("2019");
+        arrayList.add("2018");
+
+
 
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayList);
@@ -101,10 +106,23 @@ btn_subordinate.setTransformationMethod(null);
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-              String item = parent.getItemAtPosition(position).toString();
-           //  Toast.makeText(parent.getContext(), "Selected: " + item,          Toast.LENGTH_LONG).show();
+                String item = parent.getItemAtPosition(position).toString();
+                //  Toast.makeText(parent.getContext(), "Selected: " + item,          Toast.LENGTH_LONG).show();
 
-                GetData(item.replace(" ", ""));
+                if(item=="2020")
+                {
+                    year="2020-2021";
+                }
+                else if(item=="2019")
+                {
+                    year="2019-2020";
+                }
+                else
+                {
+                    year="2018-2019";
+                }
+
+                GetData(year);
 
             }
             @Override
@@ -123,9 +141,10 @@ btn_subordinate.setTransformationMethod(null);
 
     }
 
-    private void GetData(String year_code ) {
-        String url= Url.BASEURL + "leave/" + "balance/" + userSingletonModel.corporate_id+"/"+userSingletonModel.employee_id+"/"+year_code;
+    private void GetData(String year ) {
 
+        String url= Url.BASEURL + "leave/" + "balance/" + userSingletonModel.corporate_id+"/"+userSingletonModel.employee_id+"/"+year;
+        Log.d("sfgj==",url);
 
 
 
@@ -151,7 +170,7 @@ btn_subordinate.setTransformationMethod(null);
                     tv_matarnal_leave.setText(userSingletonModel.getMaternal_leave());
                     tv_paternal_leave.setText(userSingletonModel.getPaternal_leave());
 
-
+                    Log.d("case",tv_casual_leave.toString());
 
                 } catch (JSONException e) {
                     e.printStackTrace();

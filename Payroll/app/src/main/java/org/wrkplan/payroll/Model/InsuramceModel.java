@@ -1,7 +1,7 @@
 package org.wrkplan.payroll.Model;
 
 public class InsuramceModel {
-    String provider_name,type,no,amount,expiry_date,name,relationship;
+    String provider_name,type,no,amount,expiry_date,name,relationship, premium_amount;
 
     public String getProvider_name() {
         return provider_name;
@@ -57,5 +57,13 @@ public class InsuramceModel {
 
     public void setRelationship(String relationship) {
         this.relationship = relationship;
+    }
+
+    public String getPremium_amount() {
+        return premium_amount;
+    }
+
+    public void setPremium_amount(String premium_amount) {
+        this.premium_amount = premium_amount;
     }
 }

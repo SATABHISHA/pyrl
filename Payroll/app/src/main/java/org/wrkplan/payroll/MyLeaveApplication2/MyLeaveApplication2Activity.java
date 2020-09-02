@@ -72,7 +72,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     ImageView img_list;
     TextView leave_title,txt_total_number,tv_supervisor_remark,tv_final_supervisor_remark,tv_details1;
     RelativeLayout submit_type,rb_type,spiner_approved,txt_approved,txt_check_leave,subordinate_super,leave_super
-    ,subordinate_final,leave_final,supervisor_details,leave_details,rl_to_sub,rl_to,rl_from_sub,rl_from;
+            ,subordinate_final,leave_final,supervisor_details,leave_details,rl_to_sub,rl_to,rl_from_sub,rl_from;
 
     Button btn_cancel,btn_save,btn_cancel_sub,btn_save_sub;
     AlertDialog.Builder builder;
@@ -83,14 +83,14 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     TextView tv_casual_leave;
     TextView tv_earn_leav ;
 
-            TextView txt_from_date,txt_to_date,txt_from_date1,txt_to_date1,txt_application_status;
+    TextView txt_from_date,txt_to_date,txt_from_date1,txt_to_date1,txt_application_status;
     ImageView cal1,cal2;
     private int mYear, mMonth, mDay, mHour, mMinute;
     final Calendar c = Calendar.getInstance();
-   // final Calendar c2 = Calendar.getInstance();
+    // final Calendar c2 = Calendar.getInstance();
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
-  //  SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd-MMM-yyyy");
+    //  SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd-MMM-yyyy");
 
     //ArrayList<LeaveType> arrayList=new ArrayList<>();
     ArrayList<LeaveType> arrayList=new ArrayList<>();
@@ -106,43 +106,43 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     JSONObject jsonBody=new JSONObject();
     JSONObject jsonBody_Subordinate=new JSONObject();
     Button bt_ok;
-  LinearLayout  ll_save_cancel,llone_save_cancel;
+    LinearLayout  ll_save_cancel,llone_save_cancel;
 
 
 
 
     @Override
     public void onBackPressed() {
-      //  super.onBackPressed();
+        //  super.onBackPressed();
         if (txt_leave_status1.getText().toString().equals("Save") || txt_leave_status1.getText().toString().equals("Return")) {
-        Url.isSubordinateLeaveApplication=false;
-        builder.setMessage("You may lost any unsaved data. Do you really want to cancel?")
-                .setCancelable(false)
+            Url.isSubordinateLeaveApplication=false;
+            builder.setMessage("You may lost any unsaved data. Do you really want to cancel?")
+                    .setCancelable(false)
 
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Url.isSubordinateLeaveApplication = false;
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Url.isSubordinateLeaveApplication = false;
 
-                        Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //  Action for 'NO' Button
+                            Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //  Action for 'NO' Button
 
 //                                Intent intent=new Intent(MyLeaveApplication2Activity.this,MyLeaveApplication2Activity.class);
 //                                startActivity(intent);
 //                                finish();
-                        dialog.cancel();
-                    }
-                });
-        //Creating dialog box
-        AlertDialog alert = builder.create();
-        //Setting the title manually
-        alert.setTitle("Cancel!");
-        alert.show();
+                            dialog.cancel();
+                        }
+                    });
+            //Creating dialog box
+            AlertDialog alert = builder.create();
+            //Setting the title manually
+            alert.setTitle("Cancel!");
+            alert.show();
         }
         else
         {
@@ -151,6 +151,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
             finish();
 
         }
+
 
 
 
@@ -276,33 +277,33 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
 
         }
-if(Url.isSubordinateLeaveApplication=true) {
-    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-            android.R.layout.simple_spinner_item, getResources()
-            .getStringArray(R.array.Leave_Status));//setting the country_array to spinner
-    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    spinner2.setAdapter(adapter);
+        if(Url.isSubordinateLeaveApplication=true) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, getResources()
+                    .getStringArray(R.array.Leave_Status));//setting the country_array to spinner
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner2.setAdapter(adapter);
 
-    spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                   int position, long id) {
-            try {
+            spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                           int position, long id) {
+                    try {
 
-                select_item =arg0.getItemAtPosition(position).toString();
-               // Toast.makeText(MyLeaveApplication2Activity.this, select_item, Toast.LENGTH_SHORT).show();
-            }
-            catch (Exception e) {
+                        select_item =arg0.getItemAtPosition(position).toString();
+                        // Toast.makeText(MyLeaveApplication2Activity.this, select_item, Toast.LENGTH_SHORT).show();
+                    }
+                    catch (Exception e) {
 
-            }
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> arg0) {
+                }
+            });
         }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
-        }
-    });
-}
-txt_emp_name.setText(userSingletonModel.full_employee_name);
+        txt_emp_name.setText(userSingletonModel.full_employee_name);
 
 
         cal1.setOnClickListener(this);
@@ -344,7 +345,7 @@ txt_emp_name.setText(userSingletonModel.full_employee_name);
         btn_save_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Toast.makeText(MyLeaveApplication2Activity.this, "IT IS SAVE", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(MyLeaveApplication2Activity.this, "IT IS SAVE", Toast.LENGTH_SHORT).show();
                 try {
 
                     jsonBody_Subordinate.put("corp_id", userSingletonModel.corporate_id);
@@ -406,11 +407,11 @@ txt_emp_name.setText(userSingletonModel.full_employee_name);
                 final  View custom=getLayoutInflater().inflate(R.layout.popup,null);
 
 
-                 tv_casual_leave =  custom.findViewById(R.id.tv_casual_leave);
-                 tv_earn_leav =  custom.findViewById(R.id.tv_earn_leav);
-               tv_sick_leave= custom.findViewById(R.id.tv_sick_leave);
-               tv_matarnal_leave= custom.findViewById(R.id.tv_matarnal_leave);
-               tv_paternal_leave= custom.findViewById(R.id.tv_paternal_leave);
+                tv_casual_leave =  custom.findViewById(R.id.tv_casual_leave);
+                tv_earn_leav =  custom.findViewById(R.id.tv_earn_leav);
+                tv_sick_leave= custom.findViewById(R.id.tv_sick_leave);
+                tv_matarnal_leave= custom.findViewById(R.id.tv_matarnal_leave);
+                tv_paternal_leave= custom.findViewById(R.id.tv_paternal_leave);
                 tv_comp_off=custom.findViewById(R.id.tv_comp_off);
                 bt_ok=custom.findViewById(R.id.bt_ok);
                 Spinner spinner1=custom.findViewById(R.id.spinner1);
@@ -443,7 +444,7 @@ txt_emp_name.setText(userSingletonModel.full_employee_name);
                 bt_ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       dialog.dismiss();
+                        dialog.dismiss();
                     }
                 });
 
@@ -502,115 +503,119 @@ txt_emp_name.setText(userSingletonModel.full_employee_name);
         });
 
 
-btn_save.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if (rb1.isChecked() == true || rb2.isChecked() == true) {
 
 
-            try {
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // if (rb1.isChecked() == true || rb2.isChecked() == true) {
 
-                jsonBody.put("corp_id", userSingletonModel.corporate_id);
 
-                // Log.d("sdss",jsonBody.getString("corp_id"));
-                if (Url.isNew == true) {
-                    jsonBody.put("appliction_id", 0);
+                try {
 
-                } else {
-                    jsonBody.put("appliction_id", Url.currtent_application_id);
+                    jsonBody.put("corp_id", userSingletonModel.corporate_id);
 
+                    // Log.d("sdss",jsonBody.getString("corp_id"));
+                    if (Url.isNew == true) {
+                        jsonBody.put("appliction_id", 0);
+
+                    } else {
+                        jsonBody.put("appliction_id", Url.currtent_application_id);
+
+
+                    }
+
+                    jsonBody.put("leave_id", leaveID);
+                    jsonBody.put("employee_id", userSingletonModel.employee_id);
+                    jsonBody.put("from_date", txt_from_date.getText().toString());
+                    jsonBody.put("to_date", txt_to_date.getText().toString());
+                    jsonBody.put("total_days", txt_total_number.getText().toString());
+                    jsonBody.put("description", ed_details.getText().toString());
+                    jsonBody.put("supervisor_remark", ed_supervisor_remark.getText().toString());
+//                if (save == true) {
+//                    jsonBody.put("leave_status", rb1.getText().toString());
+//                }
+                    jsonBody.put("leave_status",rb1.getText().toString());
+                    if (submit == true) {
+                        jsonBody.put("leave_status", rb2.getText().toString());
+                    }
+                    jsonBody.put("approved_by_id", 0);
+                    jsonBody.put("approved_date", "");
+                    jsonBody.put("supervisor1_id", 0);
+                    jsonBody.put("supervisor2_id", 0);
+
+                    Log.d("from_date", jsonBody.getString("from_date"));
+                    Log.d("leave_status", jsonBody.getString("leave_status"));
+                    Log.d("supervisor2_id", jsonBody.getString("supervisor2_id"));
+
+                    if (jsonBody == null) {
+                        Toast.makeText(MyLeaveApplication2Activity.this, "OBject is null", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                } catch (Exception e) {
+                    e.toString();
 
                 }
 
-                jsonBody.put("leave_id", leaveID);
-                jsonBody.put("employee_id", userSingletonModel.employee_id);
-                jsonBody.put("from_date", txt_from_date.getText().toString());
-                jsonBody.put("to_date", txt_to_date.getText().toString());
-                jsonBody.put("total_days", txt_total_number.getText().toString());
-                jsonBody.put("description", ed_details.getText().toString());
-                jsonBody.put("supervisor_remark", ed_supervisor_remark.getText().toString());
-                if (save == true) {
-                    jsonBody.put("leave_status", rb1.getText().toString());
-                }
-                if (submit == true) {
-                    jsonBody.put("leave_status", rb2.getText().toString());
-                }
-                jsonBody.put("approved_by_id", 0);
-                jsonBody.put("approved_date", "");
-                jsonBody.put("supervisor1_id", 0);
-                jsonBody.put("supervisor2_id", 0);
 
-                Log.d("from_date", jsonBody.getString("from_date"));
-                Log.d("leave_status", jsonBody.getString("leave_status"));
-                Log.d("supervisor2_id", jsonBody.getString("supervisor2_id"));
+                String url = Url.BASEURL + "leave/application/save";
 
-                if (jsonBody == null) {
-                    Toast.makeText(MyLeaveApplication2Activity.this, "OBject is null", Toast.LENGTH_SHORT).show();
+                try {
+                    JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonBody.toString())
+                            , new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                // JSONObject jsonObject=new JSONObject(String.valueOf(response));
 
-                }
+                                String message = response.getString("message");
+                                Toast.makeText(MyLeaveApplication2Activity.this, message, Toast.LENGTH_SHORT).show();
+                                Log.d("hgsdfhg",message);
+                                Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(MyLeaveApplication2Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            }
 
-            } catch (Exception e) {
-                e.toString();
-
-            }
-
-
-            String url = Url.BASEURL + "leave/application/save";
-
-            try {
-                JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonBody.toString())
-                        , new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            // JSONObject jsonObject=new JSONObject(String.valueOf(response));
-
-                            String message = response.getString("message");
-                            Toast.makeText(MyLeaveApplication2Activity.this, message, Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(MyLeaveApplication2Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
-
-                    }
-                }, new ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MyLeaveApplication2Activity.this, "Couldnot connect to the server", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                Volley.newRequestQueue(MyLeaveApplication2Activity.this).add(stringRequest);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-        else {
-            //Toast.makeText(MyLeaveApplication2Activity.this, "Please choice the application type", Toast.LENGTH_SHORT).show();
-            builder.setMessage("Please select the application type!")
-                    .setCancelable(false)
-
-                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.dismiss();
+                    }, new ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(MyLeaveApplication2Activity.this, "Couldnot connect to the server", Toast.LENGTH_SHORT).show();
                         }
                     });
 
-            //Creating dialog box
-            AlertDialog alert = builder.create();
-            //Setting the title manually
-            alert.setTitle("Alert!");
-            alert.show();
-        }
-    }
+                    Volley.newRequestQueue(MyLeaveApplication2Activity.this).add(stringRequest);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+//        }
+//        else {
+//            //Toast.makeText(MyLeaveApplication2Activity.this, "Please choice the application type", Toast.LENGTH_SHORT).show();
+//            builder.setMessage("Please select the application type!")
+//                    .setCancelable(false)
+//
+//                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            dialog.dismiss();
+//                        }
+//                    });
+//
+//            //Creating dialog box
+//            AlertDialog alert = builder.create();
+//            //Setting the title manually
+//            alert.setTitle("Alert!");
+//            alert.show();
+                // }
+            }
 
 
-});
+        });
 
 
 
@@ -675,43 +680,43 @@ btn_save.setOnClickListener(new View.OnClickListener() {
                     finish();
 
                 }
-           }
+            }
 
         });
 
         btn_cancel_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // if (leave_status.equals("Save") || leave_status.equals("Return")) {
-                    builder.setMessage("You may lost any unsaved data. Do you really want to cancel?")
-                            .setCancelable(false)
+                // if (leave_status.equals("Save") || leave_status.equals("Return")) {
+                builder.setMessage("You may lost any unsaved data. Do you really want to cancel?")
+                        .setCancelable(false)
 
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    Url.isSubordinateLeaveApplication = true;
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Url.isSubordinateLeaveApplication = true;
 
-                                    Intent intent = new Intent(MyLeaveApplication2Activity.this, SubordinateLeaveApplicationActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //  Action for 'NO' Button
+                                Intent intent = new Intent(MyLeaveApplication2Activity.this, SubordinateLeaveApplicationActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //  Action for 'NO' Button
 
 //                                Intent intent=new Intent(MyLeaveApplication2Activity.this,MyLeaveApplication2Activity.class);
 //                                startActivity(intent);
 //                                finish();
-                                    dialog.cancel();
-                                }
-                            });
-                    //Creating dialog box
-                    AlertDialog alert = builder.create();
-                    //Setting the title manually
-                    alert.setTitle("Cancel!");
-                    alert.show();
+                                dialog.cancel();
+                            }
+                        });
+                //Creating dialog box
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.setTitle("Cancel!");
+                alert.show();
 
-               // }
+                // }
             }
         });
     }
@@ -839,27 +844,27 @@ btn_save.setOnClickListener(new View.OnClickListener() {
                 try {
                     JSONObject jsonObject=new JSONObject(response);
                     JSONObject jsonObject1=jsonObject.getJSONObject("fields");
-                   // for (int i=0;i<jsonObject1.length();i++)
+                    // for (int i=0;i<jsonObject1.length();i++)
 
-                        String employee_name=jsonObject1.getString("employee_name");
-                        String leave_id=jsonObject1.getString("leave_id");
-                        String from_date=jsonObject1.getString("from_date");
-                        String to_date=jsonObject1.getString("to_date");
-                        String total_days=jsonObject1.getString("total_days");
-                        String description=jsonObject1.getString("description");
-                        String leave_status=jsonObject1.getString("leave_status");
+                    String employee_name=jsonObject1.getString("employee_name");
+                    String leave_id=jsonObject1.getString("leave_id");
+                    String from_date=jsonObject1.getString("from_date");
+                    String to_date=jsonObject1.getString("to_date");
+                    String total_days=jsonObject1.getString("total_days");
+                    String description=jsonObject1.getString("description");
+                    String leave_status=jsonObject1.getString("leave_status");
 
-                        Details details=new Details();
-                        details.setEmployee_name(employee_name);
-                        details.setLeave_id(leave_id);
-                        details.setFrom_date(from_date);
-                        details.setTo_date(to_date);
-                        details.setTotal_days(total_days);
-                        details.setDescription(description);
-                        details.setLeave_status(leave_status);
-                        Log.d("svcsh>>",employee_name);
+                    Details details=new Details();
+                    details.setEmployee_name(employee_name);
+                    details.setLeave_id(leave_id);
+                    details.setFrom_date(from_date);
+                    details.setTo_date(to_date);
+                    details.setTotal_days(total_days);
+                    details.setDescription(description);
+                    details.setLeave_status(leave_status);
+                    Log.d("svcsh>>",employee_name);
 
-                        arrayList1.add(details);
+                    arrayList1.add(details);
 
 
 
@@ -886,7 +891,7 @@ btn_save.setOnClickListener(new View.OnClickListener() {
                     txt_total_number.setText(arrayList1.get(0).getTotal_days());
 
                     ed_details.setText(arrayList1.get(0).getDescription());
-                   // txt_leave_status1.setText(arrayList1.get(0).getLeave_status());
+                    // txt_leave_status1.setText(arrayList1.get(0).getLeave_status());
                     if(arrayList1.get(0).getLeave_status().equals("Canceled"))
                     {
                         txt_leave_status1.setText(arrayList1.get(0).getLeave_status());
@@ -925,7 +930,7 @@ btn_save.setOnClickListener(new View.OnClickListener() {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(MyLeaveApplication2Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
-                   // Log.d("ghfg",e.toString());
+                    // Log.d("ghfg",e.toString());
                 }
 
 
@@ -1072,7 +1077,7 @@ btn_save.setOnClickListener(new View.OnClickListener() {
 
 
 
-                       // txt_to_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        // txt_to_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
                     }
                 }, mYear, mMonth, mDay);

@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:text="1"
             android:layout_marginTop="6dp"
             android:layout_marginLeft="15dp"
 
@@ -31,7 +31,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginLeft="15dp"
             android:id="@+id/txt_holiday_name"
-
+            android:text="Gandhi jayanti"
             android:layout_toRightOf="@id/txt_count"
             android:textSize="15sp"
             android:textColor="#000">
@@ -43,41 +43,24 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="15dp"
             android:id="@+id/txt_date"
-
+            android:text="Wed,2 Oct 2019 To Wed,3 Oct 2019"
             android:layout_toRightOf="@id/txt_count"
             android:layout_below="@id/txt_holiday_name"
-            android:textSize="19sp"
+            android:textSize="12sp"
             android:textColor="#A0A5AD">
 
         </TextView>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="15dp"
-
-            android:id="@+id/txt_day_name"
-
-            android:layout_toRightOf="@id/txt_date"
-            android:layout_below="@id/txt_holiday_name"
-            android:textSize="19sp"
-            android:textColor="#868B92">
-
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginLeft="15dp"
-            android:id="@+id/txt_list"
-
-           android:layout_alignParentRight="true"
-            android:layout_marginRight="15sp"
-
-            android:textSize="19sp"
-            android:textColor="#000">
-
-        </TextView>
+            android:id="@+id/txt_total_holiday"
+            android:text="2"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:textSize="15sp"
+            android:layout_centerHorizontal="true"
+            android:textColor="#000"></TextView>
 
 
 

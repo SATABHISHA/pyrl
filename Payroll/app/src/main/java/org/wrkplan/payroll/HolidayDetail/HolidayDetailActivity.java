@@ -284,11 +284,13 @@ public class HolidayDetailActivity extends AppCompatActivity {
                         String from_date = jb1.getString("from_date");
                         String total_days = jb1.getString("total_days");
                         String id = jb1.getString("id");
+                        String to_date=jb1.getString("to_date");
                         Holiday holiday = new Holiday();
                         holiday.setHoliday_name(holiday_name);
                         holiday.setFrom_date(from_date);
                         holiday.setTotal_days(total_days);
                         holiday.setId(id);
+                        holiday.setTo_date(to_date);
                         arrayList1.add(holiday);
 
                         for (int j = 0; j < arrayList1.size(); j++) {
@@ -373,11 +375,15 @@ public class HolidayDetailActivity extends AppCompatActivity {
                         String from_date = jb1.getString("from_date");
                         String total_days = jb1.getString("total_days");
                         String id = jb1.getString("id");
+                        String to_date=jb1.getString("to_date");
+
+
 //                        Holiday holiday = new Holiday();
                         holiday.setHoliday_name(holiday_name);
                         holiday.setFrom_date(from_date);
                         holiday.setTotal_days(total_days);
                         holiday.setId(id);
+                        holiday.setTo_date(to_date);
 //                        Date currentDate = new SimpleDateFormat("dd/MM/yyyy").parse(currntdate);
 //                        Date Fromdate = new SimpleDateFormat("dd/MM/yyyy").parse(from_date);
 
@@ -398,8 +404,8 @@ public class HolidayDetailActivity extends AppCompatActivity {
                     for(int i=0; i< arrayList.size(); i++) {
                         Date currentDate = new SimpleDateFormat("dd/MM/yyyy").parse(currntdate);
                         Date Fromdate = new SimpleDateFormat("dd/MM/yyyy").parse(holiday.getFrom_date());
-                            if (currentDate.equals(Fromdate) || Fromdate.after(currentDate)) {
-                                position[0] = i;
+                        if (currentDate.equals(Fromdate) || Fromdate.after(currentDate)) {
+                            position[0] = i;
 
                         }
                     }
@@ -452,8 +458,7 @@ public class HolidayDetailActivity extends AppCompatActivity {
             TextView txt_count = v.findViewById(R.id.txt_count);
             TextView txt_holiday_name = v.findViewById(R.id.txt_holiday_name);
             TextView txt_date = v.findViewById(R.id.txt_date);
-            TextView txt_day_name = v.findViewById(R.id.txt_day_name);
-            TextView txt_list = v.findViewById(R.id.txt_list);
+            TextView txt_total_holiday=v.findViewById(R.id.txt_total_holiday);
             RelativeLayout rl11 = findViewById(R.id.rl11);
 
             txt_holiday_name.setText(arrayList.get(position).getHoliday_name());
@@ -484,32 +489,22 @@ public class HolidayDetailActivity extends AppCompatActivity {
 //            txt_date.setText(finalDay2);
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ENGLISH);
-            Date myDate = null;
+            Date myFromDate = null;
+            Date myToDate=null;
             try {
-                myDate = sdf.parse(arrayList.get(position).getFrom_date());
+                myFromDate = sdf.parse(arrayList.get(position).getFrom_date());
+                myToDate = sdf.parse(arrayList.get(position).getTo_date());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             sdf.applyPattern("EEE, d MMM yyyy");
             //sdf.applyPattern("d MMM YYYY");
-            String sMyDate = sdf.format(myDate);
-            txt_date.setText(sMyDate);
+            String sMyFromDate = sdf.format(myFromDate);
+            String sMyToDate=sdf.format(myToDate);
 
+            txt_date.setText(sMyFromDate + " To "+sMyToDate);
 
-//            try {
-//               // String s1="20/08/2020";
-//                Date date1=new SimpleDateFormat("EEE, d MMM yyyy").parse(currntdate);
-//                Date date2=new SimpleDateFormat("EEE, d MMM yyyy").parse(sMyDate);
-//
-//                if(date1.equals(date2) || date1.after(date2))
-//                {
-//                    rl11.setBackgroundColor(R.color.colorPrimary);
-//
-//                }
-//
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
+            txt_total_holiday.setText(arrayList.get(position).getTotal_days());
 
 
             return v;
