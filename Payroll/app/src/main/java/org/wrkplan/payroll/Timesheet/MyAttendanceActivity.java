@@ -33,15 +33,18 @@ import org.wrkplan.payroll.OutDoorDutyLog.CustomOdDutyLogListAdapter;
 import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogListActivity;
 import org.wrkplan.payroll.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MyAttendanceActivity extends AppCompatActivity implements View.OnClickListener {
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     ArrayList<TimesheetMyAttendanceModel> timesheetMyAttendanceModelArrayList = new ArrayList<>();
     LinearLayout ll_recycler;
     RecyclerView recycler_view;
-    RelativeLayout rl_button;
-    TextView tv_button_subordinate, tv_nodata;
+    RelativeLayout rl_button, rl_out, rl_in;
+    TextView tv_button_subordinate, tv_nodata, tv_in, tv_out, tv_time_in, tv_time_out;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +55,23 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
         ll_recycler = findViewById(R.id.ll_recycler);
         tv_nodata = findViewById(R.id.tv_nodata);
 
+        tv_time_in = findViewById(R.id.tv_time_in);
+        tv_time_out = findViewById(R.id.tv_time_out);
+        tv_in = findViewById(R.id.tv_in);
+        tv_out = findViewById(R.id.tv_out);
+        rl_in = findViewById(R.id.rl_in);
+        rl_out = findViewById(R.id.rl_out);
+
         rl_button.setOnClickListener(this);
         tv_button_subordinate.setOnClickListener(this);
+        tv_in.setOnClickListener(this);
+        tv_out.setOnClickListener(this);
+
+        //----default making tv_in, tv_out visibility gone
+        tv_in.setVisibility(View.INVISIBLE);
+        tv_out.setVisibility(View.GONE);
+        rl_in.setVisibility(View.INVISIBLE);
+        rl_out.setVisibility(View.GONE);
 
         //==========Recycler code initializing and setting layoutManager starts======
         recycler_view = findViewById(R.id.recycler_view);
@@ -62,6 +80,7 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
         //==========Recycler code initializing and setting layoutManager ends======
 
         loadData();
+        load_data_check_od_duty();
     }
 
     @Override
@@ -73,14 +92,18 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
             case R.id.tv_button_subordinate:
                 startActivity(new Intent(this, SubordinateAttendanceActivity.class));
                 break;
+            case R.id.tv_in:
+                break;
+            case R.id.tv_out:
+                break;
         }
     }
 
     //===========Code to get data from api using volley and load data to recycler view, starts==========
     public void loadData(){
 //        String url = Url.BASEURL+"od/log/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
-//        String url = Url.BASEURL+"timesheet/log/previous/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
-        String url = Url.BASEURL+"timesheet/log/previous/EMC_NEW/42";
+        String url = Url.BASEURL+"timesheet/log/previous/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+//        String url = Url.BASEURL+"timesheet/log/previous/EMC_NEW/42";
         Log.d("listurl-=>",url);
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/52";
         final ProgressDialog loading = ProgressDialog.show(MyAttendanceActivity.this, "Loading", "Please wait...", true, false);
@@ -140,4 +163,74 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
         }
     }
     //===========Code to get data from api and load data to recycler view, ends==========
+
+    //-------added 0n 2nd sept
+    //===========Code for getting time_in and time_out, starts==========
+    public void load_data_check_od_duty(){
+//        String url = Config.BaseUrlEpharma + "documents/list" ;
+//        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
+//        String url = Url.BASEURL+"od/request/check-exist/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+        String url = Url.BASEURL+"timesheet/log/today/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+//        String url = Url.BASEURL+"timesheet/log/today/EMC_NEW/42";
+        Log.d("url-=>",url);
+//        String url = Url.BASEURL+"od/request/detail/20/1/1";
+        final ProgressDialog loading = ProgressDialog.show(MyAttendanceActivity.this, "Loading", "Please wait...", true, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
+                Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        get_today_time_in_out(response);
+                        loading.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                error.printStackTrace();
+            }
+        });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+    }
+    public void get_today_time_in_out(String response){
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            Log.d("jsonData-=>",jsonObject.toString());
+            JSONObject jsonObject1 = jsonObject.getJSONObject("response");
+
+            if(jsonObject1.getString("status").contentEquals("true")){
+              if(jsonObject.getString("timesheet_in_out_action").trim().contentEquals("IN")){
+                  tv_in.setVisibility(View.VISIBLE);
+                  tv_out.setVisibility(View.GONE);
+
+                  rl_in.setVisibility(View.VISIBLE);
+                  rl_out.setVisibility(View.GONE);
+              }else if(jsonObject.getString("timesheet_in_out_action").trim().contentEquals("OUT")){
+                  tv_in.setVisibility(View.GONE);
+                  tv_out.setVisibility(View.VISIBLE);
+
+                  rl_in.setVisibility(View.GONE);
+                  rl_out.setVisibility(View.VISIBLE);
+              }else {
+                  tv_in.setVisibility(View.GONE);
+                  tv_out.setVisibility(View.GONE);
+
+                  rl_in.setVisibility(View.GONE);
+                  rl_out.setVisibility(View.GONE);
+              }
+
+              tv_time_in.setText(jsonObject.getString("time_in"));
+              tv_time_out.setText(jsonObject.getString("time_out"));
+            }else if(jsonObject.getString("status").contentEquals("false")){
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //===========Code for getting time_in and time_out, ends==========
 }
