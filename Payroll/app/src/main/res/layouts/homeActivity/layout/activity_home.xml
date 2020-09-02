@@ -539,7 +539,7 @@
                     android:layout_width="0dp"
                     android:layout_height="170dp"
                     android:layout_marginLeft="5dp"
-                    android:background="@drawable/layout6"
+                    android:background="@drawable/layout3"
                     android:gravity="center"
                     android:visibility="visible"
                     android:layout_weight="1">
@@ -590,6 +590,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="5dp"
                     android:visibility="visible"
+                    android:background="@drawable/layout2"
                     android:gravity="center"
                     android:layout_weight="1">
 
