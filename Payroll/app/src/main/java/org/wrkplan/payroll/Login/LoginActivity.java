@@ -618,11 +618,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
                             finish();
-                            Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                         }
                         else {
                             Snackbar snackbar=Snackbar.make(coordinatorLayout,"Login failure",Snackbar.LENGTH_SHORT);
                             snackbar.show();
+
+                            btn_login.setEnabled(true);
+                            btn_login.setClickable(true);
+                            btn_login.setAlpha(1.0f);
                         }
 
 
@@ -630,6 +634,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(LoginActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        btn_login.setEnabled(true);
+                        btn_login.setClickable(true);
+                        btn_login.setAlpha(1.0f);
                     }
 
                 }
@@ -637,6 +644,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onErrorResponse(VolleyError error) {
 //                    Log.d("error-=>",error.getMessage());
+                    btn_login.setEnabled(true);
+                    btn_login.setClickable(true);
+                    btn_login.setAlpha(1.0f);
                     Toast.makeText(LoginActivity.this, "Could not connect to the server", Toast.LENGTH_SHORT).show();
 
                 }
@@ -664,30 +674,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String username=ed_username.getText().toString();
                 String password=ed_userpassword.getText().toString();
 
-                if(userid.isEmpty())
-                {
-                    Snackbar snackbar=Snackbar.make(coordinatorLayout,"Userid is required",Snackbar.LENGTH_SHORT);
-                    snackbar.show();
-                    return;
+                if(userid.isEmpty() || username.isEmpty() || password.isEmpty()) {
+                    if (userid.isEmpty()) {
+                        Snackbar snackbar = Snackbar.make(coordinatorLayout, "Userid is required", Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                        return;
+                    }
+                    if (username.isEmpty()) {
+                        Snackbar snackbar = Snackbar.make(coordinatorLayout, "Username is required", Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                        return;
+                    }
+                    if (password.isEmpty()) {
+                        Snackbar snackbar = Snackbar.make(coordinatorLayout, "Password  is required", Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                        return;
+                    }
+                }else {
+
+
+                    btn_login.setEnabled(false);
+                    btn_login.setClickable(false);
+                    btn_login.setAlpha(0.4f);
+                    getlogin(userid, username, password);
+                    entry_user = username;//---added by Satabhisha on 6th MAy
                 }
-                if(username.isEmpty())
-                {
-                    Snackbar snackbar=Snackbar.make(coordinatorLayout,"Username is required",Snackbar.LENGTH_SHORT);
-                    snackbar.show();
-                    return;
-                }
-                if(password.isEmpty())
-                {
-                    Snackbar snackbar=Snackbar.make(coordinatorLayout,"Password  is required",Snackbar.LENGTH_SHORT);
-                    snackbar.show();
-                    return;
-                }
-
-
-
-
-                getlogin(userid,username,password);
-                entry_user = username;//---added by Satabhisha on 6th MAy
                 break;
                 default:
                     break;
@@ -745,6 +756,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         alert.show();
     }
     //===========Code to enable gps, ends(added on 6th May)=========
+
 
 }
 
