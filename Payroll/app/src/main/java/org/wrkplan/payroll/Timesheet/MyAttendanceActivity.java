@@ -37,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class MyAttendanceActivity extends AppCompatActivity implements View.OnClickListener {
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
@@ -44,7 +45,7 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
     LinearLayout ll_recycler;
     RecyclerView recycler_view;
     RelativeLayout rl_button, rl_out, rl_in;
-    TextView tv_button_subordinate, tv_nodata, tv_in, tv_out, tv_time_in, tv_time_out;
+    TextView tv_button_subordinate, tv_nodata, tv_in, tv_out, tv_time_in, tv_time_out, tv_date;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +60,7 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
         tv_time_out = findViewById(R.id.tv_time_out);
         tv_in = findViewById(R.id.tv_in);
         tv_out = findViewById(R.id.tv_out);
+        tv_date = findViewById(R.id.tv_date);
         rl_in = findViewById(R.id.rl_in);
         rl_out = findViewById(R.id.rl_out);
 
@@ -78,6 +80,16 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
         recycler_view.setHasFixedSize(true);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         //==========Recycler code initializing and setting layoutManager ends======
+
+        //=========get current date and set curretnt date, code starts========
+        Date c = Calendar.getInstance().getTime();
+        System.out.println("Current time => " + c);
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+        String formattedDate = df.format(c);
+
+        tv_date.setText(formattedDate);
+        //=========get current date and set curretnt date, code ends========
 
         loadData();
         load_data_check_od_duty();

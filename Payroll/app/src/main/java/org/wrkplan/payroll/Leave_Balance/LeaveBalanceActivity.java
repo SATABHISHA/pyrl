@@ -155,7 +155,8 @@ public class LeaveBalanceActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject=new JSONObject(response);
-                    JSONObject jb1=jsonObject.getJSONObject("leaves");
+//                    JSONObject jb1=jsonObject.getJSONObject("leaves");
+                    JSONObject jb1=jsonObject.getJSONObject("leave_balance");
                     userSingletonModel.setCasual_leave(jb1.getString("casual_leave"));
                     userSingletonModel.setEarn_leave(jb1.getString("earn_leave"));
                     userSingletonModel.setSick_leave(jb1.getString("sick_leave"));
