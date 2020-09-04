@@ -40,9 +40,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class MyLeaveApplicationActivity extends AppCompatActivity {
-   Button entry_form;
-   TextView myleave_title;
-   ListView lv1;
+    Button entry_form;
+    TextView myleave_title;
+    ListView lv1;
     ArrayList<LeaveApplication> arrayList=new ArrayList<>();
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
 
@@ -74,6 +74,7 @@ public class MyLeaveApplicationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Url.isNew=true;
+                Url.isSubordinateLeaveApplication=false;
                 Intent intent=new Intent(MyLeaveApplicationActivity.this, MyLeaveApplication2Activity.class);
                 startActivity(intent);
             }
@@ -91,6 +92,7 @@ public class MyLeaveApplicationActivity extends AppCompatActivity {
                 Url.supervisor1_id=arrayList.get(position).getSupervisor1_id();
                 Url.supervisor2_id=arrayList.get(position).getSupervisor2_id();
                 Url.currtent_application_id=Url.application_id.get(position);
+
                 Intent intent=new Intent(MyLeaveApplicationActivity.this,MyLeaveApplication2Activity.class);
                 startActivity(intent);
                 finish();
@@ -129,9 +131,9 @@ public class MyLeaveApplicationActivity extends AppCompatActivity {
                         lvapp.setTo_date(to_date);
                         lvapp.setTotal_days(total_days);
                         lvapp.setLeave_status(leave_status);
-                       lvapp.setAppliction_id(appliction_id);
-                       lvapp.setSupervisor1_id(supervisor1_id);
-                       lvapp.setSupervisor2_id(supervisor2_id);
+                        lvapp.setAppliction_id(appliction_id);
+                        lvapp.setSupervisor1_id(supervisor1_id);
+                        lvapp.setSupervisor2_id(supervisor2_id);
                         //userSingletonModel.setAppliction_id(appliction_id);
                         Url.application_id.add(appliction_id);
 
@@ -157,88 +159,88 @@ public class MyLeaveApplicationActivity extends AppCompatActivity {
         Volley.newRequestQueue(MyLeaveApplicationActivity.this).add(stringRequest);
     }
 
-class Nr extends BaseAdapter{
-    @Override
-    public int getCount() {
-        return arrayList.size();
+    class Nr extends BaseAdapter{
+        @Override
+        public int getCount() {
+            return arrayList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @SuppressLint("ResourceAsColor")
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater=getLayoutInflater();
+            View view=inflater.inflate(R.layout.leave_application,null);
+            TextView txt_application_code=view.findViewById(R.id.txt_application_code1);
+            TextView txt_leave_name=view.findViewById(R.id.txt_emp_name);
+            TextView txt_leave_date=view.findViewById(R.id.txt_leave_date);
+            TextView txt_total_days=view.findViewById(R.id.txt_total_days);
+            TextView txt_leave_status=view.findViewById(R.id.txt_leave_status);
+
+            txt_application_code.setText(arrayList.get(position).getAppliction_code());
+            txt_leave_name.setText(arrayList.get(position).getLeave_name());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ENGLISH);
+            Date myDate = null;
+            Date myDate1 = null;
+            try {
+                myDate = sdf.parse(arrayList.get(position).getFrom_date());
+                myDate1 = sdf.parse(arrayList.get(position).getTo_date());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            sdf.applyPattern("dd-MMM-yyyy");
+            //sdf.applyPattern("d MMM YYYY");
+            String sMyDate = sdf.format(myDate);
+            String sMyDate1 = sdf.format(myDate1);
+            //txt_leave_date.setText((arrayList.get(position).getFrom_date() + "  To  " +arrayList.get(position).getTo_date()));
+            if(arrayList.get(position).getTotal_days().equals("1"))
+            {
+                txt_leave_date.setText(sMyDate);
+            }
+            else {
+                txt_leave_date.setText(sMyDate + " To " + sMyDate1);
+            }
+
+            txt_total_days.setText(arrayList.get(position).getTotal_days());
+            if(arrayList.get(position).getLeave_status().equals("Canceled"))
+            {
+                txt_leave_status.setText(arrayList.get(position).getLeave_status());
+                // ColorDrawable color = new ColorDrawable(Color.parseColor("#E0292E"));
+                txt_leave_status.setTextColor(getResources().getColor(R.color.cancel));
+            }
+            else if(arrayList.get(position).getLeave_status().equals("Return"))
+            {
+                txt_leave_status.setText(arrayList.get(position).getLeave_status());
+                // ColorDrawable color = new ColorDrawable(Color.parseColor("#E0292E"));
+                txt_leave_status.setTextColor(getResources().getColor(R.color.returned));
+            }
+            else if(arrayList.get(position).getLeave_status().equals("Save"))
+            {
+                txt_leave_status.setText(arrayList.get(position).getLeave_status());
+                // ColorDrawable color = new ColorDrawable(Color.parseColor("#E0292E"));
+                txt_leave_status.setTextColor(getResources().getColor(R.color.Save));
+            }
+            else if(arrayList.get(position).getLeave_status().equals("Submit"))
+            {
+                txt_leave_status.setText(arrayList.get(position).getLeave_status());
+                // ColorDrawable color = new ColorDrawable(Color.parseColor("#E0292E"));
+                txt_leave_status.setTextColor(getResources().getColor(R.color.Save));
+            }
+            else
+
+                txt_leave_status.setText(arrayList.get(position).getLeave_status());
+
+
+            return view;
+        }
     }
-
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @SuppressLint("ResourceAsColor")
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater=getLayoutInflater();
-        View view=inflater.inflate(R.layout.leave_application,null);
-        TextView txt_application_code=view.findViewById(R.id.txt_application_code1);
-        TextView txt_leave_name=view.findViewById(R.id.txt_emp_name);
-        TextView txt_leave_date=view.findViewById(R.id.txt_leave_date);
-        TextView txt_total_days=view.findViewById(R.id.txt_total_days);
-        TextView txt_leave_status=view.findViewById(R.id.txt_leave_status);
-
-        txt_application_code.setText(arrayList.get(position).getAppliction_code());
-        txt_leave_name.setText(arrayList.get(position).getLeave_name());
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ENGLISH);
-        Date myDate = null;
-        Date myDate1 = null;
-        try {
-            myDate = sdf.parse(arrayList.get(position).getFrom_date());
-            myDate1 = sdf.parse(arrayList.get(position).getTo_date());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        sdf.applyPattern("dd-MMM-yyyy");
-        //sdf.applyPattern("d MMM YYYY");
-        String sMyDate = sdf.format(myDate);
-        String sMyDate1 = sdf.format(myDate1);
-        //txt_leave_date.setText((arrayList.get(position).getFrom_date() + "  To  " +arrayList.get(position).getTo_date()));
-        if(arrayList.get(position).getTotal_days().equals("1"))
-        {
-            txt_leave_date.setText(sMyDate);
-        }
-        else {
-            txt_leave_date.setText(sMyDate + " To " + sMyDate1);
-        }
-
-        txt_total_days.setText(arrayList.get(position).getTotal_days());
-        if(arrayList.get(position).getLeave_status().equals("Canceled"))
-        {
-            txt_leave_status.setText(arrayList.get(position).getLeave_status());
-           // ColorDrawable color = new ColorDrawable(Color.parseColor("#E0292E"));
-           txt_leave_status.setTextColor(getResources().getColor(R.color.cancel));
-        }
-        else if(arrayList.get(position).getLeave_status().equals("Return"))
-        {
-            txt_leave_status.setText(arrayList.get(position).getLeave_status());
-            // ColorDrawable color = new ColorDrawable(Color.parseColor("#E0292E"));
-            txt_leave_status.setTextColor(getResources().getColor(R.color.returned));
-        }
-        else if(arrayList.get(position).getLeave_status().equals("Save"))
-        {
-            txt_leave_status.setText(arrayList.get(position).getLeave_status());
-            // ColorDrawable color = new ColorDrawable(Color.parseColor("#E0292E"));
-            txt_leave_status.setTextColor(getResources().getColor(R.color.Save));
-        }
-        else if(arrayList.get(position).getLeave_status().equals("Submit"))
-        {
-            txt_leave_status.setText(arrayList.get(position).getLeave_status());
-            // ColorDrawable color = new ColorDrawable(Color.parseColor("#E0292E"));
-            txt_leave_status.setTextColor(getResources().getColor(R.color.Save));
-        }
-        else
-
-        txt_leave_status.setText(arrayList.get(position).getLeave_status());
-
-
-        return view;
-    }
-}
 }

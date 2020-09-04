@@ -75,6 +75,7 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Url.islistclicked=true;
                 Url.isSubordinateLeaveApplication=true;
+                Url.isMyLeaveApplication=false;
                 Url.LeaveType=arrayList.get(position).getLeave_name();
                 Url.currtent_application_id=Url.application_id.get(position);
                 Url.supervisor1_id=arrayList.get(position).getSupervisor1_id();

@@ -301,6 +301,7 @@
             android:id="@+id/rl_button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:background="@drawable/layout6">
             <TextView

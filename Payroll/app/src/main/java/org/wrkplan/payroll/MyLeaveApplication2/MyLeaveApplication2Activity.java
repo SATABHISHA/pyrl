@@ -122,6 +122,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Url.isSubordinateLeaveApplication = false;
+                            Url.isMyLeaveApplication=true;
 
                             Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
                             startActivity(intent);
@@ -221,9 +222,17 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
         builder = new AlertDialog.Builder(this);
 
         currntdate=(currentDte.format(date));
-        Toast.makeText(this, currntdate, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, currntdate, Toast.LENGTH_SHORT).show();
 
 
+        if(Url.isNew==true)
+        {
+            rb1.setChecked(true);
+        }
+        else
+        {
+            rb1.setChecked(false);
+        }
         if(Url.isSubordinateLeaveApplication==true)
         {
 
@@ -421,8 +430,9 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                 dialog.show();
 
 
-                arrayList.add("2019 - 2020");
-                arrayList.add("2018 - 2019");
+                arrayList.add("2018");
+                arrayList.add("2019");
+                arrayList.add("2020");
 
 
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MyLeaveApplication2Activity.this,android.R.layout.simple_spinner_item, arrayList);
@@ -434,7 +444,21 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         String item = parent.getItemAtPosition(position).toString();
                         //  Toast.makeText(parent.getContext(), "Selected: " + item,          Toast.LENGTH_LONG).show();
 
-                        GetData(item.replace(" ", ""));
+//                        GetData(item.replace(" ", ""));
+                        String year;
+                        if(item=="2020")
+                        {
+                            year="2020-2021";
+                        }
+                        else if(item=="2019")
+                        {
+                            year="2019-2020";
+                        }
+                        else
+                        {
+                            year="2018-2019";
+                        }
+                        GetData(year);
 
                     }
                     @Override
@@ -453,6 +477,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
             private void GetData(String year_code) {
                 String url= Url.BASEURL + "leave/" + "balance/" + userSingletonModel.corporate_id+"/"+userSingletonModel.employee_id+"/"+year_code;
+                Log.d("url-=>",url);
 
 
 
@@ -465,7 +490,8 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         try {
 
                             JSONObject jsonObject=new JSONObject(response);
-                            JSONObject jb1=jsonObject.getJSONObject("leaves");
+//                            JSONObject jb1=jsonObject.getJSONObject("leaves");
+                            JSONObject jb1=jsonObject.getJSONObject("leave_balance");
                             userSingletonModel.setCasual_leave(jb1.getString("casual_leave"));
                             userSingletonModel.setEarn_leave(jb1.getString("earn_leave"));
                             userSingletonModel.setSick_leave(jb1.getString("sick_leave"));
@@ -518,6 +544,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     // Log.d("sdss",jsonBody.getString("corp_id"));
                     if (Url.isNew == true) {
                         jsonBody.put("appliction_id", 0);
+
 
                     } else {
                         jsonBody.put("appliction_id", Url.currtent_application_id);
@@ -643,7 +670,8 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (txt_leave_status1.getText().toString().equals("Save") || txt_leave_status1.getText().toString().equals("Return")) {
+                if (txt_leave_status1.getText().toString().equals("Save") || txt_leave_status1.getText().toString().equals("Return")
+                        ||txt_leave_status1.getText().toString().equals("")) {
 
                     builder.setMessage("You may lost any unsaved data. Do you really want to cancel?")
                             .setCancelable(false)
@@ -651,6 +679,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     Url.isSubordinateLeaveApplication = false;
+                                    Url.isMyLeaveApplication=true;
 
                                     Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
                                     startActivity(intent);
@@ -673,6 +702,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     alert.setTitle("Cancel!");
                     alert.show();
                 }
+
                 else
                 {
                     Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
@@ -688,37 +718,16 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
             @Override
             public void onClick(View v) {
                 // if (leave_status.equals("Save") || leave_status.equals("Return")) {
-                builder.setMessage("You may lost any unsaved data. Do you really want to cancel?")
-                        .setCancelable(false)
 
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Url.isSubordinateLeaveApplication = true;
 
-                                Intent intent = new Intent(MyLeaveApplication2Activity.this, SubordinateLeaveApplicationActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                //  Action for 'NO' Button
-
-//                                Intent intent=new Intent(MyLeaveApplication2Activity.this,MyLeaveApplication2Activity.class);
-//                                startActivity(intent);
-//                                finish();
-                                dialog.cancel();
-                            }
-                        });
-                //Creating dialog box
-                AlertDialog alert = builder.create();
-                //Setting the title manually
-                alert.setTitle("Cancel!");
-                alert.show();
+                Intent intent = new Intent(MyLeaveApplication2Activity.this, SubordinateLeaveApplicationActivity.class);
+                startActivity(intent);
+                finish();
 
                 // }
             }
         });
+
     }
 
     private void GetEditForm2() {
@@ -772,10 +781,9 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     String sMyDate = sdf.format(myDate);
                     String sMyDate1 = sdf.format(myDate1);
                     txt_from_date1.setText(sMyDate);
-
+                    rb1.setChecked(false);
                     txt_to_date1.setText(sMyDate1);
                     Log.d("ddff",txt_to_date1.toString());
-
                     txt_total_number.setText(arrayList2.get(0).getTotal_days());
                     tv_details1.setText(arrayList2.get(0).getDescription());
                     txt_application_status.setText(arrayList2.get(0).getLeave_status());
@@ -1003,7 +1011,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
 ////                            {
                             leaveID = getID(leaveType);
-                            Toast.makeText(MyLeaveApplication2Activity.this, "ID: " + leaveID, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MyLeaveApplication2Activity.this, "ID: " + leaveID, Toast.LENGTH_SHORT).show();
 
 
                         }

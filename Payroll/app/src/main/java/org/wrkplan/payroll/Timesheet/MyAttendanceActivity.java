@@ -102,7 +102,7 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
                 startActivity(new Intent(this, SubordinateAttendanceActivity.class));
                 break;
             case R.id.tv_button_subordinate:
-                startActivity(new Intent(this, SubordinateAttendanceActivity.class));
+//                startActivity(new Intent(this, SubordinateAttendanceActivity.class));
                 break;
             case R.id.tv_in:
                 break;

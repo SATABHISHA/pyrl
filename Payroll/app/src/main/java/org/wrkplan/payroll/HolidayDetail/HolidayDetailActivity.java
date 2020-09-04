@@ -124,7 +124,7 @@ public class HolidayDetailActivity extends AppCompatActivity {
         lv1.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         currntdate = (currentDte.format(date));
-        Toast.makeText(this, currntdate, Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(this, currntdate, Toast.LENGTH_SHORT).show();
 
 
         img_list.setOnClickListener(new View.OnClickListener() {
