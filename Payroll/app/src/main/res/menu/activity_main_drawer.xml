@@ -43,7 +43,7 @@
 
     </group>
 
-    <item android:title=""
+   <!-- <item android:title=""
         android:visible="true">
         <menu>
         <item
@@ -52,7 +52,20 @@
             android:title="Logout" />
         </menu>
 
-    </item>
+    </item>  -->
+    <group
+        android:id="@+id/nav_settings"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_change_pswd"
+            android:icon="@drawable/passwordnav"
+            android:title="Change Password" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="Logout" />
+    </group>
+
 </menu>
 
 

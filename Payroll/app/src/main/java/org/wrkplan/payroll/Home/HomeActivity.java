@@ -5,11 +5,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,6 +35,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -216,10 +223,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             }
                         });
                 //Creating dialog box
-                AlertDialog alert = builder.create();
+                AlertDialog alert_logout = builder.create();
                 //Setting the title manually
-                alert.setTitle("Logout");
-                alert.show();
+                alert_logout.setTitle("Logout");
+                alert_logout.show();
                 break;
 
 
@@ -257,6 +264,80 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_outdoor_duty:
                 startActivity(new Intent(this, OdDutyLogListActivity.class));
+                break;
+            case R.id.nav_change_pswd:
+                //--------adding custom dialog on 14th may starts------
+                LayoutInflater li2 = LayoutInflater.from(this);
+                View dialog = li2.inflate(R.layout.dialog_change_password, null);
+                final EditText ed_current_password = dialog.findViewById(R.id.ed_current_password);
+                final EditText edt_new_password = dialog.findViewById(R.id.edt_new_password);
+                final EditText edt_retype_password = dialog.findViewById(R.id.edt_retype_password);
+                final TextView tv_pswd_chk = dialog.findViewById(R.id.tv_pswd_chk);
+                final TextView tv_submit = dialog.findViewById(R.id.tv_submit);
+                RelativeLayout rl_cancel = dialog.findViewById(R.id.rl_cancel);
+                final RelativeLayout rl_submit = dialog.findViewById(R.id.rl_submit);
+                android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
+                alert.setView(dialog);
+//                        alert.setCancelable(false);
+                //Creating an alert dialog
+                final android.app.AlertDialog alertDialog = alert.create();
+                alertDialog.show();
+                rl_submit.setClickable(false);
+//            tv_submit.setAlpha(0.5f);
+                rl_submit.setAlpha(0.5f);
+                rl_cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.cancel();
+                    }
+                });
+                edt_retype_password.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        if(edt_new_password.getText().toString().contentEquals(charSequence)){
+                            tv_pswd_chk.setVisibility(View.VISIBLE);
+                            tv_pswd_chk.setTextColor(Color.parseColor("#00AE00"));
+                            tv_pswd_chk.setText("Correct Password");
+//                        tv_submit.setAlpha(1.0f);
+                            rl_submit.setAlpha(1.0f);
+                            rl_submit.setClickable(true);
+                        }else {
+                            tv_pswd_chk.setVisibility(View.VISIBLE);
+                            tv_pswd_chk.setTextColor(Color.parseColor("#AE0000"));
+                            rl_submit.setClickable(false);
+//                        tv_submit.setAlpha(0.5f);
+                            rl_submit.setAlpha(0.5f);
+                            tv_pswd_chk.setText("Incorrect Password");
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                rl_submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(ed_current_password.getText().toString().contentEquals("") || edt_retype_password.getText().toString().contentEquals("") ){
+                            //----to display message in snackbar, code starts
+                            String message_notf = "Field cannot be left blank";
+                            int color = Color.parseColor("#FFFFFF");
+                            View v1 = findViewById(R.id.cordinatorLayout);
+                            new org.wrkplan.payroll.Config.Snackbar(message_notf,v1,color);
+                            //----to display message in snackbar, code ends
+                        }else{
+//                        changePswd(ed_current_password.getText().toString(),edt_new_password.getText().toString(),ed_password_hint.getText().toString());
+                            change_password(ed_current_password.getText().toString(),edt_new_password.getText().toString());
+                            alertDialog.dismiss();
+                        }
+                    }
+                });
                 break;
 
         }
@@ -458,5 +539,96 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
     //===========Code to get data from api and load data, ends==========
+
+    //============function to change password, code starts========
+    public void change_password(String old_pswd, String new_pswd){
+        try {
+            final JSONObject DocumentElementobj = new JSONObject();
+            DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
+            DocumentElementobj.put("employee_id", Integer.parseInt(userSingletonModel.getEmployee_id()));
+           /* DocumentElementobj.put("corp_id", "demo_test");
+            DocumentElementobj.put("employee_id", 1234);*/
+            DocumentElementobj.put("old_pwd", old_pswd);
+            DocumentElementobj.put("new_pwd", new_pswd);
+
+            Log.d("jsonObjectTest",DocumentElementobj.toString());
+            final String URL = Url.BASEURL + "user/change-password";
+
+            JsonObjectRequest request_json = null;
+            request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                //Process os success response
+                                JSONObject jsonObj = null;
+                                try{
+                                    String responseData = response.toString();
+                                    JSONObject resobj = new JSONObject(responseData);
+                                    JSONObject jsonObject = resobj.getJSONObject("response");
+                                    Log.d("getData",resobj.toString());
+
+                                    if(jsonObject.getString("status").contentEquals("1")){
+//                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
+                                        //---------Alert dialog code starts(added on 21st nov)--------
+                                        final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(HomeActivity.this);
+                                        alertDialogBuilder.setMessage(jsonObject.getString("message"));
+                                        alertDialogBuilder.setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface arg0, int arg1) {
+                                                        //-----following code is commented on 6th dec to get the calender saved state data------
+                                                        alertDialogBuilder.setCancelable(true);
+                                                    }
+                                                });
+                                        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                                        alertDialog.show();
+
+                                        //--------Alert dialog code ends--------
+                                    }else{
+//                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
+                                        //---------Alert dialog code starts(added on 21st nov)--------
+                                        final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(HomeActivity.this);
+                                        alertDialogBuilder.setMessage(jsonObject.getString("message"));
+                                        alertDialogBuilder.setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface arg0, int arg1) {
+                                                        //-----following code is commented on 6th dec to get the calender saved state data------
+                                                        alertDialogBuilder.setCancelable(true);
+                                                    }
+                                                });
+                                        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                                        alertDialog.show();
+
+                                        //--------Alert dialog code ends--------
+                                    }
+
+
+                                }catch (JSONException e){
+                                    //                            loading.dismiss();
+                                    e.printStackTrace();
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.e("Error: ", error.getMessage());
+                    Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
+                }
+            });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(request_json);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+    }
+    //============function to change password, code ends========
 
 }
