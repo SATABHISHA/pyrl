@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +30,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -44,6 +47,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.InstallStateUpdatedListener;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.InstallStatus;
+import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
@@ -65,6 +75,8 @@ import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogListActivity;
 import org.wrkplan.payroll.R;
 import org.wrkplan.payroll.Timesheet.MyAttendanceActivity;
 
+import static com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED;
+
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     ImageView img_emp_information, img_leave_balance, img_emp_facilities, img_emp_documents, img_company_documents, img_insurance_details, img_holiday_details, img_od_duty, img_info, img_timesheet;
@@ -80,6 +92,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     CoordinatorLayout coordinatorLayout;
     Context context;
     //  EditText ed_userpassword;
+
+    //------variable for version update, code starts
+    private AppUpdateManager mAppUpdateManager;
+    private int RC_APP_UPDATE = 999;
+    private int inAppUpdateType;
+    private com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask;
+    private InstallStateUpdatedListener installStateUpdatedListener;
+    //------variable for version update, code ends
 
 
 
@@ -179,8 +199,110 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         ll_timesheet.setOnClickListener(this);
         img_timesheet.setOnClickListener(this);
 
-        load_data_check_od_duty();
+        load_data_check_od_duty(); //--function to check weather od_duty exists or not
+
+        //----added on 20th July for version update, starts----
+        mAppUpdateManager = AppUpdateManagerFactory.create(this);
+        // Returns an intent object that you use to check for an update.
+        appUpdateInfoTask = mAppUpdateManager.getAppUpdateInfo();
+        //lambda operation used for below listener
+        //For flexible update
+        installStateUpdatedListener = installState -> {
+            if (installState.installStatus() == InstallStatus.DOWNLOADED) {
+                popupSnackbarForCompleteUpdate();
+            }
+        };
+        mAppUpdateManager.registerListener(installStateUpdatedListener);
+
+        //For Flexible
+        inAppUpdateType = AppUpdateType.FLEXIBLE;//1
+        inAppUpdate();
+        //----added on 20th July for version update, ends----
+
+
     }
+
+    //-------added on 4th Sept code for version update, starts----
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_APP_UPDATE) {
+            //when user clicks update button
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(HomeActivity.this, "App download starts...", Toast.LENGTH_LONG).show();
+            } else if (resultCode != RESULT_CANCELED) {
+                //if you want to request the update again just call checkUpdate()
+                Toast.makeText(HomeActivity.this, "App download canceled.", Toast.LENGTH_LONG).show();
+            } else if (resultCode == RESULT_IN_APP_UPDATE_FAILED) {
+                Toast.makeText(HomeActivity.this, "App download failed.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        mAppUpdateManager.unregisterListener(installStateUpdatedListener);
+        super.onDestroy();
+    }
+
+    private void inAppUpdate() {
+
+        try {
+            // Checks that the platform will allow the specified type of update.
+            appUpdateInfoTask.addOnSuccessListener(new com.google.android.play.core.tasks.OnSuccessListener<AppUpdateInfo>() {
+                @Override
+                public void onSuccess(AppUpdateInfo appUpdateInfo) {
+                    if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                            // For a flexible update, use AppUpdateType.FLEXIBLE
+                            && appUpdateInfo.isUpdateTypeAllowed(inAppUpdateType)) {
+                        // Request the update.
+
+                        try {
+                            mAppUpdateManager.startUpdateFlowForResult(
+                                    // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                                    appUpdateInfo,
+                                    // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
+                                    inAppUpdateType,
+                                    // The current activity making the update request.
+                                    HomeActivity.this,
+                                    // Include a request code to later monitor this update request.
+                                    RC_APP_UPDATE);
+                        } catch (IntentSender.SendIntentException ignored) {
+
+                        }
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void popupSnackbarForCompleteUpdate() {
+        try {
+            com.google.android.material.snackbar.Snackbar snackbar =
+                    com.google.android.material.snackbar.Snackbar.make(
+                            findViewById(R.id.cordinatorLayout),
+                            "An update has just been downloaded.\nRestart to update",
+                            com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE);
+
+            snackbar.setAction("INSTALL", view -> {
+                if (mAppUpdateManager != null){
+                    mAppUpdateManager.completeUpdate();
+                }
+            });
+            snackbar.setActionTextColor(Color.parseColor("#ffffff"));
+            snackbar.show();
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+    //-------added on 4th Sept code for version update, ends----
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -341,7 +463,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
         }
-        return false;
+//        return false;
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
 
 
     }
