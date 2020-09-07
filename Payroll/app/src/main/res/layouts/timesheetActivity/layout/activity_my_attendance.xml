@@ -51,73 +51,79 @@
                 android:layout_height="wrap_content"
                 android:text="Today"
                 android:layout_alignParentTop="true"
-                android:textSize="17sp"
-                android:layout_toLeftOf="@id/ll_buttons"
-                android:layout_marginRight="10dp"
-                android:textColor="#1182d5"/>
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:layout_marginRight="7dp"
+                android:textColor="#000000"/>
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_below="@id/tv_tile"
+                android:layout_centerHorizontal="true"
                 android:textSize="15sp"
                 android:text="2020-Jun-05"/>
+            <CheckBox
+                android:id="@+id/chck_wrk_frm_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_date"
+                android:layout_centerHorizontal="true"
+                android:text="Work from home"
+                android:textSize="13sp"/>
+            <EditText
+                android:id="@+id/ed_wrk_frm_home_detail"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textSize="15sp"
+                android:gravity="top|left"
+                android:layout_below="@id/chck_wrk_frm_home"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:textColor="#7A7979"
+                android:background="@drawable/layout6"
+                android:hint="Work from home detail"/>
+
             <LinearLayout
                 android:id="@+id/ll_buttons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
+                android:layout_below="@id/ed_wrk_frm_home_detail"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
                 android:orientation="horizontal">
-                <!--  <TextView
-                      android:id="@+id/tv_start"
-                      android:layout_width="80dp"
-                      android:layout_height="48dp"
-                      android:gravity="center"
-                      android:textSize="17sp"
-                      android:visibility="visible"
-                      android:textColor="#686666"
-                      android:background="#dce9ab"
-                      android:text="START"/> -->
+
                 <RelativeLayout
                     android:id="@+id/rl_in"
                     android:layout_width="80dp"
-                    android:layout_height="52dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:background="@drawable/activity_my_attendance_shape">
                     <TextView
                         android:id="@+id/tv_in"
                         android:layout_width="80dp"
-                        android:layout_height="48dp"
+                        android:layout_height="match_parent"
                         android:gravity="center"
                         android:textSize="15sp"
                         android:visibility="visible"
                         android:textColor="#393838"
                         android:text="IN"/>
                 </RelativeLayout>
-                <!--<TextView
-                    android:id="@+id/tv_pause"
-                    android:layout_width="80dp"
-                    android:layout_height="48dp"
-                    android:gravity="center"
-                    android:textSize="17sp"
-                    android:visibility="visible"
-                    android:textColor="#686666"
-                    android:background="#ffffff"
-                    android:text="PAUSE"/> -->
 
                 <RelativeLayout
                     android:id="@+id/rl_out"
                     android:layout_width="80dp"
-                    android:layout_height="52dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="7dp"
                     android:layout_gravity="center"
                     android:background="@drawable/activity_my_attendance_shape">
                     <TextView
                         android:id="@+id/tv_out"
                         android:layout_width="80dp"
-                        android:layout_height="48dp"
+                        android:layout_height="match_parent"
                         android:gravity="center"
                         android:textSize="15sp"
                         android:visibility="visible"
@@ -136,14 +142,14 @@
                       android:background="#febbaf"
                       android:text="STOP"/> -->
             </LinearLayout>
-        <!--    <LinearLayout
-                android:id="@+id/ll_border"
-                android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_height="1dp"
-                android:layout_below="@id/tv_date"
-                android:orientation="vertical"
-                android:background="#dcdcdc"/> -->
+            <!--    <LinearLayout
+                    android:id="@+id/ll_border"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/tv_date"
+                    android:orientation="vertical"
+                    android:background="#dcdcdc"/> -->
 
             <LinearLayout
                 android:id="@+id/ll_log_in_out"
@@ -224,14 +230,14 @@
                 android:layout_below="@id/ll_log_in_out"
                 android:textSize="17sp"
                 android:text="My Attendance Log"/>
-<LinearLayout
-    android:id="@+id/ll_line_attndnc"
-    android:layout_width="match_parent"
-    android:layout_height="0.8dp"
-    android:layout_below="@id/tv_logtitle"
-    android:orientation="horizontal"
-    android:layout_marginTop="5dp"
-    android:background="#454444"/>
+            <LinearLayout
+                android:id="@+id/ll_line_attndnc"
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_below="@id/tv_logtitle"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:background="#454444"/>
             <RelativeLayout
                 android:layout_below="@id/ll_line_attndnc"
                 android:layout_width="match_parent"

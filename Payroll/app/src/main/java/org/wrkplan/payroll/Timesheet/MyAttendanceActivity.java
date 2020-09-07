@@ -1,13 +1,17 @@
 package org.wrkplan.payroll.Timesheet;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +23,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -26,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.OutDoorLogListModel;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel;
 import org.wrkplan.payroll.Model.UserSingletonModel;
@@ -33,6 +40,8 @@ import org.wrkplan.payroll.OutDoorDutyLog.CustomOdDutyLogListAdapter;
 import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogListActivity;
 import org.wrkplan.payroll.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -46,10 +55,16 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
     RecyclerView recycler_view;
     RelativeLayout rl_button, rl_out, rl_in;
     TextView tv_button_subordinate, tv_nodata, tv_in, tv_out, tv_time_in, tv_time_out, tv_date;
+
+    CheckBox chck_wrk_frm_home;
+    EditText ed_wrk_frm_home_detail;
+    public static int timesheet_id, work_from_home_flag;
+    public static String timesheet_in_out_action, work_from_home_detail;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_attendance);
+//        setContentView(R.layout.activity_my_attendance1);
 
         rl_button = findViewById(R.id.rl_button);
         tv_button_subordinate = findViewById(R.id.tv_button_subordinate);
@@ -64,15 +79,21 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
         rl_in = findViewById(R.id.rl_in);
         rl_out = findViewById(R.id.rl_out);
 
+        chck_wrk_frm_home = findViewById(R.id.chck_wrk_frm_home);
+        ed_wrk_frm_home_detail = findViewById(R.id.ed_wrk_frm_home_detail);
+
         rl_button.setOnClickListener(this);
         tv_button_subordinate.setOnClickListener(this);
         tv_in.setOnClickListener(this);
         tv_out.setOnClickListener(this);
+        chck_wrk_frm_home.setOnClickListener(this);
 
         //----default making tv_in, tv_out visibility gone
-        tv_in.setVisibility(View.INVISIBLE);
+//        tv_in.setVisibility(View.INVISIBLE);
+        tv_in.setVisibility(View.GONE);
         tv_out.setVisibility(View.GONE);
-        rl_in.setVisibility(View.INVISIBLE);
+//        rl_in.setVisibility(View.INVISIBLE);
+        rl_in.setVisibility(View.GONE);
         rl_out.setVisibility(View.GONE);
 
         //==========Recycler code initializing and setting layoutManager starts======
@@ -105,12 +126,114 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
 //                startActivity(new Intent(this, SubordinateAttendanceActivity.class));
                 break;
             case R.id.tv_in:
+                save_in_out_data("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString());
                 break;
             case R.id.tv_out:
+                save_in_out_data("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString());
+                break;
+            case R.id.chck_wrk_frm_home:
+                if(chck_wrk_frm_home.isChecked()) {
+                    ed_wrk_frm_home_detail.setVisibility(View.VISIBLE);
+                    work_from_home_flag = 1;
+                }else{
+                    ed_wrk_frm_home_detail.setVisibility(View.GONE);
+                    work_from_home_flag = 0;
+                }
                 break;
         }
     }
 
+    //========function to save data for IN/OUT, code starts=======
+    public void save_in_out_data(String in_out, int work_frm_home_flag, String work_from_home_detail){
+
+        try {
+            final JSONObject DocumentElementobj = new JSONObject();
+            DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
+            DocumentElementobj.put("timesheet_id", timesheet_id);
+            DocumentElementobj.put("employee_id", Integer.parseInt(userSingletonModel.getEmployee_id()));
+            DocumentElementobj.put("in_out_action", in_out);
+            DocumentElementobj.put("work_from_home_flag", work_frm_home_flag);
+            DocumentElementobj.put("work_from_home_detail", work_from_home_detail);
+
+            Log.d("jsonObjectTest",DocumentElementobj.toString());
+            final String URL = Url.BASEURL + "timesheet/save";
+
+            JsonObjectRequest request_json = null;
+            request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                //Process os success response
+                                JSONObject jsonObj = null;
+                                try{
+                                    String responseData = response.toString();
+                                    JSONObject resobj = new JSONObject(responseData);
+                                    JSONObject jsonObject = resobj.getJSONObject("response");
+                                    Log.d("getData",resobj.toString());
+
+                                    if(jsonObject.getString("status").contentEquals("true")){
+//                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
+                                        //---------Alert dialog code starts(added on 21st nov)--------
+                                        final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(MyAttendanceActivity.this);
+                                        alertDialogBuilder.setMessage(jsonObject.getString("message"));
+                                        alertDialogBuilder.setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface arg0, int arg1) {
+                                                        //-----following code is commented on 6th dec to get the calender saved state data------
+                                                        alertDialogBuilder.setCancelable(true);
+                                                        load_data_check_od_duty();
+                                                    }
+                                                });
+                                        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                                        alertDialog.show();
+
+                                        //--------Alert dialog code ends--------
+                                    }else{
+//                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
+                                        //---------Alert dialog code starts(added on 21st nov)--------
+                                        final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(MyAttendanceActivity.this);
+                                        alertDialogBuilder.setMessage(jsonObject.getString("message"));
+                                        alertDialogBuilder.setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface arg0, int arg1) {
+                                                        //-----following code is commented on 6th dec to get the calender saved state data------
+                                                        alertDialogBuilder.setCancelable(true);
+                                                    }
+                                                });
+                                        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                                        alertDialog.show();
+
+                                        //--------Alert dialog code ends--------
+                                    }
+
+
+                                }catch (JSONException e){
+                                    //                            loading.dismiss();
+                                    e.printStackTrace();
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.e("Error: ", error.getMessage());
+                    Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
+                }
+            });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(request_json);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+    //========function to save data for IN/OUT, code ends=======
     //===========Code to get data from api using volley and load data to recycler view, starts==========
     public void loadData(){
 //        String url = Url.BASEURL+"od/log/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
@@ -213,29 +336,93 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
             JSONObject jsonObject1 = jsonObject.getJSONObject("response");
 
             if(jsonObject1.getString("status").contentEquals("true")){
-              if(jsonObject.getString("timesheet_in_out_action").trim().contentEquals("IN")){
-                  tv_in.setVisibility(View.VISIBLE);
-                  tv_out.setVisibility(View.GONE);
+                timesheet_id = jsonObject.getInt("timesheet_id");
+                work_from_home_flag = jsonObject.getInt("work_from_home_flag");
+                work_from_home_detail = jsonObject.getString("work_from_home_detail");
+                if(timesheet_id != 0 ){
+                    if(work_from_home_flag == 1){
+                        chck_wrk_frm_home.setVisibility(View.VISIBLE);
+                        chck_wrk_frm_home.setChecked(true);
+                        chck_wrk_frm_home.setClickable(false);
 
-                  rl_in.setVisibility(View.VISIBLE);
-                  rl_out.setVisibility(View.GONE);
-              }else if(jsonObject.getString("timesheet_in_out_action").trim().contentEquals("OUT")){
-                  tv_in.setVisibility(View.GONE);
-                  tv_out.setVisibility(View.VISIBLE);
+                        ed_wrk_frm_home_detail.setVisibility(View.VISIBLE);
+                        ed_wrk_frm_home_detail.setText(work_from_home_detail);
+                        ed_wrk_frm_home_detail.setEnabled(false);
+                    }else if(work_from_home_flag == 0){
+                        chck_wrk_frm_home.setVisibility(View.GONE);
+                        ed_wrk_frm_home_detail.setVisibility(View.GONE);
+                    }else{
+                        chck_wrk_frm_home.setVisibility(View.VISIBLE);
+                        chck_wrk_frm_home.setClickable(true);
 
-                  rl_in.setVisibility(View.GONE);
-                  rl_out.setVisibility(View.VISIBLE);
-              }else {
-                  tv_in.setVisibility(View.GONE);
-                  tv_out.setVisibility(View.GONE);
+                        ed_wrk_frm_home_detail.setEnabled(true);
+                        ed_wrk_frm_home_detail.setVisibility(View.GONE);
+                    }
+                }
+                if(jsonObject.has("timesheet_in_out_action")) {
+                    if (jsonObject.getString("timesheet_in_out_action").trim().contentEquals("IN")) {
+                        tv_in.setVisibility(View.VISIBLE);
+                        tv_out.setVisibility(View.GONE);
 
-                  rl_in.setVisibility(View.GONE);
-                  rl_out.setVisibility(View.GONE);
-              }
+                        rl_in.setVisibility(View.VISIBLE);
+                        rl_out.setVisibility(View.GONE);
+                    } else if (jsonObject.getString("timesheet_in_out_action").trim().contentEquals("OUT")) {
+                        tv_in.setVisibility(View.GONE);
+                        tv_out.setVisibility(View.VISIBLE);
 
-              tv_time_in.setText(jsonObject.getString("time_in"));
-              tv_time_out.setText(jsonObject.getString("time_out"));
+                        rl_in.setVisibility(View.GONE);
+                        rl_out.setVisibility(View.VISIBLE);
+                    } else {
+                        tv_in.setVisibility(View.GONE);
+                        tv_out.setVisibility(View.GONE);
+
+                        rl_in.setVisibility(View.GONE);
+                        rl_out.setVisibility(View.GONE);
+                    }
+                }else {
+                    tv_in.setVisibility(View.GONE);
+                    tv_out.setVisibility(View.GONE);
+
+                    rl_in.setVisibility(View.GONE);
+                    rl_out.setVisibility(View.GONE);
+                }
+
+                DateFormat inputFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss");
+//                DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                DateFormat outputFormat = new SimpleDateFormat("hh:mm a");
+
+                if(!jsonObject.getString("time_in").contentEquals("")) {
+                    String inputText_time_in = jsonObject.getString("time_in");
+
+                    Date date_log_time_in = null;
+                    try {
+                        date_log_time_in = inputFormat.parse(inputText_time_in);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    tv_time_in.setText(outputFormat.format(date_log_time_in));
+
+
+                }else{
+                    tv_time_in.setText("");
+                }
+                if(!jsonObject.getString("time_out").contentEquals("")){
+                    String inputText_time_out = jsonObject.getString("time_out");
+
+                    Date date_log_time_out = null;
+                    try {
+                        date_log_time_out = inputFormat.parse(inputText_time_out);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    tv_time_out.setText(outputFormat.format(date_log_time_out));
+                }else{
+                    tv_time_out.setText("");
+                }
             }else if(jsonObject.getString("status").contentEquals("false")){
+
 
             }
 

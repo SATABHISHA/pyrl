@@ -690,14 +690,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                 try{
                                     String responseData = response.toString();
                                     JSONObject resobj = new JSONObject(responseData);
-                                    JSONObject jsonObject = resobj.getJSONObject("response");
                                     Log.d("getData",resobj.toString());
 
-                                    if(jsonObject.getString("status").contentEquals("1")){
+                                    if(resobj.getString("status").contentEquals("true")){
 //                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
                                         //---------Alert dialog code starts(added on 21st nov)--------
                                         final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(HomeActivity.this);
-                                        alertDialogBuilder.setMessage(jsonObject.getString("message"));
+                                        alertDialogBuilder.setMessage(resobj.getString("message"));
                                         alertDialogBuilder.setPositiveButton("OK",
                                                 new DialogInterface.OnClickListener() {
                                                     @Override
@@ -714,7 +713,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
                                         //---------Alert dialog code starts(added on 21st nov)--------
                                         final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(HomeActivity.this);
-                                        alertDialogBuilder.setMessage(jsonObject.getString("message"));
+                                        alertDialogBuilder.setMessage(resobj.getString("message"));
                                         alertDialogBuilder.setPositiveButton("OK",
                                                 new DialogInterface.OnClickListener() {
                                                     @Override

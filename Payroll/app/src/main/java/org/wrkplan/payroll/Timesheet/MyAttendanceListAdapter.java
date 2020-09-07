@@ -44,6 +44,7 @@ public class MyAttendanceListAdapter extends RecyclerView.Adapter<MyAttendanceLi
     @Override
     public MyAttendanceListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.activity_my_attendance_row, parent, false);
+//        View view = inflater.inflate(R.layout.activity_my_attendance_row1, parent, false);
         MyAttendanceListAdapter.MyViewHolder holder = new MyAttendanceListAdapter.MyViewHolder(view);
         context = parent.getContext();
         return holder;
