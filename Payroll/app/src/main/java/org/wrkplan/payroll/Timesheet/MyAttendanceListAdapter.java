@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -69,6 +70,11 @@ public class MyAttendanceListAdapter extends RecyclerView.Adapter<MyAttendanceLi
         holder.tv_date.setText(outputFormat.format(date_log));
         holder.tv_in_time.setText(timesheetMyAttendanceModelArrayList.get(position).getTime_in());
         holder.tv_out_time.setText(timesheetMyAttendanceModelArrayList.get(position).getTime_out());
+        if(timesheetMyAttendanceModelArrayList.get(position).getWork_from_home().contentEquals("1")){
+            holder.img_view_home.setVisibility(View.VISIBLE);
+        }else {
+            holder.img_view_home.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -79,12 +85,14 @@ public class MyAttendanceListAdapter extends RecyclerView.Adapter<MyAttendanceLi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_date, tv_in_time, tv_out_time;
+        ImageView img_view_home;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
             tv_date = itemView.findViewById(R.id.tv_date);
             tv_in_time = itemView.findViewById(R.id.tv_in_time);
             tv_out_time = itemView.findViewById(R.id.tv_out_time);
+            img_view_home = itemView.findViewById(R.id.img_view_home);
 
 
         }
