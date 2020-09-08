@@ -178,13 +178,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
-
-
-
-
-
-
-
           ///============================================
           userSingletonModel.setUan_no(sharedPreferences.getString("uan_no", ""));
           userSingletonModel.setLte(sharedPreferences.getString("lte", ""));
