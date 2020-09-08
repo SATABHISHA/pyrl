@@ -1,6 +1,7 @@
 package org.wrkplan.payroll.Login;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -295,6 +296,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         private  void getlogin(final String userid, final String username, final String password)
         {
+            final ProgressDialog loading = ProgressDialog.show(LoginActivity.this, "Authenticating", "Please wait while logging", false, false);
             String url= Url.BASEURL + "login/"+userid+"/"+username+"/"+password;
             StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
@@ -308,6 +310,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         String message=jb_response.getString("message");
 
                         if(status.equals("true")) {
+                            loading.dismiss();
 
                             editor_autofill.putBoolean("savelogin", true);
                             editor_autofill.putString("userid",userid);
@@ -621,6 +624,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                            Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                         }
                         else {
+                            loading.dismiss();
                             Snackbar snackbar=Snackbar.make(coordinatorLayout,"Login failure",Snackbar.LENGTH_SHORT);
                             snackbar.show();
 
@@ -633,6 +637,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        loading.dismiss();
                         Toast.makeText(LoginActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         btn_login.setEnabled(true);
                         btn_login.setClickable(true);
@@ -644,6 +649,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onErrorResponse(VolleyError error) {
 //                    Log.d("error-=>",error.getMessage());
+                    loading.dismiss();
                     btn_login.setEnabled(true);
                     btn_login.setClickable(true);
                     btn_login.setAlpha(1.0f);
