@@ -128,7 +128,7 @@
                         android:textSize="15sp"
                         android:visibility="visible"
                         android:textColor="#393838"
-                        android:text="STOP"/>
+                        android:text="OUT"/>
                 </RelativeLayout>
                 <!--  <TextView
                       android:id="@+id/tv_stop"
