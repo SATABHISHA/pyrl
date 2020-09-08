@@ -123,7 +123,7 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
                 startActivity(new Intent(this, SubordinateAttendanceActivity.class));
                 break;
             case R.id.tv_button_subordinate:
-//                startActivity(new Intent(this, SubordinateAttendanceActivity.class));
+                startActivity(new Intent(this, SubordinateAttendanceActivity.class));
                 break;
             case R.id.tv_in:
                 save_in_out_data("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString());
