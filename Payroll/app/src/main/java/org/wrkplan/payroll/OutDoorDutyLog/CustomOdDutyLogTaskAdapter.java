@@ -261,7 +261,7 @@ public class CustomOdDutyLogTaskAdapter extends RecyclerView.Adapter<CustomOdDut
         }
 
         public void delete_api_call(final int position){
-            String url = Url.BASEURL+"od/task/delete/"+userSingletonModel.getCorporate_id()+"/"+outDoorTaskModelArrayList.get(position).getOd_duty_task_detail_id();
+            String url = Url.BASEURL()+"od/task/delete/"+userSingletonModel.getCorporate_id()+"/"+outDoorTaskModelArrayList.get(position).getOd_duty_task_detail_id();
             Log.d("url-=>",url);
             final ProgressDialog loading = ProgressDialog.show(context, "Loading", "Please wait...", true, false);
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new

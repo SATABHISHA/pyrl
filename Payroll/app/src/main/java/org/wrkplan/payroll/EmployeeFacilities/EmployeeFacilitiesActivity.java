@@ -68,7 +68,7 @@ public class EmployeeFacilitiesActivity extends AppCompatActivity {
     }
 
     private void Getdata() {
-        String url= Url.BASEURL + "facilities/"+userSingletonModel.corporate_id+"/"+userSingletonModel.employee_id;
+        String url= Url.BASEURL() + "facilities/"+userSingletonModel.corporate_id+"/"+userSingletonModel.employee_id;
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

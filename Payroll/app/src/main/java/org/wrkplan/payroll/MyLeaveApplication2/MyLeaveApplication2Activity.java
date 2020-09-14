@@ -380,7 +380,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     Toast.makeText(MyLeaveApplication2Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
                 }
 
-                String url = Url.BASEURL + "leave/application/save";
+                String url = Url.BASEURL() + "leave/application/save";
                 try {
                     JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.POST, url,
                             new JSONObject(jsonBody_Subordinate.toString()), new Response.Listener<JSONObject>() {
@@ -467,7 +467,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
             }
             private void Load_Spinner_Data() {
 
-                String url=Url.BASEURL + "finyear/" + "list/" + userSingletonModel.corporate_id;
+                String url=Url.BASEURL() + "finyear/" + "list/" + userSingletonModel.corporate_id;
                 StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -515,7 +515,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
 
             private void GetData(String year_code) {
-                String url= Url.BASEURL + "leave/" + "balance/" + userSingletonModel.corporate_id+"/"+userSingletonModel.employee_id+"/"+year_code;
+                String url= Url.BASEURL() + "leave/" + "balance/" + userSingletonModel.corporate_id+"/"+userSingletonModel.employee_id+"/"+year_code;
 
 
 
@@ -623,7 +623,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                 }
 
 
-                String url = Url.BASEURL + "leave/application/save";
+                String url = Url.BASEURL() + "leave/application/save";
 
                 try {
                     JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonBody.toString())
@@ -768,7 +768,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     }
 
     private void GetEditForm2() {
-        String url= Url.BASEURL + "leave/" + "application/"+ "detail/"+userSingletonModel.corporate_id+"/"+Url.currtent_application_id+"/"+2;
+        String url= Url.BASEURL() + "leave/" + "application/"+ "detail/"+userSingletonModel.corporate_id+"/"+Url.currtent_application_id+"/"+2;
         StringRequest stringRequest =new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -878,7 +878,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
     private void GetEditForm() {
 
-        String url= Url.BASEURL + "leave/" + "application/"+ "detail/"+userSingletonModel.corporate_id+"/"+Url.currtent_application_id+"/"+1;
+        String url= Url.BASEURL() + "leave/" + "application/"+ "detail/"+userSingletonModel.corporate_id+"/"+Url.currtent_application_id+"/"+1;
 //        Log.d("sbsv",url);
 //        Log.d("sbsv", String.valueOf(Url.islistclicked));
 
@@ -997,7 +997,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     }
 
     private void GetLeave() {
-        String url= Url.BASEURL + "leave/" + "type/"+userSingletonModel.corporate_id;
+        String url= Url.BASEURL() + "leave/" + "type/"+userSingletonModel.corporate_id;
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

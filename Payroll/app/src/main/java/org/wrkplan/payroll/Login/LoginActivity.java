@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public static String entry_user = ""; //---added by Satabhisha on 6th MAy
 
-    public static String url_check = "test";
+    public static String url_check = "test"; //----as per discussion on 12th sept, Base url(live or local) distinction should be handled by using static variable
 //    final  String url="http://192.168.10.175:9018/api/login/payroll_713/1/1";
 
 

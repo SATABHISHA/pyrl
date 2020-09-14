@@ -605,7 +605,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void load_data_check_od_duty(){
 //        String url = Config.BaseUrlEpharma + "documents/list" ;
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
-        String url = Url.BASEURL+"od/request/check-exist/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+        String url = Url.BASEURL()+"od/request/check-exist/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
         Log.d("url-=>",url);
 //        String url = Url.BASEURL+"od/request/detail/20/1/1";
         final ProgressDialog loading = ProgressDialog.show(HomeActivity.this, "Loading", "Please wait...", true, false);
@@ -677,7 +677,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             DocumentElementobj.put("new_pwd", new_pswd);
 
             Log.d("jsonObjectTest",DocumentElementobj.toString());
-            final String URL = Url.BASEURL + "user/change-password";
+            final String URL = Url.BASEURL() + "user/change-password";
 
             JsonObjectRequest request_json = null;
             request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),

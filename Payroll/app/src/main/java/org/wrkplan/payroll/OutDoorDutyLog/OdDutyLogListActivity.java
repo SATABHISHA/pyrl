@@ -166,7 +166,7 @@ public class OdDutyLogListActivity extends AppCompatActivity implements View.OnC
 
     //===========Code to get data from api using volley and load data to recycler view, starts==========
     public void loadData(){
-        String url = Url.BASEURL+"od/log/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
+        String url = Url.BASEURL()+"od/log/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
         Log.d("listurl-=>",url);
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/52";
         final ProgressDialog loading = ProgressDialog.show(OdDutyLogListActivity.this, "Loading", "Please wait...", true, false);
@@ -239,7 +239,7 @@ public class OdDutyLogListActivity extends AppCompatActivity implements View.OnC
     public void load_data_check_od_duty(){
 //        String url = Config.BaseUrlEpharma + "documents/list" ;
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
-        String url = Url.BASEURL+"od/request/check-exist/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+        String url = Url.BASEURL()+"od/request/check-exist/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
         Log.d("url-=>",url);
 //        String url = Url.BASEURL+"od/request/detail/20/1/1";
         final ProgressDialog loading = ProgressDialog.show(OdDutyLogListActivity.this, "Loading", "Please wait...", true, false);
@@ -429,7 +429,7 @@ public class OdDutyLogListActivity extends AppCompatActivity implements View.OnC
 
         //------calling api to save data
         JsonObjectRequest request_json = null;
-        String URL = Url.BASEURL+"od/log/save";
+        String URL = Url.BASEURL()+"od/log/save";
         try {
             request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
                     new Response.Listener<JSONObject>() {

@@ -337,7 +337,7 @@ public class OdDutyLogEmployeeTaskActivity extends AppCompatActivity implements 
     //===========Code to get data from api using volley and load data to recycler view, starts==========
     public void loadData(final Integer status) {
 //        String url = Url.BASEURL+"od/task/detail/"+userSingletonModel.getCorporate_id()+"/"+OdDutyLogListActivity.od_log_date+"/"+OdDutyLogListActivity.od_request_id+"/"+userSingletonModel.getEmployee_id();
-        String url = Url.BASEURL+"od/task/detail/"+userSingletonModel.getCorporate_id()+"/"+OdDutyLogListActivity.od_log_date+"/"+OdDutyLogListActivity.od_request_id+"/"+userSingletonModel.getLog_employee_id();
+        String url = Url.BASEURL()+"od/task/detail/"+userSingletonModel.getCorporate_id()+"/"+OdDutyLogListActivity.od_log_date+"/"+OdDutyLogListActivity.od_request_id+"/"+userSingletonModel.getLog_employee_id();
 //        String url = "http://220.225.40.151:9018/api/od/task/detail/payroll_713/2020-05-06/9/50";
         Log.d("tasklisturl-=>", url);
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/52";
@@ -796,7 +796,7 @@ public class OdDutyLogEmployeeTaskActivity extends AppCompatActivity implements 
 
         //------calling api to save data
         JsonObjectRequest request_json = null;
-        String URL = Url.BASEURL+"od/task/save";
+        String URL = Url.BASEURL()+"od/task/save";
         try {
             request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
                     new Response.Listener<JSONObject>() {
@@ -860,7 +860,7 @@ public class OdDutyLogEmployeeTaskActivity extends AppCompatActivity implements 
 
          //------calling api to save data
          JsonObjectRequest request_json = null;
-         String URL = Url.BASEURL+"od/task/approval";
+         String URL = Url.BASEURL()+"od/task/approval";
          try {
              request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
                      new Response.Listener<JSONObject>() {

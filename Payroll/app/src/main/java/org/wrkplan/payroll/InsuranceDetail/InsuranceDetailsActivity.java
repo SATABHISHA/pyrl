@@ -304,7 +304,7 @@ public class InsuranceDetailsActivity extends AppCompatActivity  implements View
     }
     private void getdata () {
 
-        String url= Url.BASEURL + "insurance/"+userSingletonModel.corporate_id+"/"+userSingletonModel.user_id;
+        String url= Url.BASEURL() + "insurance/"+userSingletonModel.corporate_id+"/"+userSingletonModel.user_id;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

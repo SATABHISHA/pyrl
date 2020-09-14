@@ -54,7 +54,7 @@ public class SubordinateOdDutyLogListActivity extends AppCompatActivity {
 
     //===========Code to get data from api using volley and load data to recycler view, starts==========
     public void loadData(){
-        String url = Url.BASEURL+"od/log/list/"+userSingletonModel.getCorporate_id()+"/2/"+userSingletonModel.getEmployee_id();
+        String url = Url.BASEURL()+"od/log/list/"+userSingletonModel.getCorporate_id()+"/2/"+userSingletonModel.getEmployee_id();
         Log.d("listurl-=>",url);
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/52";
         final ProgressDialog loading = ProgressDialog.show(SubordinateOdDutyLogListActivity.this, "Loading", "Please wait...", true, false);

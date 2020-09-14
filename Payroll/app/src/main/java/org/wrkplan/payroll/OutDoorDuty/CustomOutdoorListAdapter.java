@@ -183,7 +183,7 @@ public class CustomOutdoorListAdapter extends RecyclerView.Adapter<CustomOutdoor
 
 
     public void delete_api_call(final int position){
-        String url = Url.BASEURL+"od/request/delete/"+userSingletonModel.getCorporate_id()+"/"+outDoorListModelArrayList.get(position).getOd_request_id();
+        String url = Url.BASEURL()+"od/request/delete/"+userSingletonModel.getCorporate_id()+"/"+outDoorListModelArrayList.get(position).getOd_request_id();
         Log.d("url-=>",url);
         final ProgressDialog loading = ProgressDialog.show(context, "Loading", "Please wait...", true, false);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new

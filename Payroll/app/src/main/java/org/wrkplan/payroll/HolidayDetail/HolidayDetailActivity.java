@@ -271,7 +271,7 @@ public class HolidayDetailActivity extends AppCompatActivity {
 
 
     private void getholiday(String year_code) {
-        String url = Url.BASEURL + "holidays/" + userSingletonModel.corporate_id + "/" + year_code;
+        String url = Url.BASEURL() + "holidays/" + userSingletonModel.corporate_id + "/" + year_code;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -354,7 +354,7 @@ public class HolidayDetailActivity extends AppCompatActivity {
 
     private void Getholidaylist(String year_code) {
         final int[] position = {0};
-        String url = Url.BASEURL + "holidays/" + userSingletonModel.corporate_id + "/" + year_code;
+        String url = Url.BASEURL() + "holidays/" + userSingletonModel.corporate_id + "/" + year_code;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

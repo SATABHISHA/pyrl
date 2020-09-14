@@ -102,7 +102,7 @@ public class MyLeaveApplicationActivity extends AppCompatActivity {
 
     private void Getdata() {
 
-        String url= Url.BASEURL + "leave/" + "application/" + "list/"+userSingletonModel.corporate_id+"/"+1+"/"+userSingletonModel.user_id;
+        String url= Url.BASEURL() + "leave/" + "application/" + "list/"+userSingletonModel.corporate_id+"/"+1+"/"+userSingletonModel.user_id;
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

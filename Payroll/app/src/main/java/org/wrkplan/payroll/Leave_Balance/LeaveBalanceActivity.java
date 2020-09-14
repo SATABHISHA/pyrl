@@ -160,7 +160,7 @@ public class LeaveBalanceActivity extends AppCompatActivity {
 
     private void Load_Spinner_Data() {
 
-        String url=Url.BASEURL + "finyear/" + "list/" + userSingletonModel.corporate_id;
+        String url=Url.BASEURL() + "finyear/" + "list/" + userSingletonModel.corporate_id;
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -211,7 +211,7 @@ public class LeaveBalanceActivity extends AppCompatActivity {
 
     private void GetData(String year ) {
 
-        String url= Url.BASEURL + "leave/" + "balance/" + userSingletonModel.corporate_id+"/"+userSingletonModel.employee_id+"/"+year;
+        String url= Url.BASEURL() + "leave/" + "balance/" + userSingletonModel.corporate_id+"/"+userSingletonModel.employee_id+"/"+year;
         Log.d("sfgj==",url);
 
 

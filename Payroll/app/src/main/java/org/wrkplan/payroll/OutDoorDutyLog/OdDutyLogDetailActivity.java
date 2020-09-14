@@ -60,7 +60,7 @@ public class OdDutyLogDetailActivity extends AppCompatActivity {
 
     //===========Code to get data from api using volley and load data to recycler view, starts==========
     public void loadData(){
-        String url = Url.BASEURL+"od/log/detail/"+userSingletonModel.getCorporate_id()+"/"+OdDutyLogListActivity.od_request_id+"/"+OdDutyLogListActivity.od_log_date;
+        String url = Url.BASEURL()+"od/log/detail/"+userSingletonModel.getCorporate_id()+"/"+OdDutyLogListActivity.od_request_id+"/"+OdDutyLogListActivity.od_log_date;
         Log.d("detailurl-=>",url);
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/52";
         final ProgressDialog loading = ProgressDialog.show(OdDutyLogDetailActivity.this, "Loading", "Please wait...", true, false);

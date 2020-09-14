@@ -76,7 +76,7 @@ public class CompanyDocumentsActivity extends AppCompatActivity {
     }
 
     private void getdata() {
-        String url= Url.BASEURL + "companydocs/"+"list/"+userSingletonModel.corporate_id;
+        String url= Url.BASEURL() + "companydocs/"+"list/"+userSingletonModel.corporate_id;
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

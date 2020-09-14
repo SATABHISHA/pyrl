@@ -99,7 +99,7 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
     public void loadData(){
 //        String url = Config.BaseUrlEpharma + "documents/list" ;
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
-        String url = Url.BASEURL+"od/request/detail/"+userSingletonModel.getCorporate_id()+"/"+CustomSubordinateOutdoorListAdapter.od_request_id+"/2";
+        String url = Url.BASEURL()+"od/request/detail/"+userSingletonModel.getCorporate_id()+"/"+CustomSubordinateOutdoorListAdapter.od_request_id+"/2";
         Log.d("url-=>",url);
 //        String url = Url.BASEURL+"od/request/detail/20/1/1";
         final ProgressDialog loading = ProgressDialog.show(SubordinateOutDoorRequestActivity.this, "Loading", "Please wait...", true, false);
@@ -341,7 +341,7 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
 
         //------calling api to save data
         JsonObjectRequest request_json = null;
-        String URL = Url.BASEURL+"od/request/save";
+        String URL = Url.BASEURL()+"od/request/save";
         try {
             request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
                     new Response.Listener<JSONObject>() {

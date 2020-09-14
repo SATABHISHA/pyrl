@@ -156,7 +156,7 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
             DocumentElementobj.put("work_from_home_detail", work_from_home_detail);
 
             Log.d("jsonObjectTest",DocumentElementobj.toString());
-            final String URL = Url.BASEURL + "timesheet/save";
+            final String URL = Url.BASEURL() + "timesheet/save";
 
             JsonObjectRequest request_json = null;
             request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
@@ -237,7 +237,7 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
     //===========Code to get data from api using volley and load data to recycler view, starts==========
     public void loadData(){
 //        String url = Url.BASEURL+"od/log/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
-        String url = Url.BASEURL+"timesheet/log/previous/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+        String url = Url.BASEURL()+"timesheet/log/previous/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
 //        String url = Url.BASEURL+"timesheet/log/previous/EMC_NEW/42";
         Log.d("listurl-=>",url);
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/52";
@@ -305,7 +305,7 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
 //        String url = Config.BaseUrlEpharma + "documents/list" ;
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
 //        String url = Url.BASEURL+"od/request/check-exist/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
-        String url = Url.BASEURL+"timesheet/log/today/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+        String url = Url.BASEURL()+"timesheet/log/today/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
 //        String url = Url.BASEURL+"timesheet/log/today/EMC_NEW/42";
         Log.d("url-=>",url);
 //        String url = Url.BASEURL+"od/request/detail/20/1/1";

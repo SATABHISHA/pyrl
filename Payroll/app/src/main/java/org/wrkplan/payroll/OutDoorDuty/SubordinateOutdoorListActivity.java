@@ -57,7 +57,7 @@ public class SubordinateOutdoorListActivity extends AppCompatActivity {
     //===========Code to get data from api using volley and load data to recycler view, starts==========
     public void loadData(){
 //        String url = Config.BaseUrlEpharma + "documents/list" ;
-        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/2/"+userSingletonModel.getEmployee_id();
+        String url = Url.BASEURL()+"od/request/list/"+userSingletonModel.getCorporate_id()+"/2/"+userSingletonModel.getEmployee_id();
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/20";
         final ProgressDialog loading = ProgressDialog.show(SubordinateOutdoorListActivity.this, "Loading", "Please wait...", true, false);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new

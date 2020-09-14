@@ -112,7 +112,7 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
     }
 
     private void Getdata() {
-        String url= Url.BASEURL + "leave/" + "application/" + "list/"+userSingletonModel.corporate_id+"/"+2+"/"+userSingletonModel.user_id;
+        String url= Url.BASEURL() + "leave/" + "application/" + "list/"+userSingletonModel.corporate_id+"/"+2+"/"+userSingletonModel.user_id;
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

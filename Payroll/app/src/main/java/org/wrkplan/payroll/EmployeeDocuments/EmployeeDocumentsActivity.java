@@ -74,7 +74,7 @@ public class EmployeeDocumentsActivity extends AppCompatActivity {
     }
 
     private void getdata() {
-        String url= Url.BASEURL + "employeedocs/"+"list/"+userSingletonModel.corporate_id+"/"+userSingletonModel.user_id;
+        String url= Url.BASEURL() + "employeedocs/"+"list/"+userSingletonModel.corporate_id+"/"+userSingletonModel.user_id;
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

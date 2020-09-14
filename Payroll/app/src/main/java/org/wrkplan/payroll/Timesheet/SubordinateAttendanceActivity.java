@@ -76,7 +76,7 @@ public class SubordinateAttendanceActivity extends AppCompatActivity {
     //===========Code to get data from api using volley and load data to recycler view, starts==========
     public void loadData(){
 //        String url = Url.BASEURL+"od/log/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
-        String url = Url.BASEURL+"timesheet/log/subordinate/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+        String url = Url.BASEURL()+"timesheet/log/subordinate/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
 //        String url = Url.BASEURL+"timesheet/log/previous/EMC_NEW/42";
         Log.d("listurlsub-=>",url);
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/52";
