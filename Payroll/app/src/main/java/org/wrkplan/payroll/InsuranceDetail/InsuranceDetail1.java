@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -42,8 +43,9 @@ public class InsuranceDetail1 extends AppCompatActivity {
     ArrayList<InsuramceModel> arrayList=new ArrayList<>();
     CoordinatorLayout coordinatorLayout;
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
-    LinearLayout aaa;
+    LinearLayout ll_mR;
     Boolean item=false;
+    RelativeLayout rl_start;
     int i=0;
     int count=0;
     int arraySize;
@@ -51,7 +53,7 @@ public class InsuranceDetail1 extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_insurance_details);
+        setContentView(R.layout.insurance_main);
 
 
         //===============Initialize Views Start=====================//
@@ -67,12 +69,14 @@ public class InsuranceDetail1 extends AppCompatActivity {
         txt_premium=findViewById(R.id.txt_premium);
         lv1=findViewById(R.id.lv1);
         coordinatorLayout=findViewById(R.id.coordinatorLayout);
-        aaa=findViewById(R.id.ll_main);
+        rl_start=findViewById(R.id.rl_start);
+        ll_mR=findViewById(R.id.ll_mR);
         txt_msg=findViewById(R.id.txt_msg);
 
         //===============Initialize Views Ends=====================//
         bt_privious.setEnabled(false);
-        aaa.setVisibility(View.GONE);
+        rl_start.setVisibility(View.GONE);
+        ll_mR.setVisibility(View.GONE);
 
         getdata(0);
         Getsize();
@@ -82,7 +86,8 @@ public class InsuranceDetail1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(item==true) {
-                    aaa.setVisibility(View.VISIBLE);
+                    rl_start.setVisibility(View.VISIBLE);
+                    ll_mR.setVisibility(View.VISIBLE);
 
 
                     if (count < arraySize - 1) {
@@ -97,7 +102,7 @@ public class InsuranceDetail1 extends AppCompatActivity {
                 else
                 {
                     bt_next.setEnabled(false);
-                    aaa.setVisibility(View.GONE);
+                    rl_start.setVisibility(View.GONE);
                     txt_msg.setText("No insurance detail found for this employee");
 
                 }
@@ -106,6 +111,7 @@ public class InsuranceDetail1 extends AppCompatActivity {
             }
 
         });
+        //lv1.setScrollContainer(false);
         bt_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,7 +147,8 @@ public class InsuranceDetail1 extends AppCompatActivity {
 
             public void onSwipeRight() {
                 if(item==true) {
-                    aaa.setVisibility(View.VISIBLE);
+                    rl_start.setVisibility(View.VISIBLE);
+                    ll_mR.setVisibility(View.VISIBLE);
 
                     if (count > 0) {
                         count = count - 1;
@@ -159,7 +166,8 @@ public class InsuranceDetail1 extends AppCompatActivity {
                 else
                 {
                     bt_next.setEnabled(false);
-                    aaa.setVisibility(View.GONE);
+                    rl_start.setVisibility(View.GONE);
+                    ll_mR.setVisibility(View.GONE);
                     txt_msg.setText("No insurance detail found for this employee");
                 }
 
@@ -174,7 +182,8 @@ public class InsuranceDetail1 extends AppCompatActivity {
             public void onSwipeLeft() {
 
                 if(item==true) {
-                    aaa.setVisibility(View.VISIBLE);
+                    rl_start.setVisibility(View.VISIBLE);
+                    ll_mR.setVisibility(View.VISIBLE);
 
 
                     if (count < arraySize - 1) {
@@ -190,7 +199,8 @@ public class InsuranceDetail1 extends AppCompatActivity {
                 else
                 {
                     bt_next.setEnabled(false);
-                    aaa.setVisibility(View.GONE);
+                    rl_start.setVisibility(View.GONE);
+                    ll_mR.setVisibility(View.GONE);
                     txt_msg.setText("No insurance detail found for this employee");
                 }
 
@@ -201,7 +211,7 @@ public class InsuranceDetail1 extends AppCompatActivity {
 
     }
     private void Getsize() {
-        String url= Url.BASEURL + "insurance/"+userSingletonModel.corporate_id+"/"+userSingletonModel.user_id;
+        String url= Url.BASEURL() + "insurance/"+userSingletonModel.corporate_id+"/"+userSingletonModel.user_id;
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
@@ -219,11 +229,13 @@ public class InsuranceDetail1 extends AppCompatActivity {
                     if(status.equals("true"))
                     {
                         item=true;
-                        aaa.setVisibility(View.VISIBLE);
+                        rl_start.setVisibility(View.VISIBLE);
+                        ll_mR.setVisibility(View.VISIBLE);
                     }
                     else
                     {
-                        aaa.setVisibility(View.GONE);
+                        rl_start.setVisibility(View.GONE);
+                        ll_mR.setVisibility(View.GONE);
                         txt_msg.setText("No insurance detail found for this employee");
                     }
 
@@ -246,7 +258,7 @@ public class InsuranceDetail1 extends AppCompatActivity {
 
 
     private void getdata(final int count) {
-        String url= Url.BASEURL + "insurance/"+userSingletonModel.corporate_id+"/"+userSingletonModel.user_id;
+        String url= Url.BASEURL() + "insurance/"+userSingletonModel.corporate_id+"/"+userSingletonModel.user_id;
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -308,11 +320,13 @@ public class InsuranceDetail1 extends AppCompatActivity {
                     if(status.equals("true"))
                     {
                         item=true;
-                        aaa.setVisibility(View.VISIBLE);
+                        rl_start.setVisibility(View.VISIBLE);
+                        ll_mR.setVisibility(View.VISIBLE);
                     }
                     else
                     {
-                        aaa.setVisibility(View.GONE);
+                        rl_start.setVisibility(View.GONE);
+                        ll_mR.setVisibility(View.GONE);
                         txt_msg.setText("No insurance detail found for this employee");
                     }
 

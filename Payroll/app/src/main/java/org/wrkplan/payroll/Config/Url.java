@@ -1,9 +1,14 @@
 package org.wrkplan.payroll.Config;
 
+import org.wrkplan.payroll.Login.LoginActivity;
+import org.wrkplan.payroll.Model.UserSingletonModel;
+
 import java.util.ArrayList;
 
-public class Url {
-  public static String BASEURL = "http://220.225.40.151:9018/api/";
+public class Url{
+//  public static String BASEURL = "";
+  UserSingletonModel userSingletonModel = UserSingletonModel.getUserSingletonModel();
+//  public static String BASEURL = "http://220.225.40.151:9018/api/";
 //  public static String BASEURL = "https://arb-erp.com/mergepr/mobile/api/";
   public static boolean isMyLeaveApplication=false;
   public static boolean isSubordinateLeaveApplication=false;
@@ -13,5 +18,20 @@ public class Url {
   public  static  String supervisor2_id,supervisor1_id;
   public  static String LeaveType="";
   public  static  boolean isNew=false;
+
+
+  //----as per discussion on test and live url on 12th sept this code has been done
+  public static String BASEURL(){
+    String url = "";
+    if(LoginActivity.url_check.contentEquals("test")){
+      url = "http://220.225.40.151:9018/api/";
+    }else if(LoginActivity.url_check.contentEquals("live")){
+      url = "https://arb-erp.com/mergepr/mobile/api/";
+    }
+
+    return url;
+  }
+
+
 
 }

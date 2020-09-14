@@ -45,6 +45,7 @@ import org.wrkplan.payroll.Leave_Balance.LeaveBalanceActivity;
 import org.wrkplan.payroll.Model.Detail_Subordinate;
 import org.wrkplan.payroll.Model.Details;
 import org.wrkplan.payroll.Model.LeaveType;
+import org.wrkplan.payroll.Model.Load_Spinner_Model;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.MyLeaveApplication.MyLeaveApplicationActivity;
 import org.wrkplan.payroll.MyLeaveApplicationModel.LeaveApplication;
@@ -67,6 +68,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     SimpleDateFormat currentDte=new SimpleDateFormat("dd-MMM-yyyy");
     int flag,pos;
     Date date=new Date();
+    Spinner check_leave_spinner;
     String currntdate;
     String select_item;
     ImageView img_list;
@@ -82,6 +84,8 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     TextView tv_sick_leave,tv_matarnal_leave,tv_paternal_leave,tv_comp_off;
     TextView tv_casual_leave;
     TextView tv_earn_leav ;
+    ArrayList<Load_Spinner_Model> load_spinner_models=new ArrayList<>();
+    ArrayList<String> spinnerlist = new ArrayList<>();
 
     TextView txt_from_date,txt_to_date,txt_from_date1,txt_to_date1,txt_application_status;
     ImageView cal1,cal2;
@@ -423,42 +427,29 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                 tv_paternal_leave= custom.findViewById(R.id.tv_paternal_leave);
                 tv_comp_off=custom.findViewById(R.id.tv_comp_off);
                 bt_ok=custom.findViewById(R.id.bt_ok);
-                Spinner spinner1=custom.findViewById(R.id.spinner1);
-                ArrayList<String> arrayList = new ArrayList<>();
+                check_leave_spinner=custom.findViewById(R.id.spinner1);
+
+
                 builder.setView(custom);
                 final AlertDialog dialog = builder.create();
                 dialog.show();
 
+//                arrayList.add("2020 - 2021");
+//                arrayList.add("2019 - 2020");
+//                arrayList.add("2018 - 2019");
+                Load_Spinner_Data();
 
-                arrayList.add("2018");
-                arrayList.add("2019");
-                arrayList.add("2020");
 
-
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MyLeaveApplication2Activity.this,android.R.layout.simple_spinner_item, arrayList);
-                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner1.setAdapter(arrayAdapter);
-                spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                check_leave_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        String item = parent.getItemAtPosition(position).toString();
+                        // String item = parent.getItemAtPosition(position).toString();
                         //  Toast.makeText(parent.getContext(), "Selected: " + item,          Toast.LENGTH_LONG).show();
 
-//                        GetData(item.replace(" ", ""));
-                        String year;
-                        if(item=="2020")
-                        {
-                            year="2020-2021";
-                        }
-                        else if(item=="2019")
-                        {
-                            year="2019-2020";
-                        }
-                        else
-                        {
-                            year="2018-2019";
-                        }
-                        GetData(year);
+                        //  GetData(item.replace(" ", ""));
+
+                        String item=load_spinner_models.get(position).getFinancial_year_code();
+                        GetData(item);
 
                     }
                     @Override
@@ -474,10 +465,57 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
 
             }
+            private void Load_Spinner_Data() {
+
+                String url=Url.BASEURL + "finyear/" + "list/" + userSingletonModel.corporate_id;
+                StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject=new JSONObject(response);
+                            JSONArray jsonArray=jsonObject.getJSONArray("fin_years");
+                            spinnerlist.clear();
+                            load_spinner_models.clear();
+                            for(int i=0;i<jsonArray.length();i++)
+                            {
+
+                                JSONObject jb1=jsonArray.getJSONObject(i);
+                                String financial_year_code=jb1.getString("financial_year_code");
+                                String calender_year=jb1.getString("calender_year");
+                                spinnerlist.add(calender_year);
+                                Load_Spinner_Model spinnerModel=new Load_Spinner_Model();
+                                spinnerModel.setFinancial_year_code(financial_year_code);
+                                spinnerModel.setCalender_year(calender_year);
+                                // arrayList.add(jb1.getString("calender_year"));
+                                load_spinner_models.add(spinnerModel);
+
+
+                            }
+
+                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MyLeaveApplication2Activity.this,android.R.layout.simple_spinner_item, spinnerlist);
+                            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            check_leave_spinner.setAdapter(arrayAdapter);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Toast.makeText(MyLeaveApplication2Activity.this, "Could't connect to the server", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                Volley.newRequestQueue(MyLeaveApplication2Activity.this).add(stringRequest);
+            }
+
 
             private void GetData(String year_code) {
                 String url= Url.BASEURL + "leave/" + "balance/" + userSingletonModel.corporate_id+"/"+userSingletonModel.employee_id+"/"+year_code;
-                Log.d("url-=>",url);
 
 
 
@@ -490,7 +528,6 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         try {
 
                             JSONObject jsonObject=new JSONObject(response);
-//                            JSONObject jb1=jsonObject.getJSONObject("leaves");
                             JSONObject jb1=jsonObject.getJSONObject("leave_balance");
                             userSingletonModel.setCasual_leave(jb1.getString("casual_leave"));
                             userSingletonModel.setEarn_leave(jb1.getString("earn_leave"));

@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/ll_12"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2e5772"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#2e5772">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Insurance Detail"
+                    android:textColor="#fff"
+                    android:textSize="18sp"></TextView>
+
+            </androidx.appcompat.widget.Toolbar>
+            <!-- android:background="?attr/colorPrimary"-->
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <TextView
+            android:id="@+id/txt_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="19sp"
+            android:visibility="gone">
+
+        </TextView>
+
+        <LinearLayout
+            android:id="@+id/ll_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_privious"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:text="Previous">
+
+            </Button>
+
+            <Button
+                android:id="@+id/bt_close"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="-5dp"
+                android:layout_weight="1"
+                android:text="Close">
+
+            </Button>
+
+            <Button
+                android:id="@+id/bt_next"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="-5dp"
+                android:layout_weight="1"
+                android:text="Next"
+                android:visibility="visible">
+
+            </Button>
+
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/app"
+            android:layout_marginBottom="70dp"
+            android:fillViewport="true"
+            android:scrollbars="none">
+
+            <RelativeLayout
+                android:id="@+id/rl_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/app">
+
+                <RelativeLayout
+                    android:id="@+id/ll_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_policy_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="#E5E5E5"
+                        android:gravity="center"
+                        android:text="Policy Type"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ll_provider"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/ll_1"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/t_provider"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="Provider"
+                        android:textColor="#000"
+                        android:textSize="18sp"></TextView>
+
+
+                    <TextView
+                        android:id="@+id/txt_provider_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/t_provider"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Provider"
+                        android:textColor="#757575"
+                        android:textSize="18sp">
+
+                    </TextView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_3rd_part"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ll_provider"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp">
+
+                    <LinearLayout
+                        android:id="@+id/set_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="0"
+                            android:background="#E5E5E5"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+
+                            android:text="Policy No"
+                            android:textColor="#313131"
+                            android:textSize="15dp"
+                            android:textStyle="bold">
+
+                        </TextView>
+
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"></LinearLayout>
+
+                        <TextView
+                            android:id="@+id/txt_policy_no"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:background="#F5F5F5"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="5103003418040000013"
+                            android:textColor="#313131"
+                            android:textSize="15dp"
+                            android:textStyle="bold">
+
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/set_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_below="@id/set_1"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:background="#E5E5E5">
+
+                            <TextView
+                                android:id="@+id/txt_sum_Asuured"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+
+                                android:paddingLeft="10dp"
+                                android:paddingTop="5dp"
+                                android:text="Sum Assured"
+                                android:textColor="#313131"
+                                android:textSize="15dp"
+                                android:textStyle="bold">
+
+                            </TextView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/txt_sum_Asuured"
+                                android:paddingLeft="10dp"
+                                android:text="INR"
+                                android:textSize="10sp"></TextView>
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"></LinearLayout>
+
+                        <TextView
+                            android:id="@+id/txt_amount"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:background="#F5F5F5"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="500000.00"
+                            android:textColor="#313131"
+                            android:textSize="15dp"
+                            android:textStyle="bold">
+
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/set_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_below="@id/set_2"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:background="#E5E5E5">
+
+                            <TextView
+                                android:id="@+id/txt_pre"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+
+                                android:paddingLeft="10dp"
+                                android:paddingTop="5dp"
+                                android:text="Premium"
+                                android:textColor="#313131"
+                                android:textSize="15dp"
+                                android:textStyle="bold">
+
+                            </TextView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/txt_pre"
+                                android:paddingLeft="10dp"
+                                android:text="INR"
+                                android:textSize="10sp"></TextView>
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"></LinearLayout>
+
+                        <TextView
+                            android:id="@+id/txt_premium"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:background="#F5F5F5"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="500000.00"
+                            android:textColor="#313131"
+                            android:textSize="15dp"
+                            android:textStyle="bold">
+
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/set_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_below="@id/set_3"
+                        android:layout_marginTop="5dp"
+
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:background="#E5E5E5">
+
+                            <TextView
+                                android:id="@+id/txt_date"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+
+                                android:paddingLeft="10dp"
+                                android:paddingTop="5dp"
+                                android:text="Expiry Date"
+                                android:textColor="#313131"
+                                android:textSize="15dp"
+                                android:textStyle="bold">
+
+                            </TextView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/txt_date"
+                                android:paddingLeft="10dp"
+                                android:text=""
+                                android:textSize="10sp"></TextView>
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"></LinearLayout>
+
+                        <TextView
+                            android:id="@+id/txt_expiry_date"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:background="#F5F5F5"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="31/01/2020"
+                            android:textColor="#313131"
+                            android:textSize="15dp"
+                            android:textStyle="bold">
+
+
+                        </TextView>
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Rl_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_3rd_part"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="15dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_mR"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="#e5e5e5"
+                            android:padding="10dp"
+                            android:text="Member(s)"
+                            android:textColor="#000"
+                            android:textSize="15sp"
+                            android:textStyle="bold">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="1.5dp"
+                            android:layout_weight="1"
+                            android:background="#e5e5e5"
+                            android:padding="10dp"
+                            android:text="Relationship"
+                            android:textColor="#000"
+                            android:textSize="15sp"
+                            android:textStyle="bold">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <ListView
+                        android:id="@+id/lv1"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:layout_below="@id/ll_mR"
+                        android:minHeight="100dp"
+                        android:layout_marginTop="1dp"></ListView>
+
+<!--                    <EditText-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:hint="i am niladri roy"-->
+<!--                        android:id="@+id/kk"-->
+<!--                        android:layout_below="@id/lv1"></EditText>-->
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+        </ScrollView>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

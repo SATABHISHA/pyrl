@@ -3,197 +3,219 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/app"
-        android:background="#2e5772"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#2e5772">
+            android:layout_height="wrap_content"
+            android:id="@+id/app"
+            android:background="#2e5772"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#2e5772">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Employee Information"
+                    android:textColor="#fff"
+                    android:textSize="18sp"></TextView>
+
+            </androidx.appcompat.widget.Toolbar>
+            <!-- android:background="?attr/colorPrimary"-->
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="55dp"
+            android:layout_below="@id/app"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Employee Information"
-                android:textColor="#fff"
-                android:textSize="18sp"></TextView>
+                android:text="Emp. Name"
+                android:id="@+id/tv_emp_name"
+                android:textColor="#000"
+                android:textSize="15sp">?
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_emp_name"
+                android:textColor="#6C89E7"
+                android:id="@+id/emp_name_value"
+                android:layout_marginLeft="66dp"
+                android:textSize="15sp">
 
-        </androidx.appcompat.widget.Toolbar>
-        <!-- android:background="?attr/colorPrimary"-->
-
-    </com.google.android.material.appbar.AppBarLayout>
+            </TextView>
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="55dp"
-        android:layout_below="@id/app"
-        >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Emp. Code" android:layout_marginTop="15sp"
+                android:layout_below="@id/tv_emp_name"
+                android:id="@+id/tv_emp_code"
+                android:textColor="#000"
+                android:textSize="15sp">
 
-        <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Emp. Code"
-        android:id="@+id/tv_emp_code"
-        android:textColor="#000"
-        android:textSize="15sp">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_emp_code"
+                android:textColor="#6C89E7"
+                android:layout_below="@id/emp_name_value"
+                android:id="@+id/emp_code_value"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="15sp"
+                android:textSize="15sp">
 
-    </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tv_emp_code"
-            android:textColor="#6C89E7"
-            android:id="@+id/emp_code_value"
-            android:layout_marginLeft="70dp"
-            android:textSize="15sp">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ESI No "
+                android:id="@+id/tv_esi_no"
+                android:layout_marginTop="15sp"
+                android:textColor="#000"
+                android:layout_below="@id/tv_emp_code"
+                android:textSize="15sp">
 
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ESI No "
-            android:id="@+id/tv_esi_no"
-            android:layout_marginTop="15sp"
-            android:textColor="#000"
-            android:layout_below="@id/tv_emp_code"
-            android:textSize="15sp">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_emp_code"
+                android:textColor="#6C89E7"
+                android:id="@+id/esi_no_value"
+                android:layout_marginTop="15sp"
+                android:layout_below="@id/emp_code_value"
+                android:layout_marginLeft="70dp"
+                android:textSize="15sp">
 
-            android:layout_toRightOf="@id/tv_emp_code"
-            android:textColor="#6C89E7"
-            android:id="@+id/esi_no_value"
-            android:layout_marginTop="15sp"
-            android:layout_below="@id/emp_code_value"
-            android:layout_marginLeft="70dp"
-            android:textSize="15sp">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PF No "
+                android:id="@+id/tv_pf_no"
+                android:layout_marginTop="15sp"
+                android:textColor="#000"
+                android:layout_below="@id/tv_esi_no"
+                android:textSize="15sp">
 
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PF No "
-            android:id="@+id/tv_pf_no"
-            android:layout_marginTop="15sp"
-            android:textColor="#000"
-            android:layout_below="@id/tv_esi_no"
-            android:textSize="15sp">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_emp_code"
+                android:textColor="#6C89E7"
+                android:id="@+id/pf_no_value"
+                android:layout_marginTop="15sp"
+                android:layout_below="@id/esi_no_value"
+                android:layout_marginLeft="70dp"
+                android:textSize="15sp">
 
-            android:layout_toRightOf="@id/tv_emp_code"
-            android:textColor="#6C89E7"
-            android:id="@+id/pf_no_value"
-            android:layout_marginTop="15sp"
-            android:layout_below="@id/esi_no_value"
-            android:layout_marginLeft="70dp"
-            android:textSize="15sp">
+            </TextView>
 
-        </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UAN No "
+                android:id="@+id/tv_uan_no"
+                android:layout_marginTop="15sp"
+                android:textColor="#000"
+                android:layout_below="@id/tv_pf_no"
+                android:textSize="15sp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="UAN No "
-            android:id="@+id/tv_uan_no"
-            android:layout_marginTop="15sp"
-            android:textColor="#000"
-            android:layout_below="@id/tv_pf_no"
-            android:textSize="15sp">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_emp_code"
+                android:textColor="#6C89E7"
+                android:id="@+id/uan_no_value"
+                android:layout_marginTop="15sp"
+                android:layout_below="@id/pf_no_value"
+                android:layout_marginLeft="70dp"
+                android:textSize="15sp">
 
-            android:layout_toRightOf="@id/tv_emp_code"
-            android:textColor="#6C89E7"
-            android:id="@+id/uan_no_value"
-            android:layout_marginTop="15sp"
-            android:layout_below="@id/pf_no_value"
-            android:layout_marginLeft="70dp"
-            android:textSize="15sp">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Supervisor(1) "
+                android:id="@+id/tv_supervisor1"
+                android:layout_marginTop="15sp"
+                android:textColor="#000"
+                android:layout_below="@id/tv_uan_no"
+                android:textSize="15sp">
 
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Supervisor(1) "
-            android:id="@+id/tv_supervisor1"
-            android:layout_marginTop="15sp"
-            android:textColor="#000"
-            android:layout_below="@id/tv_uan_no"
-            android:textSize="15sp">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_emp_code"
+                android:textColor="#6C89E7"
+                android:id="@+id/supervisor1_value"
+                android:layout_marginTop="15sp"
+                android:layout_below="@id/uan_no_value"
+                android:layout_marginLeft="70dp"
+                android:textSize="15sp">
 
-            android:layout_toRightOf="@id/tv_emp_code"
-            android:textColor="#6C89E7"
-            android:id="@+id/supervisor1_value"
-            android:layout_marginTop="15sp"
-            android:layout_below="@id/uan_no_value"
-            android:layout_marginLeft="70dp"
-            android:textSize="15sp">
+            </TextView>
 
-        </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Supervisor(2) "
+                android:id="@+id/tv_supervisor2"
+                android:layout_marginTop="15sp"
+                android:textColor="#000"
+                android:layout_below="@id/tv_supervisor1"
+                android:textSize="15sp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Supervisor(2) "
-            android:id="@+id/tv_supervisor2"
-            android:layout_marginTop="15sp"
-            android:textColor="#000"
-            android:layout_below="@id/tv_supervisor1"
-            android:textSize="15sp">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_emp_code"
+                android:textColor="#6C89E7"
+                android:id="@+id/supervisor2_value"
+                android:layout_marginTop="15sp"
+                android:layout_below="@id/tv_supervisor1"
+                android:layout_marginLeft="70dp"
+                android:textSize="15sp">
 
-            android:layout_toRightOf="@id/tv_emp_code"
-            android:textColor="#6C89E7"
-            android:id="@+id/supervisor2_value"
-            android:layout_marginTop="15sp"
-            android:layout_below="@id/tv_supervisor1"
-            android:layout_marginLeft="70dp"
-            android:textSize="15sp">
+            </TextView>
 
-        </TextView>
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            android:text="OK"
+            android:id="@+id/btn_ok"
+            android:textSize="16sp"></Button>
+
+
 
     </RelativeLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:text="OK"
-        android:id="@+id/btn_ok"
-        android:textSize="16sp"></Button>
-
-
-
-</RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

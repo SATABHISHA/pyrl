@@ -17,7 +17,7 @@ import org.wrkplan.payroll.R;
 public class EmployeeInformationActivity extends AppCompatActivity
 {
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
-    TextView emp_code_value,esi_no_value,pf_no_value,uan_no_value,supervisor1_value,supervisor2_value;
+    TextView emp_code_value,esi_no_value,pf_no_value,uan_no_value,supervisor1_value,supervisor2_value,emp_name_value;
     Button btn_ok;
 
     @Override
@@ -36,6 +36,7 @@ public class EmployeeInformationActivity extends AppCompatActivity
         //----------------INITIALIZE VIEWS-----------------//
         emp_code_value=findViewById(R.id.emp_code_value);
         esi_no_value=findViewById(R.id.esi_no_value);
+        emp_name_value=findViewById(R.id.emp_name_value);
         pf_no_value=findViewById(R.id.pf_no_value);
         uan_no_value=findViewById(R.id.uan_no_value);
         supervisor1_value=findViewById(R.id.supervisor1_value);
@@ -55,7 +56,7 @@ public class EmployeeInformationActivity extends AppCompatActivity
         });
 
 
-
+        emp_name_value.setText(userSingletonModel.getFull_employee_name());
         emp_code_value.setText(userSingletonModel.getEmployee_code());
         esi_no_value.setText(userSingletonModel.getEsi_no());
         pf_no_value.setText(userSingletonModel.getEmployee_pf_no());
@@ -68,7 +69,7 @@ public class EmployeeInformationActivity extends AppCompatActivity
             pf_no_value.setText("NIL");
 
         }
-       if(userSingletonModel.getEsi_no().isEmpty())
+        if(userSingletonModel.getEsi_no().isEmpty())
         {
             esi_no_value.setText("NIL");
         }

@@ -54,11 +54,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     SharedPreferences sharedPreferences,autofill;
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
 
+
     CheckBox checked_sign;
     SharedPreferences.Editor editor;
     SharedPreferences.Editor editor_autofill;
     Boolean savelogin;
+
+
     public static String entry_user = ""; //---added by Satabhisha on 6th MAy
+
+    public static String url_check = "test";
 //    final  String url="http://192.168.10.175:9018/api/login/payroll_713/1/1";
 
 
@@ -74,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //----Firebase code ends
 
+//        userSingletonModel.setUrl_test_or_live_check("test"); //----as per discussion on 12th sept, Base url(live or local) distinction should be handled by using static variable
      //--------------------------Initialize views-------------------//
         btn_login=findViewById(R.id.btn_login);
         ed_userid=findViewById(R.id.ed_userid);
@@ -290,7 +296,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         private  void getlogin(final String userid, final String username, final String password)
         {
             final ProgressDialog loading = ProgressDialog.show(LoginActivity.this, "Authenticating", "Please wait while logging", false, false);
-            String url= Url.BASEURL + "login/"+userid+"/"+username+"/"+password;
+            String url= Url.BASEURL() + "login/"+userid+"/"+username+"/"+password;
             StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
