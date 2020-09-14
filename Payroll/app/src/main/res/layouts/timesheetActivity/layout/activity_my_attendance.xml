@@ -162,7 +162,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_time_title"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_margin="0.4dp"
                     android:background="#c2c2c2">
                     <TextView
@@ -193,7 +193,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_time"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_margin="0.4dp"
                     android:background="#ffffff">
                     <TextView
@@ -292,7 +292,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:paddingTop="20dp"
+                android:paddingTop="0dp"
                 android:visibility="gone"
                 android:orientation="vertical">
                 <androidx.recyclerview.widget.RecyclerView

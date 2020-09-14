@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:paddingTop="20dp"
+                android:paddingTop="0dp"
                 android:visibility="gone"
                 android:orientation="vertical">
                 <androidx.recyclerview.widget.RecyclerView

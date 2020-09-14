@@ -1,5 +1,6 @@
 package org.wrkplan.payroll.Timesheet;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -126,10 +127,10 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
                 startActivity(new Intent(this, SubordinateAttendanceActivity.class));
                 break;
             case R.id.tv_in:
-                save_in_out_data("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString());
+                save_in_out_data("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance IN time recorded");
                 break;
             case R.id.tv_out:
-                save_in_out_data("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString());
+                save_in_out_data("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance OUT time recorded");
                 break;
             case R.id.chck_wrk_frm_home:
                 if(chck_wrk_frm_home.isChecked()) {
@@ -144,7 +145,7 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
     }
 
     //========function to save data for IN/OUT, code starts=======
-    public void save_in_out_data(String in_out, int work_frm_home_flag, String work_from_home_detail){
+    public void save_in_out_data(String in_out, int work_frm_home_flag, String work_from_home_detail, String message_in_out){
 
         try {
             final JSONObject DocumentElementobj = new JSONObject();
@@ -168,22 +169,29 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
                                 JSONObject jsonObj = null;
                                 try{
                                     String responseData = response.toString();
+                                    Log.d("getData",responseData.toString());
                                     JSONObject resobj = new JSONObject(responseData);
-                                    JSONObject jsonObject = resobj.getJSONObject("response");
-                                    Log.d("getData",resobj.toString());
+//                                    JSONObject jsonObject = resobj.getJSONObject("response");
 
-                                    if(jsonObject.getString("status").contentEquals("true")){
+
+                                    if(resobj.getString("status").contentEquals("true")){
 //                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
                                         //---------Alert dialog code starts(added on 21st nov)--------
                                         final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(MyAttendanceActivity.this);
-                                        alertDialogBuilder.setMessage(jsonObject.getString("message"));
+//                                        alertDialogBuilder.setMessage(jsonObject.getString("message"));
+                                        alertDialogBuilder.setCancelable(false);
+                                        alertDialogBuilder.setMessage(message_in_out);
                                         alertDialogBuilder.setPositiveButton("OK",
                                                 new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface arg0, int arg1) {
                                                         //-----following code is commented on 6th dec to get the calender saved state data------
                                                         alertDialogBuilder.setCancelable(true);
-                                                        load_data_check_od_duty();
+//                                                        load_data_check_od_duty();
+//                                                        recreate();
+                                                        Intent t= new Intent(MyAttendanceActivity.this,MyAttendanceActivity.class);
+                                                        startActivity(t);
+                                                        finish();
                                                     }
                                                 });
                                         android.app.AlertDialog alertDialog = alertDialogBuilder.create();
@@ -194,7 +202,7 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
 //                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
                                         //---------Alert dialog code starts(added on 21st nov)--------
                                         final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(MyAttendanceActivity.this);
-                                        alertDialogBuilder.setMessage(jsonObject.getString("message"));
+                                        alertDialogBuilder.setMessage(resobj.getString("message"));
                                         alertDialogBuilder.setPositiveButton("OK",
                                                 new DialogInterface.OnClickListener() {
                                                     @Override
@@ -210,7 +218,7 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
                                     }
 
 
-                                }catch (JSONException e){
+                                }catch (Exception e){
                                     //                            loading.dismiss();
                                     e.printStackTrace();
                                 }
