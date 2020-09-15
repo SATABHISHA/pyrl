@@ -387,6 +387,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_outdoor_duty:
                 startActivity(new Intent(this, OdDutyLogListActivity.class));
                 break;
+            case R.id.nav_timesheet:
+                startActivity(new Intent(this, MyAttendanceActivity.class));
+                break;
             case R.id.nav_change_pswd:
                 //--------adding custom dialog on 14th may starts------
                 LayoutInflater li2 = LayoutInflater.from(this);

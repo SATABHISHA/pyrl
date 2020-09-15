@@ -40,6 +40,10 @@
             android:id="@+id/nav_outdoor_duty"
             android:icon="@drawable/od_duty"
             android:title="Outdoor Duty" />
+        <item
+            android:id="@+id/nav_timesheet"
+            android:icon="@drawable/timesheet"
+            android:title="Timesheet" />
 
     </group>
 
