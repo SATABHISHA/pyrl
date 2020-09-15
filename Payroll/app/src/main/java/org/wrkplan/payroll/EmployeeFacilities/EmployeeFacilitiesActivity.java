@@ -50,20 +50,20 @@ public class EmployeeFacilitiesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_employee_facilities);
-       lv1=findViewById(R.id.lv1);
-       btn_ok=findViewById(R.id.btn_ok);
-       btn_ok.setVisibility(View.GONE);
+        setContentView(R.layout.activity_employee_facilities);
+        lv1=findViewById(R.id.lv1);
+        btn_ok=findViewById(R.id.btn_ok);
+        btn_ok.setVisibility(View.GONE);
 
-       Getdata();
-       btn_ok.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent=new Intent(EmployeeFacilitiesActivity.this, HomeActivity.class);
-               startActivity(intent);
-               finish();
-           }
-       });
+        Getdata();
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(EmployeeFacilitiesActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -126,6 +126,7 @@ public class EmployeeFacilitiesActivity extends AppCompatActivity {
             View view=inflater.inflate(R.layout.empfasilities,null);
             TextView txt_service_type= view.findViewById(R.id.txt_service_type);
             TextView txt_values=view.findViewById(R.id.txt_values);
+            TextView txt_inr=view.findViewById(R.id.txt_inr);
 
             txt_service_type.setText(arrayList.get(position).getService_type());
             txt_values.setText(arrayList.get(position).getValue()+"0");
