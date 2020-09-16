@@ -380,6 +380,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     Toast.makeText(MyLeaveApplication2Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
                 }
 
+                Log.d("jsonObjecttest-=>",jsonBody_Subordinate.toString());
                 String url = Url.BASEURL() + "leave/application/save";
                 try {
                     JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.POST, url,

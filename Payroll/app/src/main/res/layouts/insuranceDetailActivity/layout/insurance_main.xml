@@ -44,7 +44,7 @@
             android:gravity="center"
             android:textColor="#000"
             android:textSize="19sp"
-            android:visibility="gone">
+            android:visibility="visible">
 
         </TextView>
 
@@ -206,7 +206,7 @@
                             android:text="5103003418040000013"
                             android:textColor="#313131"
                             android:textSize="15dp"
-                            android:textStyle="bold">
+                            android:textStyle="normal">
 
 
                         </TextView>
@@ -265,7 +265,7 @@
                             android:text="500000.00"
                             android:textColor="#313131"
                             android:textSize="15dp"
-                            android:textStyle="bold">
+                            android:textStyle="normal">
 
 
                         </TextView>
@@ -324,7 +324,7 @@
                             android:text="500000.00"
                             android:textColor="#313131"
                             android:textSize="15dp"
-                            android:textStyle="bold">
+                            android:textStyle="normal">
 
 
                         </TextView>
@@ -384,7 +384,7 @@
                             android:text="31/01/2020"
                             android:textColor="#313131"
                             android:textSize="15dp"
-                            android:textStyle="bold">
+                            android:textStyle="normal">
 
 
                         </TextView>
@@ -445,12 +445,12 @@
                         android:minHeight="100dp"
                         android:layout_marginTop="1dp"></ListView>
 
-<!--                    <EditText-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:hint="i am niladri roy"-->
-<!--                        android:id="@+id/kk"-->
-<!--                        android:layout_below="@id/lv1"></EditText>-->
+                    <!--                    <EditText-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:hint="i am niladri roy"-->
+                    <!--                        android:id="@+id/kk"-->
+                    <!--                        android:layout_below="@id/lv1"></EditText>-->
 
                 </RelativeLayout>
 

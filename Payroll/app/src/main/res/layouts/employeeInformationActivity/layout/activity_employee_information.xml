@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tv_emp_name"
-                android:textColor="#6C89E7"
+                android:textColor="@color/popup_text"
                 android:id="@+id/emp_name_value"
                 android:layout_marginLeft="66dp"
                 android:textSize="15sp">
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tv_emp_code"
-                android:textColor="#6C89E7"
+                android:textColor="@color/popup_text"
                 android:layout_below="@id/emp_name_value"
                 android:id="@+id/emp_code_value"
                 android:layout_marginLeft="70dp"
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_toRightOf="@id/tv_emp_code"
-                android:textColor="#6C89E7"
+                android:textColor="@color/popup_text"
                 android:id="@+id/esi_no_value"
                 android:layout_marginTop="15sp"
                 android:layout_below="@id/emp_code_value"
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_toRightOf="@id/tv_emp_code"
-                android:textColor="#6C89E7"
+                android:textColor="@color/popup_text"
                 android:id="@+id/pf_no_value"
                 android:layout_marginTop="15sp"
                 android:layout_below="@id/esi_no_value"
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_toRightOf="@id/tv_emp_code"
-                android:textColor="#6C89E7"
+                android:textColor="@color/popup_text"
                 android:id="@+id/uan_no_value"
                 android:layout_marginTop="15sp"
                 android:layout_below="@id/pf_no_value"
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_toRightOf="@id/tv_emp_code"
-                android:textColor="#6C89E7"
+                android:textColor="@color/popup_text"
                 android:id="@+id/supervisor1_value"
                 android:layout_marginTop="15sp"
                 android:layout_below="@id/uan_no_value"
@@ -196,7 +196,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_toRightOf="@id/tv_emp_code"
-                android:textColor="#6C89E7"
+                android:textColor="@color/popup_text"
                 android:id="@+id/supervisor2_value"
                 android:layout_marginTop="15sp"
                 android:layout_below="@id/tv_supervisor1"

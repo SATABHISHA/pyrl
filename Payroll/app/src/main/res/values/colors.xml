@@ -6,4 +6,5 @@
     <color name="cancel">#ED1C24</color>
     <color name="returned">#b04d0b</color>
     <color name="Save">#939393</color>
+    <color name="popup_text">#8A8A8A</color>
 </resources>
