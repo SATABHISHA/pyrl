@@ -87,7 +87,7 @@
                     android:textColor="#788087"
                     android:background="@drawable/layout6"
                     android:layout_alignParentRight="true"/>
-               <!-- <TextView
+                <TextView
                     android:id="@+id/tv_od_dutytype_caption"
                     android:layout_below="@id/tv_emp_name_caption"
                     android:layout_width="110dp"
@@ -123,10 +123,10 @@
                         app:ms_alignLabels="false"
                         android:layout_gravity="center"
                         android:overlapAnchor="false"/>
-                </LinearLayout> -->
+                </LinearLayout>
                 <TextView
                     android:id="@+id/tv_from_date_caption"
-                    android:layout_below="@id/tv_emp_name_caption"
+                    android:layout_below="@id/tv_od_dutytype_caption"
                     android:layout_width="110dp"
                     android:layout_height="35dp"
                     android:layout_marginTop="15dp"
@@ -136,7 +136,7 @@
                     android:textColor="#788087"/>
                 <RelativeLayout
                     android:id="@+id/rl_from_Date"
-                    android:layout_below="@id/tv_emp_name"
+                    android:layout_below="@id/ll_spinner"
                     android:layout_toRightOf="@id/tv_from_date_caption"
                     android:layout_toLeftOf="@id/ll_total_day"
                     android:layout_width="match_parent"
@@ -225,9 +225,9 @@
                     android:layout_width="60dp"
                     android:layout_height="85dp"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@id/tv_emp_name"
+                    android:layout_below="@id/tv_od_dutytype_caption"
                     android:background="@drawable/layout6"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="23.5dp"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="match_parent"

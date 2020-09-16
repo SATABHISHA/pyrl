@@ -50,7 +50,7 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     TextView tv_requisition_no, tv_emp_name, tv_total_days;
     EditText edt_from_date_select, edt_date_to_select, ed_reason, ed_approval;
-    Spinner spinner_rqst_status;
+    Spinner spinner_rqst_status, spinner_od_duty_type;
     Button btn_save, btn_cancel;
     public static String od_status="";
     int flag_edt_rmarks_chck = 0;
@@ -66,6 +66,7 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
         ed_approval = findViewById(R.id.ed_approval);
         tv_total_days = findViewById(R.id.tv_total_days);
         spinner_rqst_status = findViewById(R.id.spinner_rqst_status);
+        spinner_od_duty_type = findViewById(R.id.spinner_od_duty_type);
         btn_save = findViewById(R.id.btn_save);
         btn_cancel = findViewById(R.id.btn_cancel);
 
@@ -123,6 +124,17 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
         queue.add(stringRequest);
     }
     public void getResponseData(String response){
+
+        //------Spinner code starts(added on 16th sept), as per requirments------
+        List<String> spinnerList_od_duty_type = new ArrayList<>();
+        spinnerList_od_duty_type.add("Work From Home");
+
+        ArrayAdapter<String> adapter_od_duty_type = new ArrayAdapter<String>(SubordinateOutDoorRequestActivity.this, android.R.layout.simple_spinner_item, spinnerList_od_duty_type);
+        adapter_od_duty_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_od_duty_type.setAdapter(adapter_od_duty_type);
+        spinner_od_duty_type.setSelection(1);
+        spinner_od_duty_type.setEnabled(false);
+        //------Spinner code ends(added on 16th sept)-----
         try {
             JSONObject jsonObject = new JSONObject(response);
             Log.d("jsonData-=>",jsonObject.toString());
