@@ -3,6 +3,7 @@ package org.wrkplan.payroll.SubOrdinateLeaveApplication;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,7 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
         subordinate_title.setText("Subordinate Leave Application");
 
 
-        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Url.islistclicked=true;
@@ -84,7 +85,7 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
 
 
@@ -112,10 +113,16 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
     }
 
     private void Getdata() {
+        if(!arrayList.isEmpty()){
+            arrayList.clear();
+        }
         String url= Url.BASEURL() + "leave/" + "application/" + "list/"+userSingletonModel.corporate_id+"/"+2+"/"+userSingletonModel.user_id;
+        Log.d("url-=>",url);
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
+                Log.d("leave->",response);
                 try {
                     JSONObject jsonObject=new JSONObject(response);
                     JSONArray jsonArray=jsonObject.getJSONArray("application_list");
@@ -144,10 +151,26 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
                         sbv.setAppliction_id(appliction_id);
                         sbv.setSupervisor1_id(supervisor1_id);
                         sbv.setSupervisor2_id(supervisor2_id);
+                        sbv.setAppliction_id(appliction_id);
                         Url.application_id.add(appliction_id);
                         arrayList.add(sbv);
                     }
                     lv1.setAdapter(new Nr());
+                    lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Url.islistclicked=true;
+                            Url.isSubordinateLeaveApplication=true;
+                            Url.isMyLeaveApplication=false;
+                            Url.LeaveType=arrayList.get(i).getLeave_name();
+//                            Url.currtent_application_id=Url.application_id.get(i);
+                            Url.currtent_application_id=arrayList.get(i).getAppliction_id();
+                            Url.supervisor1_id=arrayList.get(i).getSupervisor1_id();
+                            Url.supervisor2_id=arrayList.get(i).getSupervisor2_id();
+                            Intent intent=new Intent(SubordinateLeaveApplicationActivity.this,MyLeaveApplication2Activity.class);
+                            startActivity(intent);
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

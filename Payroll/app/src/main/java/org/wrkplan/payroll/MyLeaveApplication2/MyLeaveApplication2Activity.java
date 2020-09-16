@@ -769,10 +769,13 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
     private void GetEditForm2() {
         String url= Url.BASEURL() + "leave/" + "application/"+ "detail/"+userSingletonModel.corporate_id+"/"+Url.currtent_application_id+"/"+2;
+
+        Log.d("urlleave->",url);
         StringRequest stringRequest =new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
+                    Log.d("leaveData-=>",response);
                     JSONObject jsonObject=new JSONObject(response);
                     JSONObject  jsonObject1=jsonObject.getJSONObject("fields");
                     String employee_name=jsonObject1.getString("employee_name");
