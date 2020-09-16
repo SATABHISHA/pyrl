@@ -2,7 +2,7 @@ package org.wrkplan.payroll.Model;
 
 public class Details {
 
-   public static String leave_id,employee_name,from_date,to_date,total_days,description,leave_status;
+   public static String leave_id,employee_name,from_date,to_date,total_days,description,leave_status, supervisor;
 
     public String getLeave_id() {
         return leave_id;
@@ -58,5 +58,13 @@ public class Details {
 
     public void setLeave_status(String leave_status) {
         this.leave_status = leave_status;
+    }
+
+    public String getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(String supervisor) {
+        Details.supervisor = supervisor;
     }
 }

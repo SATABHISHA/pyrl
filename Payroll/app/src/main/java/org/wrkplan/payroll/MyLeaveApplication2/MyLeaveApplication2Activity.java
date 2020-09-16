@@ -268,7 +268,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
 
         }
-        else {
+        else if(Url.isSubordinateLeaveApplication == false){
             leave_title.setText("My Leave Application");
             rb_type.setVisibility(View.VISIBLE);
             submit_type.setVisibility(View.GONE);
@@ -277,16 +277,20 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
             txt_check_leave.setVisibility(View.VISIBLE);
             leave_details.setVisibility(View.VISIBLE);
 
-            subordinate_super.setVisibility(View.GONE);
+            subordinate_super.setVisibility(View.VISIBLE); //--changed by sr
             leave_super.setVisibility(View.VISIBLE);
             subordinate_final.setVisibility(View.GONE);
             leave_final.setVisibility(View.VISIBLE);
-            rl_from_sub.setVisibility(View.GONE);
+//            rl_from_sub.setVisibility(View.GONE);
+            rl_from_sub.setVisibility(View.VISIBLE); //--changed by sr
             rl_from.setVisibility(View.VISIBLE);
-            rl_to_sub.setVisibility(View.GONE);
+//            rl_to_sub.setVisibility(View.GONE);
+            rl_to_sub.setVisibility(View.VISIBLE); //--changed by sr
             rl_to.setVisibility(View.VISIBLE);
             ll_save_cancel.setVisibility(View.VISIBLE);
             llone_save_cancel.setVisibility(View.GONE);
+
+            GetEditForm();
 
 
         }
@@ -325,17 +329,12 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
         GetLeave();
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,arrayList);
 
-        if(Url.islistclicked) {
+      /*  if(Url.islistclicked) {
             GetEditForm();
             Url.islistclicked=false;
             arrayList1.clear();
-        }
-//        if(Url.islistclicked &&  Url.isSubordinateLeaveApplication){
-//
-//            GetEditForm2();
-//            arrayList2.clear();
-//
-//        }
+        }*/
+
 
 
         rb1.setOnClickListener(new View.OnClickListener() {
@@ -364,7 +363,8 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     jsonBody_Subordinate.put("corp_id", userSingletonModel.corporate_id);
                     jsonBody_Subordinate.put("appliction_id", Url.currtent_application_id);
                     jsonBody_Subordinate.put("leave_id", leaveID);
-                    jsonBody_Subordinate.put("employee_id", userSingletonModel.employee_id);
+//                    jsonBody_Subordinate.put("employee_id", userSingletonModel.employee_id);
+                    jsonBody_Subordinate.put("employee_id", 0);
                     jsonBody_Subordinate.put("from_date", txt_from_date1.getText().toString());
                     jsonBody_Subordinate.put("to_date", txt_to_date1.getText().toString());
                     jsonBody_Subordinate.put("total_days", txt_total_number.getText().toString());
@@ -791,6 +791,18 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     String supervisor2_name=jsonObject1.getString("supervisor2_name");
                     String leave_id=jsonObject1.getString("leave_id");
 
+                    ed_supervisor_remark.setText(jsonObject1.getString("supervisor_remark"));
+                    if(leave_status.contentEquals("Approved") ||
+                            leave_status.contentEquals("Return") ||
+                            leave_status.contentEquals("Canceled")) {
+                        ed_supervisor_remark.setEnabled(false);
+                    }else if(leave_status.contentEquals("Submit")){
+                        ed_supervisor_remark.setEnabled(true);
+                    }else{
+                        ed_supervisor_remark.setEnabled(false);
+                    }
+
+
                     Detail_Subordinate ds=new Detail_Subordinate();
                     ds.setEmployee_name(employee_name);
                     ds.setFrom_date(from_date);
@@ -835,14 +847,14 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     if(userSingletonModel.user_id.equals(supervisor1_id))
                     {
 
-                        ed_supervisor_remark.setEnabled(true);
+//                        ed_supervisor_remark.setEnabled(true);  //---commented by satabhisha
                         ed_final_supervisor_remark.setEnabled(false);
 
                     }
                     else if(userSingletonModel.user_id.equals(supervisor2_id))
                     {
 
-                        ed_supervisor_remark.setEnabled(false);
+//                        ed_supervisor_remark.setEnabled(false);  //---commented by satabhisha
                         ed_final_supervisor_remark.setEnabled(true);
 
                     }
@@ -882,6 +894,9 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
     private void GetEditForm() {
 
+        if(!arrayList1.isEmpty()){
+            arrayList1.clear();
+        }
         String url= Url.BASEURL() + "leave/" + "application/"+ "detail/"+userSingletonModel.corporate_id+"/"+Url.currtent_application_id+"/"+1;
 //        Log.d("sbsv",url);
 //        Log.d("sbsv", String.valueOf(Url.islistclicked));
@@ -889,7 +904,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                Log.d("leaveemptest-=>",response);
                 try {
                     JSONObject jsonObject=new JSONObject(response);
                     JSONObject jsonObject1=jsonObject.getJSONObject("fields");
@@ -903,6 +918,13 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     String description=jsonObject1.getString("description");
                     String leave_status=jsonObject1.getString("leave_status");
 
+                    String supervisor1_name=jsonObject1.getString("supervisor1_name");
+                    String supervisor2_name=jsonObject1.getString("supervisor2_name");
+
+                    tv_supervisor_remark.setText(supervisor1_name);
+                    tv_final_supervisor_remark.setText(supervisor2_name);
+
+
                     Details details=new Details();
                     details.setEmployee_name(employee_name);
                     details.setLeave_id(leave_id);
@@ -911,6 +933,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     details.setTotal_days(total_days);
                     details.setDescription(description);
                     details.setLeave_status(leave_status);
+                    details.setSupervisor(jsonObject1.getString("supervisor_remark"));
                     Log.d("svcsh>>",employee_name);
 
                     arrayList1.add(details);
@@ -940,6 +963,11 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     txt_total_number.setText(arrayList1.get(0).getTotal_days());
 
                     ed_details.setText(arrayList1.get(0).getDescription());
+                    ed_supervisor_remark.setEnabled(false);
+                    ed_supervisor_remark.setVisibility(View.VISIBLE);
+                    ed_supervisor_remark.setText(arrayList1.get(0).getSupervisor());
+
+
                     // txt_leave_status1.setText(arrayList1.get(0).getLeave_status());
                     if(arrayList1.get(0).getLeave_status().equals("Canceled"))
                     {
