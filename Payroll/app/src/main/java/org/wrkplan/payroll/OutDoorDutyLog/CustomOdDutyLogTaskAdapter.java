@@ -228,7 +228,7 @@ public class CustomOdDutyLogTaskAdapter extends RecyclerView.Adapter<CustomOdDut
                     androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
                     builder.setMessage("Are you sure, you want to delete task ?")
                             .setCancelable(false)
-                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
 
                                     if(outDoorTaskModelArrayList.get(position).getTask_delete_api_call() == 1){
@@ -244,7 +244,7 @@ public class CustomOdDutyLogTaskAdapter extends RecyclerView.Adapter<CustomOdDut
                                     dialog.cancel();
                                 }
                             })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     dialogInterface.cancel();
