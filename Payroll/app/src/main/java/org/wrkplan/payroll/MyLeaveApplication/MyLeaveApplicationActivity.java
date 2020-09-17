@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,9 +107,11 @@ public class MyLeaveApplicationActivity extends AppCompatActivity {
             arrayList.clear();
         }
         String url= Url.BASEURL() + "leave/" + "application/" + "list/"+userSingletonModel.corporate_id+"/"+1+"/"+userSingletonModel.user_id;
+
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.d("testmyLeave-=>",response);
                 try {
                     Url.application_id.clear();
                     JSONObject jsonObject=new JSONObject(response);
@@ -236,11 +239,12 @@ public class MyLeaveApplicationActivity extends AppCompatActivity {
             {
                 txt_leave_status.setText(arrayList.get(position).getLeave_status());
                 // ColorDrawable color = new ColorDrawable(Color.parseColor("#E0292E"));
-                txt_leave_status.setTextColor(getResources().getColor(R.color.Save));
+                txt_leave_status.setTextColor(getResources().getColor(R.color.submit));
             }
             else
 
                 txt_leave_status.setText(arrayList.get(position).getLeave_status());
+            // txt_leave_status.setTextColor(getResources().getColor(R.color.approoved));
 
 
             return view;

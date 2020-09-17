@@ -3,8 +3,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="cancel">#ED1C24</color>
+    <color name="cancel">#ed1c24</color>
     <color name="returned">#b04d0b</color>
-    <color name="Save">#939393</color>
+    <color name="Save">#2196ed</color>
+    <color name="submit">#fe52ce</color>
+    <color name="approoved">#1e9547</color>
     <color name="popup_text">#8A8A8A</color>
 </resources>

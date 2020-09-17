@@ -146,7 +146,13 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
 
     //========function to save data for IN/OUT, code starts=======
     public void save_in_out_data(String in_out, int work_frm_home_flag, String work_from_home_detail, String message_in_out){
-
+           if(message_in_out.contentEquals("IN")){
+               rl_in.setAlpha(0.5f);
+               tv_in.setClickable(false);
+           }else if(message_in_out.contentEquals("OUT")){
+               rl_out.setAlpha(0.5f);
+               tv_out.setClickable(false);
+           }
         try {
             final JSONObject DocumentElementobj = new JSONObject();
             DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
@@ -175,6 +181,14 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
 
 
                                     if(resobj.getString("status").contentEquals("true")){
+
+                                        if(message_in_out.contentEquals("IN")){
+                                            rl_in.setAlpha(1.0f);
+                                            tv_in.setClickable(true);
+                                        }else if(message_in_out.contentEquals("OUT")){
+                                            rl_out.setAlpha(1.0f);
+                                            tv_out.setClickable(true);
+                                        }
 //                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
                                         //---------Alert dialog code starts(added on 21st nov)--------
                                         final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(MyAttendanceActivity.this);
@@ -199,6 +213,14 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
 
                                         //--------Alert dialog code ends--------
                                     }else{
+
+                                        if(message_in_out.contentEquals("IN")){
+                                            rl_in.setAlpha(1.0f);
+                                            tv_in.setClickable(true);
+                                        }else if(message_in_out.contentEquals("OUT")){
+                                            rl_out.setAlpha(1.0f);
+                                            tv_out.setClickable(true);
+                                        }
 //                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
                                         //---------Alert dialog code starts(added on 21st nov)--------
                                         final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(MyAttendanceActivity.this);
@@ -221,17 +243,42 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
                                 }catch (Exception e){
                                     //                            loading.dismiss();
                                     e.printStackTrace();
+                                    if(message_in_out.contentEquals("IN")){
+                                        rl_in.setAlpha(1.0f);
+                                        tv_in.setClickable(true);
+                                    }else if(message_in_out.contentEquals("OUT")){
+                                        rl_out.setAlpha(1.0f);
+                                        tv_out.setClickable(true);
+                                    }
                                 }
 
                             } catch (Exception e) {
                                 e.printStackTrace();
+
+                                if(message_in_out.contentEquals("IN")){
+                                    rl_in.setAlpha(1.0f);
+                                    tv_in.setClickable(true);
+                                }else if(message_in_out.contentEquals("OUT")){
+                                    rl_out.setAlpha(1.0f);
+                                    tv_out.setClickable(true);
+                                }
+
                             }
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.e("Error: ", error.getMessage());
+
                     Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
+                    if(message_in_out.contentEquals("IN")){
+                        rl_in.setAlpha(1.0f);
+                        tv_in.setClickable(true);
+                    }else if(message_in_out.contentEquals("OUT")){
+                        rl_out.setAlpha(1.0f);
+                        tv_out.setClickable(true);
+                    }
+
                 }
             });
 
@@ -239,6 +286,14 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
             requestQueue.add(request_json);
         }catch (JSONException e){
             e.printStackTrace();
+
+            if(message_in_out.contentEquals("IN")){
+                rl_in.setAlpha(1.0f);
+                tv_in.setClickable(true);
+            }else if(message_in_out.contentEquals("OUT")){
+                rl_out.setAlpha(1.0f);
+                tv_out.setClickable(true);
+            }
         }
     }
     //========function to save data for IN/OUT, code ends=======

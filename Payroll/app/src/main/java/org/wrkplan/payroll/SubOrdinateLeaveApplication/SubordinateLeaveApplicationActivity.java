@@ -241,7 +241,7 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
             {
                 txt_leave_status.setText(arrayList.get(position).getLeave_status());
                 // ColorDrawable color = new ColorDrawable(Color.parseColor("#E0292E"));
-                txt_leave_status.setTextColor(getResources().getColor(R.color.Save));
+                txt_leave_status.setTextColor(getResources().getColor(R.color.submit));
             }
             else
 
