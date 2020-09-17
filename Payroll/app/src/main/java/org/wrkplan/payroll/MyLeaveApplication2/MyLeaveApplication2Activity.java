@@ -129,8 +129,9 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                             Url.isMyLeaveApplication=true;
 
                             Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
-                            finish();
+//                            finish();
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -152,8 +153,9 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
         else
         {
             Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish();
+//            finish();
 
         }
 
@@ -759,6 +761,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
 
                 Intent intent = new Intent(MyLeaveApplication2Activity.this, SubordinateLeaveApplicationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
 
