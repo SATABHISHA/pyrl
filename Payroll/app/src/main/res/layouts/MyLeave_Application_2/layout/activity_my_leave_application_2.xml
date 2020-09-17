@@ -283,7 +283,7 @@
                             android:layout_centerVertical="true"
 
                             android:layout_marginLeft="5dp"
-                            android:text="2-Feb-2020">
+                            android:text="">
 
 
                         </TextView>
@@ -425,7 +425,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="5dp"
-                            android:text="2-Feb-2020">
+                            android:text="">
 
 
                         </TextView>
