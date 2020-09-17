@@ -12,17 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="0dp"
+        android:paddingBottom="1dp"
         android:paddingTop="0dp"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:layout_marginBottom="0dp"
         android:layout_marginTop="0dp"
-        android:background="#ffffff">
+        android:background="#dcdcdc">
         <RelativeLayout
             android:id="@+id/relative_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingBottom="7dp"
+            android:background="#ffffff">
             <!--<ImageView
                 android:id="@+id/img_circular"
                 android:layout_width="40dp"
@@ -111,14 +115,14 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:text="Approved"/>
-            <LinearLayout
+         <!--   <LinearLayout
                 android:id="@+id/ll_border"
                 android:layout_below="@id/tv_od_status"
                 android:layout_width="match_parent"
                 android:layout_marginTop="7dp"
                 android:layout_height="1dp"
                 android:orientation="vertical"
-                android:background="#dcdcdc"/>
+                android:background="#dcdcdc"/> -->
 
             <!-- <TextView
                  android:id="@+id/tv_day_date_period"
@@ -154,7 +158,7 @@
             <RelativeLayout
                 android:id="@+id/rl_day_count"
                 android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:background="#ffffff"
                 android:paddingBottom="7dp"
                 android:gravity="center"

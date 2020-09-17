@@ -17,11 +17,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
+                android:layout_toLeftOf="@id/rl_btn_new"
+                android:layout_marginRight="10dp"
                 android:text="My Outdoor Duty Request List"
                 android:textColor="#ffffff"
                 android:textSize="20sp"/>
             <RelativeLayout
+                android:id="@+id/rl_btn_new"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:background="#3e7aa1"
@@ -75,8 +79,8 @@
                 android:id="@+id/ll_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="0dp"
-                android:paddingRight="0dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:visibility="gone"
                 android:orientation="vertical">
                 <androidx.recyclerview.widget.RecyclerView
