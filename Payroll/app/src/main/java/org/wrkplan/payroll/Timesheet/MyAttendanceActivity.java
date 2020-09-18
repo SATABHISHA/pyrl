@@ -2,11 +2,14 @@ package org.wrkplan.payroll.Timesheet;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -130,7 +133,28 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
                 save_in_out_data("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance IN time recorded");
                 break;
             case R.id.tv_out:
-                save_in_out_data("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance OUT time recorded");
+                if((work_from_home_flag == 1) && ed_wrk_frm_home_detail.getText().toString().trim().isEmpty()){
+
+                    //---------Alert dialog code starts(added on 21st nov)--------
+                    final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(MyAttendanceActivity.this);
+                    alertDialogBuilder.setCancelable(false);
+                    alertDialogBuilder.setMessage("Cannot save without work from home details");
+                    alertDialogBuilder.setPositiveButton("OK",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    //-----following code is commented on 6th dec to get the calender saved state data------
+                                    alertDialogBuilder.setCancelable(true);
+                                }
+                            });
+                    android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+
+                    //--------Alert dialog code ends--------
+
+                }else{
+                    save_in_out_data("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance OUT time recorded");
+                }
                 break;
             case R.id.chck_wrk_frm_home:
                 if(chck_wrk_frm_home.isChecked()) {
@@ -410,7 +434,7 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
 
                         ed_wrk_frm_home_detail.setVisibility(View.VISIBLE);
                         ed_wrk_frm_home_detail.setText(work_from_home_detail);
-                        ed_wrk_frm_home_detail.setEnabled(false);
+                        ed_wrk_frm_home_detail.setEnabled(true);
                     }else if(work_from_home_flag == 0){
                         chck_wrk_frm_home.setVisibility(View.GONE);
                         ed_wrk_frm_home_detail.setVisibility(View.GONE);
@@ -495,4 +519,15 @@ public class MyAttendanceActivity extends AppCompatActivity implements View.OnCl
     }
 
     //===========Code for getting time_in and time_out, ends==========
+
+
+    //========following function is to resign keyboard on touching anywhere in the screen
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 }
