@@ -270,7 +270,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
 
         }
-        else if(Url.isSubordinateLeaveApplication == false){
+        /*else if(Url.isSubordinateLeaveApplication == false){
             leave_title.setText("My Leave Application");
             rb_type.setVisibility(View.VISIBLE);
             submit_type.setVisibility(View.GONE);
@@ -293,6 +293,33 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
             llone_save_cancel.setVisibility(View.GONE);
 
             GetEditForm();
+
+
+        } */else{
+            leave_title.setText("My Leave Application");
+            rb_type.setVisibility(View.VISIBLE);
+            submit_type.setVisibility(View.GONE);
+            spiner_approved.setVisibility(View.GONE);
+            txt_approved.setVisibility(View.VISIBLE);
+            txt_check_leave.setVisibility(View.VISIBLE);
+            leave_details.setVisibility(View.VISIBLE);
+
+//            subordinate_super.setVisibility(View.GONE);
+            subordinate_super.setVisibility(View.VISIBLE);
+            leave_super.setVisibility(View.VISIBLE);
+            subordinate_final.setVisibility(View.GONE);
+            leave_final.setVisibility(View.VISIBLE);
+            rl_from_sub.setVisibility(View.GONE);
+//            rl_from_sub.setVisibility(View.VISIBLE);
+
+            rl_from.setVisibility(View.VISIBLE);
+            rl_to_sub.setVisibility(View.GONE);
+//            rl_to_sub.setVisibility(View.VISIBLE);
+            rl_to.setVisibility(View.VISIBLE);
+            ll_save_cancel.setVisibility(View.VISIBLE);
+            llone_save_cancel.setVisibility(View.GONE);
+
+//            GetEditForm();
 
 
         }
@@ -331,11 +358,11 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
         GetLeave();
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,arrayList);
 
-      /*  if(Url.islistclicked) {
+        if(Url.islistclicked) {
             GetEditForm();
             Url.islistclicked=false;
             arrayList1.clear();
-        }*/
+        }
 
 
 
