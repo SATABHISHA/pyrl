@@ -421,7 +421,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
 
                     btn_save.setClickable(true);
                     btn_save.setAlpha(1.0f);
-                }else if(jsonObject2.getString("od_status").contentEquals("Returned")){
+                }else if(jsonObject2.getString("od_status").contentEquals("Return")){
 
                     od_request_id = jsonObject2.getInt("od_request_id"); //--added on 29th May, it would be 0 for new creation
 
