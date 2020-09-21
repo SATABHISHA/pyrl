@@ -258,8 +258,10 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
                     //--------Spinner code starts------
                     List<String> spinnerList_request_status = new ArrayList<>();
                     spinnerList_request_status.add("Approved");
-                    spinnerList_request_status.add("Cancelled");
-                    spinnerList_request_status.add("Returned");
+                   /* spinnerList_request_status.add("Cancelled");
+                    spinnerList_request_status.add("Returned");*/
+                    spinnerList_request_status.add("Canceled");
+                    spinnerList_request_status.add("Return");
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(SubordinateOutDoorRequestActivity.this, android.R.layout.simple_spinner_item, spinnerList_request_status);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -337,13 +339,14 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
             DocumentElementobj.put("total_days", tv_total_days.getText().toString());
             DocumentElementobj.put("description", ed_reason.getText().toString());
             DocumentElementobj.put("supervisor_remark", ed_approval.getText().toString());
-            if(spinner_rqst_status.getSelectedItem().toString().contentEquals("Returned")){
+           /* if(spinner_rqst_status.getSelectedItem().toString().contentEquals("Returned")){
                 DocumentElementobj.put("od_status", "Return");
             }else  if(spinner_rqst_status.getSelectedItem().toString().contentEquals("Cancelled")){
                 DocumentElementobj.put("od_status", "Canceled");
             }else  if(spinner_rqst_status.getSelectedItem().toString().contentEquals("Approved")){
                 DocumentElementobj.put("od_status", "Approved");
-            }
+            }*/
+            DocumentElementobj.put("od_status", spinner_rqst_status.getSelectedItem().toString());
 
 
             DocumentElementobj.put("approved_by_id", userSingletonModel.getEmployee_id());
