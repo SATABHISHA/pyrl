@@ -84,6 +84,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Timesheet.MyAttendanceActivity_v2"
             android:screenOrientation="portrait"/>
+        <activity android:name=".Timesheet.SubordinateAttendanceActivity_v2"
+            android:screenOrientation="portrait"/>
 
         <!-- Firebase Notifications -->
         <service
