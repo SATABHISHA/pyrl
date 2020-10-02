@@ -1,6 +1,7 @@
 package org.wrkplan.payroll.Timesheet;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -124,8 +125,8 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity {
             }else if(jsonObject1.getString("status").contentEquals("false")){
                 ll_recycler.setVisibility(View.GONE);
                 tv_nodata.setVisibility(View.VISIBLE);
-//                tv_nodata.setText(jsonObject1.getString("message"));
-                tv_nodata.setText("Subordinate timesheet data not found");
+                tv_nodata.setText(jsonObject1.getString("message"));
+//                tv_nodata.setText("Subordinate timesheet data not found");
             }
 
         } catch (JSONException e) {
@@ -133,4 +134,13 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity {
         }
     }
     //===========Code to get data from api and load data to recycler view, ends==========
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent_myattendence = new Intent(SubordinateAttendanceActivity_v2.this, MyAttendanceActivity_v2.class);
+        intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent_myattendence);
+    }
 }
