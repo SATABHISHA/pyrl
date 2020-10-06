@@ -1,5 +1,6 @@
 package org.wrkplan.payroll.Timesheet;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,12 +15,14 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -28,6 +31,11 @@ import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MyAttendanceActivity_v2 extends AppCompatActivity implements View.OnClickListener {
     TextView tv_punch_time;
@@ -52,6 +60,8 @@ public class MyAttendanceActivity_v2 extends AppCompatActivity implements View.O
         chck_wrk_frm_home.setOnClickListener(this);
         btn_subordinate_attendance_log.setOnClickListener(this);
         btn_my_attendance_log.setOnClickListener(this);
+
+        load_biometric_data();
     }
 
     @Override
@@ -192,4 +202,74 @@ public class MyAttendanceActivity_v2 extends AppCompatActivity implements View.O
         intent_dashboard.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_dashboard);
     }
+
+    //===========Code for getting biometric data, starts==========
+    ProgressDialog loading;
+
+    public void load_biometric_data(){
+        loading = ProgressDialog.show(MyAttendanceActivity_v2.this, "Loading", "Please wait! Syncing data from biometric machine.", true, false);
+//        String url = Config.BaseUrlEpharma + "documents/list" ;
+//        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
+//        String url = Url.BASEURL+"od/request/check-exist/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+        String url = Url.BASEURL()+"timesheet/biometric/fetch/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+//        String url = Url.BASEURL+"timesheet/log/today/EMC_NEW/42";
+        Log.d("url-=>",url);
+//        String url = Url.BASEURL+"od/request/detail/20/1/1";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
+                Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        get_biometric_update(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                error.printStackTrace();
+            }
+        });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+    }
+    public void get_biometric_update(String response){
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            Log.d("jsonData-=>",jsonObject.toString());
+//            JSONObject jsonObject1 = jsonObject.getJSONObject("response");
+
+            if(jsonObject.getString("status").contentEquals("true")){
+                loading.dismiss();
+                //---------Alert dialog code starts(added on 21st nov)--------
+                final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(MyAttendanceActivity_v2.this);
+//                                        alertDialogBuilder.setMessage(jsonObject.getString("message"));
+                alertDialogBuilder.setCancelable(false);
+                alertDialogBuilder.setMessage(jsonObject.getString("message"));
+                alertDialogBuilder.setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                //-----following code is commented on 6th dec to get the calender saved state data------
+                                alertDialogBuilder.setCancelable(true);
+//                                                        load_data_check_od_duty();
+//                                                        recreate();
+                               /* Intent t= new Intent(MyAttendanceActivity_v2.this,MyAttendanceActivity_v2.class);
+                                startActivity(t);
+                                finish();*/
+                            }
+                        });
+                android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+                //--------Alert dialog code ends--------
+                }
+
+        } catch (JSONException e) {
+            loading.dismiss();
+            e.printStackTrace();
+        }
+    }
+
+    //===========Code for getting biometric data, ends==========
 }
