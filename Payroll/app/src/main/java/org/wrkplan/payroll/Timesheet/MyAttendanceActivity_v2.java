@@ -35,7 +35,7 @@ public class MyAttendanceActivity_v2 extends AppCompatActivity implements View.O
     EditText ed_wrk_frm_home_detail;
     public static int timesheet_id, work_from_home_flag;
     UserSingletonModel userSingletonModel = UserSingletonModel.getUserSingletonModel();
-    Button btn_subordinate_attendance_log;
+    Button btn_subordinate_attendance_log, btn_my_attendance_log;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,10 +46,12 @@ public class MyAttendanceActivity_v2 extends AppCompatActivity implements View.O
         chck_wrk_frm_home = findViewById(R.id.chck_wrk_frm_home);
         ed_wrk_frm_home_detail = findViewById(R.id.ed_wrk_frm_home_detail);
         btn_subordinate_attendance_log = findViewById(R.id.btn_subordinate_attendance_log);
+        btn_my_attendance_log = findViewById(R.id.btn_my_attendance_log);
 
         tv_punch_time.setOnClickListener(this);
         chck_wrk_frm_home.setOnClickListener(this);
         btn_subordinate_attendance_log.setOnClickListener(this);
+        btn_my_attendance_log.setOnClickListener(this);
     }
 
     @Override
@@ -71,6 +73,11 @@ public class MyAttendanceActivity_v2 extends AppCompatActivity implements View.O
                 Intent intent_subordinate_attendance_log = new Intent(MyAttendanceActivity_v2.this, SubordinateAttendanceActivity_v2.class);
                 intent_subordinate_attendance_log.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_subordinate_attendance_log);
+                break;
+                case R.id.btn_my_attendance_log:
+                Intent intent_my_attendance_log = new Intent(MyAttendanceActivity_v2.this, MyAttendanceLogActivity_v2.class);
+                    intent_my_attendance_log.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent_my_attendance_log);
                 break;
             default:
                 break;
