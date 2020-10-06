@@ -15,11 +15,11 @@
         android:layout_marginBottom="0dp"
         android:layout_marginTop="0dp"
         android:background="#D1D1D1">
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/relative_layout"
             android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:layout_marginBottom="0.6dp"
             android:background="#ffffff"
             android:layout_height="wrap_content">
@@ -29,8 +29,9 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="nil-Aug-2020"
-                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
                 android:textColor="#565555"
+                android:layout_weight="1"
                 android:textSize="15sp"/>
             <TextView
                 android:id="@+id/tv_in_time"
@@ -38,9 +39,8 @@
                 android:layout_height="wrap_content"
                 android:text="10:00 AM"
                 android:textColor="#565555"
-                android:layout_toLeftOf="@id/tv_out_time"
-                android:layout_marginRight="20dp"
-                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
                 android:textSize="15sp"/>
             <TextView
                 android:id="@+id/tv_out_time"
@@ -48,14 +48,14 @@
                 android:layout_height="wrap_content"
                 android:text="5:30 PM"
                 android:textColor="#565555"
-                android:layout_marginRight="20dp"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/ll_label"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
                 android:textSize="15sp"/>
             <LinearLayout
                 android:id="@+id/ll_label"
                 android:layout_width="70dp"
                 android:layout_height="30dp"
+                android:layout_weight="1"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:orientation="vertical"
@@ -65,6 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:textColor="#ffffff"
                     android:text="Present"/>
             </LinearLayout>
 
@@ -79,6 +80,6 @@
                   android:background="#dcdcdc"/> -->
 
 
-        </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

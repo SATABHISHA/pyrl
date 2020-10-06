@@ -111,8 +111,16 @@ public class MyAttendanceLogActivity_v2 extends AppCompatActivity {
                     timesheetMyAttendanceModel_v2.setDay_no(jsonObject2.getString("day_no"));
                     timesheetMyAttendanceModel_v2.setDay_name(jsonObject2.getString("day_name"));
                     timesheetMyAttendanceModel_v2.setDate(jsonObject2.getString("date"));
-                    timesheetMyAttendanceModel_v2.setTime_in(jsonObject2.getString("time_in"));
-                    timesheetMyAttendanceModel_v2.setTime_out(jsonObject2.getString("time_out"));
+                    if(jsonObject2.getString("time_in").trim().contentEquals("")){
+                        timesheetMyAttendanceModel_v2.setTime_in("             ");
+                    }else{
+                        timesheetMyAttendanceModel_v2.setTime_in(jsonObject2.getString("time_in"));
+                    }
+                    if(jsonObject2.getString("time_out").trim().contentEquals("")){
+                        timesheetMyAttendanceModel_v2.setTime_out("              ");
+                    }else {
+                        timesheetMyAttendanceModel_v2.setTime_out(jsonObject2.getString("time_out"));
+                    }
                     timesheetMyAttendanceModel_v2.setAttendance_status(jsonObject2.getString("attendance_status"));
                     timesheetMyAttendanceModel_v2.setAttendance_color(jsonObject2.getString("attendance_color"));
                     timesheetMyAttendanceModel_v2.setMonth_no(jsonObject2.getString("month_no"));
