@@ -122,6 +122,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 
 //        loadData();
         load_data_check_od_duty();
+        load_biometric_data();
     }
     @Override
     public void onClick(View view) {
@@ -533,6 +534,77 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
     }
 
     //===========Code for getting time_in and time_out, ends==========
+
+    //===========Code for getting biometric data, starts==========
+    ProgressDialog loading;
+
+    public void load_biometric_data(){
+        loading = ProgressDialog.show(MyAttendanceActivity_v3.this, "Loading", "Please wait! Syncing data from biometric machine.", true, false);
+//        String url = Config.BaseUrlEpharma + "documents/list" ;
+//        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
+//        String url = Url.BASEURL+"od/request/check-exist/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+        String url = Url.BASEURL()+"timesheet/biometric/fetch/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+//        String url = Url.BASEURL+"timesheet/log/today/EMC_NEW/42";
+        Log.d("url-=>",url);
+//        String url = Url.BASEURL+"od/request/detail/20/1/1";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
+                Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        get_biometric_update(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                error.printStackTrace();
+            }
+        });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+    }
+    public void get_biometric_update(String response){
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            Log.d("jsonData-=>",jsonObject.toString());
+//            JSONObject jsonObject1 = jsonObject.getJSONObject("response");
+
+            if(jsonObject.getString("status").contentEquals("true")){
+                loading.dismiss();
+                //---------Alert dialog code starts(added on 21st nov)--------
+                final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(MyAttendanceActivity_v3.this);
+//                                        alertDialogBuilder.setMessage(jsonObject.getString("message"));
+                alertDialogBuilder.setCancelable(false);
+                alertDialogBuilder.setMessage(jsonObject.getString("message"));
+                alertDialogBuilder.setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                //-----following code is commented on 6th dec to get the calender saved state data------
+                                alertDialogBuilder.setCancelable(true);
+//                                                        load_data_check_od_duty();
+//                                                        recreate();
+                               /* Intent t= new Intent(MyAttendanceActivity_v2.this,MyAttendanceActivity_v2.class);
+                                startActivity(t);
+                                finish();*/
+                            }
+                        });
+                android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+                //--------Alert dialog code ends--------
+            }
+
+        } catch (JSONException e) {
+            loading.dismiss();
+            e.printStackTrace();
+        }
+    }
+
+    //===========Code for getting biometric data, ends==========
+
     //========following function is to resign keyboard on touching anywhere in the screen
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
