@@ -222,14 +222,14 @@
                         android:text="Nil"/>
                 </RelativeLayout> -->
             </LinearLayout>
-        <!--    <TextView
+            <TextView
                 android:id="@+id/tv_logtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_below="@id/ll_log_in_out"
                 android:textSize="17sp"
-                android:text="My Attendance Log"/>
+                android:text="My Attendance for Today"/>
             <LinearLayout
                 android:id="@+id/ll_line_attndnc"
                 android:layout_width="match_parent"
@@ -239,6 +239,7 @@
                 android:layout_marginTop="5dp"
                 android:background="#454444"/>
             <RelativeLayout
+                android:id="@+id/rl_column_name"
                 android:layout_below="@id/ll_line_attndnc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -255,17 +256,26 @@
                     android:layout_alignParentRight="true"
                     android:layout_toLeftOf="@id/tv_title_out1"
                     android:layout_marginRight="150dp"
-                    android:text="IN"/>
+                    android:text="Time"/>
                 <TextView
                     android:id="@+id/tv_title_out1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="30dp"
-                    android:text="OUT"/>
-            </RelativeLayout> -->
+                    android:text="IN / OUT"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_line_attndnc1"
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:layout_below="@id/rl_column_name"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:background="#454444"/>
         </RelativeLayout>
-       <!-- <androidx.cardview.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/rl_button"
@@ -302,7 +312,7 @@
                     android:layout_marginTop="0dp"
                     android:scrollbars="vertical" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView> -->
+        </androidx.cardview.widget.CardView>
         <LinearLayout
             android:id="@+id/rl_button"
             android:layout_width="match_parent"

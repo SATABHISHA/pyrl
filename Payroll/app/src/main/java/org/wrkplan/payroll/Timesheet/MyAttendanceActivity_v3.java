@@ -38,6 +38,7 @@ import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel;
+import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel_v3;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
@@ -52,8 +53,9 @@ import java.util.Locale;
 public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.OnClickListener{
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     ArrayList<TimesheetMyAttendanceModel> timesheetMyAttendanceModelArrayList = new ArrayList<>();
+    ArrayList<TimesheetMyAttendanceModel_v3> timesheetMyAttendanceModel_v3ArrayList = new ArrayList<>();
     LinearLayout ll_recycler;
-//    RecyclerView recycler_view;
+    RecyclerView recycler_view;
     RelativeLayout rl_button, rl_out, rl_in;
     TextView tv_button_subordinate, tv_nodata, tv_in, tv_out, tv_time_in, tv_time_out, tv_date;
 
@@ -69,9 +71,9 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_my_attendance_v3);
 
      /*   rl_button = findViewById(R.id.rl_button);
-        tv_button_subordinate = findViewById(R.id.tv_button_subordinate);
+        tv_button_subordinate = findViewById(R.id.tv_button_subordinate);*/
         ll_recycler = findViewById(R.id.ll_recycler);
-        tv_nodata = findViewById(R.id.tv_nodata);*/
+        tv_nodata = findViewById(R.id.tv_nodata);
 
        /* tv_time_in = findViewById(R.id.tv_time_in);
         tv_time_out = findViewById(R.id.tv_time_out);*/
@@ -106,9 +108,9 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
         rl_out.setVisibility(View.GONE);*/
 
         //==========Recycler code initializing and setting layoutManager starts======
-//        recycler_view = findViewById(R.id.recycler_view);
-//        recycler_view.setHasFixedSize(true);
-//        recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        recycler_view = findViewById(R.id.recycler_view);
+        recycler_view.setHasFixedSize(true);
+        recycler_view.setLayoutManager(new LinearLayoutManager(this));
         //==========Recycler code initializing and setting layoutManager ends======
 
         //=========get current date and set curretnt date, code starts========
@@ -434,6 +436,9 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
     }
     public void get_today_time_in_out(String response){
         try {
+            if(!timesheetMyAttendanceModel_v3ArrayList.isEmpty()){
+                timesheetMyAttendanceModel_v3ArrayList.clear();
+            }
             JSONObject jsonObject = new JSONObject(response);
             Log.d("jsonDatacheck-=>",jsonObject.toString());
             JSONObject jsonObject1 = jsonObject.getJSONObject("response");
@@ -529,12 +534,38 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
                         e.printStackTrace();
                     }
 //                    tv_time_out.setText(outputFormat.format(date_log_time_out));
+
+
                 }else{
 //                    tv_time_out.setText("");
                 }
-            }else if(jsonObject.getString("status").contentEquals("false")){
 
+                //---code to load data to list, starts----
+                ll_recycler.setVisibility(View.VISIBLE);
+                tv_nodata.setVisibility(View.GONE);
+                JSONArray jsonArray = jsonObject.getJSONArray("rows");
 
+                for(int i=0; i<jsonArray.length(); i++){
+                    JSONObject jsonObject2 = jsonArray.getJSONObject(i);
+                    TimesheetMyAttendanceModel_v3 timesheetMyAttendanceModel_v3 = new TimesheetMyAttendanceModel_v3();
+                    timesheetMyAttendanceModel_v3.setSl(jsonObject2.getString("sl"));
+                    timesheetMyAttendanceModel_v3.setAttendance_biometric_id(jsonObject2.getString("attendance_biometric_id"));
+                    timesheetMyAttendanceModel_v3.setDate(jsonObject2.getString("date"));
+                    timesheetMyAttendanceModel_v3.setTime(jsonObject2.getString("time"));
+                    timesheetMyAttendanceModel_v3.setBiometric_machine_yn(jsonObject2.getString("biometric_machine_yn"));
+                    timesheetMyAttendanceModel_v3.setStatus(jsonObject2.getString("status"));
+
+                    timesheetMyAttendanceModel_v3ArrayList.add(timesheetMyAttendanceModel_v3);
+
+                }
+                recycler_view.setAdapter(new MyAttendanceActivity_LogList_Adapter_v3(MyAttendanceActivity_v3.this, timesheetMyAttendanceModel_v3ArrayList));
+
+                //---code to load data to list, ends----
+
+            }else if(jsonObject1.getString("status").contentEquals("false")){
+                ll_recycler.setVisibility(View.GONE);
+                tv_nodata.setVisibility(View.VISIBLE);
+                tv_nodata.setText(jsonObject1.getString("message"));
             }
 
         } catch (JSONException e) {
@@ -629,4 +660,5 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
         intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_myattendence);
     }
+
 }
