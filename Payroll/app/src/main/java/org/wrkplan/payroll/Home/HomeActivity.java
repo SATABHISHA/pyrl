@@ -391,7 +391,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_timesheet:
 //                startActivity(new Intent(this, MyAttendanceActivity.class));
-                startActivity(new Intent(this, MyAttendanceActivity_v2.class));
+                startActivity(new Intent(this, MyAttendanceActivity_v3.class));
                 break;
             case R.id.nav_change_pswd:
                 //--------adding custom dialog on 14th may starts------

@@ -98,6 +98,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 
         //----default making tv_in, tv_out visibility gone
 //        tv_in.setVisibility(View.INVISIBLE);
+        chck_wrk_frm_home.setVisibility(View.GONE);
         tv_in.setVisibility(View.GONE);
         tv_out.setVisibility(View.GONE);
 
@@ -463,18 +464,24 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
                 }
                 if(jsonObject.has("timesheet_in_out_action")) {
                     if (jsonObject.getString("timesheet_in_out_action").trim().contentEquals("IN")) {
+                        chck_wrk_frm_home.setVisibility(View.VISIBLE); //--added on 8th oct
+
                         tv_in.setVisibility(View.VISIBLE);
                         tv_out.setVisibility(View.GONE);
 
                         rl_in.setVisibility(View.VISIBLE);
                         rl_out.setVisibility(View.GONE);
                     } else if (jsonObject.getString("timesheet_in_out_action").trim().contentEquals("OUT")) {
+                        chck_wrk_frm_home.setVisibility(View.VISIBLE); //--added on 8th oct
+
                         tv_in.setVisibility(View.GONE);
                         tv_out.setVisibility(View.VISIBLE);
 
                         rl_in.setVisibility(View.GONE);
                         rl_out.setVisibility(View.VISIBLE);
                     } else {
+                        chck_wrk_frm_home.setVisibility(View.GONE); //--added on 8th oct
+
                         tv_in.setVisibility(View.GONE);
                         tv_out.setVisibility(View.GONE);
 
@@ -482,6 +489,8 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
                         rl_out.setVisibility(View.GONE);
                     }
                 }else {
+                    chck_wrk_frm_home.setVisibility(View.GONE); //--added on 8th oct
+
                     tv_in.setVisibility(View.GONE);
                     tv_out.setVisibility(View.GONE);
 
