@@ -121,7 +121,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
         //=========get current date and set curretnt date, code ends========
 
 //        loadData();
-        load_data_check_od_duty();
+//        load_data_check_od_duty();
         load_biometric_data();
     }
     @Override
@@ -557,10 +557,11 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
             @Override
             public void onErrorResponse(VolleyError error) {
                 loading.dismiss();
+                load_data_check_od_duty();
                 error.printStackTrace();
             }
         });
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(15000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
@@ -573,8 +574,9 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 
             if(jsonObject.getString("status").contentEquals("true")){
                 loading.dismiss();
+                load_data_check_od_duty();
                 //---------Alert dialog code starts(added on 21st nov)--------
-                final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(MyAttendanceActivity_v3.this);
+              /*  final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(MyAttendanceActivity_v3.this);
 //                                        alertDialogBuilder.setMessage(jsonObject.getString("message"));
                 alertDialogBuilder.setCancelable(false);
                 alertDialogBuilder.setMessage(jsonObject.getString("message"));
@@ -584,17 +586,14 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
                             public void onClick(DialogInterface arg0, int arg1) {
                                 //-----following code is commented on 6th dec to get the calender saved state data------
                                 alertDialogBuilder.setCancelable(true);
-//                                                        load_data_check_od_duty();
-//                                                        recreate();
-                               /* Intent t= new Intent(MyAttendanceActivity_v2.this,MyAttendanceActivity_v2.class);
-                                startActivity(t);
-                                finish();*/
                             }
                         });
                 android.app.AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                alertDialog.show();*/
 
                 //--------Alert dialog code ends--------
+            }else if(jsonObject.getString("status").contentEquals("false")){
+                load_data_check_od_duty();
             }
 
         } catch (JSONException e) {
