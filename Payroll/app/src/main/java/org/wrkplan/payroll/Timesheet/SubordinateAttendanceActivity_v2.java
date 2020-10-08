@@ -139,7 +139,7 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent_myattendence = new Intent(SubordinateAttendanceActivity_v2.this, MyAttendanceActivity_v2.class);
+        Intent intent_myattendence = new Intent(SubordinateAttendanceActivity_v2.this, MyAttendanceActivity_v3.class);
         intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_myattendence);
     }

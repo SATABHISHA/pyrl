@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/app"
+        android:background="#2e5772"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="My Attendance"
+                android:textColor="#ffffff"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+        <!-- <androidx.appcompat.widget.Toolbar
+             android:id="@+id/toolbar"
+             android:layout_width="match_parent"
+             android:layout_height="?attr/actionBarSize"
+             android:background="#2e5772">
+
+         </androidx.appcompat.widget.Toolbar> -->
+        <!-- android:background="?attr/colorPrimary"-->
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        <RelativeLayout
+            android:id="@+id/rl_attendance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:visibility="visible">
+            <TextView
+                android:id="@+id/tv_tile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Today"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:layout_marginRight="7dp"
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/tv_tile"
+                android:layout_centerHorizontal="true"
+                android:textSize="15sp"
+                android:text="2020-Jun-05"/>
+            <CheckBox
+                android:id="@+id/chck_wrk_frm_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_date"
+                android:layout_centerHorizontal="true"
+                android:text="Work from home"
+                android:textSize="13sp"/>
+            <EditText
+                android:id="@+id/ed_wrk_frm_home_detail"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textSize="15sp"
+                android:gravity="top|left"
+                android:layout_below="@id/chck_wrk_frm_home"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:textColor="#7A7979"
+                android:background="@drawable/layout6"
+                android:hint="Work from home detail"/>
+
+            <LinearLayout
+                android:id="@+id/ll_buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ed_wrk_frm_home_detail"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rl_in"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/activity_my_attendance_shape">
+                    <TextView
+                        android:id="@+id/tv_in"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textSize="15sp"
+                        android:visibility="visible"
+                        android:textColor="#393838"
+                        android:text="IN"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_out"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/activity_my_attendance_shape">
+                    <TextView
+                        android:id="@+id/tv_out"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textSize="15sp"
+                        android:visibility="visible"
+                        android:textColor="#393838"
+                        android:text="OUT"/>
+                </RelativeLayout>
+                <!--  <TextView
+                      android:id="@+id/tv_stop"
+                      android:layout_width="80dp"
+                      android:layout_height="48dp"
+                      android:layout_marginLeft="2dp"
+                      android:textColor="#686666"
+                      android:gravity="center"
+                      android:textSize="17sp"
+                      android:visibility="visible"
+                      android:background="#febbaf"
+                      android:text="STOP"/> -->
+            </LinearLayout>
+            <!--    <LinearLayout
+                    android:id="@+id/ll_border"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/tv_date"
+                    android:orientation="vertical"
+                    android:background="#dcdcdc"/> -->
+
+            <LinearLayout
+                android:id="@+id/ll_log_in_out"
+                android:layout_width="match_parent"
+                android:layout_below="@id/ll_buttons"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/activity_my_attendance_shape1"
+                android:orientation="vertical">
+           <!--     <RelativeLayout
+                    android:id="@+id/rl_time_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="0.4dp"
+                    android:background="#c2c2c2">
+                    <TextView
+                        android:id="@+id/tv_title_in"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textSize="18sp"
+                        android:paddingLeft="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:text="IN Time"/>
+                    <LinearLayout
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="#000000"
+                        android:layout_centerHorizontal="true"/>
+                    <TextView
+                        android:id="@+id/tv_title_out"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textSize="18sp"
+                        android:paddingRight="10dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_alignParentRight="true"
+                        android:text="OUT Time"/>
+                </RelativeLayout> -->
+             <!--   <RelativeLayout
+                    android:id="@+id/rl_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="0.4dp"
+                    android:background="#ffffff">
+                    <TextView
+                        android:id="@+id/tv_time_in"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textSize="18sp"
+                        android:paddingLeft="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:text="Nil"/>
+                    <LinearLayout
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="#000000"
+                        android:layout_centerHorizontal="true"/>
+                    <TextView
+                        android:id="@+id/tv_time_out"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textSize="18sp"
+                        android:paddingRight="10dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_alignParentRight="true"
+                        android:text="Nil"/>
+                </RelativeLayout> -->
+            </LinearLayout>
+        <!--    <TextView
+                android:id="@+id/tv_logtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/ll_log_in_out"
+                android:textSize="17sp"
+                android:text="My Attendance Log"/>
+            <LinearLayout
+                android:id="@+id/ll_line_attndnc"
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_below="@id/tv_logtitle"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:background="#454444"/>
+            <RelativeLayout
+                android:layout_below="@id/ll_line_attndnc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/tv_title_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date"/>
+                <TextView
+                    android:id="@+id/tv_title_in1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_toLeftOf="@id/tv_title_out1"
+                    android:layout_marginRight="150dp"
+                    android:text="IN"/>
+                <TextView
+                    android:id="@+id/tv_title_out1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:text="OUT"/>
+            </RelativeLayout> -->
+        </RelativeLayout>
+       <!-- <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/rl_button"
+            android:layout_below="@id/rl_attendance"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="0dp"
+            app:cardElevation="0dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            app:cardUseCompatPadding="false">
+            <TextView
+                android:id="@+id/tv_nodata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:textSize="14dp"
+                android:text="No List to show"/>
+            <LinearLayout
+                android:id="@+id/ll_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="0dp"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView> -->
+        <LinearLayout
+            android:id="@+id/rl_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:visibility="visible"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true">
+            <Button
+                android:id="@+id/btn_my_attendance_log"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:text="My\nAttrndance Log"
+                android:textSize="15sp"
+                android:background="@drawable/layout6"
+                android:textColor="#2e5772"
+                />
+            <Button
+                android:id="@+id/btn_subordinate_attendance_log"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Subordinate\nAttendance Log"
+                android:textAllCaps="false"
+                android:background="@drawable/layout6"
+                android:textSize="15sp"
+                android:textColor="#2e5772"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -75,6 +75,7 @@ import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogListActivity;
 import org.wrkplan.payroll.R;
 import org.wrkplan.payroll.Timesheet.MyAttendanceActivity;
 import org.wrkplan.payroll.Timesheet.MyAttendanceActivity_v2;
+import org.wrkplan.payroll.Timesheet.MyAttendanceActivity_v3;
 
 import static com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED;
 
@@ -597,11 +598,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.ll_timesheet:
 //                startActivity(new Intent(this, MyAttendanceActivity.class));
-                startActivity(new Intent(this, MyAttendanceActivity_v2.class));
+                startActivity(new Intent(this, MyAttendanceActivity_v3.class));
                 break;
             case R.id.img_timesheet:
 //                startActivity(new Intent(this, MyAttendanceActivity.class));
-                startActivity(new Intent(this, MyAttendanceActivity_v2.class));
+                startActivity(new Intent(this, MyAttendanceActivity_v3.class));
                 break;
             default:
                 break;

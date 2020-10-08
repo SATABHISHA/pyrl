@@ -123,9 +123,9 @@ public class MyAttendanceLogActivity_v2 extends AppCompatActivity {
                     }
                     timesheetMyAttendanceModel_v2.setAttendance_status(jsonObject2.getString("attendance_status"));
                     timesheetMyAttendanceModel_v2.setAttendance_color(jsonObject2.getString("attendance_color"));
-                    timesheetMyAttendanceModel_v2.setMonth_no(jsonObject2.getString("month_no"));
-                    timesheetMyAttendanceModel_v2.setMonth_name(jsonObject2.getString("month_name"));
-                    timesheetMyAttendanceModel_v2.setYear(jsonObject2.getString("year"));
+//                    timesheetMyAttendanceModel_v2.setMonth_no(jsonObject2.getString("month_no"));
+//                    timesheetMyAttendanceModel_v2.setMonth_name(jsonObject2.getString("month_name"));
+//                    timesheetMyAttendanceModel_v2.setYear(jsonObject2.getString("year"));
 
                     timesheetMyAttendanceModel_v2ArrayList.add(timesheetMyAttendanceModel_v2);
 
@@ -146,7 +146,7 @@ public class MyAttendanceLogActivity_v2 extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent_myattendence = new Intent(MyAttendanceLogActivity_v2.this, MyAttendanceActivity_v2.class);
+        Intent intent_myattendence = new Intent(MyAttendanceLogActivity_v2.this, MyAttendanceActivity_v3.class);
         intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_myattendence);
     }
