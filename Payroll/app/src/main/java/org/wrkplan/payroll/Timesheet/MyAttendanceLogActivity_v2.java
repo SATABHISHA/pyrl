@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,15 +33,17 @@ import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
-public class MyAttendanceLogActivity_v2 extends AppCompatActivity {
+public class MyAttendanceLogActivity_v2 extends AppCompatActivity implements View.OnClickListener {
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     ArrayList<TimesheetMyAttendanceModel_v2> timesheetMyAttendanceModel_v2ArrayList = new ArrayList<>();
     LinearLayout ll_recycler;
     RecyclerView recycler_view;
     TextView tv_nodata, tv_title;
-    String month_name, year, month_number;
+    String month_name, year = "", month_number = "";
+    ImageButton imgbtn_prev, imgbtn_next;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +52,8 @@ public class MyAttendanceLogActivity_v2 extends AppCompatActivity {
 
         tv_nodata = findViewById(R.id.tv_nodata);
         tv_title = findViewById(R.id.tv_title);
+        imgbtn_prev = findViewById(R.id.imgbtn_prev);
+        imgbtn_next = findViewById(R.id.imgbtn_next);
         ll_recycler = findViewById(R.id.ll_recycler);
         recycler_view = findViewById(R.id.recycler_view);
 
@@ -58,10 +64,14 @@ public class MyAttendanceLogActivity_v2 extends AppCompatActivity {
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         //==========Recycler code initializing and setting layoutManager ends======
 
+
         month_name = (String)android.text.format.DateFormat.format("MMMM", new Date());
         month_number = (String)android.text.format.DateFormat.format("MM", new Date());
         year=(String)android.text.format.DateFormat.format("yyyy", new Date());
-        tv_title.setText(month_name+", "+year);
+//        tv_title.setText(month_name+", "+year);
+
+        imgbtn_prev.setOnClickListener(this);
+        imgbtn_next.setOnClickListener(this);
 
         loadData();
     }
@@ -101,6 +111,7 @@ public class MyAttendanceLogActivity_v2 extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(response);
             Log.d("jsonData-=>",jsonObject.toString());
             JSONObject jsonObject1 = jsonObject.getJSONObject("response");
+            tv_title.setText(jsonObject.getString("month_name")+", "+jsonObject.getString("year"));
             if(jsonObject1.getString("status").contentEquals("true")){
                 ll_recycler.setVisibility(View.VISIBLE);
                 tv_nodata.setVisibility(View.GONE);
@@ -149,5 +160,45 @@ public class MyAttendanceLogActivity_v2 extends AppCompatActivity {
         Intent intent_myattendence = new Intent(MyAttendanceLogActivity_v2.this, MyAttendanceActivity_v3.class);
         intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_myattendence);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.imgbtn_prev:
+                int temp_month_no = Integer.parseInt(month_number);
+                int temp_year = Integer.parseInt(year);
+                if(temp_month_no<=1) {
+                    temp_month_no = 12;
+                    temp_year = temp_year - 1;
+                }else{
+                    temp_month_no = temp_month_no - 1;
+                    temp_year = temp_year;
+                }
+                month_number = String.valueOf(temp_month_no);
+                year = String.valueOf(temp_year);
+//                Toast.makeText(getApplicationContext(),month_number+","+year,Toast.LENGTH_LONG).show();
+//                month_name = (String)android.text.format.DateFormat.format("MMMM", temp_month_no);
+                loadData();
+                break;
+            case R.id.imgbtn_next:
+                int temp_month_no1 = Integer.parseInt(month_number);
+                int temp_year1 = Integer.parseInt(year);
+                if(temp_month_no1>=12) {
+                    temp_month_no1 = 1;
+                    temp_year1 = temp_year1 + 1;
+                }else{
+                    temp_month_no1 = temp_month_no1 + 1;
+                    temp_year1 = temp_year1;
+                }
+                month_number = String.valueOf(temp_month_no1);
+                year = String.valueOf(temp_year1);
+//                Toast.makeText(getApplicationContext(),month_number+","+year,Toast.LENGTH_LONG).show();
+//                month_name = (String)android.text.format.DateFormat.format("MMMM", temp_month_no);
+                loadData();
+                break;
+            default:
+                break;
+        }
     }
 }

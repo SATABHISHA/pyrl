@@ -45,11 +45,25 @@
             android:paddingRight="20dp"
             android:paddingTop="20dp"
             android:visibility="visible">
+            <ImageButton
+                android:id="@+id/imgbtn_prev"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/leftarrowprev"
+                android:layout_toLeftOf="@id/tv_title"
+                android:layout_marginRight="30dp"/>
+            <ImageButton
+                android:id="@+id/imgbtn_next"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/rightarrownext"
+                android:layout_toRightOf="@id/tv_title"
+                android:layout_marginLeft="30dp"/>
             <TextView
                 android:id="@+id/tv_title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="October, 2020"
                 android:layout_alignParentTop="true"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
