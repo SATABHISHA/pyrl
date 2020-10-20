@@ -146,7 +146,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         tv_fullname=header.findViewById(R.id.tv_fullname);
         tv_companynam=header.findViewById(R.id.tv_companynam);
         //  ed_userpassword=findViewById(R.id.ed_userpassword);
-        coordinatorLayout=findViewById(R.id.coordinatorLayout);
+        coordinatorLayout=findViewById(R.id.cordinatorLayout);
         tv_fullname.setText(userSingletonModel.getFull_employee_name());
         tv_companynam.setText(userSingletonModel.getCompany_name());
         navigationView.setNavigationItemSelectedListener(this);
