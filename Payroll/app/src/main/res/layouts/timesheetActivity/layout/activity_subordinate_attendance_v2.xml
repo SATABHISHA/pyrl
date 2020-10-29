@@ -136,7 +136,7 @@
             android:id="@+id/rl_button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_alignParentBottom="true"
             android:background="@drawable/layout6">
             <TextView
@@ -146,7 +146,7 @@
                 android:gravity="center"
                 android:textSize="18sp"
                 android:textColor="#2e5772"
-                android:text="Subordinate Attendance"/>
+                android:text="Subordinate Attendance Log"/>
         </RelativeLayout>
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
