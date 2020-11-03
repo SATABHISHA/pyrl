@@ -67,7 +67,7 @@
                 android:textSize="15sp"
                 android:text="2020-Jun-05"/>
 
-            <RelativeLayout
+            <!--<RelativeLayout
                 android:layout_below="@id/tv_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -92,7 +92,45 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="30dp"
                     android:text="OUT"/>
-            </RelativeLayout>
+            </RelativeLayout> -->
+            <LinearLayout
+                android:id="@+id/rl_column_name"
+                android:layout_below="@id/tv_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="50dp">
+                <TextView
+                    android:id="@+id/tv_title_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="0dp"
+                    android:text="Emp Name"/>
+                <TextView
+                    android:id="@+id/tv_title_in1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="2dp"
+                    android:layout_weight="1"
+                    android:text="IN"/>
+                <TextView
+                    android:id="@+id/tv_title_out1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingRight="3dp"
+                    android:layout_weight="1"
+                    android:text="OUT"/>
+                <TextView
+                    android:id="@+id/tv_title_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="Status"/>
+            </LinearLayout>
         </RelativeLayout>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

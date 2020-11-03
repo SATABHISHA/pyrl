@@ -117,11 +117,12 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity {
                     timesheetSubordinateModel.setTime_in(jsonObject2.getString("time_in"));
                     timesheetSubordinateModel.setTime_out(jsonObject2.getString("time_out"));
                     timesheetSubordinateModel.setEmployee_name(jsonObject2.getString("employee_name"));
+                    timesheetSubordinateModel.setAttendance_status(jsonObject2.getString("status"));
 
                     timesheetSubordinateModelArrayList.add(timesheetSubordinateModel);
 
                 }
-                recycler_view.setAdapter(new SubordinateAttendanceListAdapter(SubordinateAttendanceActivity_v2.this, timesheetSubordinateModelArrayList));
+                recycler_view.setAdapter(new SubordinateAttendanceListAdapterv2(SubordinateAttendanceActivity_v2.this, timesheetSubordinateModelArrayList));
             }else if(jsonObject1.getString("status").contentEquals("false")){
                 ll_recycler.setVisibility(View.GONE);
                 tv_nodata.setVisibility(View.VISIBLE);

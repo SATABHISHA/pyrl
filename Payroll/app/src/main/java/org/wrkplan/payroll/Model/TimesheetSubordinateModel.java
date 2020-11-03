@@ -1,7 +1,7 @@
 package org.wrkplan.payroll.Model;
 
 public class TimesheetSubordinateModel {
-    String slno, ts_date, time_in, time_out, employee_name;
+    String slno, ts_date, time_in, time_out, employee_name, attendance_status;
 
     public String getSlno() {
         return slno;
@@ -41,5 +41,13 @@ public class TimesheetSubordinateModel {
 
     public void setEmployee_name(String employee_name) {
         this.employee_name = employee_name;
+    }
+
+    public String getAttendance_status() {
+        return attendance_status;
+    }
+
+    public void setAttendance_status(String attendance_status) {
+        this.attendance_status = attendance_status;
     }
 }
