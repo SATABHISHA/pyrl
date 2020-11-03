@@ -326,7 +326,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textAllCaps="false"
-                android:text="My\nAttendance Log"
+                android:text="My Monthly\nAttendance Log"
                 android:textSize="15sp"
                 android:background="@drawable/layout6"
                 android:textColor="#2e5772"

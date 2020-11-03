@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:text="Subordinate Attendance"
+                android:text="Subordinate Attendance Log"
                 android:textColor="#ffffff"
                 android:textSize="20sp"/>
         </RelativeLayout>
@@ -173,18 +173,20 @@
         <RelativeLayout
             android:id="@+id/rl_button"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:visibility="visible"
+            android:minHeight="60dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:background="@drawable/layout6">
             <TextView
                 android:id="@+id/tv_button_subordinate"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:minHeight="60dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="18sp"
                 android:textColor="#2e5772"
-                android:text="Subordinate Attendance Log"/>
+                android:text="Subordinate Monthly Attendance Log"/>
         </RelativeLayout>
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
