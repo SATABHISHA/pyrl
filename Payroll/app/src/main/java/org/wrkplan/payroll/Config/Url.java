@@ -24,7 +24,8 @@ public class Url{
   public static String BASEURL(){
     String url = "";
     if(LoginActivity.url_check.contentEquals("test")){
-      url = "http://220.225.40.151:9018/api/";
+//      url = "http://220.225.40.151:9018/api/";
+      url = "http://203.163.248.154:9018/api/";
     }else if(LoginActivity.url_check.contentEquals("live")){
       url = "https://arb-erp.com/mergepr/mobile/api/";
     }

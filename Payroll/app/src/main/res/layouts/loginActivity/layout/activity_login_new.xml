@@ -234,7 +234,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_marginBottom="20dp"
-            android:text="Version 1.2020.11.03"
+            android:text="Version 1.2020.11.07"
             android:textSize="11sp" />
         <TextView
             android:layout_width="match_parent"

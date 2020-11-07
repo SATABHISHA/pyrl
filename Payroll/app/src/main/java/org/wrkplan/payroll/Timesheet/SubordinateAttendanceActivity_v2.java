@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.Model.TimesheetSubordinateModel;
+import org.wrkplan.payroll.Model.TimesheetSubordinateMonthlyAttendanceModel;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
@@ -36,9 +37,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class SubordinateAttendanceActivity_v2 extends AppCompatActivity {
+public class SubordinateAttendanceActivity_v2 extends AppCompatActivity implements View.OnClickListener {
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     ArrayList<TimesheetSubordinateModel> timesheetSubordinateModelArrayList = new ArrayList<>();
+    public static ArrayList<TimesheetSubordinateMonthlyAttendanceModel> timesheetSubordinateMonthlyAttendanceModelArrayList = new ArrayList<>();
     LinearLayout ll_recycler;
     RecyclerView recycler_view;
     RelativeLayout rl_button, rl_out, rl_in;
@@ -67,6 +69,8 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity {
         recycler_view.setHasFixedSize(true);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         //==========Recycler code initializing and setting layoutManager ends======
+
+        tv_button_subordinate.setOnClickListener(this);
 
         loadData();
     }
@@ -102,6 +106,10 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity {
             if(!timesheetSubordinateModelArrayList.isEmpty()){
                 timesheetSubordinateModelArrayList.clear();
             }
+
+            if(!timesheetSubordinateMonthlyAttendanceModelArrayList.isEmpty()){
+                timesheetSubordinateMonthlyAttendanceModelArrayList.clear();
+            }
             JSONObject jsonObject = new JSONObject(response);
             Log.d("jsonData-=>",jsonObject.toString());
             JSONObject jsonObject1 = jsonObject.getJSONObject("response");
@@ -112,14 +120,22 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity {
                 for(int i=0; i<jsonArray.length(); i++){
                     JSONObject jsonObject2 = jsonArray.getJSONObject(i);
                     TimesheetSubordinateModel timesheetSubordinateModel = new TimesheetSubordinateModel();
+                    TimesheetSubordinateMonthlyAttendanceModel timesheetSubordinateMonthlyAttendanceModel = new TimesheetSubordinateMonthlyAttendanceModel();
+
                     timesheetSubordinateModel.setSlno(jsonObject2.getString("slno"));
+                    timesheetSubordinateMonthlyAttendanceModel.setSlno(jsonObject2.getString("slno"));
+
                     timesheetSubordinateModel.setTs_date(jsonObject2.getString("ts_date"));
                     timesheetSubordinateModel.setTime_in(jsonObject2.getString("time_in"));
                     timesheetSubordinateModel.setTime_out(jsonObject2.getString("time_out"));
+
                     timesheetSubordinateModel.setEmployee_name(jsonObject2.getString("employee_name"));
+                    timesheetSubordinateMonthlyAttendanceModel.setEmployee_name(jsonObject2.getString("employee_name"));
+
                     timesheetSubordinateModel.setAttendance_status(jsonObject2.getString("status"));
 
                     timesheetSubordinateModelArrayList.add(timesheetSubordinateModel);
+                    timesheetSubordinateMonthlyAttendanceModelArrayList.add(timesheetSubordinateMonthlyAttendanceModel);
 
                 }
                 recycler_view.setAdapter(new SubordinateAttendanceListAdapterv2(SubordinateAttendanceActivity_v2.this, timesheetSubordinateModelArrayList));
@@ -143,5 +159,18 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity {
         Intent intent_myattendence = new Intent(SubordinateAttendanceActivity_v2.this, MyAttendanceActivity_v3.class);
         intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_myattendence);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_button_subordinate:
+                Intent intent = new Intent(SubordinateAttendanceActivity_v2.this,SubordinateMonthlyAttendanceLog.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 }
