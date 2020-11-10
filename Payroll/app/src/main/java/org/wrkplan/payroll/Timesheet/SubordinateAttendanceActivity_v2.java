@@ -123,7 +123,8 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity implemen
                     TimesheetSubordinateMonthlyAttendanceModel timesheetSubordinateMonthlyAttendanceModel = new TimesheetSubordinateMonthlyAttendanceModel();
 
                     timesheetSubordinateModel.setSlno(jsonObject2.getString("slno"));
-                    timesheetSubordinateMonthlyAttendanceModel.setSlno(jsonObject2.getString("slno"));
+//                    timesheetSubordinateMonthlyAttendanceModel.setSlno(jsonObject2.getString("slno"));
+                    timesheetSubordinateMonthlyAttendanceModel.setSlno(jsonObject2.getString("employee_id")); //emp_id will be there in place of slno(previosuly there was no emp_id, that's why slno is being used)
 
                     timesheetSubordinateModel.setTs_date(jsonObject2.getString("ts_date"));
                     timesheetSubordinateModel.setTime_in(jsonObject2.getString("time_in"));
