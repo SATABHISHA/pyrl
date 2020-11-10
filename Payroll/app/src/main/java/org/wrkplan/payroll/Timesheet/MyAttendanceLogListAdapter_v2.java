@@ -50,7 +50,7 @@ public class MyAttendanceLogListAdapter_v2 extends RecyclerView.Adapter<MyAttend
         holder.itemView.setTag(timesheetMyAttendanceModel_v2ArrayList.get(position));
 
 //        DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
-        DateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        DateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
         DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
         String inputText = timesheetMyAttendanceModel_v2ArrayList.get(position).getDate();

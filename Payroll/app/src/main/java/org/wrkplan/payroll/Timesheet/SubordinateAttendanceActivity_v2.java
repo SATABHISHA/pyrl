@@ -139,6 +139,7 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity implemen
 
                 }
                 recycler_view.setAdapter(new SubordinateAttendanceListAdapterv2(SubordinateAttendanceActivity_v2.this, timesheetSubordinateModelArrayList));
+                recycler_view.getRecycledViewPool().setMaxRecycledViews(0, 0); //--to protect from getting items hidden or something other
             }else if(jsonObject1.getString("status").contentEquals("false")){
                 ll_recycler.setVisibility(View.GONE);
                 tv_nodata.setVisibility(View.VISIBLE);

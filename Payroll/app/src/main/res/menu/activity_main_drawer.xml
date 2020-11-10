@@ -32,14 +32,14 @@
             android:id="@+id/holiday_detail"
             android:icon="@drawable/holiday_list"
             android:title="Holiday Detail" />
-        <item
+       <!-- <item
             android:id="@+id/nav_outdoor_duty_request"
             android:icon="@drawable/od_request"
             android:title="Outdoor Duty Request" />
         <item
             android:id="@+id/nav_outdoor_duty"
             android:icon="@drawable/od_duty"
-            android:title="Outdoor Duty" />
+            android:title="Outdoor Duty" /> -->
         <item
             android:id="@+id/nav_timesheet"
             android:icon="@drawable/timesheet"

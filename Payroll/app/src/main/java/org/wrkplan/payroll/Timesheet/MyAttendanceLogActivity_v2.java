@@ -142,6 +142,7 @@ public class MyAttendanceLogActivity_v2 extends AppCompatActivity implements Vie
 
                 }
                 recycler_view.setAdapter(new MyAttendanceLogListAdapter_v2(MyAttendanceLogActivity_v2.this, timesheetMyAttendanceModel_v2ArrayList));
+                recycler_view.getRecycledViewPool().setMaxRecycledViews(0, 0); //--to protect from getting items hidden or something other
             }else if(jsonObject1.getString("status").contentEquals("false")){
                 ll_recycler.setVisibility(View.GONE);
                 tv_nodata.setVisibility(View.VISIBLE);

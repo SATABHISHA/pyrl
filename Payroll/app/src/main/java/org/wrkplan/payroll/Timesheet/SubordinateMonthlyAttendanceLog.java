@@ -198,6 +198,7 @@ public class SubordinateMonthlyAttendanceLog extends AppCompatActivity implement
 
                 }
                 recycler_view.setAdapter(new SubordinateMonthlyAttendanceLogListAdapter(SubordinateMonthlyAttendanceLog.this, timesheetSubordinateMonthlyAttendanceModel1ArrayList));
+                recycler_view.getRecycledViewPool().setMaxRecycledViews(0, 0); //--to protect from getting items hidden or something other
             }else if(jsonObject1.getString("status").contentEquals("false")){
                 ll_recycler.setVisibility(View.GONE);
                 tv_nodata.setVisibility(View.VISIBLE);

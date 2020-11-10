@@ -51,7 +51,7 @@ public class SubordinateMonthlyAttendanceLogListAdapter extends RecyclerView.Ada
         holder.itemView.setTag(timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position));
 
 //        DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
-        DateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        DateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
         DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
         String inputText = timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position).getDate();
@@ -72,7 +72,8 @@ public class SubordinateMonthlyAttendanceLogListAdapter extends RecyclerView.Ada
         } else if (timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position).getAttendance_status().trim().contentEquals("Present")) {
             holder.tv_present_absent.setText("Present");
             holder.ll_label.setVisibility(View.VISIBLE);
-            holder.ll_label.setBackgroundColor(Color.parseColor("#00FF00"));
+//            holder.ll_label.setBackgroundColor(Color.parseColor("#00FF00"));
+            holder.ll_label.setBackgroundColor(Color.parseColor(timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position).getAttendance_color()));
         } else if (timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position).getAttendance_status().trim().contentEquals("")) {
             holder.ll_label.setVisibility(View.INVISIBLE);
         }

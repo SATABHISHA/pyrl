@@ -131,6 +131,14 @@
                     android:layout_weight="1"
                     android:text="Status"/>
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_line_attndnc"
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_below="@id/rl_column_name"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:background="#454444"/>
         </RelativeLayout>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

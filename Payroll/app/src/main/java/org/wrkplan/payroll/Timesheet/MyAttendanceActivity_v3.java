@@ -559,6 +559,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 
                 }
                 recycler_view.setAdapter(new MyAttendanceActivity_LogList_Adapter_v3(MyAttendanceActivity_v3.this, timesheetMyAttendanceModel_v3ArrayList));
+                recycler_view.getRecycledViewPool().setMaxRecycledViews(0, 0); //--to protect from getting items hidden or something other
 
                 //---code to load data to list, ends----
 
