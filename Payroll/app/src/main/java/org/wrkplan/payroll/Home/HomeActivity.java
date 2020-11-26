@@ -108,7 +108,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_temporary);
+//        setContentView(R.layout.activity_home_temporary);
+        setContentView(R.layout.activity_home);
         Linear=findViewById(R.id.Linear);
         sharedPreferences = getSharedPreferences("loginref", MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -169,11 +170,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         tv_insurance_details = findViewById(R.id.tv_insurance_details);
         tv_holiday_details = findViewById(R.id.tv_holiday_details);
 
-        /*tv_companynam=findViewById(R.id.tv_companynam);
+        tv_companynam=findViewById(R.id.tv_companynam);
         ll_od_request=findViewById(R.id.ll_od_request);
         ll_od_duty=findViewById(R.id.ll_od_duty);
         img_od_duty=findViewById(R.id.img_od_duty);
-        img_info=findViewById(R.id.img_info);*/ //making temporary disable on 9th nov
+        img_info=findViewById(R.id.img_info); //making temporary disable on 9th nov
 
         ll_timesheet=findViewById(R.id.ll_timesheet);
         img_timesheet=findViewById(R.id.img_timesheet);
@@ -194,14 +195,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         tv_cmp_documents.setOnClickListener(this);
         tv_insurance_details.setOnClickListener(this);
         tv_holiday_details.setOnClickListener(this);
-        /*ll_od_request.setOnClickListener(this);
+
+        ll_od_request.setOnClickListener(this);
         ll_od_request.setOnClickListener(this);
         ll_od_duty.setOnClickListener(this);
-        img_od_duty.setOnClickListener(this);*/ //temporary making disable on 9th nov
+        img_od_duty.setOnClickListener(this); //temporary making disable on 9th nov
+
         ll_timesheet.setOnClickListener(this);
         img_timesheet.setOnClickListener(this);
 
-//        load_data_check_od_duty(); //--function to check weather od_duty exists or not/temporrary commented on 10th nov
+        load_data_check_od_duty(); //--function to check weather od_duty exists or not/temporrary commented on 10th nov
 
         //----added on 20th July for version update, starts----
         mAppUpdateManager = AppUpdateManagerFactory.create(this);
@@ -382,13 +385,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent7 = new Intent(HomeActivity.this, HolidayDetailActivity.class);
                 startActivity(intent7);
                 break;
-            /*case R.id.nav_outdoor_duty_request:
+
+            case R.id.nav_outdoor_duty_request:
                 Intent intent8 = new Intent(HomeActivity.this, OutdoorListActivity.class);
                 startActivity(intent8);
                 break;
             case R.id.nav_outdoor_duty:
                 startActivity(new Intent(this, OdDutyLogListActivity.class));
-                break;*/ //making temporary disable on 9th nov
+                break; //making temporary disable on 9th nov
             case R.id.nav_timesheet:
 //                startActivity(new Intent(this, MyAttendanceActivity.class));
                 startActivity(new Intent(this, MyAttendanceActivity_v3.class));
@@ -585,7 +589,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(i7);
                 finish();
                 break;
-          /*  case R.id.ll_od_request:
+
+            case R.id.ll_od_request:
 //                Intent intent8 = new Intent(HomeActivity.this, OutDoorRequestActivity.class);
                 Intent intent8 = new Intent(HomeActivity.this, OutdoorListActivity.class);
                 startActivity(intent8);
@@ -595,7 +600,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.img_od_duty:
                 startActivity(new Intent(this, OdDutyLogListActivity.class));
-                break;*/ //making temporary disable on 9th nov
+                break; //making temporary disable on 9th nov
+
             case R.id.ll_timesheet:
 //                startActivity(new Intent(this, MyAttendanceActivity.class));
                 startActivity(new Intent(this, MyAttendanceActivity_v3.class));
