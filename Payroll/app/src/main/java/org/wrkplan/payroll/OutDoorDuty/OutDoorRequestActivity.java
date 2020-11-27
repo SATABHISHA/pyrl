@@ -515,7 +515,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                 }
 
                 //---from/to date code starts----
-                DateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+                DateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
                 DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
                 String inputTextFromDate = jsonObject2.getString("from_date");
                 String inputTextToDate = jsonObject2.getString("to_date");
