@@ -51,7 +51,8 @@ public class SubordinateMonthlyAttendanceLogListAdapter extends RecyclerView.Ada
         holder.itemView.setTag(timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position));
 
 //        DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
-        DateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+//        DateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+        DateFormat inputFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss"); //again date format changed, noted on 7th dec
         DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
         String inputText = timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position).getDate();
