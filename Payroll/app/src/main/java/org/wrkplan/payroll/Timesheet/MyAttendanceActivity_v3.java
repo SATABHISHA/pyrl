@@ -448,28 +448,37 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
                 work_from_home_flag = jsonObject.getInt("work_from_home_flag");
                 work_from_home_detail = jsonObject.getString("work_from_home_detail");
                 if(timesheet_id != 0 ){
-                    if(work_from_home_flag == 1){
-                        chck_wrk_frm_home.setVisibility(View.VISIBLE);
-                        chck_wrk_frm_home.setChecked(true);
-                        chck_wrk_frm_home.setClickable(false);
+                    if(jsonObject.getInt("work_from_home_flag_branch") == 1) { //--work_from_home_flag_branch added on 9th dec
+                        if (work_from_home_flag == 1) {
+                            chck_wrk_frm_home.setVisibility(View.VISIBLE);
+                            chck_wrk_frm_home.setChecked(true);
+                            chck_wrk_frm_home.setClickable(false);
 
-                        ed_wrk_frm_home_detail.setVisibility(View.VISIBLE);
-                        ed_wrk_frm_home_detail.setText(work_from_home_detail);
-                        ed_wrk_frm_home_detail.setEnabled(true);
-                    }else if(work_from_home_flag == 0){
-                        chck_wrk_frm_home.setVisibility(View.GONE);
-                        ed_wrk_frm_home_detail.setVisibility(View.GONE);
+                            ed_wrk_frm_home_detail.setVisibility(View.VISIBLE);
+                            ed_wrk_frm_home_detail.setText(work_from_home_detail);
+                            ed_wrk_frm_home_detail.setEnabled(true);
+                        } else if (work_from_home_flag == 0) {
+                            chck_wrk_frm_home.setVisibility(View.GONE);
+                            ed_wrk_frm_home_detail.setVisibility(View.GONE);
+                        } else {
+                            chck_wrk_frm_home.setVisibility(View.VISIBLE);
+                            chck_wrk_frm_home.setClickable(true);
+
+                            ed_wrk_frm_home_detail.setEnabled(true);
+                            ed_wrk_frm_home_detail.setVisibility(View.GONE);
+                        }
                     }else{
-                        chck_wrk_frm_home.setVisibility(View.VISIBLE);
-                        chck_wrk_frm_home.setClickable(true);
-
-                        ed_wrk_frm_home_detail.setEnabled(true);
+                        chck_wrk_frm_home.setVisibility(View.GONE);
                         ed_wrk_frm_home_detail.setVisibility(View.GONE);
                     }
                 }
                 if(jsonObject.has("timesheet_in_out_action")) {
                     if (jsonObject.getString("timesheet_in_out_action").trim().contentEquals("IN")) {
-                        chck_wrk_frm_home.setVisibility(View.VISIBLE); //--added on 8th oct
+                        if(jsonObject.getInt("work_from_home_flag_branch") == 1) {
+                            chck_wrk_frm_home.setVisibility(View.VISIBLE); //--added on 8th oct
+                        }else{
+                            chck_wrk_frm_home.setVisibility(View.GONE);
+                        }
 
                         tv_in.setVisibility(View.VISIBLE);
                         tv_out.setVisibility(View.GONE);
@@ -477,7 +486,11 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
                         rl_in.setVisibility(View.VISIBLE);
                         rl_out.setVisibility(View.GONE);
                     } else if (jsonObject.getString("timesheet_in_out_action").trim().contentEquals("OUT")) {
-                        chck_wrk_frm_home.setVisibility(View.VISIBLE); //--added on 8th oct
+                        if(jsonObject.getInt("work_from_home_flag_branch") == 1) {
+                            chck_wrk_frm_home.setVisibility(View.VISIBLE); //--added on 8th oct
+                        }else{
+                            chck_wrk_frm_home.setVisibility(View.GONE);
+                        }
 
                         tv_in.setVisibility(View.GONE);
                         tv_out.setVisibility(View.VISIBLE);
