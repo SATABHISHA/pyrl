@@ -74,7 +74,7 @@ public class LeaveBalanceActivity extends AppCompatActivity {
 
         //------------------End Initialize Views-------------//
 
-       /* btn_leave.setOnClickListener(new View.OnClickListener() {
+        btn_leave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Url.isMyLeaveApplication=true;
@@ -97,7 +97,7 @@ public class LeaveBalanceActivity extends AppCompatActivity {
 
 
         btn_leave.setTransformationMethod(null);
-        btn_subordinate.setTransformationMethod(null);*/ //-------commented by satabhisha on 3rd nov as per discussion for temporary case
+        btn_subordinate.setTransformationMethod(null); //-------commented by satabhisha on 3rd nov as per discussion for temporary case
 
 
 

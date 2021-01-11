@@ -244,7 +244,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:orientation="horizontal">
 
                 <Button
@@ -252,11 +252,9 @@
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-
+                    android:gravity="center"
                     android:background="@drawable/layout9"
-                    android:text="My Leave
-                    Application"
-
+                    android:text="My Leave\nApplication"
                     android:textAlignment="center"
                     android:textColor="#4A6688"
                     android:textSize="15sp"
