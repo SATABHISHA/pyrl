@@ -391,7 +391,8 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
                     jsonBody_Subordinate.put("corp_id", userSingletonModel.corporate_id);
                     jsonBody_Subordinate.put("appliction_id", Url.currtent_application_id);
-                    jsonBody_Subordinate.put("leave_id", leaveID);
+//                    jsonBody_Subordinate.put("leave_id", leaveID); //--commented by satabhisha
+                    jsonBody_Subordinate.put("leave_id", Integer.parseInt(leaveID));
 //                    jsonBody_Subordinate.put("employee_id", userSingletonModel.employee_id);
                     jsonBody_Subordinate.put("employee_id", 0);
                     jsonBody_Subordinate.put("from_date", txt_from_date1.getText().toString());
@@ -619,11 +620,33 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
                     }
 
-                    jsonBody.put("leave_id", leaveID);
-                    jsonBody.put("employee_id", userSingletonModel.employee_id);
-                    jsonBody.put("from_date", txt_from_date.getText().toString());
-                    jsonBody.put("to_date", txt_to_date.getText().toString());
-                    jsonBody.put("total_days", txt_total_number.getText().toString());
+//                    jsonBody.put("leave_id", leaveID); //commented by satabhisha
+                    jsonBody.put("leave_id", Integer.parseInt(leaveID));
+                    jsonBody.put("employee_id", userSingletonModel.employee_id); //commented by satabhisha
+                    jsonBody.put("employee_id", Integer.parseInt(userSingletonModel.employee_id));
+
+                    //---from/to date code starts----
+                    DateFormat inputFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                    DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    String inputTextFromDate = txt_from_date.getText().toString();
+                    String inputTextToDate = txt_to_date.getText().toString();
+                    Date fromDate = null, toDate = null;
+                    try {
+                        fromDate = inputFormat.parse(inputTextFromDate);
+                        toDate = inputFormat.parse(inputTextToDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    String outputTextFromDate = outputFormat.format(fromDate);
+                    String outputTextToDate = outputFormat.format(toDate);
+
+//                edt_date_to_select.setTextColor(Color.parseColor("#b2b2b2"));
+                    //---from/to date code ends----
+
+                    jsonBody.put("from_date", outputTextFromDate);
+                    jsonBody.put("to_date", outputTextToDate);
+//                    jsonBody.put("total_days", txt_total_number.getText().toString()); //commented by sr
+                    jsonBody.put("total_days", Double.parseDouble(txt_total_number.getText().toString()));
                     jsonBody.put("description", ed_details.getText().toString());
                     jsonBody.put("supervisor_remark", ed_supervisor_remark.getText().toString());
 //                if (save == true) {
@@ -652,7 +675,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
                 }
 
-
+                Log.d("jsonbody-=>",jsonBody.toString());
                 String url = Url.BASEURL() + "leave/application/save";
 
                 try {
@@ -666,6 +689,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                                 String message = response.getString("message");
                                 Toast.makeText(MyLeaveApplication2Activity.this, message, Toast.LENGTH_SHORT).show();
                                 Log.d("hgsdfhg",message);
+                                Log.d("responseData",response.toString());
                                 Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -850,7 +874,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     arrayList2.add(ds);
 
                     txt_emp_name.setText(arrayList2.get(0).getEmployee_name());
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", java.util.Locale.ENGLISH);
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                     Date myDate = null;
                     Date myDate1 = null;
                     try {
@@ -860,10 +884,11 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         e.printStackTrace();
                     }
                     sdf.applyPattern("dd-MMM-yyyy");
-                    sdf.applyPattern("d MMM YYYY");
+//                    sdf.applyPattern("d MMM YYYY"); //commented by satabhisha
                     String sMyDate = sdf.format(myDate);
                     String sMyDate1 = sdf.format(myDate1);
-                    txt_from_date1.setText(sMyDate);
+                    txt_from_date1.setText(sMyDate); //unnecessary but not deleting for sureity
+                    txt_from_date.setText(sMyDate);
                     rb1.setChecked(false);
                     txt_to_date1.setText(sMyDate1);
                     Log.d("ddff",txt_to_date1.toString());
@@ -984,7 +1009,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         e.printStackTrace();
                     }
                     sdf.applyPattern("dd-MMM-yyyy");
-                    sdf.applyPattern("d MMM YYYY");
+//                    sdf.applyPattern("d MMM YYYY");
                     String sMyDate = sdf.format(myDate);
                     String sMyDate1 = sdf.format(myDate1);
                     txt_from_date.setText(sMyDate);

@@ -122,7 +122,7 @@
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:background="@drawable/layout6"
-                android:text="CENCEL"
+                android:text="CANCEL"
                 android:textColor="#2e5772"
                 android:textSize="15sp">
 
