@@ -158,6 +158,11 @@ public class LeaveBalanceActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
     private void Load_Spinner_Data() {
 
         String url=Url.BASEURL() + "finyear/" + "list/" + userSingletonModel.corporate_id;
