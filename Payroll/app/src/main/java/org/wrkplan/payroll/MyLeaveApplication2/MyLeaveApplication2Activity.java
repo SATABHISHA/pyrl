@@ -858,8 +858,20 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                             leave_status.contentEquals("Return") ||
                             leave_status.contentEquals("Canceled")) {
                         ed_supervisor_remark.setEnabled(false);
+                        spinner2.setEnabled(false);
+
+                        if(leave_status.contentEquals("Approved")){
+                            spinner2.setSelection(0);
+                        }else if(leave_status.contentEquals("Return")){
+                            spinner2.setSelection(1);
+                        }else if(leave_status.contentEquals("Canceled")){
+                            spinner2.setSelection(2);
+                        }
+
                     }else if(leave_status.contentEquals("Submit")){
                         ed_supervisor_remark.setEnabled(true);
+                        spinner2.setEnabled(true);
+
                     }else{
                         ed_supervisor_remark.setEnabled(true); //by sr
                     }
@@ -1059,6 +1071,9 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         rb2.setClickable(false);
                         rb1.setClickable(false);
 
+                        spinner1.setEnabled(false);
+//                        spinner2.setEnabled(false);
+
 
                         //--by sr ends
                     }
@@ -1067,6 +1082,8 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         Url.isSubordinateLeaveApplication=false;
                         btn_save.setEnabled(true);
 
+                        spinner1.setEnabled(true);
+//                        spinner2.setEnabled(true);
                         if (leave_status.equals("Save")) {
                         rb1.setChecked(true);
                     }else if(leave_status.equals("Return")){
