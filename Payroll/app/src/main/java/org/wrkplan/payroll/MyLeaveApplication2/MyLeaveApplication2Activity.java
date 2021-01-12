@@ -319,6 +319,9 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
             ll_save_cancel.setVisibility(View.VISIBLE);
             llone_save_cancel.setVisibility(View.GONE);
 
+            ed_supervisor_remark.setEnabled(false); //by sr
+            ed_final_supervisor_remark.setEnabled(false); // by sr
+
 //            GetEditForm();
 
 
@@ -691,6 +694,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                                 Log.d("hgsdfhg",message);
                                 Log.d("responseData",response.toString());
                                 Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
                             } catch (JSONException e) {
@@ -853,7 +857,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     }else if(leave_status.contentEquals("Submit")){
                         ed_supervisor_remark.setEnabled(true);
                     }else{
-                        ed_supervisor_remark.setEnabled(false);
+                        ed_supervisor_remark.setEnabled(true); //by sr
                     }
 
 
@@ -1046,11 +1050,24 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     {
                         btn_save.setEnabled(false);
                         txt_check_leave.setEnabled(false);
+                      //by sr, starts
+                        rb2.setChecked(true);
+                        rb2.setClickable(false);
+                        rb1.setClickable(false);
+
+
+                        //--by sr ends
                     }
                     else if(leave_status.equals("Return")|| leave_status.equals("Save"))
                     {
                         Url.isSubordinateLeaveApplication=false;
                         btn_save.setEnabled(true);
+
+                        if (leave_status.equals("Save")) {
+                        rb1.setChecked(true);
+                    }else if(leave_status.equals("Return")){
+                            rb2.setChecked(true);
+                        }
                     }
 
 
