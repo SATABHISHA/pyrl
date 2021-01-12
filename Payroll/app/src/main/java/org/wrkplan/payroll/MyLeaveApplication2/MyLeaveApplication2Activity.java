@@ -118,45 +118,49 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     @Override
     public void onBackPressed() {
         //  super.onBackPressed();
-        if (txt_leave_status1.getText().toString().equals("Save") || txt_leave_status1.getText().toString().equals("Return")) {
-            Url.isSubordinateLeaveApplication=false;
-            builder.setMessage("You may lost any unsaved data. Do you really want to cancel?")
-                    .setCancelable(false)
+        if(Url.isSubordinateLeaveApplication == true){
+            Intent intent = new Intent(MyLeaveApplication2Activity.this, SubordinateLeaveApplicationActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }else {
+            if (txt_leave_status1.getText().toString().equals("Save") || txt_leave_status1.getText().toString().equals("Return")) {
+                Url.isSubordinateLeaveApplication = false;
+                builder.setMessage("You may lost any unsaved data. Do you really want to cancel?")
+                        .setCancelable(false)
 
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            Url.isSubordinateLeaveApplication = false;
-                            Url.isMyLeaveApplication=true;
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Url.isSubordinateLeaveApplication = false;
+                                Url.isMyLeaveApplication = true;
 
-                            Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
+                                Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
 //                            finish();
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            //  Action for 'NO' Button
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //  Action for 'NO' Button
 
 //                                Intent intent=new Intent(MyLeaveApplication2Activity.this,MyLeaveApplication2Activity.class);
 //                                startActivity(intent);
 //                                finish();
-                            dialog.cancel();
-                        }
-                    });
-            //Creating dialog box
-            AlertDialog alert = builder.create();
-            //Setting the title manually
-            alert.setTitle("Cancel!");
-            alert.show();
-        }
-        else
-        {
-            Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+                                dialog.cancel();
+                            }
+                        });
+                //Creating dialog box
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.setTitle("Cancel!");
+                alert.show();
+            } else {
+                Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 //            finish();
 
+            }
         }
 
 
