@@ -465,7 +465,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="8dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:background="@drawable/info"/>
                     <ImageView
                         android:id="@+id/img_od_duty"
