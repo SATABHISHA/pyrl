@@ -111,7 +111,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     JSONObject jsonBody_Subordinate=new JSONObject();
     Button bt_ok;
     LinearLayout  ll_save_cancel,llone_save_cancel;
-    public String status_message = "";
+    public static String status_message = "";
 
 
 
@@ -428,6 +428,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         public void onResponse(JSONObject response) {
                             try {
                                 String message=response.getString("message");
+                                status_message = "Leave application "+select_item;
                                 Toast.makeText(MyLeaveApplication2Activity.this, message, Toast.LENGTH_SHORT).show();
                                 Log.d("sds",message);
                                 Url.isSubordinateLeaveApplication=true;
@@ -662,10 +663,12 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 //                    jsonBody.put("leave_status", rb1.getText().toString());
 //                }
                     jsonBody.put("leave_status",rb1.getText().toString());
-                    status_message = "Leave application Saved";
+
                     if (submit == true) {
                         jsonBody.put("leave_status", rb2.getText().toString());
-                        status_message = "Leave application submitted";
+                        status_message = "Submitted";
+                    }else{
+                        status_message = "Saved";
                     }
                     jsonBody.put("approved_by_id", 0);
                     jsonBody.put("approved_date", "");
@@ -699,13 +702,14 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
                                 String message = response.getString("message");
 //                                Toast.makeText(MyLeaveApplication2Activity.this, message, Toast.LENGTH_SHORT).show(); //as per discussion on 13jan 21
-                                Toast.makeText(MyLeaveApplication2Activity.this, status_message, Toast.LENGTH_SHORT).show();
-                                Log.d("hgsdfhg",message);
+//                                Toast.makeText(getApplicationContext(), status_message, Toast.LENGTH_LONG).show();
+                                Log.d("hgsdfhg",status_message);
                                 Log.d("responseData",response.toString());
                                 Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
-                                finish();
+//                                finish(); // commented by sr
+                                Toast.makeText(getApplicationContext(),"Leave application "+status_message,Toast.LENGTH_LONG).show();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(MyLeaveApplication2Activity.this, e.toString(), Toast.LENGTH_SHORT).show();

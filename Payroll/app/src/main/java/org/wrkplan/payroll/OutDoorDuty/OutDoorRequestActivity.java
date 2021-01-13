@@ -120,10 +120,33 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
     public void onClick(View view) {
        switch (view.getId()){
            case R.id.btn_save:
-               if(Double.parseDouble(tv_total_days.getText().toString())>-1) {
+              /* if(Double.parseDouble(tv_total_days.getText().toString())>-1) {
                    saveData();
                }else{
                    Toast.makeText(getApplicationContext(), "\"To Date\" should be graeter than \"From Date\"", Toast.LENGTH_LONG).show();
+               }*/
+
+               //added on 13th jan
+               SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+               Date strDate = null;
+               try {
+                   strDate = sdf.parse(edt_from_date_select.getText().toString());
+               } catch (ParseException e) {
+                   e.printStackTrace();
+               }
+               if (strDate.getTime() > System.currentTimeMillis()-(1000 * 60 * 60 * 24)) {
+//                   Toast.makeText(getApplicationContext(),"Eureka",Toast.LENGTH_LONG).show();
+                   Log.d("test","Eurwka");
+                   if(Double.parseDouble(tv_total_days.getText().toString())>-1) {
+                       saveData();
+                   }else{
+                       Toast.makeText(getApplicationContext(), "\"To Date\" should be greater than \"From Date\"", Toast.LENGTH_LONG).show();
+                   }
+
+               }
+               else{
+                   Toast.makeText(getApplicationContext(),"Cannot submit back dated OD Request",Toast.LENGTH_LONG).show();
+                   Log.d("test","no");
                }
                break;
            case R.id.btn_cancel:
