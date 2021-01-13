@@ -111,6 +111,8 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     JSONObject jsonBody_Subordinate=new JSONObject();
     Button bt_ok;
     LinearLayout  ll_save_cancel,llone_save_cancel;
+    public String status_message = "";
+
 
 
 
@@ -660,8 +662,10 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 //                    jsonBody.put("leave_status", rb1.getText().toString());
 //                }
                     jsonBody.put("leave_status",rb1.getText().toString());
+                    status_message = "Leave application Saved";
                     if (submit == true) {
                         jsonBody.put("leave_status", rb2.getText().toString());
+                        status_message = "Leave application submitted";
                     }
                     jsonBody.put("approved_by_id", 0);
                     jsonBody.put("approved_date", "");
@@ -694,7 +698,8 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                                 // JSONObject jsonObject=new JSONObject(String.valueOf(response));
 
                                 String message = response.getString("message");
-                                Toast.makeText(MyLeaveApplication2Activity.this, message, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(MyLeaveApplication2Activity.this, message, Toast.LENGTH_SHORT).show(); //as per discussion on 13jan 21
+                                Toast.makeText(MyLeaveApplication2Activity.this, status_message, Toast.LENGTH_SHORT).show();
                                 Log.d("hgsdfhg",message);
                                 Log.d("responseData",response.toString());
                                 Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
@@ -916,8 +921,8 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     tv_details1.setText(arrayList2.get(0).getDescription());
                     txt_application_status.setText(arrayList2.get(0).getLeave_status());
                     //tv_supervisor_remark.setText(arrayList2.get(0).getSupervisor1_name());
-                    tv_supervisor_remark.setText(arrayList2.get(0).getSupervisor1_name());
-                    tv_final_supervisor_remark.setText(arrayList2.get(0).getSupervisor2_name());
+                    tv_supervisor_remark.setText("By "+arrayList2.get(0).getSupervisor1_name());
+                    tv_final_supervisor_remark.setText("By "+arrayList2.get(0).getSupervisor2_name());
 
                     if(userSingletonModel.user_id.equals(supervisor1_id))
                     {
@@ -996,8 +1001,8 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     String supervisor1_name=jsonObject1.getString("supervisor1_name");
                     String supervisor2_name=jsonObject1.getString("supervisor2_name");
 
-                    tv_supervisor_remark.setText(supervisor1_name);
-                    tv_final_supervisor_remark.setText(supervisor2_name);
+                    tv_supervisor_remark.setText("By "+supervisor1_name);
+                    tv_final_supervisor_remark.setText("By "+supervisor2_name);
 
 
                     Details details=new Details();
