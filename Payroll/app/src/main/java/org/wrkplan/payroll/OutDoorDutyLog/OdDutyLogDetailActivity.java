@@ -93,7 +93,8 @@ public class OdDutyLogDetailActivity extends AppCompatActivity {
 
 
             //-------Date format code starts----
-            DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+//            DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat inputFormat = new SimpleDateFormat("dd-MMM-yyyy"); // again changed on 21st jan
             DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
             String inputText = jsonObject.getString("od_duty_log_date");

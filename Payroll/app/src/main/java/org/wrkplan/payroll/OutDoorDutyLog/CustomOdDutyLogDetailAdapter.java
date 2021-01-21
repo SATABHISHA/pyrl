@@ -53,7 +53,8 @@ public class CustomOdDutyLogDetailAdapter extends RecyclerView.Adapter<CustomOdD
 //        holder.tv_address.setText(outDoorDetailModelArrayList.get(position).getLocation_address());
         holder.tv_address.setText(address);
 
-        DateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+//        DateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        DateFormat inputFormat = new SimpleDateFormat("dd-MMM-yyyy"); //again changed on 21st jan
         DateFormat outputFormat = new SimpleDateFormat("hh:mm a");
 
         String inputText = outDoorDetailModelArrayList.get(position).getLog_datetime();
