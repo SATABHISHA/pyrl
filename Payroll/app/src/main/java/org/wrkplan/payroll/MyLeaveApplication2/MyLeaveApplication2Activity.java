@@ -879,11 +879,14 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
                     }else if(leave_status.contentEquals("Submit")){
                         ed_supervisor_remark.setEnabled(true);
+                        ed_supervisor_remark.setFocusableInTouchMode(true);
+                        ed_supervisor_remark.setClickable(true);
                         spinner2.setEnabled(true);
 
-                    }else{
+                    }/*else{
                         ed_supervisor_remark.setEnabled(true); //by sr
-                    }
+                        spinner2.setEnabled(true);
+                    }*/
 
 
                     Detail_Subordinate ds=new Detail_Subordinate();
