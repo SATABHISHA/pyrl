@@ -903,7 +903,8 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     arrayList2.add(ds);
 
                     txt_emp_name.setText(arrayList2.get(0).getEmployee_name());
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+//                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy"); //
                     Date myDate = null;
                     Date myDate1 = null;
                     try {

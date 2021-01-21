@@ -647,6 +647,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 
                 //--------Alert dialog code ends--------
             }else if(jsonObject.getString("status").contentEquals("false")){
+                loading.dismiss();
                 load_data_check_od_duty();
             }
 

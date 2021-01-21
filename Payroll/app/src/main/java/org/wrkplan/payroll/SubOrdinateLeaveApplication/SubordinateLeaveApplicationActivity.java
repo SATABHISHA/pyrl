@@ -249,7 +249,8 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
 
 
             //  txt_leave_date.setText((arrayList.get(position).getFrom_date() + "  To  " +arrayList.get(position).getTo_date()));
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ENGLISH);
+//            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ENGLISH);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy", java.util.Locale.ENGLISH);//--again changed on 21st jan
             Date myDate = null;
             Date myDate1 = null;
             try {
@@ -265,10 +266,12 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
             //txt_leave_date.setText((arrayList.get(position).getFrom_date() + "  To  " +arrayList.get(position).getTo_date()));
             if(arrayList.get(position).getTotal_days().equals("1"))
             {
-                txt_leave_date.setText(sMyDate);
+//                txt_leave_date.setText(sMyDate);
+                txt_leave_date.setText(arrayList.get(position).getFrom_date()); //added on 21st jan
             }
             else {
-                txt_leave_date.setText(sMyDate + " To " + sMyDate1);
+//                txt_leave_date.setText(sMyDate + " To " + sMyDate1);
+                txt_leave_date.setText(arrayList.get(position).getFrom_date() + " To " + arrayList.get(position).getTo_date()); // added on 21st jan
             }
 
             return view;
