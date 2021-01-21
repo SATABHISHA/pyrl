@@ -51,7 +51,8 @@ public class MyAttendanceLogListAdapter_v2 extends RecyclerView.Adapter<MyAttend
 
 //        DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
 //        DateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a"); //--for live url
-        DateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss"); //--for local
+//        DateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss"); //--for local
+        DateFormat inputFormat = new SimpleDateFormat("dd-MMM-yyyy"); //--again changed on 21st jan
         DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
         String inputText = timesheetMyAttendanceModel_v2ArrayList.get(position).getDate();

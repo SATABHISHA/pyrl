@@ -91,7 +91,8 @@ public class CustomOutdoorListAdapter extends RecyclerView.Adapter<CustomOutdoor
 
 
 
-        DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat inputFormat = new SimpleDateFormat("dd-MMM-yyyy"); //agein changed on 21st jan
         DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
        /* String inputText = outDoorListModelArrayList.get(position).getOd_request_date();
         Date date1 = null;

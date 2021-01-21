@@ -151,7 +151,8 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
 
                 //---from/to date code starts----
 //                DateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
-                DateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss"); //--on 13th jan
+//                DateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss"); //--on 13th jan
+                DateFormat inputFormat = new SimpleDateFormat("dd-MMM-yyyy"); //--on 21st jan
                 DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
                 String inputTextFromDate = jsonObject2.getString("from_date");
                 String inputTextToDate = jsonObject2.getString("to_date");

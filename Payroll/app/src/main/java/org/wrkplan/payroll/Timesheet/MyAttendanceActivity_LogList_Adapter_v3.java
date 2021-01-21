@@ -49,7 +49,8 @@ public class MyAttendanceActivity_LogList_Adapter_v3 extends RecyclerView.Adapte
         holder.itemView.setTag(timesheetMyAttendanceModel_v3ArrayList.get(position));
 
         if(!timesheetMyAttendanceModel_v3ArrayList.get(position).getDate().isEmpty()) {
-            DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+//            DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat inputFormat = new SimpleDateFormat("dd-MMM-yyyy"); //changed on 21st jan
 //        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
             DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
