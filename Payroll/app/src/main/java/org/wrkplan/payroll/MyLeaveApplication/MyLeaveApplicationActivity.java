@@ -196,7 +196,7 @@ public class MyLeaveApplicationActivity extends AppCompatActivity {
 
             txt_application_code.setText(arrayList.get(position).getAppliction_code());
             txt_leave_name.setText(arrayList.get(position).getLeave_name());
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ENGLISH);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy", java.util.Locale.ENGLISH);
             Date myDate = null;
             Date myDate1 = null;
             try {

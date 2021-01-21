@@ -1028,7 +1028,8 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
 
                     txt_emp_name.setText(arrayList1.get(0).getEmployee_name());
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", java.util.Locale.ENGLISH);
+//                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", java.util.Locale.ENGLISH);
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy", java.util.Locale.ENGLISH); //--changed on 19th jan
                     Date myDate = null;
                     Date myDate1 = null;
                     try {
