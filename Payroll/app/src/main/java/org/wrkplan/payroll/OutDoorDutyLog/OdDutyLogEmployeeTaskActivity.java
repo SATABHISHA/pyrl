@@ -45,7 +45,10 @@ import org.wrkplan.payroll.Model.OutDoorTaskModel;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OdDutyLogEmployeeTaskActivity extends AppCompatActivity implements View.OnClickListener {
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
@@ -60,6 +63,7 @@ public class OdDutyLogEmployeeTaskActivity extends AppCompatActivity implements 
     public static Integer back_btn_save_unsave_check=0;
 //    CustomOdDutyLogTaskAdapter customOdDutyLogTaskAdapter = new CustomOdDutyLogTaskAdapter(OdDutyLogEmployeeTaskActivity.this, outDoorTaskModelArrayList);
     public static CustomOdDutyLogTaskAdapter customOdDutyLogTaskAdapter;
+    androidx.appcompat.app.AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +73,8 @@ public class OdDutyLogEmployeeTaskActivity extends AppCompatActivity implements 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         customOdDutyLogTaskAdapter =  new CustomOdDutyLogTaskAdapter(OdDutyLogEmployeeTaskActivity.this, outDoorTaskModelArrayList);
+
+        builder = new androidx.appcompat.app.AlertDialog.Builder(this);
 
         ll_recycler = findViewById(R.id.ll_recycler);
         ll_supervisor = findViewById(R.id.ll_supervisor);
@@ -193,7 +199,35 @@ public class OdDutyLogEmployeeTaskActivity extends AppCompatActivity implements 
                 approve_return_cancel("Approved");
                 break;
             case R.id.tv_btn_new_task:
-                loadPopupAddNewTask();
+//                loadPopupAddNewTask();
+
+                //--Date checkin added on 22nd jan
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date strDate = null;
+                try {
+                    strDate = sdf.parse(userSingletonModel.getLog_task_date());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (new Date().after(strDate)) {
+                    builder.setMessage("You cannot add task for a expired OD Duty")
+                            .setCancelable(false)
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                   dialog.cancel();
+
+                                }
+                            });
+                    //Creating dialog box
+                    androidx.appcompat.app.AlertDialog alert_logout = builder.create();
+                    //Setting the title manually
+                    alert_logout.setTitle("Alert!");
+                    alert_logout.show();
+//                    Toast.makeText(getApplicationContext(),"Outdated",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    loadPopupAddNewTask();
+                }
                 break;
         }
     }
