@@ -58,6 +58,8 @@ public class CustomSubordinateOutdoorListAdapter extends RecyclerView.Adapter<Cu
             holder.tv_od_status.setTextColor(Color.parseColor("#fe52ce"));
         }else if(outDoorListModelArrayList.get(position).getOd_status().contentEquals("Returned")){
             holder.tv_od_status.setTextColor(Color.parseColor("#2196ed"));
+        }else if(outDoorListModelArrayList.get(position).getOd_status().contentEquals("Submit")){
+            holder.tv_od_status.setTextColor(Color.parseColor("#fe52ce"));
         }
 
         holder.tv_od_no.setText(outDoorListModelArrayList.get(position).getOd_request_no());

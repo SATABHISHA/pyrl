@@ -59,7 +59,7 @@
                     android:paddingLeft="5dp"
                     android:textSize="15sp"
                     android:layout_marginLeft="10dp"
-                    android:textColor="#788087"
+                    android:textColor="#3C3C3C"
                     android:background="@drawable/layout6"
                     android:layout_alignParentRight="true"/>
                 <TextView
@@ -84,7 +84,7 @@
                     android:paddingLeft="5dp"
                     android:textSize="15sp"
                     android:layout_marginLeft="10dp"
-                    android:textColor="#788087"
+                    android:textColor="#3C3C3C"
                     android:background="@drawable/layout6"
                     android:layout_alignParentRight="true"/>
                 <TextView
@@ -114,6 +114,7 @@
                         android:paddingLeft="10dp"
                         app:ms_multiline="false"
                         app:ms_hint="Select Type"
+                        app:ms_hintColor="#3C3C3C"
                         app:ms_hintTextSize="15sp"
                         app:ms_enableFloatingLabel="false"
                         app:ms_enableErrorLabel="false"
@@ -155,6 +156,7 @@
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dp"
                         android:hint="Select Date"
+                        android:textColor="#3C3C3C"
                         android:textSize="15sp"
                         android:singleLine="true"
                         android:clickable="true"
@@ -204,6 +206,7 @@
                         android:paddingLeft="5dp"
                         android:hint="Select Date"
                         android:textSize="15sp"
+                        android:textColor="#3C3C3C"
                         android:singleLine="true"
                         android:clickable="true"
                         android:focusable="false"
@@ -271,6 +274,7 @@
                     android:layout_marginTop="0dp"
                     android:padding="5dp"
                     android:gravity="top"
+                    android:textColor="#3C3C3C"
                     android:layout_below="@id/tv_reason_caption"
                     android:background="@drawable/layout6"/>
 
@@ -291,6 +295,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="0dp"
                     android:padding="5dp"
+                    android:textColor="#3C3C3C"
                     android:layout_below="@id/tv_approval_caption"
                     android:gravity="top"
                     android:background="@drawable/layout6"/>
@@ -384,7 +389,7 @@
                         android:gravity="left"
                         app:ms_multiline="false"
                         app:ms_hint="Select Status"
-                        app:ms_hintColor="#000000"
+                        app:ms_hintColor="#3C3C3C"
                         app:ms_enableFloatingLabel="false"
                         app:ms_enableErrorLabel="false"
                         app:ms_thickness="0dp"

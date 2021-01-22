@@ -166,6 +166,7 @@
                     android:id="@+id/txt_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
                     android:text="Employee Name "
                     android:textColor="#788087"
                     android:textSize="15sp">
@@ -174,10 +175,13 @@
 
                 <TextView
                     android:id="@+id/txt_emp_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
                     android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@id/txt_name"
+                    android:background="@drawable/layout6"
+                    android:paddingLeft="5dp"
+                    android:gravity="center_vertical"
                     android:text=""
                     android:textColor="#ED8A8A8A"
                     android:textSize="15sp">
@@ -191,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txt_name"
                     android:layout_centerVertical="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="28dp"
                     android:text="Leave Type  "
                     android:textColor="#788087"
                     android:textSize="15sp">
@@ -205,7 +209,7 @@
                     android:layout_below="@id/txt_emp_name"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/txt_name"
                     android:layout_weight="0"
                     android:background="@drawable/layout8"></Spinner>
@@ -312,7 +316,7 @@
                     android:layout_height="20dp"
                     android:layout_below="@id/txt_leave_type"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="13dp"
 
 
                     android:background="@drawable/layout10"
