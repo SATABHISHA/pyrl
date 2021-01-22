@@ -209,7 +209,12 @@ public class OdDutyLogEmployeeTaskActivity extends AppCompatActivity implements 
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                if (new Date().after(strDate)) {
+
+                SimpleDateFormat sdf_current_date = new SimpleDateFormat("yyyy-MM-dd");
+                String currentDate = sdf_current_date.format(new Date());
+                Integer datediff = Integer.parseInt(get_date_difference(currentDate,userSingletonModel.getLog_task_date()));
+
+                if (datediff<1) {
                     builder.setMessage("You cannot add task for a expired OD Duty")
                             .setCancelable(false)
                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -221,16 +226,59 @@ public class OdDutyLogEmployeeTaskActivity extends AppCompatActivity implements 
                     //Creating dialog box
                     androidx.appcompat.app.AlertDialog alert_logout = builder.create();
                     //Setting the title manually
-                    alert_logout.setTitle("Alert!");
+//                    alert_logout.setTitle("Alert!");
                     alert_logout.show();
 //                    Toast.makeText(getApplicationContext(),"Outdated",Toast.LENGTH_LONG).show();
                 }
-                else{
+                else {
                     loadPopupAddNewTask();
                 }
                 break;
         }
     }
+    //---------Date Difference function, code starts-------
+    public String get_date_difference(String fromDate, String toDate){
+        String dayDifference = "";
+        try {
+            //Dates to compare
+           /* String CurrentDate=  "09/24/2015";
+            String FinalDate=  "09/26/2015";*/
+
+            Date date1;
+            Date date2;
+
+//            SimpleDateFormat dates = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat dates = new SimpleDateFormat("yyyy-MM-dd");
+
+            //Setting dates
+            date1 = dates.parse(fromDate);
+            date2 = dates.parse(toDate);
+
+            //Comparing dates
+            long difference = Math.abs(date1.getTime() - date2.getTime());
+//            long difference = date1.getTime() - date2.getTime();
+            long differenceDates = difference / (24 * 60 * 60 * 1000);
+
+            if (date2.getTime() < date1.getTime()) {
+//                Toast.makeText(getApplicationContext(), "To Date should be graeter than \"From Date\"", Toast.LENGTH_LONG).show();
+                dayDifference = Long.toString(-(differenceDates+1));
+                dayDifference = dayDifference;
+            }else if(date2.getTime() >= date1.getTime()){
+                //Convert long to String
+
+                dayDifference = Long.toString(differenceDates+1);
+            }
+//            dayDifference = Long.toString(differenceDates+1);
+
+            Log.e("HERE","HERE: " + dayDifference);
+
+
+        } catch (Exception exception) {
+            Log.e("DIDN'T WORK", "exception " + exception);
+        }
+        return dayDifference;
+    }
+    //---------Date Difference function, code ends-------
 
     //=======code for popup to create new task, starts=======
     public void loadPopupAddNewTask(){
