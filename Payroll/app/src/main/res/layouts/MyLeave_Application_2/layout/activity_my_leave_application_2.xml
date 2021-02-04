@@ -617,7 +617,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
                             android:gravity="top"
-                            android:text="gdgd"
+                            android:text=""
                             android:background="@null"
                             android:focusableInTouchMode="true"
                             android:clickable="true"
