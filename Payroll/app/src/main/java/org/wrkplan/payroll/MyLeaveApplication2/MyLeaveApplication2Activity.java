@@ -632,7 +632,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
 //                    jsonBody.put("leave_id", leaveID); //commented by satabhisha
                     jsonBody.put("leave_id", Integer.parseInt(leaveID));
-                    jsonBody.put("employee_id", userSingletonModel.employee_id); //commented by satabhisha
+//                    jsonBody.put("employee_id", userSingletonModel.employee_id); //commented by satabhisha on 9th April
                     jsonBody.put("employee_id", Integer.parseInt(userSingletonModel.employee_id));
 
                     //---from/to date code starts----
