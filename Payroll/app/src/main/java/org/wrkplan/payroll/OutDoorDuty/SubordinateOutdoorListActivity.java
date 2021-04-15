@@ -158,7 +158,7 @@ public class SubordinateOutdoorListActivity extends AppCompatActivity {
         }
         if(outdoorListActivityArrayList.size()>0) {
             for (int i = 0; i < outdoorListActivityArrayList.size(); i++){
-                if(outdoorListActivityArrayList.get(i).getEmployee_name().toLowerCase().trim().contains(employeename)){
+                if(outdoorListActivityArrayList.get(i).getEmployee_name().toLowerCase().trim().contains(employeename.toLowerCase())){
                     OutDoorListModel outDoorListModel = new OutDoorListModel();
                     outDoorListModel.setOd_request_no(outdoorListActivityArrayList.get(i).getOd_request_no());
                     outDoorListModel.setOd_request_id(outdoorListActivityArrayList.get(i).getOd_request_id());

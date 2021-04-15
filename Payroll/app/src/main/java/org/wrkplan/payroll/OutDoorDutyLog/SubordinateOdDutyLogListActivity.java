@@ -3,8 +3,11 @@ package org.wrkplan.payroll.OutDoorDutyLog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,8 +28,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Model.OutDoorListModel;
 import org.wrkplan.payroll.Model.OutDoorLogListModel;
 import org.wrkplan.payroll.Model.UserSingletonModel;
+import org.wrkplan.payroll.OutDoorDuty.CustomSubordinateOutdoorListAdapter;
+import org.wrkplan.payroll.OutDoorDuty.SubordinateOutdoorListActivity;
 import org.wrkplan.payroll.R;
 
 import java.util.ArrayList;
@@ -34,21 +40,43 @@ import java.util.ArrayList;
 public class SubordinateOdDutyLogListActivity extends AppCompatActivity {
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     ArrayList<OutDoorLogListModel> outDoorLogListModelArrayList = new ArrayList<>();
+    ArrayList<OutDoorLogListModel> filteredData = new ArrayList<>();
     LinearLayout ll_recycler;
     TextView tv_nodata;
     RecyclerView recycler_view;
+    EditText ed_search;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subordinate_od_duty_log_list_activity);
         ll_recycler = findViewById(R.id.ll_recycler);
         tv_nodata = findViewById(R.id.tv_nodata);
+        ed_search = findViewById(R.id.ed_search);
 
         //==========Recycler code initializing and setting layoutManager starts======
         recycler_view = findViewById(R.id.recycler_view);
         recycler_view.setHasFixedSize(true);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         //==========Recycler code initializing and setting layoutManager ends======
+
+        ed_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//             loadData(ed_search.getText().toString());
+                display_filtered_data(ed_search.getText().toString());
+            }
+        });
+
         loadData();
     }
 
@@ -100,7 +128,8 @@ public class SubordinateOdDutyLogListActivity extends AppCompatActivity {
                     outDoorLogListModelArrayList.add(outDoorLogListModel);
 
                 }
-                recycler_view.setAdapter(new CustomSubordinateOdDutyLogListAdapter(this, outDoorLogListModelArrayList));
+                display_filtered_data("");
+//                recycler_view.setAdapter(new CustomSubordinateOdDutyLogListAdapter(this, outDoorLogListModelArrayList));
             }else if(jsonObject1.getString("status").contentEquals("false")){
                 ll_recycler.setVisibility(View.GONE);
                 tv_nodata.setVisibility(View.VISIBLE);
@@ -113,6 +142,32 @@ public class SubordinateOdDutyLogListActivity extends AppCompatActivity {
     }
     //===========Code to get data from api and load data to recycler view, ends==========
 
+    //===========code to filter data and display in list, code starts=======
+    public void display_filtered_data(String employeename){
+        if (!filteredData.isEmpty()){
+            filteredData.clear();
+        }
+        if(outDoorLogListModelArrayList.size()>0) {
+            for (int i = 0; i < outDoorLogListModelArrayList.size(); i++){
+                if(outDoorLogListModelArrayList.get(i).getEmployee_name().toLowerCase().trim().contains(employeename.toLowerCase())){
+                    OutDoorLogListModel outDoorLogListModel = new OutDoorLogListModel();
+                    outDoorLogListModel.setOd_duty_log_date(outDoorLogListModelArrayList.get(i).getOd_duty_log_date());
+                    outDoorLogListModel.setOd_request_id(outDoorLogListModelArrayList.get(i).getOd_request_id());
+                    outDoorLogListModel.setEmployee_id(outDoorLogListModelArrayList.get(i).getEmployee_id());
+                    outDoorLogListModel.setEmployee_name(outDoorLogListModelArrayList.get(i).getEmployee_name());
+
+                    filteredData.add(outDoorLogListModel);
+
+                }
+            }
+            recycler_view.setAdapter(new CustomSubordinateOdDutyLogListAdapter(SubordinateOdDutyLogListActivity.this, filteredData));
+        }/*else{
+            ll_recycler.setVisibility(View.GONE);
+            tv_nodata.setVisibility(View.VISIBLE);
+            tv_nodata.setText(jsonObject1.getString("message"));
+        }*/
+    }
+    //===========code to filter data and display in list, code ends=======
 
     @Override
     public void onBackPressed() {
