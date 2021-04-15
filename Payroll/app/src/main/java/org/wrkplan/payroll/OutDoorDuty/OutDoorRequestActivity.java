@@ -626,6 +626,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
         //------calling api to save data
         JsonObjectRequest request_json = null;
         String URL = Url.BASEURL()+"od/request/save";
+        Log.d("testsaveurl-=>",URL);
         try {
             request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
                     new Response.Listener<JSONObject>() {
