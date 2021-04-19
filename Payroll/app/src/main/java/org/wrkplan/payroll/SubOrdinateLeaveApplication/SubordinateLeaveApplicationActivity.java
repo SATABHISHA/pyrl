@@ -469,11 +469,31 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
 
             txt_application_code1.setText(subordinateLeaveApplicationModelArrayList.get(position).getAppliction_code());
             txt_emp_name.setText(subordinateLeaveApplicationModelArrayList.get(position).getEmployee_name());
-            txt_leave_status.setText(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status());
+//            txt_leave_status.setText(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status());
             txt_leave_name.setText(subordinateLeaveApplicationModelArrayList.get(position).getLeave_name());
             txt_leave_date.setText(subordinateLeaveApplicationModelArrayList.get(position).getFrom_date()+ " to "+subordinateLeaveApplicationModelArrayList.get(position).getTo_date());
             txt_total_days.setText(""+subordinateLeaveApplicationModelArrayList.get(position).getTotal_days());
 
+
+            if(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status().equals("Approved")){
+                txt_leave_status.setText(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status());
+                txt_leave_status.setTextColor(Color.parseColor("#1e9547"));
+            }else if(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status().equals("Canceled")){
+                txt_leave_status.setText(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status());
+                txt_leave_status.setTextColor(Color.parseColor("#ed1c24"));
+            }else if(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status().equals("Returned")){
+                txt_leave_status.setText(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status());
+                txt_leave_status.setTextColor(Color.parseColor("#b04d0b"));
+            }else if(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status().equals("Returned")){
+                txt_leave_status.setText(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status());
+                txt_leave_status.setTextColor(Color.parseColor("#fe52ce"));
+            }else if(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status().equals("Returned")){
+                txt_leave_status.setText(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status());
+                txt_leave_status.setTextColor(Color.parseColor("#2196ed"));
+            }else if(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status().equals("Submit")){
+                txt_leave_status.setText(subordinateLeaveApplicationModelArrayList.get(position).getLeave_status());
+                txt_leave_status.setTextColor(Color.parseColor("#fe52ce"));
+            }
             return  v;
         }
     }
