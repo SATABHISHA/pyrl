@@ -2,6 +2,7 @@ package org.wrkplan.payroll.Timesheet;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,12 +69,22 @@ public class MyAttendanceLogListAdapter_v2 extends RecyclerView.Adapter<MyAttend
         holder.tv_out_time.setText(timesheetMyAttendanceModel_v2ArrayList.get(position).getTime_out());
         if(timesheetMyAttendanceModel_v2ArrayList.get(position).getAttendance_status().trim().contentEquals("Absent")){
             holder.tv_present_absent.setText("Absent");
+            holder.tv_present_absent.setTextColor(Color.parseColor("#ffffff"));
             holder.ll_label.setVisibility(View.VISIBLE);
-            holder.ll_label.setBackgroundColor(Color.parseColor(timesheetMyAttendanceModel_v2ArrayList.get(position).getAttendance_color()));
+//            holder.ll_label.setBackgroundColor(Color.parseColor(timesheetMyAttendanceModel_v2ArrayList.get(position).getAttendance_color()));
+//            holder.ll_label.setBackgroundColor(R.drawable.loglist_corner_radius_absent);
+            holder.ll_label.setBackgroundResource(R.drawable.loglist_corner_radius_absent);
+//            Log.d("Absent color-=>",fb4e4e);
+//            holder.ll_label.setBackgroundColor(R.drawable.loglist_corner_radius);
+
         }else if(timesheetMyAttendanceModel_v2ArrayList.get(position).getAttendance_status().trim().contentEquals("Present")){
             holder.tv_present_absent.setText("Present");
+            holder.tv_present_absent.setTextColor(Color.parseColor("#494949"));
             holder.ll_label.setVisibility(View.VISIBLE);
-            holder.ll_label.setBackgroundColor(Color.parseColor("#00FF00"));
+//            holder.ll_label.setBackgroundColor(Color.parseColor("#00FF00"));
+//            holder.ll_label.setBackgroundColor(R.drawable.loglist_corner_radius_present);
+            holder.ll_label.setBackgroundResource(R.drawable.loglist_corner_radius_present);
+//            Log.d("Present color-=>",9fdd55);
         }else if(timesheetMyAttendanceModel_v2ArrayList.get(position).getAttendance_status().trim().contentEquals("")){
             holder.ll_label.setVisibility(View.INVISIBLE);
         }

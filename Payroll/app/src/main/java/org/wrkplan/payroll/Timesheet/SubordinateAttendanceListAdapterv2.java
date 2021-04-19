@@ -52,13 +52,17 @@ public class SubordinateAttendanceListAdapterv2 extends RecyclerView.Adapter<Sub
 //        holder.tv_out_time.setText("04:00PM");
         if(timesheetSubordinateModelArrayList.get(position).getAttendance_status().trim().contentEquals("Absent")){
             holder.tv_present_absent.setText("Absent");
+            holder.tv_present_absent.setTextColor(Color.parseColor("#ffffff"));
             holder.ll_label.setVisibility(View.VISIBLE);
 //            holder.ll_label.setBackgroundColor(Color.parseColor(timesheetSubordinateModelArrayList.get(position).getAttendance_color()));
-            holder.ll_label.setBackgroundColor(Color.parseColor("#FF0000"));
+//            holder.ll_label.setBackgroundColor(Color.parseColor("#FF0000"));
+            holder.ll_label.setBackgroundResource(R.drawable.loglist_corner_radius_absent);
         }else if(timesheetSubordinateModelArrayList.get(position).getAttendance_status().trim().contentEquals("Present")){
             holder.tv_present_absent.setText("Present");
+            holder.tv_present_absent.setTextColor(Color.parseColor("#494949"));
             holder.ll_label.setVisibility(View.VISIBLE);
-            holder.ll_label.setBackgroundColor(Color.parseColor("#00FF00"));
+//            holder.ll_label.setBackgroundColor(Color.parseColor("#00FF00"));
+            holder.ll_label.setBackgroundResource(R.drawable.loglist_corner_radius_present);
         }else if(timesheetSubordinateModelArrayList.get(position).getAttendance_status().trim().contentEquals("")){
             holder.ll_label.setVisibility(View.INVISIBLE);
         }

@@ -69,13 +69,17 @@ public class SubordinateMonthlyAttendanceLogListAdapter extends RecyclerView.Ada
         holder.tv_out_time.setText(timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position).getTime_out());
         if (timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position).getAttendance_status().trim().contentEquals("Absent")) {
             holder.tv_present_absent.setText("Absent");
+            holder.tv_present_absent.setTextColor(Color.parseColor("#ffffff"));
             holder.ll_label.setVisibility(View.VISIBLE);
-            holder.ll_label.setBackgroundColor(Color.parseColor(timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position).getAttendance_color()));
+//            holder.ll_label.setBackgroundColor(Color.parseColor(timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position).getAttendance_color()));
+            holder.ll_label.setBackgroundResource(R.drawable.loglist_corner_radius_absent);
         } else if (timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position).getAttendance_status().trim().contentEquals("Present")) {
             holder.tv_present_absent.setText("Present");
+            holder.tv_present_absent.setTextColor(Color.parseColor("#494949"));
             holder.ll_label.setVisibility(View.VISIBLE);
 //            holder.ll_label.setBackgroundColor(Color.parseColor("#00FF00"));
-            holder.ll_label.setBackgroundColor(Color.parseColor(timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position).getAttendance_color()));
+//            holder.ll_label.setBackgroundColor(Color.parseColor(timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position).getAttendance_color()));
+            holder.ll_label.setBackgroundResource(R.drawable.loglist_corner_radius_present);
         } else if (timesheetSubordinateMonthlyAttendanceModel1ArrayList.get(position).getAttendance_status().trim().contentEquals("")) {
             holder.ll_label.setVisibility(View.INVISIBLE);
         }
