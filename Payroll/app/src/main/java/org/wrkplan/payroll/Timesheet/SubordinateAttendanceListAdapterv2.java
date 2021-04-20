@@ -63,6 +63,12 @@ public class SubordinateAttendanceListAdapterv2 extends RecyclerView.Adapter<Sub
             holder.ll_label.setVisibility(View.VISIBLE);
 //            holder.ll_label.setBackgroundColor(Color.parseColor("#00FF00"));
             holder.ll_label.setBackgroundResource(R.drawable.loglist_corner_radius_present);
+        }else if(timesheetSubordinateModelArrayList.get(position).getAttendance_status().trim().contentEquals("WFH")){
+            holder.tv_present_absent.setText("WFH");
+            holder.tv_present_absent.setTextColor(Color.parseColor("#ffffff"));
+            holder.ll_label.setVisibility(View.VISIBLE);
+//            holder.ll_label.setBackgroundColor(Color.parseColor("#00FF00"));
+            holder.ll_label.setBackgroundResource(R.drawable.loglist_corner_radius_wfh);
         }else if(timesheetSubordinateModelArrayList.get(position).getAttendance_status().trim().contentEquals("")){
             holder.ll_label.setVisibility(View.INVISIBLE);
         }

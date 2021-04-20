@@ -85,6 +85,15 @@ public class MyAttendanceLogListAdapter_v2 extends RecyclerView.Adapter<MyAttend
 //            holder.ll_label.setBackgroundColor(R.drawable.loglist_corner_radius_present);
             holder.ll_label.setBackgroundResource(R.drawable.loglist_corner_radius_present);
 //            Log.d("Present color-=>",9fdd55);
+        }else if(timesheetMyAttendanceModel_v2ArrayList.get(position).getAttendance_status().trim().contentEquals("WFH")){
+            holder.tv_present_absent.setText("WFH");
+            holder.tv_present_absent.setTextColor(Color.parseColor("#ffffff"));
+            holder.ll_label.setVisibility(View.VISIBLE);
+//            holder.ll_label.setBackgroundColor(Color.parseColor("#00FF00"));
+//            holder.ll_label.setBackgroundColor(R.drawable.loglist_corner_radius_present);
+            holder.ll_label.setBackgroundResource(R.drawable.loglist_corner_radius_wfh);
+//            Log.d("Present color-=>",9fdd55);
+            Log.d("WFH color-=>",timesheetMyAttendanceModel_v2ArrayList.get(position).getAttendance_color());
         }else if(timesheetMyAttendanceModel_v2ArrayList.get(position).getAttendance_status().trim().contentEquals("")){
             holder.ll_label.setVisibility(View.INVISIBLE);
         }
