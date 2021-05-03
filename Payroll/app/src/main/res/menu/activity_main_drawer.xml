@@ -44,6 +44,10 @@
             android:id="@+id/nav_timesheet"
             android:icon="@drawable/timesheet"
             android:title="Timesheet" />
+        <item
+            android:id="@+id/nav_reports"
+            android:icon="@drawable/timesheet"
+            android:title="Reports" />
 
     </group>
 

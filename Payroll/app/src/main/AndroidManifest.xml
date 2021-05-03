@@ -92,6 +92,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Timesheet.SubordinateMonthlyAttendanceLog"
             android:screenOrientation="portrait"/>
+        <activity android:name=".Reports.ReportHomeListActivity"
+            android:screenOrientation="portrait"/>
 
         <!-- Firebase Notifications -->
         <service

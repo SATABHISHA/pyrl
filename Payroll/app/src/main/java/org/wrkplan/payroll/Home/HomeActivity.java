@@ -81,7 +81,7 @@ import static com.google.android.play.core.install.model.ActivityResult.RESULT_I
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    ImageView img_emp_information, img_leave_balance, img_emp_facilities, img_emp_documents, img_company_documents, img_insurance_details, img_holiday_details, img_od_duty, img_info, img_timesheet;
+    ImageView img_emp_information, img_leave_balance, img_emp_facilities, img_emp_documents, img_company_documents, img_insurance_details, img_holiday_details, img_od_duty, img_info, img_timesheet, img_reports;
     TextView tv_emp_information, tv_leave_balance, tv_emp_facilitis, tv_emp_documemts, tv_cmp_documents,
             tv_insurance_details, tv_holiday_details;
     TextView tv_fullname,tv_companynam;
@@ -90,7 +90,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences.Editor editor;
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
     LinearLayout Linear, ll_od_request, ll_timesheet;
-    RelativeLayout ll_od_duty;
+    RelativeLayout ll_od_duty, rl_reports;
     CoordinatorLayout coordinatorLayout;
     Context context;
     //  EditText ed_userpassword;
@@ -180,6 +180,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         ll_timesheet=findViewById(R.id.ll_timesheet);
         img_timesheet=findViewById(R.id.img_timesheet);
 
+        rl_reports=findViewById(R.id.rl_reports);
+        img_reports=findViewById(R.id.img_reports);
+
         //------------------End of Initialize views--------------//
 
         img_emp_information.setOnClickListener(this);
@@ -203,6 +206,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         ll_timesheet.setOnClickListener(this);
         img_timesheet.setOnClickListener(this);
+
+        rl_reports.setOnClickListener(this);
+        img_reports.setOnClickListener(this);
 
         load_data_check_od_duty(); //--function to check weather od_duty exists or not/temporary commented on 9th dec
 
@@ -609,6 +615,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.img_timesheet:
 //                startActivity(new Intent(this, MyAttendanceActivity.class));
                 startActivity(new Intent(this, MyAttendanceActivity_v3.class));
+                break;
+            case R.id.rl_reports:
+                break;
+            case R.id.img_reports:
                 break;
             default:
                 break;
