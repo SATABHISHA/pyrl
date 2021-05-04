@@ -21,6 +21,9 @@ android {
     sourceSets {
         main {
             res.srcDirs = ['src/main/res', 'src/main/res/layouts/loginActivity', 'src/main/res/layouts/homeActivity', 'src/main/res/layouts/employeeInformationActivity', 'src/main/res/layouts/leaveBalance', 'src/main/res/layouts/employeeFacilities', 'src/main/res/layouts/employeeDocumentsActivity', 'src/main/res/layouts/employeeFacilitiesActivities', 'src/main/res/layouts/leaveBalanceActivity', 'src/main/res/layouts/companyDocumentsActivity', 'src/main/res/layouts/insuranceDetailActivity', 'src/main/res/layouts/holidayDetailActivity', 'src/main/res/layouts/MyLeaveApplication', 'src/main/res/layouts/MyLeave_Application_2', 'src/main/res/layouts/SubodinateLeaveApplication', 'src/main/res/layouts/outdoorActivity', 'src/main/res/layouts/outDoorDutyActivity', 'src/main/res/popup', 'src/main/res/layouts/popups', 'src/main/res/layouts/timesheetActivity', 'src/main/res/layouts/report']
+            assets {
+                srcDirs 'src/main/assets'
+            }
         }
     }
     compileOptions {
@@ -42,6 +45,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation 'com.google.firebase:firebase-messaging:20.2.1'
     implementation 'com.google.android.play:core:1.6.4' //--for version update
+    implementation project(path: ':pdfcreator') //--added module manually for pdf creator
     testImplementation 'junit:junit:4.12'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

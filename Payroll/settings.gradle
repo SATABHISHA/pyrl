@@ -1,2 +1,3 @@
+include ':pdfcreator'
 include ':app'
 rootProject.name='Payroll'

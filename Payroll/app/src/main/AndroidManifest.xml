@@ -94,6 +94,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Reports.ReportHomeListActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".Reports.PdfViewerActivity"/>
+        <activity android:name=".Reports.PdfEditorActivity"/>
 
         <!-- Firebase Notifications -->
         <service

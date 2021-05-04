@@ -2,7 +2,12 @@ package org.wrkplan.payroll.Reports;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.print.PDFPrint;
+import android.print.PrintAttributes;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +29,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.tejpratapsingh.pdfcreator.utils.FileManager;
+import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +41,9 @@ import org.wrkplan.payroll.Model.Load_Spinner_Model;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class ReportHomeListActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_view_task;
@@ -42,6 +51,9 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
     ArrayList<Load_Spinner_Model> load_spinner_models = new ArrayList<>();
     ArrayList<String>arrayList=new ArrayList<>();
     public static String report_html = "";
+    public static String year_code = "";
+    private File pdfFile = null;
+    private static LinkedList<Bitmap> pdfBitmapList = new LinkedList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +86,11 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //
-                        item[0] =load_spinner_models.get(position).getFinancial_year_code();
+//                        item[0] =load_spinner_models.get(position).getFinancial_year_code();
+                        if(position != -1) {
+                            Log.d("getdata-=>", load_spinner_models.get(position).getFinancial_year_code());
+                            year_code = load_spinner_models.get(position).getFinancial_year_code();
+                        }
 
                     }
                     @Override
@@ -85,6 +101,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                     @Override
                     public void onClick(View v) {
                         alertDialog.dismiss();
+                        loadData(year_code);
                     }
                 });
                 break;
@@ -92,7 +109,9 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                 break;
         }
     }
-
+    public File getPdfFile() {
+        return this.pdfFile;
+    }
     //----code to load spinner data, starts-----
     public void Load_Spinner_Data(Spinner spinner_year) {
 
@@ -175,7 +194,58 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
             JSONObject jsonObject1 = jsonObject.getJSONObject("response");
             if(jsonObject1.getString("status").contentEquals("true")){
                 report_html = jsonObject.getString("report_html");
+                startActivity(new Intent(ReportHomeListActivity.this,PdfEditorActivity.class));
 
+                //---pdf converter, code starts
+              /*  final File savedPDFFile = FileManager.getInstance().createTempFile(getApplicationContext(), "pdf", false);
+// Generate Pdf From Html
+                PDFUtil.generatePDFFromHTML(getApplicationContext(), savedPDFFile, report_html, new PDFPrint.OnPDFPrintListener() {
+                    @Override
+                    public void onSuccess(File file) {
+                        // Open Pdf Viewer
+                        Uri pdfUri = Uri.fromFile(savedPDFFile);
+
+                        Uri pdfFileUri = pdfUri;
+
+                        if (pdfFileUri == null || pdfFileUri.getPath() == null) {
+                            new IllegalStateException("pdf File Uri is null").printStackTrace();
+                            finish();
+                            return;
+                        }
+
+                        pdfFile = new File(pdfFileUri.getPath());
+
+                        if (!pdfFile.exists()) {
+                            new IllegalStateException("File Does Not Exist.").printStackTrace();
+                            finish();
+                            return;
+                        }
+                        try {
+                            pdfBitmapList = PDFUtil.pdfToBitmap(pdfFile);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        //---customise code, ends---
+
+                        File fileToPrint = getPdfFile();
+                        if (fileToPrint == null || !fileToPrint.exists()) {
+                            Toast.makeText(ReportHomeListActivity.this, "Generated File is null or does not exist!", Toast.LENGTH_SHORT).show();
+//                            return super.onOptionsItemSelected(item);
+                        }
+
+                        PrintAttributes.Builder printAttributeBuilder = new PrintAttributes.Builder();
+                        printAttributeBuilder.setMediaSize(PrintAttributes.MediaSize.ISO_A4);
+                        printAttributeBuilder.setMinMargins(PrintAttributes.Margins.NO_MARGINS);
+
+                        PDFUtil.printPdf(ReportHomeListActivity.this, fileToPrint, printAttributeBuilder.build());
+                    }
+
+                    @Override
+                    public void onError(Exception exception) {
+                        exception.printStackTrace();
+                    }
+                });*/
+                //---pdf converter, code ends
             }else if(jsonObject1.getString("status").contentEquals("false")){
                 Toast.makeText(getApplicationContext(),jsonObject1.getString("message"), Toast.LENGTH_LONG).show();
             }
