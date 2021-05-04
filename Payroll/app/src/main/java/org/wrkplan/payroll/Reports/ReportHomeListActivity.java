@@ -1,9 +1,12 @@
 package org.wrkplan.payroll.Reports;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +17,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -36,6 +41,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     ArrayList<Load_Spinner_Model> load_spinner_models = new ArrayList<>();
     ArrayList<String>arrayList=new ArrayList<>();
+    public static String report_html = "";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +58,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                 LayoutInflater li = LayoutInflater.from(ReportHomeListActivity.this);
                 final View dialog = li.inflate(R.layout.activity_home_pf_report_popup, null);
                 final Spinner spinner_year =  dialog.findViewById(R.id.spinner_year);
+                final String[] item = new String[1];
                 TextView tv_button_continue = dialog.findViewById(R.id.tv_button_continue);
 
 
@@ -63,6 +70,17 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                 final AlertDialog alertDialog = alert.create();
                 alertDialog.show();
                 Load_Spinner_Data(spinner_year);
+                spinner_year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+                        item[0] =load_spinner_models.get(position).getFinancial_year_code();
+
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView <?> parent) {
+                    }
+                });
                 tv_button_continue.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -99,8 +117,6 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                         spinnerModel.setCalender_year(calender_year);
                         // arrayList.add(jb1.getString("calender_year"));
                         load_spinner_models.add(spinnerModel);
-
-
                     }
                     initSpinnerAdapter(spinner_year);
 
@@ -127,4 +143,46 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_year.setAdapter(arrayAdapter);
     }
+
+    //===========Code to get financial year data w.r.t pdf generation from api using volley and load data to recycler view, starts==========
+    public void loadData(String financial_year){
+//        String url = "http://14.99.211.60:9018/api/reports/pf-deduction/demo_test/95/2020" ;
+        String url = Url.BASEURL() + "reports/pf-deduction/" + userSingletonModel.corporate_id + "/" + userSingletonModel.employee_id + "/" + financial_year;
+        final ProgressDialog loading = ProgressDialog.show(ReportHomeListActivity.this, "Loading", "Please wait...", true, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
+                Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        getResponseData(response);
+                        loading.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                error.printStackTrace();
+            }
+        });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+    }
+    public void getResponseData(String response){
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+
+            Log.d("jsonData-=>",jsonObject.toString());
+            JSONObject jsonObject1 = jsonObject.getJSONObject("response");
+            if(jsonObject1.getString("status").contentEquals("true")){
+                report_html = jsonObject.getString("report_html");
+
+            }else if(jsonObject1.getString("status").contentEquals("false")){
+                Toast.makeText(getApplicationContext(),jsonObject1.getString("message"), Toast.LENGTH_LONG).show();
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    //===========Code to get financial year data w.r.t pdf generation from api and load data to recycler view, ends==========
 }

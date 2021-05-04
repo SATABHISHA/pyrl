@@ -478,6 +478,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
                 break;
+            case R.id.nav_reports:
+                startActivity(new Intent(this, ReportHomeListActivity.class));
+                break;
 
         }
 //        return false;
