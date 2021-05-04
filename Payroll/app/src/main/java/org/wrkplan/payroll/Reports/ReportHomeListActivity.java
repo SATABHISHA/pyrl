@@ -87,7 +87,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //
 //                        item[0] =load_spinner_models.get(position).getFinancial_year_code();
-                        if(position != -1) {
+                        if(position != -1 && position != 0) {
                             Log.d("getdata-=>", load_spinner_models.get(position).getFinancial_year_code());
                             year_code = load_spinner_models.get(position).getFinancial_year_code();
                         }
@@ -115,7 +115,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
     //----code to load spinner data, starts-----
     public void Load_Spinner_Data(Spinner spinner_year) {
 
-        String url= Url.BASEURL() + "finyear/" + "list/" + userSingletonModel.corporate_id;
+        String url= Url.BASEURL() + "finyear/" + "list/reports/" + userSingletonModel.corporate_id+"/1";
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -128,8 +128,8 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                     {
 
                         JSONObject jb1=jsonArray.getJSONObject(i);
-                        String financial_year_code=jb1.getString("financial_year_code");
-                        String calender_year=jb1.getString("calender_year");
+                        String financial_year_code=jb1.getString("financial_year_id");
+                        String calender_year=jb1.getString("financial_year_code");
                         arrayList.add(calender_year);
                         Load_Spinner_Model spinnerModel=new Load_Spinner_Model();
                         spinnerModel.setFinancial_year_code(financial_year_code);

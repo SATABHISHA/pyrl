@@ -636,7 +636,7 @@
                         android:layout_gravity="center"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/od_duty"
+                        android:src="@drawable/reports"
                         />
 
 
