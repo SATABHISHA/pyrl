@@ -50,35 +50,67 @@
             android:layout_weight="1"
             android:background="#ffffff"
             app:cardUseCompatPadding="false">
-            <TextView
-                android:id="@+id/tv_nodata"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:visibility="gone"
-                android:textSize="14dp"
-                android:text="No List to show"/>
             <LinearLayout
-                android:id="@+id/ll_recycler"
+                android:id="@+id/ll_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:visibility="gone"
-                android:orientation="vertical">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view"
+                android:orientation="vertical"
+                android:paddingBottom="0dp"
+                android:paddingTop="0dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="0dp"
+                android:background="#ffffff">
+                <RelativeLayout
+                    android:id="@+id/relative_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:scrollbars="vertical" />
-                <!--  <Button
-                      android:id="@+id/btn_dwnload_test"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="Download"/> -->
+                    android:layout_height="wrap_content">
 
+                    <TextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toLeftOf="@id/btn_view_task"
+                        android:textSize="17sp"
+                        android:textColor="#333333"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:text="PF\nDeduction"/>
+
+                    <Button
+                        android:id="@+id/btn_view_task"
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_alignParentRight="true"
+                        android:textAllCaps="false"
+                        android:textColor="#686666"
+                        android:text="View"/>
+                  <!--  <Button
+                        android:id="@+id/btn_view_time_log"
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:textAllCaps="false"
+                        android:layout_toLeftOf="@id/btn_view_task"
+                        android:textColor="#686666"
+                        android:text="View\nTime Log"/> -->
+                    <LinearLayout
+                        android:id="@+id/ll_border"
+                        android:layout_below="@id/btn_view_task"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="4dp"
+                        android:layout_height="1dp"
+                        android:orientation="vertical"
+                        android:background="#dcdcdc"/>
+
+
+                </RelativeLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

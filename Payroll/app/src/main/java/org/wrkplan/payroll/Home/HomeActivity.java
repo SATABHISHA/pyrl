@@ -73,6 +73,7 @@ import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.OutDoorDuty.OutdoorListActivity;
 import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogListActivity;
 import org.wrkplan.payroll.R;
+import org.wrkplan.payroll.Reports.ReportHomeListActivity;
 import org.wrkplan.payroll.Timesheet.MyAttendanceActivity;
 import org.wrkplan.payroll.Timesheet.MyAttendanceActivity_v2;
 import org.wrkplan.payroll.Timesheet.MyAttendanceActivity_v3;
@@ -617,8 +618,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, MyAttendanceActivity_v3.class));
                 break;
             case R.id.rl_reports:
+                startActivity(new Intent(this, ReportHomeListActivity.class));
                 break;
             case R.id.img_reports:
+                startActivity(new Intent(this, ReportHomeListActivity.class));
                 break;
             default:
                 break;
