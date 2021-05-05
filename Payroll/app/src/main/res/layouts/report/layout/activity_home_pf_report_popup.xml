@@ -50,7 +50,6 @@
                     android:layout_marginRight="10dp"
                     android:gravity="left"
                     app:ms_multiline="false"
-                    app:ms_hint="Select year"
                     app:ms_hintColor="#3C3C3C"
                     app:ms_hintTextSize="15sp"
                     app:ms_enableFloatingLabel="false"

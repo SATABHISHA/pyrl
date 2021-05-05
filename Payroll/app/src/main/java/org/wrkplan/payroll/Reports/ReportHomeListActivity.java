@@ -82,14 +82,22 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                 final AlertDialog alertDialog = alert.create();
                 alertDialog.show();
                 Load_Spinner_Data(spinner_year);
+                spinner_year.setSelection(1);
+                tv_button_continue.setAlpha(0.4f);
+                tv_button_continue.setClickable(false);
                 spinner_year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //
 //                        item[0] =load_spinner_models.get(position).getFinancial_year_code();
-                        if(position != -1 && position != 0) {
+                        if(position > 0) {
                             Log.d("getdata-=>", load_spinner_models.get(position).getFinancial_year_code());
                             year_code = load_spinner_models.get(position).getFinancial_year_code();
+                            tv_button_continue.setAlpha(1.0f);
+                            tv_button_continue.setClickable(true);
+                        }else{
+                            tv_button_continue.setAlpha(0.4f);
+                            tv_button_continue.setClickable(false);
                         }
 
                     }
@@ -116,6 +124,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
     public void Load_Spinner_Data(Spinner spinner_year) {
 
         String url= Url.BASEURL() + "finyear/" + "list/reports/" + userSingletonModel.corporate_id+"/1";
+        Log.d("urlfinyear-=>",url);
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -195,57 +204,6 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
             if(jsonObject1.getString("status").contentEquals("true")){
                 report_html = jsonObject.getString("report_html");
                 startActivity(new Intent(ReportHomeListActivity.this,PdfEditorActivity.class));
-
-                //---pdf converter, code starts
-              /*  final File savedPDFFile = FileManager.getInstance().createTempFile(getApplicationContext(), "pdf", false);
-// Generate Pdf From Html
-                PDFUtil.generatePDFFromHTML(getApplicationContext(), savedPDFFile, report_html, new PDFPrint.OnPDFPrintListener() {
-                    @Override
-                    public void onSuccess(File file) {
-                        // Open Pdf Viewer
-                        Uri pdfUri = Uri.fromFile(savedPDFFile);
-
-                        Uri pdfFileUri = pdfUri;
-
-                        if (pdfFileUri == null || pdfFileUri.getPath() == null) {
-                            new IllegalStateException("pdf File Uri is null").printStackTrace();
-                            finish();
-                            return;
-                        }
-
-                        pdfFile = new File(pdfFileUri.getPath());
-
-                        if (!pdfFile.exists()) {
-                            new IllegalStateException("File Does Not Exist.").printStackTrace();
-                            finish();
-                            return;
-                        }
-                        try {
-                            pdfBitmapList = PDFUtil.pdfToBitmap(pdfFile);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        //---customise code, ends---
-
-                        File fileToPrint = getPdfFile();
-                        if (fileToPrint == null || !fileToPrint.exists()) {
-                            Toast.makeText(ReportHomeListActivity.this, "Generated File is null or does not exist!", Toast.LENGTH_SHORT).show();
-//                            return super.onOptionsItemSelected(item);
-                        }
-
-                        PrintAttributes.Builder printAttributeBuilder = new PrintAttributes.Builder();
-                        printAttributeBuilder.setMediaSize(PrintAttributes.MediaSize.ISO_A4);
-                        printAttributeBuilder.setMinMargins(PrintAttributes.Margins.NO_MARGINS);
-
-                        PDFUtil.printPdf(ReportHomeListActivity.this, fileToPrint, printAttributeBuilder.build());
-                    }
-
-                    @Override
-                    public void onError(Exception exception) {
-                        exception.printStackTrace();
-                    }
-                });*/
-                //---pdf converter, code ends
             }else if(jsonObject1.getString("status").contentEquals("false")){
                 Toast.makeText(getApplicationContext(),jsonObject1.getString("message"), Toast.LENGTH_LONG).show();
             }
