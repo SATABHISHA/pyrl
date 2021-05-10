@@ -39,6 +39,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.wrkplan.payroll.Config.AppVersionUpgradeNotifier;
 import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.UserSingletonModel;
@@ -47,7 +48,7 @@ import org.wrkplan.payroll.R;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, AppVersionUpgradeNotifier.VersionUpdateListener {
     Button btn_login;
  public static   EditText ed_userid,ed_username,ed_userpassword;
     CoordinatorLayout coordinatorLayout;
@@ -67,11 +68,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //    final  String url="http://192.168.10.175:9018/api/login/payroll_713/1/1";
 
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_login);
         setContentView(R.layout.activity_login_new);
+
+        AppVersionUpgradeNotifier.init(this,this); //---for version updateDCR
 //        statusCheck(); //---added by Satabhisha on 6th MAy //--commented on 1st sept
 
         //----Firebase code starts
@@ -759,9 +763,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         final AlertDialog alert = builder.create();
         alert.show();
     }
+
+
     //===========Code to enable gps, ends(added on 6th May)=========
 
 
+    //---verson upgrade code starts----
+    @Override
+    public boolean onVersionUpdate(int newVersion, int oldVersion) {
+        return true;
+    }
+    //---verson upgrade code ends----
 }
 
 
