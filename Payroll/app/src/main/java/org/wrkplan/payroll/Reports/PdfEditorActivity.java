@@ -85,6 +85,10 @@ public class PdfEditorActivity extends AppCompatActivity implements View.OnClick
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(false);
+
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+
         webView.setWebViewClient(new MyWebViewClient(new MyWebViewClient.OnSourceReceived() {
             @Override
             public void success(String html) {
