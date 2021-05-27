@@ -1,9 +1,16 @@
 package org.wrkplan.payroll.Timesheet;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,6 +26,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,9 +57,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
-public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.OnClickListener{
+public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.OnClickListener, LocationListener {
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     ArrayList<TimesheetMyAttendanceModel> timesheetMyAttendanceModelArrayList = new ArrayList<>();
     ArrayList<TimesheetMyAttendanceModel_v3> timesheetMyAttendanceModel_v3ArrayList = new ArrayList<>();
@@ -65,6 +75,10 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
     public static String timesheet_in_out_action, work_from_home_detail;
 //    Button btn_my_attendance_log;
     Button btn_subordinate_attendance_log, btn_my_attendance_log;
+
+    public String latitude = "", longitude = "", locationAddress=""; //---added on 27th may
+    LocationManager locationManager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,7 +140,22 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 //        loadData();
 //        load_data_check_od_duty();
         load_biometric_data();
+        statusCheck();
+        getLocation(); //added on 27th may
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        statusCheck();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        statusCheck();
+        recreate();
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -137,7 +166,13 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
                 startActivity(new Intent(this, SubordinateAttendanceActivity.class));
                 break;*/
             case R.id.tv_in:
-                save_in_out_data("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance IN time recorded");
+                if(!latitude.contentEquals("") && !longitude.contentEquals("")) {
+                    save_in_out_data("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance IN time recorded");
+//                    save_geo_loaction(work_from_home_flag,ed_wrk_frm_home_detail.getText().toString());//--added on 27th may
+                }else{
+                    Toast.makeText(getApplicationContext(),"Unable to track location. Please try again.",Toast.LENGTH_LONG).show();
+                }
+
                 break;
             case R.id.tv_out:
                 if((work_from_home_flag == 1) && ed_wrk_frm_home_detail.getText().toString().trim().isEmpty()){
@@ -160,7 +195,12 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
                     //--------Alert dialog code ends--------
 
                 }else{
-                    save_in_out_data("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance OUT time recorded");
+                    if(!latitude.contentEquals("") && !longitude.contentEquals("")) {
+                        save_in_out_data("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance OUT time recorded");
+//                        save_geo_loaction(work_from_home_flag, ed_wrk_frm_home_detail.getText().toString());//--added on 27th may
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Unable to track location. Please try again.",Toast.LENGTH_LONG).show();
+                    }
                 }
                 break;
             case R.id.chck_wrk_frm_home:
@@ -262,15 +302,25 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
         }
         try {
             final JSONObject DocumentElementobj = new JSONObject();
-            DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
+           /* DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
             DocumentElementobj.put("timesheet_id", timesheet_id);
             DocumentElementobj.put("employee_id", Integer.parseInt(userSingletonModel.getEmployee_id()));
             DocumentElementobj.put("in_out_action", in_out);
             DocumentElementobj.put("work_from_home_flag", work_frm_home_flag);
+            DocumentElementobj.put("work_from_home_detail", work_from_home_detail);*/ //--commented on 27th may
+
+            //--added on 27th may starts
+            DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
+            DocumentElementobj.put("employee_id", Integer.parseInt(userSingletonModel.getEmployee_id()));
+            DocumentElementobj.put("work_from_home_flag", work_frm_home_flag);
             DocumentElementobj.put("work_from_home_detail", work_from_home_detail);
+            DocumentElementobj.put("latitude", latitude);
+            DocumentElementobj.put("longitude",longitude);
+            //--added on 27th may ends
 
             Log.d("jsonObjectTest",DocumentElementobj.toString());
-            final String URL = Url.BASEURL() + "timesheet/save";
+//            final String URL = Url.BASEURL() + "timesheet/save";
+            final String URL = Url.BASEURL() + "timesheet/save-with-geo-location"; //added on 27th may
 
             JsonObjectRequest request_json = null;
             request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
@@ -288,7 +338,6 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 
 
                                     if(resobj.getString("status").contentEquals("true")){
-
                                         if(message_in_out.contentEquals("IN")){
                                             rl_in.setAlpha(1.0f);
                                             tv_in.setClickable(true);
@@ -404,6 +453,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
         }
     }
     //========function to save data for IN/OUT, code ends=======
+
 
     //===========Code for getting time_in and time_out, starts==========
     public void load_data_check_od_duty(){
@@ -659,6 +709,62 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 
     //===========Code for getting biometric data, ends==========
 
+    //-------------location code starts(added on 27th may)--------
+    void getLocation() {
+        try {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+            //---minTime(in millisec), minDistance(in meters)
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+//        locationText.setText("Latitude: " + location.getLatitude() + "\n Longitude: " + location.getLongitude());
+//        Toast.makeText(getApplicationContext(), "Latitude:" + location.getLatitude() + "\n" + "Longitude: " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+
+        try {
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+//            locationText.setText(locationText.getText() + "\n"+addresses.get(0).getAddressLine(0)+", "+ addresses.get(0).getAddressLine(1)+", "+addresses.get(0).getAddressLine(2));
+//            Toast.makeText(getApplicationContext(), addresses.get(0).getAddressLine(0) + addresses.get(0).getAddressLine(1) + addresses.get(0).getAddressLine(2), Toast.LENGTH_LONG).show();
+//            String locationAddress = addresses.get(0).getAddressLine(0) + addresses.get(0).getAddressLine(1) + addresses.get(0).getAddressLine(2);
+
+
+//            latitude = String.valueOf(location.getLatitude());
+            latitude = String.format("%.6f", location.getLatitude());
+//            latitude = "";
+//            longitude = String.valueOf(location.getLongitude());
+            longitude = String.format("%.6f", location.getLongitude());
+//            longitude = "";
+            locationAddress = addresses.get(0).getAddressLine(0) + addresses.get(0).getAddressLine(1) + addresses.get(0).getAddressLine(2);
+            Log.d("Location-=>",locationAddress);
+            final Context context = this;
+
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Toast.makeText(this, "Please Enable GPS and Internet", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+    //-------------location code ends(added on 27th may)--------
+
     //========following function is to resign keyboard on touching anywhere in the screen
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -675,5 +781,45 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
         intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_myattendence);
     }
+    //===========Code to enable gps, starts(added on 27th May)=========
+    public void statusCheck() {
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            buildAlertMessageNoGps();
+
+        }else if(manager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            //-----------code to check location permission, code starts(added on 25th nov)---------
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
+
+            }else if(ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+//                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+
+//                finish();
+            }
+
+        }
+    }
+
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Please enable your GPS")
+                .setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+//                        startActivity(new Intent(HomeActivity.this, FingerprintActivity.class));
+                    }
+                });
+               /* .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        dialog.cancel();
+                    }
+                });*/
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+    //===========Code to enable gps, ends(added on 27th May)=========
 }
