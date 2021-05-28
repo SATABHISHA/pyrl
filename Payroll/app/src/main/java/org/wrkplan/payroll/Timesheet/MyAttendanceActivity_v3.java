@@ -1,11 +1,13 @@
 package org.wrkplan.payroll.Timesheet;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -13,6 +15,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -44,6 +47,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.wrkplan.payroll.Config.ImageUtil;
 import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel;
@@ -79,11 +83,15 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
     public String latitude = "", longitude = "", locationAddress=""; //---added on 27th may
     LocationManager locationManager;
 
+    public static final int RequestPermissionCode = 1;
+    public static String base64String, SelfieInOut, SelfieMessage;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_attendance_v3);
 
+        EnableRuntimePermission();
      /*   rl_button = findViewById(R.id.rl_button);
         tv_button_subordinate = findViewById(R.id.tv_button_subordinate);*/
         ll_recycler = findViewById(R.id.ll_recycler);
@@ -167,8 +175,10 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
                 break;*/
             case R.id.tv_in:
                 if(!latitude.contentEquals("") && !longitude.contentEquals("")) {
-                    save_in_out_data("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance IN time recorded");
-//                    save_geo_loaction(work_from_home_flag,ed_wrk_frm_home_detail.getText().toString());//--added on 27th may
+//                    save_in_out_data("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance IN time recorded"); //--commented on 28th May
+                    SelfieInOut = "IN";
+                    SelfieMessage = "Attendance IN time recorded";
+                    open_selfie_popup("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance IN time recorded"); //--added on 28th May
                 }else{
                     Toast.makeText(getApplicationContext(),"Unable to track location. Please try again.",Toast.LENGTH_LONG).show();
                 }
@@ -196,8 +206,10 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 
                 }else{
                     if(!latitude.contentEquals("") && !longitude.contentEquals("")) {
-                        save_in_out_data("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance OUT time recorded");
-//                        save_geo_loaction(work_from_home_flag, ed_wrk_frm_home_detail.getText().toString());//--added on 27th may
+//                        save_in_out_data("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance OUT time recorded"); //--commented on 28th May
+                        SelfieInOut = "OUT";
+                        SelfieMessage = "Attendance OUT time recorded";
+                        open_selfie_popup("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance OUT time recorded"); //--added on 28th May
                     }else{
                         Toast.makeText(getApplicationContext(),"Unable to track location. Please try again.",Toast.LENGTH_LONG).show();
                     }
@@ -292,7 +304,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
     //===========Code to get data from api and load data to recycler view, ends==========
 
     //========function to save data for IN/OUT, code starts=======
-    public void save_in_out_data(String in_out, int work_frm_home_flag, String work_from_home_detail, String message_in_out){
+    public void save_in_out_data(String in_out, int work_frm_home_flag, String work_from_home_detail, String message_in_out, String imageBase64){
         if(message_in_out.contentEquals("IN")){
             rl_in.setAlpha(0.5f);
             tv_in.setClickable(false);
@@ -316,6 +328,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
             DocumentElementobj.put("work_from_home_detail", work_from_home_detail);
             DocumentElementobj.put("latitude", latitude);
             DocumentElementobj.put("longitude",longitude);
+            DocumentElementobj.put("imageBase64",imageBase64);
             //--added on 27th may ends
 
             Log.d("jsonObjectTest",DocumentElementobj.toString());
@@ -822,4 +835,82 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
         alert.show();
     }
     //===========Code to enable gps, ends(added on 27th May)=========
+
+
+    //==========selfie popup, code starts(added on 28th May)=========
+
+    public void open_selfie_popup(String InOut, int work_from_home_flag, String work_from_home_detail, String message){
+        //-------custom dialog code starts=========
+        LayoutInflater li2 = LayoutInflater.from(this);
+        View dialog = li2.inflate(R.layout.activity_myattendancev3_selfie_popup, null);
+        TextView tv_button_yes = dialog.findViewById(R.id.tv_button_yes);
+        TextView tv_button_no = dialog.findViewById(R.id.tv_button_no);
+
+
+        androidx.appcompat.app.AlertDialog.Builder alert = new androidx.appcompat.app.AlertDialog.Builder(this);
+        alert.setView(dialog);
+        //Creating an alert dialog
+        final androidx.appcompat.app.AlertDialog alertDialog = alert.create();
+        alertDialog.show();
+        tv_button_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+//                saveInOut("OUT","PUNCHED_OUT");
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra("android.intent.extras.CAMERA_FACING", 1);
+                startActivityForResult(intent, 7);
+
+            }
+        });
+        tv_button_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+//                saveInOut("OUT","BREAK_STARTS");
+                save_in_out_data(InOut, work_from_home_flag, work_from_home_detail, message, "");
+
+            }
+        });
+        //-------custom dialog code ends=========
+    }
+    //==========selfie popup, code ends(added on 28th May)=========
+
+    //========Camera code starts(added on 28th May)=======
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 7 && resultCode == RESULT_OK) {
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+//            img.setImageBitmap(bitmap);
+            base64String = ImageUtil.convert(bitmap);
+            save_in_out_data(SelfieInOut, work_from_home_flag, work_from_home_detail, SelfieMessage, base64String);
+            Log.d("base64-=>",base64String);
+
+//            recognize(base64String);
+//            Log.d("base64-=>",base64String);
+        }
+    }
+    public void EnableRuntimePermission(){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(MyAttendanceActivity_v3.this,
+                Manifest.permission.CAMERA)) {
+//            Toast.makeText(RecognizeHomeActivity.this,"CAMERA permission allows us to Access CAMERA app",     Toast.LENGTH_LONG).show();
+        } else {
+            ActivityCompat.requestPermissions(MyAttendanceActivity_v3.this,new String[]{
+                    Manifest.permission.CAMERA}, RequestPermissionCode);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] result) {
+        switch (requestCode) {
+            case RequestPermissionCode:
+                if (result.length > 0 && result[0] == PackageManager.PERMISSION_GRANTED) {
+//                    Toast.makeText(MyAttendanceActivity_v3.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(MyAttendanceActivity_v3.this, "Permission Canceled, Now your application cannot access CAMERA.", Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
+    }
+    //========Camera code ends(added on 28th May)=======
 }
