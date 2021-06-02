@@ -99,6 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="50dp">
                 <TextView
                     android:id="@+id/tv_title_date"
@@ -137,6 +138,7 @@
                 android:layout_height="0.8dp"
                 android:layout_below="@id/rl_column_name"
                 android:orientation="horizontal"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="5dp"
                 android:background="#454444"/>
         </RelativeLayout>
@@ -166,7 +168,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp"
+                android:paddingRight="0dp"
                 android:paddingTop="0dp"
                 android:visibility="gone"
                 android:orientation="vertical">

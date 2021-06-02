@@ -50,6 +50,7 @@ public class SubordinateAttendanceListAdapterv2 extends RecyclerView.Adapter<Sub
 //        holder.tv_in_time.setText("10:00AM");
         holder.tv_out_time.setText(timesheetSubordinateModelArrayList.get(position).getTime_out());
 //        holder.tv_out_time.setText("04:00PM");
+        holder.img_sublog_arrow.setVisibility(View.INVISIBLE);
         if(timesheetSubordinateModelArrayList.get(position).getAttendance_status().trim().contentEquals("Absent")){
             holder.tv_present_absent.setText("Absent");
             holder.tv_present_absent.setTextColor(Color.parseColor("#ffffff"));
@@ -63,12 +64,22 @@ public class SubordinateAttendanceListAdapterv2 extends RecyclerView.Adapter<Sub
             holder.ll_label.setVisibility(View.VISIBLE);
 //            holder.ll_label.setBackgroundColor(Color.parseColor("#00FF00"));
             holder.ll_label.setBackgroundResource(R.drawable.loglist_corner_radius_present);
+            if(userSingletonModel.getAttendance_with_selfie_yn().contentEquals("1")){
+                holder.img_sublog_arrow.setVisibility(View.VISIBLE);
+            }else{
+                holder.img_sublog_arrow.setVisibility(View.INVISIBLE);
+            }
         }else if(timesheetSubordinateModelArrayList.get(position).getAttendance_status().trim().contentEquals("WFH")){
             holder.tv_present_absent.setText("WFH");
             holder.tv_present_absent.setTextColor(Color.parseColor("#ffffff"));
             holder.ll_label.setVisibility(View.VISIBLE);
 //            holder.ll_label.setBackgroundColor(Color.parseColor("#00FF00"));
             holder.ll_label.setBackgroundResource(R.drawable.loglist_corner_radius_wfh);
+            if(userSingletonModel.getAttendance_with_selfie_yn().contentEquals("1")){
+                holder.img_sublog_arrow.setVisibility(View.VISIBLE);
+            }else{
+                holder.img_sublog_arrow.setVisibility(View.INVISIBLE);
+            }
         }else if(timesheetSubordinateModelArrayList.get(position).getAttendance_status().trim().contentEquals("")){
             holder.ll_label.setVisibility(View.INVISIBLE);
         }
@@ -83,6 +94,7 @@ public class SubordinateAttendanceListAdapterv2 extends RecyclerView.Adapter<Sub
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_emp_name, tv_in_time, tv_out_time, tv_present_absent;
+        ImageView img_sublog_arrow;
         LinearLayout ll_label;
 
         public MyViewHolder(final View itemView) {
@@ -92,6 +104,7 @@ public class SubordinateAttendanceListAdapterv2 extends RecyclerView.Adapter<Sub
             tv_out_time = itemView.findViewById(R.id.tv_out_time);
             ll_label = itemView.findViewById(R.id.ll_label);
             tv_present_absent = itemView.findViewById(R.id.tv_present_absent);
+            img_sublog_arrow = itemView.findViewById(R.id.img_sublog_arrow);
 
 
         }

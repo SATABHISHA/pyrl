@@ -73,7 +73,7 @@
         android:orientation="vertical"
         android:layout_marginBottom="0dp"
         android:layout_marginTop="0dp"
-        android:background="#D1D1D1">
+        android:background="#ffffff">
         <LinearLayout
             android:id="@+id/relative_layout"
             android:layout_width="match_parent"
@@ -128,18 +128,21 @@
                     android:textColor="#ffffff"
                     android:text="Present"/>
             </LinearLayout>
-
-
-            <!--  <LinearLayout
-                  android:id="@+id/ll_border"
-                  android:layout_below="@id/tv_date"
-                  android:layout_width="match_parent"
-                  android:layout_marginTop="10dp"
-                  android:layout_height="1dp"
-                  android:orientation="vertical"
-                  android:background="#dcdcdc"/> -->
-
+            <ImageView
+                android:id="@+id/img_sublog_arrow"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/arrowrightsublog"/>
 
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_border"
+            android:layout_width="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="40dp"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            android:background="#D1D1D1"/>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
