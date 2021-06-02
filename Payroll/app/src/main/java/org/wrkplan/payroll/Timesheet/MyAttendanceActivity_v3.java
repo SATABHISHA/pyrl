@@ -176,9 +176,13 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
             case R.id.tv_in:
                 if(!latitude.contentEquals("") && !longitude.contentEquals("")) {
 //                    save_in_out_data("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance IN time recorded"); //--commented on 28th May
-                    SelfieInOut = "IN";
-                    SelfieMessage = "Attendance IN time recorded";
-                    open_selfie_popup("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance IN time recorded"); //--added on 28th May
+                    if(userSingletonModel.getAttendance_with_selfie_yn().contentEquals("1")) {
+                        SelfieInOut = "IN";
+                        SelfieMessage = "Attendance IN time recorded";
+                        open_selfie_popup("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance IN time recorded"); //--added on 28th May
+                    }else{
+                        save_in_out_data("IN", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance IN time recorded","");
+                    }
                 }else{
                     Toast.makeText(getApplicationContext(),"Unable to track location. Please try again.",Toast.LENGTH_LONG).show();
                 }
@@ -207,9 +211,13 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
                 }else{
                     if(!latitude.contentEquals("") && !longitude.contentEquals("")) {
 //                        save_in_out_data("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance OUT time recorded"); //--commented on 28th May
-                        SelfieInOut = "OUT";
-                        SelfieMessage = "Attendance OUT time recorded";
-                        open_selfie_popup("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance OUT time recorded"); //--added on 28th May
+                        if(userSingletonModel.getAttendance_with_selfie_yn().contentEquals("1")) {
+                            SelfieInOut = "OUT";
+                            SelfieMessage = "Attendance OUT time recorded";
+                            open_selfie_popup("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance OUT time recorded"); //--added on 28th May
+                        }else{
+                            save_in_out_data("OUT", work_from_home_flag, ed_wrk_frm_home_detail.getText().toString(), "Attendance OUT time recorded","");
+                        }
                     }else{
                         Toast.makeText(getApplicationContext(),"Unable to track location. Please try again.",Toast.LENGTH_LONG).show();
                     }

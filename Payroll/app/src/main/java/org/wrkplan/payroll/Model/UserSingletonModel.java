@@ -24,7 +24,7 @@ public class UserSingletonModel {
 
     //----company variables
     public  String company_id,company_code,company_name,corporate_id,logo_path,active_yn,address_line1,address_line2,state,
-            state_id,country,pin,business_type,email,phone,website,gst_no,company_pan_no,tan_no,cin_no,ptax_no,company_pf_no,esic_no;
+            state_id,country,pin,business_type,email,phone,website,gst_no,company_pan_no,tan_no,cin_no,ptax_no,company_pf_no,esic_no, attendance_with_selfie_yn;
 
     //-------policies variables...
   //  public String provider_name,no,holder_name,holder_relationship,type,amount,expiry_date;
@@ -565,7 +565,12 @@ public  String casual_leave,earn_leave,sick_leave,comp_off,maternal_leave,patern
     public String getLog_employee_id() {
         return log_employee_id;
     }
-//---------Getter method ends-----------------
+
+    public String getAttendance_with_selfie_yn() {
+        return attendance_with_selfie_yn;
+    }
+
+    //---------Getter method ends-----------------
 
     //---------setter method starts-----------------
 
@@ -1094,7 +1099,11 @@ public  String casual_leave,earn_leave,sick_leave,comp_off,maternal_leave,patern
     public void setLog_employee_id(String log_employee_id) {
         this.log_employee_id = log_employee_id;
     }
-//---------Setter method ends-----------------
+
+    public void setAttendance_with_selfie_yn(String attendance_with_selfie_yn) {
+        this.attendance_with_selfie_yn = attendance_with_selfie_yn;
+    }
+    //---------Setter method ends-----------------
 
 
 

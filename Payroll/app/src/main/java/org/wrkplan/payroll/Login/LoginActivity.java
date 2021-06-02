@@ -265,6 +265,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
           userSingletonModel.setCompany_pf_no(sharedPreferences.getString("pf_no", ""));
           userSingletonModel.setEsic_no(sharedPreferences.getString("esic_no", ""));
+          userSingletonModel.setAttendance_with_selfie_yn(sharedPreferences.getString("attendance_with_selfie_yn",""));
           Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
           startActivity(intent);
       }
@@ -461,6 +462,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 editor.putString("ptax_no", jb_company.getString("ptax_no"));
                                 editor.putString("pf_no", jb_company.getString("pf_no"));
                                 editor.putString("esic_no", jb_company.getString("esic_no"));
+                                editor.putString("attendance_with_selfie_yn", jb_company.getString("attendance_with_selfie_yn"));
 
 
 
@@ -618,6 +620,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             userSingletonModel.setCompany_pf_no(jb_company.getString("pf_no"));
                             userSingletonModel.setEsic_no(jb_company.getString("esic_no"));
+                            userSingletonModel.setAttendance_with_selfie_yn(jb_company.getString("attendance_with_selfie_yn"));
 
 
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
