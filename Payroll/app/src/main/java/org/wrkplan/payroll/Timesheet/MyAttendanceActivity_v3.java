@@ -336,6 +336,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
             DocumentElementobj.put("work_from_home_detail", work_from_home_detail);
             DocumentElementobj.put("latitude", latitude);
             DocumentElementobj.put("longitude",longitude);
+            DocumentElementobj.put("address",locationAddress);
             DocumentElementobj.put("imageBase64",imageBase64);
             //--added on 27th may ends
 
