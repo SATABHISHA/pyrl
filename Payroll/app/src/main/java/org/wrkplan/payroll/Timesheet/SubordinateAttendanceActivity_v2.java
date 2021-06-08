@@ -131,6 +131,7 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity implemen
                     timesheetSubordinateModel.setTime_out(jsonObject2.getString("time_out"));
 
                     timesheetSubordinateModel.setEmployee_name(jsonObject2.getString("employee_name"));
+                    timesheetSubordinateModel.setEmployee_id(jsonObject2.getString("employee_id"));
                     timesheetSubordinateMonthlyAttendanceModel.setEmployee_name(jsonObject2.getString("employee_name"));
 
                     timesheetSubordinateModel.setAttendance_status(jsonObject2.getString("status"));

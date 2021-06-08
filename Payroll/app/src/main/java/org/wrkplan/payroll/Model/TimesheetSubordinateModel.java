@@ -1,7 +1,15 @@
 package org.wrkplan.payroll.Model;
 
 public class TimesheetSubordinateModel {
-    String slno, ts_date, time_in, time_out, employee_name, attendance_status;
+    String slno, ts_date, time_in, time_out, employee_name, attendance_status, employee_id;
+
+    public String getEmployee_id() {
+        return employee_id;
+    }
+
+    public void setEmployee_id(String employee_id) {
+        this.employee_id = employee_id;
+    }
 
     public String getSlno() {
         return slno;
