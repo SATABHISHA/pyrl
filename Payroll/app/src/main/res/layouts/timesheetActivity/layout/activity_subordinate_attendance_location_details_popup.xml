@@ -31,8 +31,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical"
                 android:background="#ffffff">
                 <TextView
@@ -47,7 +47,7 @@
                     android:id="@+id/tv_employee_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
+                    android:textSize="11sp"
                     android:layout_gravity="center"
                     android:textColor="#404040"
                     android:text="A"/>
@@ -60,17 +60,34 @@
                     android:layout_marginTop="10dp"
                     android:textColor="#404040"
                     android:text="2021"/>
+                <LinearLayout
+                    android:id="@+id/ll_status"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.2"
+                    android:layout_gravity="center_vertical|center"
+                    android:orientation="vertical"
+                    android:background="@drawable/loglist_corner_radius_present">
+                    <TextView
+                        android:id="@+id/tv_present_absent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:text="Present"/>
+                </LinearLayout>
 
                 <RelativeLayout
                     android:id="@+id/rl_location_in_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="20dp">
                     <TextView
                         android:id="@+id/tv_in"
                         android:layout_width="55dp"
-                        android:layout_height="55dp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_height="81dp"
+                        android:layout_marginLeft="10dp"
                         android:text="IN"
                         android:gravity="center"
                         android:background="#DFDFDF"
@@ -78,15 +95,15 @@
                     <ImageView
                         android:id="@+id/img_view_in"
                         android:layout_width="55dp"
-                        android:layout_height="55dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_height="81dp"
+                        android:layout_marginRight="10dp"
                         android:layout_alignParentRight="true"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/tv_in"
                         android:layout_toLeftOf="@id/img_view_in"
-                        android:layout_marginTop="-4dp"
+                        android:layout_marginTop="-1dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:orientation="vertical">
@@ -146,10 +163,11 @@
                         <TextView
                             android:id="@+id/tv_in_address"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="27dp"
                             android:layout_marginTop="5dp"
-                            android:text="81/3, Haltu, Purbachal Main Road, Kolkata India, 700078"
+                            android:text="81/3, Haltu, Purbachal Main Road, Kolkata India, 700078,Kolkata India, 700078Kolkata India, 700078"
                             android:textColor="#7F7F7F"
+                            android:maxLines="2"
                             android:textSize="10sp"/>
                     </LinearLayout>
                 </RelativeLayout>
@@ -159,28 +177,28 @@
                     android:id="@+id/rl_location_out_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="30dp">
                     <TextView
                         android:id="@+id/tv_out"
                         android:layout_width="55dp"
-                        android:layout_height="55dp"
-                        android:layout_marginLeft="5dp"
-                        android:text="IN"
+                        android:layout_height="81dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="OUT"
                         android:gravity="center"
                         android:background="#DFDFDF"
                         android:textColor="#4D4D4D"/>
                     <ImageView
                         android:id="@+id/img_view_out"
                         android:layout_width="55dp"
-                        android:layout_height="55dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_height="81dp"
+                        android:layout_marginRight="10dp"
                         android:layout_alignParentRight="true"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/tv_out"
                         android:layout_toLeftOf="@id/img_view_out"
-                        android:layout_marginTop="-4dp"
+                        android:layout_marginTop="-1dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:orientation="vertical">
@@ -242,10 +260,11 @@
                         <TextView
                             android:id="@+id/tv_address_out"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="27dp"
                             android:layout_marginTop="5dp"
                             android:text="81/3, Haltu, Purbachal Main Road, Kolkata India, 700078"
                             android:textColor="#7F7F7F"
+                            android:maxLines="2"
                             android:textSize="10sp"/>
                     </LinearLayout>
                 </RelativeLayout>
