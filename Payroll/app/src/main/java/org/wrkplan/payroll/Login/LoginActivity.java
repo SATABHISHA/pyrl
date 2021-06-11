@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        setContentView(R.layout.activity_login);
         setContentView(R.layout.activity_login_new);
 
+
         AppVersionUpgradeNotifier.init(this,this); //---for version updateDCR
 //        statusCheck(); //---added by Satabhisha on 6th MAy //--commented on 1st sept
 
