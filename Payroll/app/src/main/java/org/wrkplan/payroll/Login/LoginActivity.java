@@ -61,7 +61,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     SharedPreferences.Editor editor_autofill;
     Boolean savelogin;
 
-
     public static String entry_user = ""; //---added by Satabhisha on 6th May
 
     public static String url_check = "test"; //----as per discussion on 12th sept, Base url(live or test) distinction should be handled by using static variable
