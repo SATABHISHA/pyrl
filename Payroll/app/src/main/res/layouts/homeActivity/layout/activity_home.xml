@@ -621,7 +621,7 @@
                 android:orientation="horizontal">
 
                 <RelativeLayout
-                    android:id="@+id/rl_reports"
+                    android:id="@+id/rl_advance"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:minHeight="170dp"
@@ -630,34 +630,34 @@
                     android:layout_weight="1">
 
                     <ImageView
-                        android:id="@+id/img_reports"
+                        android:id="@+id/img_advance"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/reports"
+                        android:src="@drawable/advance"
                         />
 
 
 
                 </RelativeLayout>
                 <LinearLayout
-                    android:id="@+id/ll_unknown"
+                    android:id="@+id/ll_reports"
                     android:layout_width="0dp"
                     android:layout_height="170dp"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/layout3"
                     android:gravity="center"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     android:layout_weight="1">
                     <ImageView
-                        android:id="@+id/img_unknown"
+                        android:id="@+id/img_reports"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:visibility="visible"
-                        android:src="@drawable/timesheet"
+                        android:src="@drawable/reports"
                         ></ImageView>
 
                 </LinearLayout>
@@ -683,12 +683,12 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/tv_reports"
+                        android:id="@+id/tv_advance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:textStyle="bold"
-                        android:text="Reports"
+                        android:text="Advance"
                         android:textColor="#2e5772"
                         ></TextView>
 
@@ -697,18 +697,18 @@
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="5dp"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     android:background="@drawable/layout2"
                     android:gravity="center"
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/tv_unknown"
+                        android:id="@+id/tv_reports"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:textStyle="bold"
-                        android:text="Unknown"
+                        android:text="Reports"
                         android:visibility="visible"
                         android:textColor="#2e5772"
                         ></TextView>
