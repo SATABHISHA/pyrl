@@ -99,6 +99,11 @@
         <activity android:name=".Reports.PdfViewerActivity"/>
         <activity android:name=".Reports.PdfEditorActivity"/>
 
+        <activity android:name=".AdvanceRequisition.AdvanceRequisitionActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".AdvanceRequisition.AdvanceRequisitionEntryActivity"
+            android:screenOrientation="portrait"></activity>
+
         <!-- Firebase Notifications -->
         <service
             android:name=".service.MyFirebaseService" android:exported="false">

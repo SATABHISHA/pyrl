@@ -45,6 +45,10 @@
             android:icon="@drawable/timesheet"
             android:title="Timesheet" />
         <item
+            android:id="@+id/nav_advance"
+            android:icon="@drawable/advance"
+            android:title="Advance" />
+        <item
             android:id="@+id/nav_reports"
             android:icon="@drawable/reports"
             android:title="Reports" />

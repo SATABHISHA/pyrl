@@ -60,6 +60,7 @@ import com.google.firebase.iid.InstanceIdResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.wrkplan.payroll.AdvanceRequisition.AdvanceRequisitionActivity;
 import org.wrkplan.payroll.CompanyDocuments.CompanyDocumentsActivity;
 import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.EmployeeDocuments.EmployeeDocumentsActivity;
@@ -484,6 +485,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
                 break;
+            case R.id.nav_advance:
+                startActivity(new Intent(this, AdvanceRequisitionActivity.class));
+                //Toast.makeText(context, "Requisation Page", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.nav_reports:
                 startActivity(new Intent(this, ReportHomeListActivity.class));
                 break;
@@ -633,10 +638,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, ReportHomeListActivity.class));
                 break;
             case R.id.rl_advance:
-//                startActivity(new Intent(this, ReportHomeListActivity.class));
+                startActivity(new Intent(this, AdvanceRequisitionActivity.class));
                 break;
             case R.id.img_advance:
-//                startActivity(new Intent(this, ReportHomeListActivity.class));
+                startActivity(new Intent(this, AdvanceRequisitionActivity.class));
                 break;
             default:
                 break;

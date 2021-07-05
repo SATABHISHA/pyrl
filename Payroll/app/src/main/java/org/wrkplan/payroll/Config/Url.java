@@ -19,6 +19,13 @@ public class Url{
   public  static String LeaveType="";
   public  static  boolean isNew=false;
 
+  public  static  boolean isNewEntry=false;
+  public static boolean isSubordinateRequisition=false;
+  public static boolean isMyRequisition=false;
+
+  public  static  boolean isNewEntryMediclaim=false;
+  public static boolean isSubordinateMediclaim=false;
+  public static boolean isMyMediclaim=false;
 
   //----as per discussion on test and live url on 12th sept this code has been done
   public static String BASEURL(){
