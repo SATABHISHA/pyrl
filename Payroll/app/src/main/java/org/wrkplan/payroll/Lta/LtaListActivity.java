@@ -45,6 +45,7 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
     RecyclerView recycler_view;
     public static int new_create_yn = 1;
     public static CustomLTAListActivityAdapter customLTAListActivityAdapter;
+    public static String EmployeeType = "", mediclaim_status = "";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,13 +75,16 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()){
             case R.id.tv_button_subordinate:
                 new_create_yn = 0;
-                Intent i = new Intent(LtaListActivity.this, LtaRequestActivity.class);
-                startActivity(i);
+                /*Intent i = new Intent(LtaListActivity.this, LtaRequestActivity.class);
+                startActivity(i);*/
+                EmployeeType = "Subordinate";
                 break;
             case R.id.tv_btn_new_rqst:
                 new_create_yn = 1;
                 Intent i1 = new Intent(LtaListActivity.this, LtaRequestActivity.class);
                 startActivity(i1);
+                mediclaim_status = "";
+                EmployeeType = "Employee";
                 break;
             default:
                 break;

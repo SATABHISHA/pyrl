@@ -151,6 +151,8 @@ public class CustomLTAListActivityAdapter extends RecyclerView.Adapter<CustomLTA
                 @Override
                 public void onClick(View view) {
                     final int position = getAdapterPosition();
+                    LtaListActivity.EmployeeType = "Employee";
+                    LtaListActivity.mediclaim_status = ltaModelArrayList.get(position).getLta_status();
                     LtaListActivity.new_create_yn = 0;
 //                    od_request_id = outDoorListModelArrayList.get(position).getOd_request_id();
                     Intent i = new Intent(context, LtaRequestActivity.class);
