@@ -643,7 +643,7 @@
 
                 </RelativeLayout>
                 <LinearLayout
-                    android:id="@+id/ll_reports"
+                    android:id="@+id/ll_mediclaim"
                     android:layout_width="0dp"
                     android:layout_height="170dp"
                     android:layout_marginLeft="5dp"
@@ -652,7 +652,7 @@
                     android:visibility="visible"
                     android:layout_weight="1">
                     <ImageView
-                        android:id="@+id/img_reports"
+                        android:id="@+id/img_mediclaim"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
@@ -703,6 +703,114 @@
                     android:layout_weight="1">
 
                     <TextView
+                        android:id="@+id/tv_mediclaim"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="Mediclaim"
+                        android:visibility="visible"
+                        android:textColor="#2e5772"
+                        ></TextView>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <!--added on 3rd may, code ends -->
+
+            <!--added on 6thJuly, code starts -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rl_lta"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="170dp"
+                    android:background="@drawable/layout3"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/img_lta"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/advance"
+                        />
+
+
+
+                </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/ll_reports"
+                    android:layout_width="0dp"
+                    android:layout_height="170dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/layout3"
+                    android:gravity="center"
+                    android:visibility="visible"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:id="@+id/img_reports"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:visibility="visible"
+                        android:src="@drawable/reports"
+                        ></ImageView>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="-2dp"
+                android:layout_marginRight="15dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/layout2"
+                    android:gravity="center"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_lta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="LTA Requisition"
+                        android:textColor="#2e5772"
+                        ></TextView>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:visibility="visible"
+                    android:background="@drawable/layout2"
+                    android:gravity="center"
+                    android:layout_weight="1">
+
+                    <TextView
                         android:id="@+id/tv_reports"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -717,7 +825,7 @@
                 </LinearLayout>
 
             </LinearLayout>
-            <!--added on 3rd may, code ends -->
+            <!--added on 6thJuly, code ends -->
 
 
         </LinearLayout>
