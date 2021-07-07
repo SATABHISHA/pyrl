@@ -31,6 +31,7 @@ public class CustomLtaDocumentsActivityAdapter extends RecyclerView.Adapter<Cust
     public LayoutInflater inflater;
     public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList;
     private Context context;
+    public  static String base64String = "", filename = "";
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
 
 //    public static ProgressDialog loading;
@@ -84,7 +85,10 @@ public class CustomLtaDocumentsActivityAdapter extends RecyclerView.Adapter<Cust
                 @Override
                 public void onClick(View view) {
                     final int position = getAdapterPosition();
-
+                    base64String = ltaDocumentsModelArrayList.get(position).getLta_file_base64();
+                    filename = ltaDocumentsModelArrayList.get(position).getLta_filename();
+                    Intent i = new Intent(context, LtaDocumentPdfViewer.class);
+                    context.startActivity(i);
                 }
             });
 

@@ -110,6 +110,10 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".Lta.LtaDocumentsActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".Lta.LtaDocumentPdfEditorActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Lta.LtaDocumentPdfViewer"
+            android:screenOrientation="portrait"></activity>
 
 
         <!-- Firebase Notifications -->
