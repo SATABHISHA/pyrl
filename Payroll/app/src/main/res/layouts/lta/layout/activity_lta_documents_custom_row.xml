@@ -4,6 +4,7 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
@@ -16,6 +17,9 @@
             android:text="1"
             android:layout_centerVertical="true"
             android:textColor="#4F4F4F"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:textSize="18sp">
 
         </TextView>
@@ -27,16 +31,22 @@
             android:layout_toRightOf="@id/tv_index"
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:src="@drawable/file_pdf"></ImageView>
 
         <TextView
-            android:id="@+id/tv_pdf_file"
+            android:id="@+id/tv_pdf_file_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_toLeftOf="@id/img_pdf_icon_delete"
+            android:layout_toLeftOf="@id/img_view_delete"
             android:layout_marginRight="15dp"
             android:layout_marginTop="5dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:layout_toRightOf="@id/img_pdf_icon"
             android:text="202175-Doc-1.pdf"></TextView>
 
@@ -44,11 +54,14 @@
             android:id="@+id/tv_pdf_file_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_pdf_file_name"
             android:layout_marginLeft="10dp"
-            android:textSize="10dp"
             android:layout_toRightOf="@id/img_pdf_icon"
-            android:layout_below="@id/tv_pdf_file"
-            android:text="22 KB"></TextView>
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="22 KB"
+            android:textSize="10dp"></TextView>
         <View
             android:id="@+id/view1"
             android:layout_below="@id/tv_pdf_file_size"
@@ -57,7 +70,7 @@
             android:layout_height="0.7dp"
             android:background="#C3C3C3"></View>
         <ImageView
-            android:id="@+id/img_pdf_icon_delete"
+            android:id="@+id/img_view_delete"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"

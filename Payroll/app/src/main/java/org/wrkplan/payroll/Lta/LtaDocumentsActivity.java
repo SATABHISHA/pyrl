@@ -1,33 +1,61 @@
 package org.wrkplan.payroll.Lta;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import org.wrkplan.payroll.Model.LTAModel;
+import org.wrkplan.payroll.Model.LtaDocumentsModel;
 import org.wrkplan.payroll.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class LtaDocumentsActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView img_add;
     Uri uripdf=null;
+    public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList = new ArrayList<>();
+    public static LinearLayout ll_recycler;
+    public static TextView tv_nodata;
+    public static RecyclerView recycler_view;
+    public static CustomLtaDocumentsActivityAdapter customLtaDocumentsActivityAdapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lta_documents);
 
         img_add = findViewById(R.id.img_add);
+        ll_recycler = findViewById(R.id.ll_recycler);
+        tv_nodata = findViewById(R.id.tv_nodata);
+
+        customLtaDocumentsActivityAdapter = new CustomLtaDocumentsActivityAdapter(this,ltaDocumentsModelArrayList);
+
+
+
+        //==========Recycler code initializing and setting layoutManager starts======
+        recycler_view = findViewById(R.id.recycler_view);
+        recycler_view.setHasFixedSize(true);
+        recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        //==========Recycler code initializing and setting layoutManager ends======
         img_add.setOnClickListener(this);
+        load_data();
     }
 
     //----onclick code starts-----
@@ -44,7 +72,23 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
 
     }
     //----onclick code ends-----
+    public static void load_data(){
+        /*ll_recycler.setVisibility(View.VISIBLE);
+        tv_nodata.setVisibility(View.GONE);
 
+        recycler_view.setAdapter(customLtaDocumentsActivityAdapter);*/
+        if(!ltaDocumentsModelArrayList.isEmpty()){
+            ll_recycler.setVisibility(View.VISIBLE);
+            tv_nodata.setVisibility(View.GONE);
+
+            recycler_view.setAdapter(customLtaDocumentsActivityAdapter);
+        }else{
+            ll_recycler.setVisibility(View.GONE);
+            tv_nodata.setVisibility(View.VISIBLE);
+        }
+
+
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -62,9 +106,18 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
             recycler_pdf.setAdapter(adapter);
             arraylistSize=pdf_modelArrayList.size();
             Toast.makeText(MediclaimDocumentsActivity.this, ""+arraylistSize, Toast.LENGTH_SHORT).show();*/
-            Log.d("base64-=>",getStringPdf(uripdf));
+//            Log.d("base64-=>",getStringPdf(uripdf));
+            Log.d("FileSize-=>",getStringPDFsIZE(getApplicationContext(),uripdf));
+
+            LtaDocumentsModel ltaDocumentsModel = new LtaDocumentsModel();
+            ltaDocumentsModel.setLta_file_base64(getStringPdf(uripdf));
+            ltaDocumentsModel.setLta_filename(getfileName(getApplicationContext(),uripdf));
+            ltaDocumentsModel.setLta_file_size(getStringPDFsIZE(getApplicationContext(),uripdf));
+
+            ltaDocumentsModelArrayList.add(ltaDocumentsModel);
 
 //          loadDocuments();
+            load_data();
         }
     }
 
@@ -96,5 +149,59 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
         byte[] pdfByteArray = byteArrayOutputStream.toByteArray();
 
         return Base64.encodeToString(pdfByteArray, Base64.DEFAULT);
+    }
+
+    public static String getStringPDFsIZE(Context context, Uri uri)
+    {
+        String filesize="";
+        String final_pdf_size="";
+        Cursor cursor=context.getContentResolver().query(uri,null,null,null,null,null);
+        try {
+            if(cursor!=null && cursor.moveToFirst())
+            {
+                // getfile size
+                int sizeIndex=cursor.getColumnIndex(OpenableColumns.SIZE);
+                if(!cursor.isNull(sizeIndex))
+                {
+                    filesize=cursor.getString(sizeIndex);
+                    int a=Integer.parseInt(filesize)/1024 ;
+                    if(a>1024)
+                    {
+                        int b=a/1024;
+                        final_pdf_size=b+" MB";
+                    }
+                    else
+                    {
+                        final_pdf_size=a+" KB";
+                    }
+
+
+                }
+            }
+        }
+        finally {
+            cursor.close();
+        }
+        return final_pdf_size;
+
+    }
+    public static String getfileName(Context context,Uri uri)
+    {
+        String filename="";
+
+        Cursor cursor=context.getContentResolver().query(uri,null,null,null,null,null);
+        try {
+            if(cursor!=null && cursor.moveToFirst())
+            {
+                // getfile name
+                filename=cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+
+            }
+        }
+        finally {
+            cursor.close();
+        }
+        return filename;
+
     }
 }
