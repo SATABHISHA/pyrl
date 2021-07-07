@@ -511,13 +511,13 @@
                         android:layout_width="301dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="0dp"
-                        android:layout_toLeftOf="@id/tv_views"
+                        android:layout_toLeftOf="@id/tv_document_view"
                         android:background="@drawable/layout11"
                         android:padding="5dp"
                         android:layout_centerVertical="true"
                         android:textColor="#000" />
                     <TextView
-                        android:id="@+id/tv_views"
+                        android:id="@+id/tv_document_view"
                         android:layout_width="70dp"
                         android:layout_height="match_parent"
                         android:textSize="15dp"

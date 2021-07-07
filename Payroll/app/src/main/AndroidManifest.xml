@@ -108,6 +108,8 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".Lta.LtaRequestActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".Lta.LtaDocumentsActivity"
+            android:screenOrientation="portrait"></activity>
 
 
         <!-- Firebase Notifications -->

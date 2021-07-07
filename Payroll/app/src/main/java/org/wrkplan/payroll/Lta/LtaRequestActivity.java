@@ -1,15 +1,18 @@
 package org.wrkplan.payroll.Lta;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.wrkplan.payroll.R;
 
-public class LtaRequestActivity extends AppCompatActivity {
+public class LtaRequestActivity extends AppCompatActivity implements View.OnClickListener {
+    TextView tv_document_view;
     Button btn_back, btn_cancel, btn_return, btn_approve, btn_submit, btn_save;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,10 +25,37 @@ public class LtaRequestActivity extends AppCompatActivity {
         btn_approve = findViewById(R.id.btn_approve);
         btn_submit = findViewById(R.id.btn_submit);
         btn_save = findViewById(R.id.btn_save);
+        tv_document_view = findViewById(R.id.tv_document_view);
+
+        tv_document_view.setOnClickListener(this);
+        btn_back.setOnClickListener(this);
 
         LoadButtons();
     }
 
+    //=====onClick code starts=====
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+            case R.id.tv_document_view:
+                startActivity(new Intent(LtaRequestActivity.this,LtaDocumentsActivity.class));
+                break;
+            case R.id.btn_back:
+                break;
+            case R.id.btn_cancel:
+                break;
+            case R.id.btn_return:
+                break;
+            case R.id.btn_approve:
+                break;
+            case R.id.btn_submit:
+                break;
+            case R.id.btn_save:
+                break;
+        }
+    }
+    //=====onClick code ends=====
     //----function to load buttons acc to the logic, code starts
     public void LoadButtons(){
 
@@ -151,5 +181,6 @@ public class LtaRequestActivity extends AppCompatActivity {
 
 
     }
+
     //----function to load buttons acc to the logic, code ends
 }
