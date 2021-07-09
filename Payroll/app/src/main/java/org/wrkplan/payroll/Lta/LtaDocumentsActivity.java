@@ -33,7 +33,7 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
     Uri uripdf=null;
     public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList = new ArrayList<>();
     public static LinearLayout ll_recycler;
-    public static TextView tv_nodata;
+    public static TextView tv_nodata, tv_button_done, tv_button_cancel;
     public static RecyclerView recycler_view;
     public static CustomLtaDocumentsActivityAdapter customLtaDocumentsActivityAdapter;
     @Override
@@ -44,6 +44,8 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
         img_add = findViewById(R.id.img_add);
         ll_recycler = findViewById(R.id.ll_recycler);
         tv_nodata = findViewById(R.id.tv_nodata);
+        tv_button_done = findViewById(R.id.tv_button_done);
+        tv_button_cancel = findViewById(R.id.tv_button_cancel);
 
         customLtaDocumentsActivityAdapter = new CustomLtaDocumentsActivityAdapter(this,ltaDocumentsModelArrayList);
 
@@ -67,6 +69,10 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
                 intent.setType("application/pdf");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent,"Select PDF file"),1);
+                break;
+            case R.id.tv_button_done:
+                break;
+            case R.id.tv_button_cancel:
                 break;
         }
 
