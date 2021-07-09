@@ -70,36 +70,36 @@ public class CustomLTAListActivityAdapter extends RecyclerView.Adapter<CustomLTA
     @Override
     public void onBindViewHolder(CustomLTAListActivityAdapter.MyViewHolder holder, int position) {
         holder.itemView.setTag(ltaModelArrayList.get(position));
-        holder.tv_lta_no.setText(ltaModelArrayList.get(position).getLta_no());
-        holder.tv_lta_status.setText(ltaModelArrayList.get(position).getLta_status());
-        if(ltaModelArrayList.get(position).getLta_status().contentEquals("Saved")){
+        holder.tv_lta_no.setText(ltaModelArrayList.get(position).getLta_application_no());
+        holder.tv_lta_status.setText(ltaModelArrayList.get(position).getLta_application_status());
+        if(ltaModelArrayList.get(position).getLta_application_status().contentEquals("Saved")){
             holder.imgbtn_delete.setVisibility(View.VISIBLE);
         }else {
             holder.imgbtn_delete.setVisibility(View.INVISIBLE);
         }
 
 
-        if(ltaModelArrayList.get(position).getLta_status().contentEquals("Approved")){
+        if(ltaModelArrayList.get(position).getLta_application_status().contentEquals("Approved")){
             holder.tv_lta_status.setTextColor(Color.parseColor("#1e9547"));
-        }else if(ltaModelArrayList.get(position).getLta_status().contentEquals("Canceled")){
+        }else if(ltaModelArrayList.get(position).getLta_application_status().contentEquals("Canceled")){
             holder.tv_lta_status.setTextColor(Color.parseColor("#ed1c24"));
-        }else if(ltaModelArrayList.get(position).getLta_status().contentEquals("Returned")){
+        }else if(ltaModelArrayList.get(position).getLta_application_status().contentEquals("Returned")){
             holder.tv_lta_status.setTextColor(Color.parseColor("#b04d0b"));
-        }else if(ltaModelArrayList.get(position).getLta_status().contentEquals("Submit")){
+        }else if(ltaModelArrayList.get(position).getLta_application_status().contentEquals("Submit")){
             holder.tv_lta_status.setTextColor(Color.parseColor("#fe52ce"));
-        }else if(ltaModelArrayList.get(position).getLta_status().contentEquals("Saved")){
+        }else if(ltaModelArrayList.get(position).getLta_application_status().contentEquals("Saved")){
             holder.tv_lta_status.setTextColor(Color.parseColor("#2196ed"));
         }
 //        holder.tv_odr_request_id.setText(outDoorListModelArrayList.get(position).getOd_request_id());
         holder.tv_lta_amount.setText(ltaModelArrayList.get(position).getLta_amount());
-        holder.tv_lta_date.setText(ltaModelArrayList.get(position).getLta_date());
+        holder.tv_lta_date.setText(ltaModelArrayList.get(position).getDate_from()+" to "+ltaModelArrayList.get(position).getDate_to());
 
 
 
 //        DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
-        DateFormat inputFormat = new SimpleDateFormat("dd-MMM-yyyy"); //agein changed on 21st jan
+      /*  DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy"); //agein changed on 21st jan
         DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
-       /* String inputText = outDoorListModelArrayList.get(position).getOd_request_date();
+        String inputText = ltaModelArrayList.get(position).getDate_to();
         Date date1 = null;
         try {
             date1 = inputFormat.parse(inputText);
@@ -152,7 +152,7 @@ public class CustomLTAListActivityAdapter extends RecyclerView.Adapter<CustomLTA
                 public void onClick(View view) {
                     final int position = getAdapterPosition();
                     LtaListActivity.EmployeeType = "Employee";
-                    LtaListActivity.mediclaim_status = ltaModelArrayList.get(position).getLta_status();
+                    LtaListActivity.mediclaim_status = ltaModelArrayList.get(position).getLta_application_status();
                     LtaListActivity.new_create_yn = 0;
 //                    od_request_id = outDoorListModelArrayList.get(position).getOd_request_id();
                     Intent i = new Intent(context, LtaRequestActivity.class);

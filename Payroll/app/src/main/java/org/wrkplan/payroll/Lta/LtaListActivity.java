@@ -63,8 +63,8 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
         recycler_view.setHasFixedSize(true);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         //==========Recycler code initializing and setting layoutManager ends======
-//        loadData();
-        load_temp_data();
+        loadData();
+//        load_temp_data();
 
         tv_button_subordinate.setOnClickListener(this);
         tv_btn_new_rqst.setOnClickListener(this);
@@ -91,7 +91,7 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public void load_temp_data(){
+    /*public void load_temp_data(){
         if(!ltaModelArrayList.isEmpty()){
             ltaModelArrayList.clear();
         }
@@ -113,10 +113,10 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
         ltaModelArrayList.add(ltaModel1);
 
         recycler_view.setAdapter(customLTAListActivityAdapter);
-    }
+    }*/
     //===========Code to get data from api using volley and load data to recycler view, starts==========
-   /* public void loadData(){
-        String url = Url.BASEURL()+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
+    public void loadData(){
+        String url = Url.BASEURL()+"lta/list/"+userSingletonModel.getCorporate_id()+"/employee/"+userSingletonModel.getEmployee_id();
         Log.d("listurl-=>",url);
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/52";
         final ProgressDialog loading = ProgressDialog.show(LtaListActivity.this, "Loading", "Please wait...", true, false);
@@ -141,8 +141,8 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
     }
     public void getResponseData(String response){
         try {
-            if(!outdoorListActivityArrayList.isEmpty()){
-                outdoorListActivityArrayList.clear();
+            if(!ltaModelArrayList.isEmpty()){
+                ltaModelArrayList.clear();
             }
             JSONObject jsonObject = new JSONObject(response);
             Log.d("jsonData-=>",jsonObject.toString());
@@ -150,30 +150,24 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
             if(jsonObject1.getString("status").contentEquals("true")){
                 ll_recycler.setVisibility(View.VISIBLE);
                 tv_nodata.setVisibility(View.GONE);
-                JSONArray jsonArray = jsonObject.getJSONArray("request_list");
+                JSONArray jsonArray = jsonObject.getJSONArray("lta_list");
                 for(int i=0; i<jsonArray.length(); i++){
                     JSONObject jsonObject2 = jsonArray.getJSONObject(i);
-                    OutDoorListModel outDoorListModel = new OutDoorListModel();
-                    outDoorListModel.setOd_request_no(jsonObject2.getString("od_request_no"));
-                    outDoorListModel.setOd_request_id(jsonObject2.getString("od_request_id"));
-                    outDoorListModel.setOd_request_date(jsonObject2.getString("od_request_date"));
-                    outDoorListModel.setEmployee_id(jsonObject2.getString("employee_id"));
-                    outDoorListModel.setEmployee_name(jsonObject2.getString("employee_name"));
-                    outDoorListModel.setFrom_date(jsonObject2.getString("from_date"));
-                    outDoorListModel.setTo_date(jsonObject2.getString("to_date"));
-                    outDoorListModel.setTotal_days(jsonObject2.getString("total_days"));
-                    outDoorListModel.setDescription(jsonObject2.getString("description"));
-                    outDoorListModel.setSupervisor_remark(jsonObject2.getString("supervisor_remark"));
-                    outDoorListModel.setOd_status(jsonObject2.getString("od_status"));
-                    outDoorListModel.setApproved_by_id(jsonObject2.getString("approved_by_id"));
-                    outDoorListModel.setApproved_by_id(jsonObject2.getString("approved_by_id"));
-                    outDoorListModel.setApproved_by_name(jsonObject2.getString("approved_by_name"));
-                    outDoorListModel.setApproved_date(jsonObject2.getString("approved_date"));
-                    outdoorListActivityArrayList.add(outDoorListModel);
+                    LTAModel ltaModel = new LTAModel();
+                    ltaModel.setLta_application_id(jsonObject2.getString("lta_application_id"));
+                    ltaModel.setLta_application_no(jsonObject2.getString("lta_application_no"));
+                    ltaModel.setEmployee_id(jsonObject2.getString("employee_id"));
+                    ltaModel.setDate_from(jsonObject2.getString("date_from"));
+                    ltaModel.setEmployee_name(jsonObject2.getString("employee_name"));
+                    ltaModel.setDate_to(jsonObject2.getString("date_to"));
+                    ltaModel.setLta_amount(String.valueOf(jsonObject2.getDouble("lta_amount")));
+                    ltaModel.setLta_application_status(jsonObject2.getString("lta_application_status"));
+
+                    ltaModelArrayList.add(ltaModel);
 
                 }
 //                recycler_view.setAdapter(new CustomOutdoorListAdapter(OutdoorListActivity.this, outdoorListActivityArrayList));
-                recycler_view.setAdapter(customOutdoorListAdapter);
+                recycler_view.setAdapter(customLTAListActivityAdapter);
             }else if(jsonObject1.getString("status").contentEquals("false")){
                 ll_recycler.setVisibility(View.GONE);
                 tv_nodata.setVisibility(View.VISIBLE);
@@ -183,7 +177,7 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }*/
+    }
     //===========Code to get data from api and load data to recycler view, ends==========
 
 
