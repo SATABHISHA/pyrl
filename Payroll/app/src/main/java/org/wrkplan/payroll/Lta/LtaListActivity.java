@@ -75,8 +75,8 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()){
             case R.id.tv_button_subordinate:
                 new_create_yn = 0;
-                /*Intent i = new Intent(LtaListActivity.this, LtaRequestActivity.class);
-                startActivity(i);*/
+                Intent i = new Intent(LtaListActivity.this, SubordinateLtaListActivity.class);
+                startActivity(i);
                 EmployeeType = "Subordinate";
                 break;
             case R.id.tv_btn_new_rqst:

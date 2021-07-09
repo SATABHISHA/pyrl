@@ -108,6 +108,8 @@
 
         <activity android:name=".Lta.LtaListActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".Lta.SubordinateLtaListActivity"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".Lta.LtaRequestActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".Lta.LtaDocumentsActivity"
