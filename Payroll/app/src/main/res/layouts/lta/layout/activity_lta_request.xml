@@ -484,6 +484,7 @@
                                 android:layout_gravity="center"
                                 android:textStyle="normal"/>
                             <TextView
+                                android:id="@+id/tv_dayscount_alert_title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"

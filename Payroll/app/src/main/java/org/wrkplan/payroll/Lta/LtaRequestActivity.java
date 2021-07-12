@@ -3,6 +3,7 @@ package org.wrkplan.payroll.Lta;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -53,7 +54,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     Button btn_back, btn_cancel, btn_return, btn_approve, btn_submit, btn_save;
     EditText edt_from_date_select, edt_to_date_select, ed_lta_amount, ed_detail, ed_approved_amount, ed_supervisor_remark, ed_final_supervisor_remark;
     ImageButton imgBtnCalenderFrom, imgBtnCalenderTo;
-    TextView tv_total_days, tv_docs;
+    TextView tv_total_days, tv_docs, tv_dayscount_alert_title;
     final Calendar myCalendarFromDate = Calendar.getInstance();
     final Calendar myCalendarToDate = Calendar.getInstance();
     Integer flag_datefield_check = 1;
@@ -81,6 +82,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         tv_to_year_lta_limit = findViewById(R.id.tv_to_year_lta_limit);
         tv_total_lta_amount = findViewById(R.id.tv_total_lta_amount);
         tv_remaining_lta_amount = findViewById(R.id.tv_remaining_lta_amount);
+        tv_dayscount_alert_title = findViewById(R.id.tv_dayscount_alert_title);
 
         tv_total_days = findViewById(R.id.tv_total_days);
 
@@ -109,6 +111,9 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 
         LoadButtons();
         tv_docs.setText(String.valueOf(ltaDocumentsModelArrayList.size())+" Doc(s)");
+        if (LtaListActivity.new_create_yn == 1) {
+
+        }
         if (LtaListActivity.new_create_yn == 0) {
             loadData(LtaListActivity.lta_application_id);
         }
@@ -331,6 +336,11 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 
         } catch (Exception exception) {
             Log.e("DIDN'T WORK", "exception " + exception);
+        }
+        if (Integer.parseInt(dayDifference) < 5){
+           tv_dayscount_alert_title.setTextColor(Color.parseColor("#FF0000"));
+        }else{
+            tv_dayscount_alert_title.setTextColor(Color.parseColor("#717171"));
         }
         return dayDifference;
     }
