@@ -1,10 +1,12 @@
 package org.wrkplan.payroll.Lta;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -15,12 +17,14 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -30,15 +34,18 @@ import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.Login.LoginActivity;
 import org.wrkplan.payroll.Model.LtaDocumentsModel;
 import org.wrkplan.payroll.Model.UserSingletonModel;
+import org.wrkplan.payroll.OutDoorDuty.CustomOutdoorListAdapter;
 import org.wrkplan.payroll.OutDoorDuty.OutDoorRequestActivity;
 import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogListActivity;
 import org.wrkplan.payroll.R;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class LtaRequestActivity extends AppCompatActivity implements View.OnClickListener {
@@ -52,6 +59,8 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     Integer flag_datefield_check = 1;
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,6 +104,9 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         btn_submit.setOnClickListener(this);
 
         LoadButtons();
+        if (LtaListActivity.new_create_yn == 0) {
+            loadData(LtaListActivity.lta_application_id);
+        }
     }
 
     //=====onClick code starts=====
@@ -479,6 +491,193 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     //=====function to load data, code starts========
     public void loadData(String application_id){
 
+//        String url = Config.BaseUrlEpharma + "documents/list" ;
+//        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
+        String url = Url.BASEURL()+"lta/detail/"+userSingletonModel.getCorporate_id()+"/"+ application_id;
+        Log.d("url-=>",url);
+//        String url = Url.BASEURL+"od/request/detail/20/1/1";
+        final ProgressDialog loading = ProgressDialog.show(LtaRequestActivity.this, "Loading", "Please wait...", true, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
+                Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        getResponseData(response);
+                        loading.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                error.printStackTrace();
+            }
+        });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+    }
+
+    public void getResponseData(String response){
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            Log.d("jsonData-=>",jsonObject.toString());
+            JSONObject jsonObject1 = jsonObject.getJSONObject("response");
+            if(jsonObject1.getString("status").contentEquals("true")){
+                JSONObject jsonObject2 = jsonObject.getJSONObject("fields");
+                tv_employee_name.setText(jsonObject2.getString("employee_name"));
+
+                tv_lta_requisition_status.setText(jsonObject2.getString("application_status"));
+                tv_lta_no.setText(jsonObject2.getString("lta_application_no"));
+                tv_from_year_lta_limit.setText(jsonObject2.getString("year_from_limit"));
+                tv_to_year_lta_limit.setText(jsonObject2.getString("year_to_limit"));
+                tv_total_lta_amount.setText(jsonObject2.getString("lta_total_limit"));
+                tv_remaining_lta_amount.setText(jsonObject2.getString("lta_used_amount"));
+                ed_lta_amount.setText(jsonObject2.getString("lta_amount"));
+                ed_detail.setText(jsonObject2.getString("description"));
+                edt_from_date_select.setText(jsonObject2.getString("date_from"));
+                edt_to_date_select.setText(jsonObject2.getString("date_to"));
+                ed_approved_amount.setText(jsonObject2.getString("approved_lta_amount"));
+                ed_supervisor_remark.setText(jsonObject2.getString("supervisor_remark"));
+                ed_final_supervisor_remark.setText(jsonObject2.getString("final_supervisor_remark"));
+                int total_days = jsonObject2.getInt("total_days");
+                tv_total_days.setText(String.valueOf(total_days));
+
+                if(jsonObject2.getString("application_status").contentEquals("Saved")){
+//                    od_request_id = jsonObject2.getInt("od_request_id"); //--added on 29th May, it would be 0 for new creation
+
+                    imgBtnCalenderTo.setVisibility(View.VISIBLE);
+                    imgBtnCalenderFrom.setVisibility(View.VISIBLE);
+
+                    edt_from_date_select.setEnabled(true);
+                    edt_from_date_select.setFocusable(true);
+
+                    edt_to_date_select.setEnabled(true);
+                    edt_to_date_select.setFocusable(true);
+
+                    ed_lta_amount.setEnabled(true);
+                    ed_lta_amount.setFocusable(true);
+
+                    ed_detail.setEnabled(true);
+                    ed_detail.setFocusable(true);
+
+                    ed_approved_amount.setEnabled(false);
+                    ed_approved_amount.setFocusable(false);
+
+                    ed_supervisor_remark.setEnabled(false);
+                    ed_supervisor_remark.setFocusable(false);
+
+                    ed_final_supervisor_remark.setEnabled(false);
+                    ed_final_supervisor_remark.setFocusable(false);
+
+
+                    btn_save.setClickable(true);
+                    btn_save.setAlpha(1.0f);
+                }else if(jsonObject2.getString("application_status").contentEquals("Returned")){
+
+//                    od_request_id = jsonObject2.getInt("od_request_id"); //--added on 29th May, it would be 0 for new creation
+
+                    imgBtnCalenderTo.setVisibility(View.VISIBLE);
+                    imgBtnCalenderFrom.setVisibility(View.VISIBLE);
+
+                    edt_from_date_select.setEnabled(true);
+                    edt_from_date_select.setFocusable(true);
+
+                    edt_to_date_select.setEnabled(true);
+                    edt_to_date_select.setFocusable(true);
+
+                    ed_lta_amount.setEnabled(true);
+                    ed_lta_amount.setFocusable(true);
+
+                    ed_detail.setEnabled(true);
+                    ed_detail.setFocusable(true);
+
+                    ed_approved_amount.setEnabled(false);
+                    ed_approved_amount.setFocusable(false);
+
+                    ed_supervisor_remark.setEnabled(false);
+                    ed_supervisor_remark.setFocusable(false);
+
+                    ed_final_supervisor_remark.setEnabled(false);
+                    ed_final_supervisor_remark.setFocusable(false);
+
+
+                    btn_save.setClickable(true);
+                    btn_save.setAlpha(1.0f);
+
+
+                }else if(jsonObject2.getString("application_status").contentEquals("Approved")){
+
+//                    od_request_id = jsonObject2.getInt("od_request_id"); //--added on 29th May, it would be 0 for new creation
+
+                    imgBtnCalenderTo.setVisibility(View.GONE);
+                    imgBtnCalenderFrom.setVisibility(View.GONE);
+
+                    edt_from_date_select.setEnabled(false);
+                    edt_from_date_select.setFocusable(false);
+
+                    edt_to_date_select.setEnabled(false);
+                    edt_to_date_select.setFocusable(false);
+
+                    ed_lta_amount.setEnabled(false);
+                    ed_lta_amount.setFocusable(false);
+
+                    ed_detail.setEnabled(false);
+                    ed_detail.setFocusable(false);
+
+                    ed_approved_amount.setEnabled(false);
+                    ed_approved_amount.setFocusable(false);
+
+                    ed_supervisor_remark.setEnabled(false);
+                    ed_supervisor_remark.setFocusable(false);
+
+                    ed_final_supervisor_remark.setEnabled(false);
+                    ed_final_supervisor_remark.setFocusable(false);
+
+
+                    btn_save.setClickable(true);
+                    btn_save.setAlpha(1.0f);
+
+
+                }else {
+                    imgBtnCalenderTo.setVisibility(View.GONE);
+                    imgBtnCalenderFrom.setVisibility(View.GONE);
+
+                    edt_from_date_select.setEnabled(false);
+                    edt_from_date_select.setFocusable(false);
+
+                    edt_to_date_select.setEnabled(false);
+                    edt_to_date_select.setFocusable(false);
+
+                    ed_lta_amount.setEnabled(false);
+                    ed_lta_amount.setFocusable(false);
+
+                    ed_detail.setEnabled(false);
+                    ed_detail.setFocusable(false);
+
+                    ed_approved_amount.setEnabled(true);
+                    ed_approved_amount.setFocusable(true);
+
+                    ed_supervisor_remark.setEnabled(true);
+                    ed_supervisor_remark.setFocusable(true);
+
+                    ed_final_supervisor_remark.setEnabled(true);
+                    ed_final_supervisor_remark.setFocusable(true);
+
+                    btn_save.setClickable(false);
+                    btn_save.setAlpha(0.7f);
+
+                }
+
+
+            }else if(jsonObject1.getString("status").contentEquals("false")){
+               /* ll_recycler.setVisibility(View.GONE);
+                tv_nodata.setVisibility(View.VISIBLE);
+                tv_nodata.setText(jsonObject1.getString("message"));*/
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
     //=====function to load data, code ends========
 }

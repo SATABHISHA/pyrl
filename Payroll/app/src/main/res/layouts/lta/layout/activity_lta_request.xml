@@ -61,7 +61,8 @@
                     android:layout_marginTop="8dp"
                     android:padding="5dp"
                     android:textColor="#3C3C3C"
-                    android:gravity="top"
+                    android:gravity="left|center_vertical"
+                    android:textSize="15sp"
                     android:background="@drawable/layout6"/>
 
                 <TextView
@@ -78,7 +79,8 @@
                     android:layout_marginTop="8dp"
                     android:padding="5dp"
                     android:textColor="#3C3C3C"
-                    android:gravity="top"
+                    android:gravity="left|center_vertical"
+                    android:textSize="15sp"
                     android:background="@drawable/layout6"/>
                     <!--From year/to year, code starts -->
                     <LinearLayout
@@ -200,7 +202,8 @@
                                 android:layout_marginTop="8dp"
                                 android:padding="5dp"
                                 android:textColor="#3C3C3C"
-                                android:gravity="left"
+                                android:gravity="left|center_vertical"
+                                android:textSize="15sp"
                                 android:enabled="false"
                                 android:background="@drawable/layout6"/>
                         </LinearLayout>
@@ -223,7 +226,8 @@
                                 android:layout_marginTop="8dp"
                                 android:padding="5dp"
                                 android:textColor="#3C3C3C"
-                                android:gravity="left"
+                                android:gravity="left|center_vertical"
+                                android:textSize="15sp"
                                 android:enabled="false"
                                 android:background="@drawable/layout6"/>
                         </LinearLayout>
@@ -256,7 +260,8 @@
                                 android:layout_marginTop="8dp"
                                 android:padding="5dp"
                                 android:textColor="#3C3C3C"
-                                android:gravity="right"
+                                android:gravity="right|center_vertical"
+                                android:textSize="15sp"
                                 android:enabled="false"
                                 android:background="@drawable/layout6"/>
                         </LinearLayout>
@@ -279,7 +284,8 @@
                                 android:layout_marginTop="8dp"
                                 android:padding="5dp"
                                 android:textColor="#3C3C3C"
-                                android:gravity="right"
+                                android:gravity="right|center_vertical"
+                                android:textSize="15sp"
                                 android:enabled="false"
                                 android:background="@drawable/layout6"/>
                         </LinearLayout>
@@ -300,7 +306,8 @@
                         android:padding="5dp"
                         android:inputType="number"
                         android:textColor="#3C3C3C"
-                        android:gravity="right"
+                        android:gravity="right|center_vertical"
+                        android:textSize="15sp"
                         android:layout_marginRight="10dp"
                         android:background="@drawable/layout6"/>
 
@@ -320,6 +327,7 @@
                         android:layout_marginTop="8dp"
                         android:padding="5dp"
                         android:gravity="top"
+                        android:textSize="15sp"
                         android:textColor="#3C3C3C"
                         android:background="@drawable/layout6"/>
 
@@ -515,6 +523,7 @@
                         android:background="@drawable/layout11"
                         android:padding="5dp"
                         android:layout_centerVertical="true"
+                        android:textSize="15sp"
                         android:textColor="#000" />
                     <TextView
                         android:id="@+id/tv_document_view"
@@ -548,7 +557,8 @@
                         android:layout_marginTop="8dp"
                         android:padding="5dp"
                         android:textColor="#3C3C3C"
-                        android:gravity="left"
+                        android:gravity="left|center_vertical"
+                        android:textSize="15sp"
                         android:background="@drawable/layout6"/>
                 <TextView
                     android:id="@+id/tv_approved_amount"
@@ -565,7 +575,9 @@
                     android:layout_marginTop="8dp"
                     android:padding="5dp"
                     android:textColor="#3C3C3C"
-                    android:gravity="end"
+                    android:inputType="number"
+                    android:gravity="end|center_vertical"
+                    android:textSize="15sp"
                     android:background="@drawable/layout6"/>
 
                 <TextView
@@ -581,6 +593,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_marginTop="8dp"
+                        android:textSize="15sp"
                         android:padding="5dp"
                         android:gravity="top"
                         android:textColor="#3C3C3C"
@@ -591,6 +604,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Final Supervisor Remark "
+                        android:textSize="15sp"
                         android:layout_marginTop="8dp"
                         android:textColor="#000"
                         ></TextView>
