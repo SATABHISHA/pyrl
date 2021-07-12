@@ -15,12 +15,28 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Login.LoginActivity;
+import org.wrkplan.payroll.Model.LtaDocumentsModel;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.OutDoorDuty.OutDoorRequestActivity;
+import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogListActivity;
 import org.wrkplan.payroll.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -35,6 +51,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     final Calendar myCalendarToDate = Calendar.getInstance();
     Integer flag_datefield_check = 1;
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
+    public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +91,8 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 
         tv_document_view.setOnClickListener(this);
         btn_back.setOnClickListener(this);
+        btn_save.setOnClickListener(this);
+        btn_submit.setOnClickListener(this);
 
         LoadButtons();
     }
@@ -97,6 +116,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
             case R.id.btn_submit:
                 break;
             case R.id.btn_save:
+                makeJsonObjectAndSaveDataToServer("0",edt_from_date_select.getText().toString(),edt_to_date_select.getText().toString(),tv_total_days.getText().toString(),ed_lta_amount.getText().toString(),"0.0",ed_detail.getText().toString(),ed_supervisor_remark.getText().toString(),"Saved","0");
                 break;
             case R.id.imgBtnCalenderFrom:
                 calendarPicker(myCalendarFromDate,edt_from_date_select, "from_date");
@@ -375,8 +395,84 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     //---------Calendar code ends--------
 
     //=========function to make json object and save data, code starts======
-    public void makeJsonObjectAndSaveDataToServer(){
+    public void makeJsonObjectAndSaveDataToServer(String lta_application_id, String date_from, String date_to, String total_days, String lta_amount, String approved_lta_amount, String description, String supervisor_remark, String lta_application_status, String approved_by_id){
 
+        final JSONObject DocumentElementobj = new JSONObject();
+        JSONArray req = new JSONArray();
+        JSONObject reqObjdt = new JSONObject();
+        try {
+                for (int i = 0; i < ltaDocumentsModelArrayList.size(); i++) {
+                    JSONObject reqObj = new JSONObject();
+//                reqObj.put("od_duty_task_head_id", Integer.parseInt(outDoorTaskModelArrayList.get(i).getOd_duty_task_detail_id()));
+                    reqObj.put("file_name", ltaDocumentsModelArrayList.get(i).getLta_filename());
+                    reqObj.put("file_base64", ltaDocumentsModelArrayList.get(i).getLta_file_base64());
+                    req.put(reqObj);
+                }
+            DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
+            DocumentElementobj.put("lta_application_id", Integer.parseInt(lta_application_id));
+            DocumentElementobj.put("employee_id", Integer.parseInt(userSingletonModel.getEmployee_id()));
+            DocumentElementobj.put("date_from", date_from);
+            DocumentElementobj.put("date_to", date_to);
+            DocumentElementobj.put("total_days", Integer.parseInt(total_days));
+            DocumentElementobj.put("lta_amount", Double.parseDouble(lta_amount));
+            DocumentElementobj.put("approved_lta_amount", Double.parseDouble(approved_lta_amount));
+            DocumentElementobj.put("description", description);
+            DocumentElementobj.put("supervisor_remark", supervisor_remark);
+            DocumentElementobj.put("lta_application_status", lta_application_status);
+            DocumentElementobj.put("approved_by_id", Integer.parseInt(approved_by_id));
+            /*DocumentElementobj.put("entry_user", LoginActivity.entry_user);
+            DocumentElementobj.put("saved_from_mobile_app", 1);*/
+            DocumentElementobj.put("documents", req);
+
+            Log.d("jsontesting-=>",DocumentElementobj.toString());
+            //------calling api to save data
+            JsonObjectRequest request_json = null;
+            String URL = Url.BASEURL()+"lta/save";
+            Log.d("ltaurl-=>",URL);
+            try {
+                request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    //Process os success response
+                                    JSONObject jsonObj = null;
+                                    try{
+                                        String responseData = response.toString();
+                                        String val = "";
+                                        JSONObject resobj = new JSONObject(responseData);
+                                        Log.d("getData",resobj.toString());
+
+                                        if(resobj.getString("status").contentEquals("true")){
+                                            Toast.makeText(getApplicationContext(),resobj.getString("message"),Toast.LENGTH_LONG).show();
+                                            finish();
+                                            startActivity(getIntent());
+                                        }else{
+                                            Toast.makeText(getApplicationContext(),resobj.getString("message"),Toast.LENGTH_LONG).show();
+                                        }
+                                    }catch (JSONException e){
+                                        //  loading.dismiss();
+                                        e.printStackTrace();
+                                    }
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.e("Error: ", error.getMessage());
+                    }
+                });
+                RequestQueue requestQueue = Volley.newRequestQueue(this);
+                requestQueue.add(request_json);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     //=========function to make json object and save data, code ends======
 }

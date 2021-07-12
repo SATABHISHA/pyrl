@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class LtaDocumentsActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView img_add;
     Uri uripdf=null;
-    public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList = new ArrayList<>();
+//    public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList = new ArrayList<>();
     public static LinearLayout ll_recycler;
     public static TextView tv_nodata, tv_button_done, tv_button_cancel;
     public static RecyclerView recycler_view;
@@ -47,7 +47,7 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
         tv_button_done = findViewById(R.id.tv_button_done);
         tv_button_cancel = findViewById(R.id.tv_button_cancel);
 
-        customLtaDocumentsActivityAdapter = new CustomLtaDocumentsActivityAdapter(this,ltaDocumentsModelArrayList);
+        customLtaDocumentsActivityAdapter = new CustomLtaDocumentsActivityAdapter(this,LtaRequestActivity.ltaDocumentsModelArrayList);
 
 
 
@@ -71,6 +71,7 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
                 startActivityForResult(Intent.createChooser(intent,"Select PDF file"),1);
                 break;
             case R.id.tv_button_done:
+                startActivity(new Intent(LtaDocumentsActivity.this, LtaRequestActivity.class));
                 break;
             case R.id.tv_button_cancel:
                 break;
@@ -83,7 +84,7 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
         tv_nodata.setVisibility(View.GONE);
 
         recycler_view.setAdapter(customLtaDocumentsActivityAdapter);*/
-        if(!ltaDocumentsModelArrayList.isEmpty()){
+        if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
             ll_recycler.setVisibility(View.VISIBLE);
             tv_nodata.setVisibility(View.GONE);
 
@@ -120,7 +121,7 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
             ltaDocumentsModel.setLta_filename(getfileName(getApplicationContext(),uripdf));
             ltaDocumentsModel.setLta_file_size(getStringPDFsIZE(getApplicationContext(),uripdf));
 
-            ltaDocumentsModelArrayList.add(ltaDocumentsModel);
+            LtaRequestActivity.ltaDocumentsModelArrayList.add(ltaDocumentsModel);
 
 //          loadDocuments();
             load_data();
