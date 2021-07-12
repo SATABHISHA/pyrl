@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.OutDoorDuty.OutDoorRequestActivity;
 import org.wrkplan.payroll.R;
 
@@ -25,14 +26,16 @@ import java.util.Date;
 import java.util.Locale;
 
 public class LtaRequestActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView tv_document_view;
+    TextView tv_document_view, tv_lta_no, tv_employee_name, tv_from_year_lta_limit, tv_to_year_lta_limit, tv_total_lta_amount, tv_remaining_lta_amount, tv_lta_requisition_status;
     Button btn_back, btn_cancel, btn_return, btn_approve, btn_submit, btn_save;
-    EditText edt_from_date_select, edt_to_date_select;
+    EditText edt_from_date_select, edt_to_date_select, ed_lta_amount, ed_detail, ed_approved_amount, ed_supervisor_remark, ed_final_supervisor_remark;
     ImageButton imgBtnCalenderFrom, imgBtnCalenderTo;
     TextView tv_total_days;
     final Calendar myCalendarFromDate = Calendar.getInstance();
     final Calendar myCalendarToDate = Calendar.getInstance();
     Integer flag_datefield_check = 1;
+    UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +48,26 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         btn_submit = findViewById(R.id.btn_submit);
         btn_save = findViewById(R.id.btn_save);
         tv_document_view = findViewById(R.id.tv_document_view);
+        tv_lta_no = findViewById(R.id.tv_lta_no);
+        tv_employee_name = findViewById(R.id.tv_employee_name);
+        tv_from_year_lta_limit = findViewById(R.id.tv_from_year_lta_limit);
+        tv_to_year_lta_limit = findViewById(R.id.tv_to_year_lta_limit);
+        tv_total_lta_amount = findViewById(R.id.tv_total_lta_amount);
+        tv_remaining_lta_amount = findViewById(R.id.tv_remaining_lta_amount);
+
         tv_total_days = findViewById(R.id.tv_total_days);
 
+        ed_lta_amount = findViewById(R.id.ed_lta_amount);
+        ed_detail = findViewById(R.id.ed_detail);
         edt_from_date_select = findViewById(R.id.edt_from_date_select);
         edt_to_date_select = findViewById(R.id.edt_to_date_select);
         imgBtnCalenderFrom = findViewById(R.id.imgBtnCalenderFrom);
         imgBtnCalenderTo = findViewById(R.id.imgBtnCalenderTo);
+
+        tv_lta_requisition_status = findViewById(R.id.tv_lta_requisition_status);
+        ed_approved_amount = findViewById(R.id.ed_approved_amount);
+        ed_supervisor_remark = findViewById(R.id.ed_supervisor_remark);
+        ed_final_supervisor_remark = findViewById(R.id.ed_final_supervisor_remark);
 
         imgBtnCalenderFrom.setOnClickListener(this);
         imgBtnCalenderTo.setOnClickListener(this);
@@ -95,6 +112,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 
 
         if (LtaListActivity.EmployeeType == "Employee"){
+            tv_employee_name.setText(userSingletonModel.getFull_employee_name());
 //            LabelNavBarTitle.text = "My Advance Requisition"
 //            btn_reason_select_type.isUserInteractionEnabled = true
 //            btn_reason_select_type.alpha = 1.0
@@ -355,4 +373,10 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 //        loadLocationData(sdf.format(myCalendar.getTime()));
     }
     //---------Calendar code ends--------
+
+    //=========function to make json object and save data, code starts======
+    public void makeJsonObjectAndSaveDataToServer(){
+
+    }
+    //=========function to make json object and save data, code ends======
 }

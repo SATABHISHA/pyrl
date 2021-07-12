@@ -542,7 +542,7 @@
                         ></TextView>
 
                     <TextView
-                        android:id="@+id/ed_lta_requisition_status"
+                        android:id="@+id/tv_lta_requisition_status"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="8dp"
