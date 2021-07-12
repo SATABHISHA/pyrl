@@ -475,4 +475,10 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         }
     }
     //=========function to make json object and save data, code ends======
+
+    //=====function to load data, code starts========
+    public void loadData(String application_id){
+
+    }
+    //=====function to load data, code ends========
 }

@@ -45,7 +45,7 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
     RecyclerView recycler_view;
     public static int new_create_yn = 1;
     public static CustomLTAListActivityAdapter customLTAListActivityAdapter;
-    public static String EmployeeType = "", mediclaim_status = "";
+    public static String EmployeeType = "", mediclaim_status = "", lta_application_id = "";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
