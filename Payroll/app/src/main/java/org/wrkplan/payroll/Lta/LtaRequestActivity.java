@@ -53,7 +53,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     Button btn_back, btn_cancel, btn_return, btn_approve, btn_submit, btn_save;
     EditText edt_from_date_select, edt_to_date_select, ed_lta_amount, ed_detail, ed_approved_amount, ed_supervisor_remark, ed_final_supervisor_remark;
     ImageButton imgBtnCalenderFrom, imgBtnCalenderTo;
-    TextView tv_total_days;
+    TextView tv_total_days, tv_docs;
     final Calendar myCalendarFromDate = Calendar.getInstance();
     final Calendar myCalendarToDate = Calendar.getInstance();
     Integer flag_datefield_check = 1;
@@ -74,6 +74,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         btn_submit = findViewById(R.id.btn_submit);
         btn_save = findViewById(R.id.btn_save);
         tv_document_view = findViewById(R.id.tv_document_view);
+        tv_docs = findViewById(R.id.tv_docs);
         tv_lta_no = findViewById(R.id.tv_lta_no);
         tv_employee_name = findViewById(R.id.tv_employee_name);
         tv_from_year_lta_limit = findViewById(R.id.tv_from_year_lta_limit);
@@ -100,10 +101,14 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 
         tv_document_view.setOnClickListener(this);
         btn_back.setOnClickListener(this);
+        btn_cancel.setOnClickListener(this);
+        btn_return.setOnClickListener(this);
+        btn_approve.setOnClickListener(this);
         btn_save.setOnClickListener(this);
         btn_submit.setOnClickListener(this);
 
         LoadButtons();
+        tv_docs.setText(String.valueOf(ltaDocumentsModelArrayList.size())+" Doc(s)");
         if (LtaListActivity.new_create_yn == 0) {
             loadData(LtaListActivity.lta_application_id);
         }
@@ -118,6 +123,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 startActivity(new Intent(LtaRequestActivity.this,LtaDocumentsActivity.class));
                 break;
             case R.id.btn_back:
+                startActivity(new Intent(LtaRequestActivity.this,LtaListActivity.class));
                 break;
             case R.id.btn_cancel:
                 break;

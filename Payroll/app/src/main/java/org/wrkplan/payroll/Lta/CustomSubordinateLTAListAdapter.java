@@ -94,7 +94,7 @@ public class CustomSubordinateLTAListAdapter extends RecyclerView.Adapter<Custom
                 @Override
                 public void onClick(View view) {
                     final int position = getAdapterPosition();
-                    LtaListActivity.EmployeeType = "Subordinate";
+                    LtaListActivity.EmployeeType = "Supervisor";
                     LtaListActivity.mediclaim_status = ltaModelArrayList.get(position).getLta_application_status();
                     LtaListActivity.new_create_yn = 0;
                     LtaListActivity.lta_application_id = ltaModelArrayList.get(position).getLta_application_id();
