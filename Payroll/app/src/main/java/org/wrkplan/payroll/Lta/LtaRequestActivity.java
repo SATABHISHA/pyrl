@@ -526,8 +526,8 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                         }
                     }*/
 
-                    btn_save.setClickable(true);
-                    btn_save.setAlpha(1.0f);
+                   /* btn_save.setClickable(true);
+                    btn_save.setAlpha(1.0f);*/ //--commented on 13h July
 
 
                     if (!edt_from_date_select.getText().toString().isEmpty() && !edt_to_date_select.getText().toString().isEmpty()) {
