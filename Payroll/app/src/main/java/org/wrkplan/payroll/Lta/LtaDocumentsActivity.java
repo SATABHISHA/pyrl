@@ -57,6 +57,8 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         //==========Recycler code initializing and setting layoutManager ends======
         img_add.setOnClickListener(this);
+        tv_button_done.setOnClickListener(this);
+        tv_button_cancel.setOnClickListener(this);
         load_data();
     }
 
@@ -74,6 +76,10 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
                 startActivity(new Intent(LtaDocumentsActivity.this, LtaRequestActivity.class));
                 break;
             case R.id.tv_button_cancel:
+                if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
+                    LtaRequestActivity.ltaDocumentsModelArrayList.clear();
+                }
+                startActivity(new Intent(LtaDocumentsActivity.this, LtaRequestActivity.class));
                 break;
         }
 

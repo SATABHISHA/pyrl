@@ -112,7 +112,29 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         LoadButtons();
         tv_docs.setText(String.valueOf(ltaDocumentsModelArrayList.size())+" Doc(s)");
         if (LtaListActivity.new_create_yn == 1) {
+            imgBtnCalenderTo.setVisibility(View.VISIBLE);
+            imgBtnCalenderFrom.setVisibility(View.VISIBLE);
 
+            edt_from_date_select.setEnabled(true);
+            edt_from_date_select.setFocusable(true);
+
+            edt_to_date_select.setEnabled(true);
+            edt_to_date_select.setFocusable(true);
+
+            ed_lta_amount.setEnabled(true);
+            ed_lta_amount.setFocusable(true);
+
+            ed_detail.setEnabled(true);
+            ed_detail.setFocusable(true);
+
+            ed_approved_amount.setEnabled(false);
+            ed_approved_amount.setFocusable(false);
+
+            ed_supervisor_remark.setEnabled(false);
+            ed_supervisor_remark.setFocusable(false);
+
+            ed_final_supervisor_remark.setEnabled(false);
+            ed_final_supervisor_remark.setFocusable(false);
         }
         if (LtaListActivity.new_create_yn == 0) {
             loadData(LtaListActivity.lta_application_id);
@@ -128,6 +150,9 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 startActivity(new Intent(LtaRequestActivity.this,LtaDocumentsActivity.class));
                 break;
             case R.id.btn_back:
+                if(!ltaDocumentsModelArrayList.isEmpty()){
+                    ltaDocumentsModelArrayList.clear();
+                }
                 startActivity(new Intent(LtaRequestActivity.this,LtaListActivity.class));
                 break;
             case R.id.btn_cancel:

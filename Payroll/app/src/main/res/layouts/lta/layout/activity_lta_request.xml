@@ -617,7 +617,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_marginTop="8dp"
-                        android:text="15sp"
+                        android:textSize="15sp"
                         android:padding="5dp"
                         android:gravity="top"
                         android:textColor="#3C3C3C"
