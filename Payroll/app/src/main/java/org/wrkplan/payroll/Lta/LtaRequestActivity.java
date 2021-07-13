@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -135,12 +137,136 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 
             ed_final_supervisor_remark.setEnabled(false);
             ed_final_supervisor_remark.setFocusable(false);
+
+            buttonEnableDisable();
+
         }
         if (LtaListActivity.new_create_yn == 0) {
             loadData(LtaListActivity.lta_application_id);
         }
     }
 
+    //=====function to enable/disable buttons according to field check, code starts====
+    public void buttonEnableDisable(){
+        btn_save.setClickable(false);
+        btn_save.setAlpha(0.7f);
+
+        btn_submit.setClickable(false);
+        btn_submit.setAlpha(0.7f);
+
+        imgBtnCalenderFrom.setClickable(false);
+        imgBtnCalenderFrom.setAlpha(0.7f);
+
+        imgBtnCalenderTo.setClickable(false);
+        imgBtnCalenderTo.setAlpha(0.7f);
+
+
+        ed_lta_amount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!ed_lta_amount.getText().toString().isEmpty()){
+                    imgBtnCalenderFrom.setClickable(true);
+                    imgBtnCalenderFrom.setAlpha(1.0f);
+                    if(!edt_from_date_select.getText().toString().trim().isEmpty() &&
+                    !edt_to_date_select.getText().toString().trim().isEmpty()){
+                        btn_save.setClickable(true);
+                        btn_save.setAlpha(1.0f);
+
+                        btn_submit.setClickable(true);
+                        btn_submit.setAlpha(1.0f);
+                    }
+                }else if(ed_lta_amount.getText().toString().isEmpty()){
+                    btn_save.setClickable(false);
+                    btn_save.setAlpha(0.7f);
+
+                    btn_submit.setClickable(false);
+                    btn_submit.setAlpha(0.7f);
+
+                    imgBtnCalenderFrom.setClickable(false);
+                    imgBtnCalenderFrom.setAlpha(0.7f);
+                }
+            }
+        });
+
+        edt_from_date_select.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(!edt_from_date_select.getText().toString().isEmpty()){
+
+                    imgBtnCalenderTo.setClickable(true);
+                    imgBtnCalenderTo.setAlpha(1.0f);
+                    if(!edt_from_date_select.getText().toString().trim().isEmpty() &&
+                            !edt_to_date_select.getText().toString().trim().isEmpty()){
+                        btn_save.setClickable(true);
+                        btn_save.setAlpha(1.0f);
+
+                        btn_submit.setClickable(true);
+                        btn_submit.setAlpha(1.0f);
+                    }
+                }else if(edt_from_date_select.getText().toString().trim().isEmpty()){
+                    btn_save.setClickable(false);
+                    btn_save.setAlpha(0.7f);
+
+                    btn_submit.setClickable(false);
+                    btn_submit.setAlpha(0.7f);
+
+                    imgBtnCalenderTo.setClickable(false);
+                    imgBtnCalenderTo.setAlpha(0.7f);
+                }
+            }
+        });
+
+        edt_to_date_select.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!edt_to_date_select.getText().toString().trim().isEmpty()){
+                    btn_save.setClickable(true);
+                    btn_save.setAlpha(1.0f);
+
+                    btn_submit.setClickable(true);
+                    btn_submit.setAlpha(1.0f);
+                }else if(edt_to_date_select.getText().toString().trim().isEmpty()){
+                    btn_save.setClickable(false);
+                    btn_save.setAlpha(0.7f);
+
+                    btn_submit.setClickable(false);
+                    btn_submit.setAlpha(0.7f);
+                }
+            }
+        });
+    }
+    //=====function to enable/disable buttons according to field check, code ends====
     //=====onClick code starts=====
     @Override
     public void onClick(View v) {
@@ -162,9 +288,18 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
             case R.id.btn_approve:
                 break;
             case R.id.btn_submit:
+                if (LtaListActivity.new_create_yn == 1) {
+                    makeJsonObjectAndSaveDataToServer("0", edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), "0.0", ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Submitted", "0");
+                }else{
+                    makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), "0.0", ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Submitted", "0");
+                }
                 break;
             case R.id.btn_save:
-                makeJsonObjectAndSaveDataToServer("0",edt_from_date_select.getText().toString(),edt_to_date_select.getText().toString(),tv_total_days.getText().toString(),ed_lta_amount.getText().toString(),"0.0",ed_detail.getText().toString(),ed_supervisor_remark.getText().toString(),"Saved","0");
+                if (LtaListActivity.new_create_yn == 1) {
+                    makeJsonObjectAndSaveDataToServer("0", edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), "0.0", ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Saved", "0");
+                }else{
+                    makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), "0.0", ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Saved", "0");
+                }
                 break;
             case R.id.imgBtnCalenderFrom:
                 calendarPicker(myCalendarFromDate,edt_from_date_select, "from_date");
