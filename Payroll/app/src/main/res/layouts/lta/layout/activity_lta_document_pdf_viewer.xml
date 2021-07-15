@@ -20,7 +20,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Pdf Viewer"
+                android:text="PDF Viewer"
                 android:textColor="#ffffff"
                 android:textSize="20sp"/>
             <ImageView

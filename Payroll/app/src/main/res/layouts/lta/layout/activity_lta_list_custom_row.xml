@@ -79,8 +79,8 @@
                 android:id="@+id/tv_lta_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:layout_below="@id/tv_lta_no"
-                android:layout_toLeftOf="@id/rl_day_count"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="0dp"
@@ -88,7 +88,7 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:text="10-Jub-2021"
+                android:text="10-Jun-2021 to 12-July-2021"
                 android:textColor="#616161"
                 android:textSize="13dp" />
             <!--   <TextView
@@ -164,7 +164,7 @@
                 android:background="#ffffff"
                 android:paddingBottom="7dp"
                 android:gravity="end"
-                android:layout_toRightOf="@id/tv_lta_no"
+                android:layout_toRightOf="@+id/tv_lta_date"
                 android:layout_marginRight="20dp"
                 android:layout_toLeftOf="@id/imgbtn_delete"
                 android:layout_centerHorizontal="true"

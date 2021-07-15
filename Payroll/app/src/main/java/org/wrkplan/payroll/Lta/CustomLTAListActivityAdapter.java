@@ -81,7 +81,7 @@ public class CustomLTAListActivityAdapter extends RecyclerView.Adapter<CustomLTA
 
         if(ltaModelArrayList.get(position).getLta_application_status().contentEquals("Approved")){
             holder.tv_lta_status.setTextColor(Color.parseColor("#1e9547"));
-        }else if(ltaModelArrayList.get(position).getLta_application_status().contentEquals("Canceled")){
+        }else if(ltaModelArrayList.get(position).getLta_application_status().contentEquals("Cancelled")){
             holder.tv_lta_status.setTextColor(Color.parseColor("#ed1c24"));
         }else if(ltaModelArrayList.get(position).getLta_application_status().contentEquals("Returned")){
             holder.tv_lta_status.setTextColor(Color.parseColor("#b04d0b"));
