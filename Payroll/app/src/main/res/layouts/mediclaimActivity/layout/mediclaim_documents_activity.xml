@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/app"
+        android:background="#2e5772"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_mediclaim_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="#ffffff"
+                android:text="Mediclaim Supporting Documents"
+                android:textSize="20sp"/>
+
+        </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="25dp"
+            android:layout_above="@id/ll_button"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/img_add"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/add_icons"
+                android:layout_alignParentRight="true"></ImageView>
+
+
+
+            <View
+                android:id="@+id/view1"
+                android:layout_below="@id/img_add"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#C3C3C3"></View>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_pdf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view1"
+
+                tools:listitem="@layout/select_custom_pdf_layout_row"
+                android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
+
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/ll_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:text="Cancel"
+            android:textSize="15sp"
+            android:background="@drawable/layout6"
+            android:textColor="#504E4E"
+            />
+        <Button
+            android:id="@+id/btn_done"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Done"
+            android:textAllCaps="false"
+            android:background="@drawable/layout6"
+            android:textSize="15sp"
+            android:textColor="#504E4E"
+            />
+        </LinearLayout>
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

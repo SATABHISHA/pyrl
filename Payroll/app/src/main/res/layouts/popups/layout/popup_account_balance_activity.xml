@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/app"
+        android:background="#2e5772"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_mediclaim_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:text="Claim Amount Balance"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="#ffffff"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <RelativeLayout
+            android:id="@+id/rl_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tv_period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Period"
+                android:textSize="15sp"
+                android:textColor="#444444"></TextView>
+
+            <TextView
+                android:id="@+id/txt_period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020-2023"
+                android:layout_alignParentRight="true"
+                android:textSize="15sp"
+
+              ></TextView>
+            <TextView
+                android:id="@+id/tv_unutilized_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Unutilized Amount "
+                android:textSize="15sp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/tv_period"
+                android:textColor="#444444"></TextView>
+
+            <TextView
+                android:id="@+id/txt_unutilized_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="65258.91"
+                android:textSize="15sp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:textAlignment="viewEnd"
+                android:layout_below="@id/tv_period"
+               ></TextView>
+
+            <TextView
+                android:id="@+id/tv_1years"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020-2021"
+                android:textSize="15sp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/tv_unutilized_amount"
+                ></TextView>
+            <TextView
+                android:id="@+id/tv_limit_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Limit for the year"
+                android:textSize="15sp"
+                android:layout_below="@id/tv_1years"
+                android:textColor="#444444"
+                ></TextView>
+            <TextView
+                android:id="@+id/txt_limit_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="80900.00"
+                android:layout_alignParentRight="true"
+                android:textAlignment="viewEnd"
+                android:textSize="15sp"
+                android:layout_below="@id/tv_1years"
+                ></TextView>
+            <TextView
+                android:id="@+id/tv_2years"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020-2021"
+                android:textSize="15sp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/tv_limit_year"
+                ></TextView>
+            <TextView
+                android:id="@+id/tv_amount_disbursed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amount disbursed "
+                android:textSize="15sp"
+                android:layout_below="@id/tv_2years"
+                android:textColor="#444444"
+                ></TextView>
+            <TextView
+                android:id="@+id/txt_amount_disbursed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:layout_alignParentRight="true"
+                android:textAlignment="viewEnd"
+                android:textSize="15sp"
+                android:layout_below="@id/tv_2years"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/tv_balance_available"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Balance available "
+                android:textSize="17sp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/tv_amount_disbursed"
+                android:textColor="#0078C8"></TextView>
+            <TextView
+                android:id="@+id/txt_balance_available"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="146158.91"
+                android:textSize="15sp"
+                android:textAlignment="viewEnd"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/tv_amount_disbursed"
+                android:textColor="#444444"></TextView>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_1">
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ok"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:textColor="#444444"
+                android:layout_gravity="center"
+                android:background="@drawable/layout9"></Button>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

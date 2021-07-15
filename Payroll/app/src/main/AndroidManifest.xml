@@ -119,6 +119,13 @@
         <activity android:name=".Lta.LtaDocumentPdfViewer"
             android:screenOrientation="portrait"></activity>
 
+        <activity android:name=".Mediclaim.MediclaimActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mediclaim.MediclaimEntryActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mediclaim.MediclaimDocumentsActivity"
+            android:screenOrientation="portrait"></activity>
+
 
         <!-- Firebase Notifications -->
         <service

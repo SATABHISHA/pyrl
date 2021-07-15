@@ -71,6 +71,7 @@ import org.wrkplan.payroll.InsuranceDetail.InsuranceDetail1;
 import org.wrkplan.payroll.Leave_Balance.LeaveBalanceActivity;
 import org.wrkplan.payroll.Login.LoginActivity;
 import org.wrkplan.payroll.Lta.LtaListActivity;
+import org.wrkplan.payroll.Mediclaim.MediclaimActivity;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.OutDoorDuty.OutdoorListActivity;
 import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogListActivity;
@@ -84,7 +85,7 @@ import static com.google.android.play.core.install.model.ActivityResult.RESULT_I
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    ImageView img_emp_information, img_leave_balance, img_emp_facilities, img_emp_documents, img_company_documents, img_insurance_details, img_holiday_details, img_od_duty, img_info, img_timesheet, img_reports, img_advance, img_lta;
+    ImageView img_emp_information, img_leave_balance, img_emp_facilities, img_emp_documents, img_company_documents, img_insurance_details, img_holiday_details, img_od_duty, img_info, img_timesheet, img_reports, img_advance, img_lta, img_mediclaim;
     TextView tv_emp_information, tv_leave_balance, tv_emp_facilitis, tv_emp_documemts, tv_cmp_documents,
             tv_insurance_details, tv_holiday_details;
     TextView tv_fullname,tv_companynam;
@@ -92,7 +93,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
-    LinearLayout Linear, ll_od_request, ll_timesheet, ll_reports;
+    LinearLayout Linear, ll_od_request, ll_timesheet, ll_reports, ll_mediclaim;
     RelativeLayout ll_od_duty, rl_advance, rl_lta;
     CoordinatorLayout coordinatorLayout;
     Context context;
@@ -192,6 +193,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         rl_lta = findViewById(R.id.rl_lta);
         img_lta=findViewById(R.id.img_lta);
 
+        ll_mediclaim = findViewById(R.id.ll_mediclaim);
+        img_mediclaim=findViewById(R.id.img_mediclaim);
+
         //------------------End of Initialize views--------------//
 
         img_emp_information.setOnClickListener(this);
@@ -224,6 +228,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         rl_lta.setOnClickListener(this);
         img_lta.setOnClickListener(this);
+
+        ll_mediclaim.setOnClickListener(this);
+        img_mediclaim.setOnClickListener(this);
 
         load_data_check_od_duty(); //--function to check weather od_duty exists or not/temporary commented on 9th dec
 
@@ -655,6 +662,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.img_lta:
                 startActivity(new Intent(this, LtaListActivity.class));
+                break;
+            case R.id.ll_mediclaim:
+                startActivity(new Intent(this, MediclaimActivity.class));
+                break;
+            case R.id.img_mediclaim:
+                startActivity(new Intent(this, MediclaimActivity.class));
                 break;
             default:
                 break;
