@@ -29,10 +29,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class LtaDocumentsActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageView img_add;
+    public ImageView img_add;
+    public View view_dcmnts_border_line;
     Uri uripdf=null;
 //    public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList = new ArrayList<>();
-    public static LinearLayout ll_recycler;
+    public static LinearLayout ll_recycler, ll_button;
     public static TextView tv_nodata, tv_button_done, tv_button_cancel;
     public static RecyclerView recycler_view;
     public static CustomLtaDocumentsActivityAdapter customLtaDocumentsActivityAdapter;
@@ -46,6 +47,8 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
         tv_nodata = findViewById(R.id.tv_nodata);
         tv_button_done = findViewById(R.id.tv_button_done);
         tv_button_cancel = findViewById(R.id.tv_button_cancel);
+        view_dcmnts_border_line = findViewById(R.id.view_dcmnts_border_line);
+        ll_button = findViewById(R.id.ll_button);
 
         customLtaDocumentsActivityAdapter = new CustomLtaDocumentsActivityAdapter(this,LtaRequestActivity.ltaDocumentsModelArrayList);
 
@@ -60,8 +63,91 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
         tv_button_done.setOnClickListener(this);
         tv_button_cancel.setOnClickListener(this);
         load_data();
+        LoadButtons();
     }
 
+    //----function to load buttons acc to the logic, code starts
+    public void LoadButtons(){
+
+
+        if (LtaListActivity.EmployeeType == "Employee"){
+
+            if (LtaListActivity.mediclaim_status.contentEquals("")){
+                tv_button_done.setVisibility(View.VISIBLE);
+                tv_button_cancel.setVisibility(View.VISIBLE);
+                ll_button.setVisibility(View.VISIBLE);
+                img_add.setVisibility(View.VISIBLE);
+                view_dcmnts_border_line.setVisibility(View.VISIBLE);
+//                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.VISIBLE);
+
+
+            }
+            if (LtaListActivity.mediclaim_status.contentEquals("Saved")){
+
+
+                tv_button_done.setVisibility(View.VISIBLE);
+                tv_button_cancel.setVisibility(View.VISIBLE);
+                ll_button.setVisibility(View.VISIBLE);
+                img_add.setVisibility(View.VISIBLE);
+                view_dcmnts_border_line.setVisibility(View.VISIBLE);
+//                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.VISIBLE);
+
+            }
+            if ((LtaListActivity.mediclaim_status.contentEquals("Submitted")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Approved")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Payment done")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Canceled"))){
+
+                tv_button_done.setVisibility(View.GONE);
+                tv_button_cancel.setVisibility(View.GONE);
+                ll_button.setVisibility(View.GONE);
+                img_add.setVisibility(View.GONE);
+                view_dcmnts_border_line.setVisibility(View.GONE);
+//                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);
+
+            }
+            if (LtaListActivity.mediclaim_status.contentEquals("Returned")){
+
+                tv_button_done.setVisibility(View.GONE);
+                tv_button_cancel.setVisibility(View.GONE);
+                ll_button.setVisibility(View.GONE);
+                img_add.setVisibility(View.GONE);
+                view_dcmnts_border_line.setVisibility(View.GONE);
+//                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);
+
+            }
+        }
+        if (LtaListActivity.EmployeeType == "Supervisor"){
+//            LabelNavBarTitle.text = "Subordinate Advance Requisition"
+//            btn_reason_select_type.isUserInteractionEnabled = false
+//            btn_reason_select_type.alpha = 0.6
+            if (LtaListActivity.mediclaim_status.contentEquals("Submitted")){
+                tv_button_done.setVisibility(View.GONE);
+                tv_button_cancel.setVisibility(View.GONE);
+                ll_button.setVisibility(View.GONE);
+                img_add.setVisibility(View.GONE);
+                view_dcmnts_border_line.setVisibility(View.GONE);
+//                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);
+            }
+            if ((LtaListActivity.mediclaim_status.contentEquals("Returned")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Approved")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Payment done")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Cancelled"))){
+
+                tv_button_done.setVisibility(View.GONE);
+                tv_button_cancel.setVisibility(View.GONE);
+                ll_button.setVisibility(View.GONE);
+                img_add.setVisibility(View.GONE);
+                view_dcmnts_border_line.setVisibility(View.GONE);
+//                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);
+
+            }
+        }
+
+
+    }
+
+    //----function to load buttons acc to the logic, code ends
     //----onclick code starts-----
     @Override
     public void onClick(View v) {

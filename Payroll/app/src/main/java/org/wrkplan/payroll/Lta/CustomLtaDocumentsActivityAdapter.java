@@ -32,6 +32,7 @@ public class CustomLtaDocumentsActivityAdapter extends RecyclerView.Adapter<Cust
     public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList;
     private Context context;
     public  static String base64String = "", filename = "";
+    public static ImageView img_view_delete;
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
 
 //    public static ProgressDialog loading;
@@ -48,9 +49,58 @@ public class CustomLtaDocumentsActivityAdapter extends RecyclerView.Adapter<Cust
         View view = inflater.inflate(R.layout.activity_lta_documents_custom_row, parent, false);
         CustomLtaDocumentsActivityAdapter.MyViewHolder holder = new CustomLtaDocumentsActivityAdapter.MyViewHolder(view);
         context = parent.getContext();
+        LoadButtons();
         return holder;
     }
 
+    //----function to load buttons acc to the logic, code starts
+    public void LoadButtons(){
+
+
+        if (LtaListActivity.EmployeeType == "Employee"){
+
+            if (LtaListActivity.mediclaim_status.contentEquals("")){
+                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.VISIBLE);
+
+
+            }
+            if (LtaListActivity.mediclaim_status.contentEquals("Saved")){
+                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.VISIBLE);
+
+            }
+            if ((LtaListActivity.mediclaim_status.contentEquals("Submitted")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Approved")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Payment done")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Canceled"))){
+
+                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);
+
+            }
+            if (LtaListActivity.mediclaim_status.contentEquals("Returned")){
+
+                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);
+
+            }
+        }
+        if (LtaListActivity.EmployeeType == "Supervisor"){
+            if (LtaListActivity.mediclaim_status.contentEquals("Submitted")){
+
+                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);
+            }
+            if ((LtaListActivity.mediclaim_status.contentEquals("Returned")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Approved")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Payment done")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Cancelled"))){
+
+                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);
+
+            }
+        }
+
+
+    }
+
+    //----function to load buttons acc to the logic, code ends
     @Override
     public void onBindViewHolder(CustomLtaDocumentsActivityAdapter.MyViewHolder holder, int position) {
         holder.itemView.setTag(ltaDocumentsModelArrayList.get(position));
@@ -68,7 +118,7 @@ public class CustomLtaDocumentsActivityAdapter extends RecyclerView.Adapter<Cust
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_index, tv_pdf_file_name, tv_pdf_file_size;
-        ImageView img_view_delete;
+
         RelativeLayout relative_layout;
 
 

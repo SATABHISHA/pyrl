@@ -112,7 +112,6 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         btn_save.setOnClickListener(this);
         btn_submit.setOnClickListener(this);
 
-        LoadButtons();
         if (LtaListActivity.new_create_yn == 1) {
             imgBtnCalenderTo.setVisibility(View.VISIBLE);
             imgBtnCalenderFrom.setVisibility(View.VISIBLE);
@@ -143,6 +142,8 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         }
         if (LtaListActivity.new_create_yn == 0) {
             loadData(LtaListActivity.lta_application_id);
+        }else {
+            LoadButtons();
         }
     }
 
@@ -343,20 +344,10 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
             case R.id.imgBtnCalenderFrom:
                 calendarPicker(myCalendarFromDate,edt_from_date_select, "from_date");
 
-                if (LtaListActivity.EmployeeType == "Supervisor"){
-                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
-                }else if (LtaListActivity.EmployeeType == "Employee") {
-                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
-                }
                 break;
             case R.id.imgBtnCalenderTo:
                 calendarPicker(myCalendarToDate,edt_to_date_select, "to_date");
 
-                if (LtaListActivity.EmployeeType == "Supervisor"){
-                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
-                }else if (LtaListActivity.EmployeeType == "Employee") {
-                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
-                }
                 break;
         }
     }
@@ -381,6 +372,12 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 
 
 
+                tv_document_view.setClickable(true);
+                tv_document_view.setAlpha(1.0f);
+                /*LtaDocumentsActivity.tv_button_done.setVisibility(View.VISIBLE);
+                LtaDocumentsActivity.img_add.setVisibility(View.VISIBLE);
+                LtaDocumentsActivity.view_dcmnts_border_line.setVisibility(View.VISIBLE);
+                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.VISIBLE);*/
 
                 /*TxtMediclaimAmount.isUserInteractionEnabled = true
                 TxtReason.isUserInteractionEnabled = true
@@ -400,7 +397,12 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 btn_return.setVisibility(View.GONE);
 
 
-
+                tv_document_view.setClickable(true);
+                tv_document_view.setAlpha(1.0f);
+                /*LtaDocumentsActivity.tv_button_done.setVisibility(View.VISIBLE);
+                LtaDocumentsActivity.img_add.setVisibility(View.VISIBLE);
+                LtaDocumentsActivity.view_dcmnts_border_line.setVisibility(View.VISIBLE);
+                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.VISIBLE);*/
                 /*TxtMediclaimAmount.isUserInteractionEnabled = true
                 TxtReason.isUserInteractionEnabled = true
                 TxtApprovedAmount.isUserInteractionEnabled = false
@@ -409,7 +411,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
             if ((LtaListActivity.mediclaim_status.contentEquals("Submitted")) ||
                     (LtaListActivity.mediclaim_status.contentEquals("Approved")) ||
                     (LtaListActivity.mediclaim_status.contentEquals("Payment done")) ||
-                    (LtaListActivity.mediclaim_status.contentEquals("Canceled"))){
+                    (LtaListActivity.mediclaim_status.contentEquals("Cancelled"))){
 
                 btn_back.setVisibility(View.VISIBLE);
                 btn_cancel.setVisibility(View.GONE);
@@ -420,6 +422,18 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 btn_return.setVisibility(View.GONE);
 
 
+
+                if(ltaDocumentsModelArrayList.size() == 0){
+                    tv_document_view.setClickable(false);
+                    tv_document_view.setAlpha(0.2f);
+                }else if(ltaDocumentsModelArrayList.size() > 0){
+                    tv_document_view.setClickable(true);
+                    tv_document_view.setAlpha(1.0f);
+                }
+                /*LtaDocumentsActivity.tv_button_done.setVisibility(View.INVISIBLE);
+                LtaDocumentsActivity.img_add.setVisibility(View.INVISIBLE);
+                LtaDocumentsActivity.view_dcmnts_border_line.setVisibility(View.INVISIBLE);
+                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);*/
 
                 /*TxtMediclaimAmount.isUserInteractionEnabled = false
                 TxtReason.isUserInteractionEnabled = false
@@ -437,6 +451,12 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 btn_approve.setVisibility(View.GONE);
                 btn_return.setVisibility(View.GONE);
 
+                tv_document_view.setClickable(true);
+                tv_document_view.setAlpha(1.0f);
+                /*LtaDocumentsActivity.tv_button_done.setVisibility(View.INVISIBLE);
+                LtaDocumentsActivity.img_add.setVisibility(View.INVISIBLE);
+                LtaDocumentsActivity.view_dcmnts_border_line.setVisibility(View.INVISIBLE);
+                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);*/
                 /*TxtMediclaimAmount.isUserInteractionEnabled = true
                 TxtReason.isUserInteractionEnabled = true
                 TxtApprovedAmount.isUserInteractionEnabled = false
@@ -457,6 +477,17 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 btn_approve.setVisibility(View.VISIBLE);
                 btn_return.setVisibility(View.VISIBLE);
 
+                if(ltaDocumentsModelArrayList.size() == 0){
+                    tv_document_view.setClickable(false);
+                    tv_document_view.setAlpha(0.2f);
+                }else if(ltaDocumentsModelArrayList.size() > 0){
+                    tv_document_view.setClickable(true);
+                    tv_document_view.setAlpha(1.0f);
+                }
+                /*LtaDocumentsActivity.tv_button_done.setVisibility(View.INVISIBLE);
+                LtaDocumentsActivity.img_add.setVisibility(View.INVISIBLE);
+                LtaDocumentsActivity.view_dcmnts_border_line.setVisibility(View.INVISIBLE);
+                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);*/
                 /*TxtMediclaimAmount.isUserInteractionEnabled = false
                 TxtReason.isUserInteractionEnabled = false
                 TxtApprovedAmount.isUserInteractionEnabled = true
@@ -476,7 +507,17 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 btn_return.setVisibility(View.GONE);
 
 
-
+                if(ltaDocumentsModelArrayList.size() == 0){
+                    tv_document_view.setClickable(false);
+                    tv_document_view.setAlpha(0.2f);
+                }else if(ltaDocumentsModelArrayList.size() > 0){
+                    tv_document_view.setClickable(true);
+                    tv_document_view.setAlpha(1.0f);
+                }
+               /* LtaDocumentsActivity.tv_button_done.setVisibility(View.INVISIBLE);
+                LtaDocumentsActivity.img_add.setVisibility(View.INVISIBLE);
+                LtaDocumentsActivity.view_dcmnts_border_line.setVisibility(View.INVISIBLE);
+                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);*/
 
                 /*TxtMediclaimAmount.isUserInteractionEnabled = false
                 TxtReason.isUserInteractionEnabled = false
@@ -915,11 +956,13 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 
                 }
 
+                LoadButtons();
 
             }else if(jsonObject1.getString("status").contentEquals("false")){
                /* ll_recycler.setVisibility(View.GONE);
                 tv_nodata.setVisibility(View.VISIBLE);
                 tv_nodata.setText(jsonObject1.getString("message"));*/
+                LoadButtons();
             }
 
         } catch (JSONException e) {
