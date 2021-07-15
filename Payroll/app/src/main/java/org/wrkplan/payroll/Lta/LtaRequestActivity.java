@@ -287,18 +287,43 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.btn_cancel:
                 makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), ed_approved_amount.getText().toString(), ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Cancelled", userSingletonModel.getEmployee_id());
+
+                if (LtaListActivity.EmployeeType == "Supervisor"){
+                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                }else if (LtaListActivity.EmployeeType == "Employee") {
+                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+                }
+
                 break;
             case R.id.btn_return:
                 makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), ed_approved_amount.getText().toString(), ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Returned", userSingletonModel.getEmployee_id());
+
+                if (LtaListActivity.EmployeeType == "Supervisor"){
+                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                }else if (LtaListActivity.EmployeeType == "Employee") {
+                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+                }
                 break;
             case R.id.btn_approve:
                 makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), ed_approved_amount.getText().toString(), ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Approved", userSingletonModel.getEmployee_id());
+
+                if (LtaListActivity.EmployeeType == "Supervisor"){
+                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                }else if (LtaListActivity.EmployeeType == "Employee") {
+                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+                }
                 break;
             case R.id.btn_submit:
                 if (LtaListActivity.new_create_yn == 1) {
                     makeJsonObjectAndSaveDataToServer("0", edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), "0.0", ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Submitted", "0");
                 }else{
                     makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), "0.0", ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Submitted", "0");
+                }
+
+                if (LtaListActivity.EmployeeType == "Supervisor"){
+                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                }else if (LtaListActivity.EmployeeType == "Employee") {
+                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
                 }
                 break;
             case R.id.btn_save:
@@ -307,12 +332,31 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 }else{
                     makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), "0.0", ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Saved", "0");
                 }
+
+                if (LtaListActivity.EmployeeType == "Supervisor"){
+                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                }else if (LtaListActivity.EmployeeType == "Employee") {
+                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+                }
+
                 break;
             case R.id.imgBtnCalenderFrom:
                 calendarPicker(myCalendarFromDate,edt_from_date_select, "from_date");
+
+                if (LtaListActivity.EmployeeType == "Supervisor"){
+                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                }else if (LtaListActivity.EmployeeType == "Employee") {
+                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+                }
                 break;
             case R.id.imgBtnCalenderTo:
                 calendarPicker(myCalendarToDate,edt_to_date_select, "to_date");
+
+                if (LtaListActivity.EmployeeType == "Supervisor"){
+                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                }else if (LtaListActivity.EmployeeType == "Employee") {
+                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+                }
                 break;
         }
     }
