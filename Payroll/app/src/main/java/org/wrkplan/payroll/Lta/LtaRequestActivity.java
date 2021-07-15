@@ -279,13 +279,20 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 if(!ltaDocumentsModelArrayList.isEmpty()){
                     ltaDocumentsModelArrayList.clear();
                 }
-                startActivity(new Intent(LtaRequestActivity.this,LtaListActivity.class));
+                if (LtaListActivity.EmployeeType == "Supervisor"){
+                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                }else if (LtaListActivity.EmployeeType == "Employee") {
+                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+                }
                 break;
             case R.id.btn_cancel:
+                makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), ed_approved_amount.getText().toString(), ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Cancelled", userSingletonModel.getEmployee_id());
                 break;
             case R.id.btn_return:
+                makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), ed_approved_amount.getText().toString(), ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Returned", userSingletonModel.getEmployee_id());
                 break;
             case R.id.btn_approve:
+                makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), ed_approved_amount.getText().toString(), ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Approved", userSingletonModel.getEmployee_id());
                 break;
             case R.id.btn_submit:
                 if (LtaListActivity.new_create_yn == 1) {
@@ -414,10 +421,10 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
             if ((LtaListActivity.mediclaim_status.contentEquals("Returned")) ||
                     (LtaListActivity.mediclaim_status.contentEquals("Approved")) ||
                     (LtaListActivity.mediclaim_status.contentEquals("Payment done")) ||
-                    (LtaListActivity.mediclaim_status.contentEquals("Canceled"))){
+                    (LtaListActivity.mediclaim_status.contentEquals("Cancelled"))){
 
                 btn_back.setVisibility(View.VISIBLE);
-                btn_cancel.setVisibility(View.VISIBLE);
+                btn_cancel.setVisibility(View.GONE);
                 btn_save.setVisibility(View.GONE);
                 btn_submit.setVisibility(View.GONE);
 
@@ -499,8 +506,18 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         }
         if (Integer.parseInt(dayDifference) < 5){
            tv_dayscount_alert_title.setTextColor(Color.parseColor("#FF0000"));
+            btn_save.setClickable(false);
+            btn_save.setAlpha(0.7f);
+
+            btn_submit.setClickable(false);
+            btn_submit.setAlpha(0.7f);
         }else{
             tv_dayscount_alert_title.setTextColor(Color.parseColor("#717171"));
+            btn_save.setClickable(true);
+            btn_save.setAlpha(1.0f);
+
+            btn_submit.setClickable(true);
+            btn_submit.setAlpha(1.0f);
         }
         return dayDifference;
     }
@@ -866,4 +883,10 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         }
     }
     //=====function to load data, code ends========
+
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+    }
 }

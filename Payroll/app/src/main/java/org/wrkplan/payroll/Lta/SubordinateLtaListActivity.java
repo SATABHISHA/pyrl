@@ -1,6 +1,7 @@
 package org.wrkplan.payroll.Lta;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -178,4 +179,11 @@ public class SubordinateLtaListActivity extends AppCompatActivity {
         }*/
     }
     //===========code to filter data and display in list, code ends=======
+
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        startActivity(new Intent(SubordinateLtaListActivity.this, LtaListActivity.class));
+    }
 }
