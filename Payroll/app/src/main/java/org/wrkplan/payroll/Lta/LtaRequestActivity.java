@@ -56,7 +56,8 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     Button btn_back, btn_cancel, btn_return, btn_approve, btn_submit, btn_save;
     EditText edt_from_date_select, edt_to_date_select, ed_lta_amount, ed_detail, ed_approved_amount, ed_supervisor_remark, ed_final_supervisor_remark;
     ImageButton imgBtnCalenderFrom, imgBtnCalenderTo;
-    TextView tv_total_days, tv_docs, tv_dayscount_alert_title;
+    TextView tv_total_days, tv_dayscount_alert_title;
+    public static TextView tv_docs;
     final Calendar myCalendarFromDate = Calendar.getInstance();
     final Calendar myCalendarToDate = Calendar.getInstance();
     Integer flag_datefield_check = 1;
@@ -112,7 +113,6 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         btn_submit.setOnClickListener(this);
 
         LoadButtons();
-        tv_docs.setText(String.valueOf(ltaDocumentsModelArrayList.size())+" Doc(s)");
         if (LtaListActivity.new_create_yn == 1) {
             imgBtnCalenderTo.setVisibility(View.VISIBLE);
             imgBtnCalenderFrom.setVisibility(View.VISIBLE);
@@ -718,6 +718,16 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 int total_days = jsonObject2.getInt("total_days");
                 tv_total_days.setText(String.valueOf(total_days));
 
+                JSONArray jsonArray = jsonObject.getJSONArray("documents");
+                for(int i = 0; i<jsonArray.length(); i++){
+                    JSONObject jsonObject3 = jsonArray.getJSONObject(i);
+                    LtaDocumentsModel ltaDocumentsModel = new LtaDocumentsModel();
+                    ltaDocumentsModel.setLta_filename(jsonObject3.getString("file_name"));
+                    ltaDocumentsModel.setLta_file_base64(jsonObject3.getString("file_base64"));
+                    ltaDocumentsModelArrayList.add(ltaDocumentsModel);
+                }
+
+                tv_docs.setText(String.valueOf(ltaDocumentsModelArrayList.size())+" Doc(s)");
                 if(jsonObject2.getString("application_status").contentEquals("Saved")){
 //                    od_request_id = jsonObject2.getInt("od_request_id"); //--added on 29th May, it would be 0 for new creation
 

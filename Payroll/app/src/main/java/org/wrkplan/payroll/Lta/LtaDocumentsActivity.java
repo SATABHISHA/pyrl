@@ -73,13 +73,17 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
                 startActivityForResult(Intent.createChooser(intent,"Select PDF file"),1);
                 break;
             case R.id.tv_button_done:
-                startActivity(new Intent(LtaDocumentsActivity.this, LtaRequestActivity.class));
+                LtaRequestActivity.tv_docs.setText(String.valueOf(LtaRequestActivity.ltaDocumentsModelArrayList.size())+" Doc(s)");
+                super.onBackPressed();
+//                startActivity(new Intent(LtaDocumentsActivity.this, LtaRequestActivity.class));
                 break;
             case R.id.tv_button_cancel:
                 if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
                     LtaRequestActivity.ltaDocumentsModelArrayList.clear();
                 }
-                startActivity(new Intent(LtaDocumentsActivity.this, LtaRequestActivity.class));
+                LtaRequestActivity.tv_docs.setText(String.valueOf(LtaRequestActivity.ltaDocumentsModelArrayList.size())+" Doc(s)");
+                super.onBackPressed();
+//                startActivity(new Intent(LtaDocumentsActivity.this, LtaRequestActivity.class));
                 break;
         }
 
