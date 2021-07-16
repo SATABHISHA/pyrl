@@ -41,14 +41,14 @@ public class CustomSubordinateRequisitionListAdapter extends RecyclerView.Adapte
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CustomSubordinateRequisitionListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_subordinate_requsition_list_custom_row,parent,false);
-        return new ViewHolder(view);
+        return new CustomSubordinateRequisitionListAdapter.ViewHolder(view);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CustomSubordinateRequisitionListAdapter.ViewHolder holder, int position) {
 
         Subordinate_Requsition_Model subordinateRequsitionModel=subrequsitionList.get(position);
         holder.tv_sub_employee_name.setText(subrequsitionList.get(position).getEmployee_name());
