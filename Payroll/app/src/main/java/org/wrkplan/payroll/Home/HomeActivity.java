@@ -503,6 +503,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, AdvanceRequisitionActivity.class));
                 //Toast.makeText(context, "Requisation Page", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.nav_mediclaim:
+                startActivity(new Intent(this, MediclaimActivity.class));
+                //Toast.makeText(context, "Requisation Page", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_lta:
+                startActivity(new Intent(this, LtaListActivity.class));
+                //Toast.makeText(context, "Requisation Page", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.nav_reports:
                 startActivity(new Intent(this, ReportHomeListActivity.class));
                 break;

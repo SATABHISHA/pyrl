@@ -49,6 +49,14 @@
             android:icon="@drawable/advance"
             android:title="Advance" />
         <item
+            android:id="@+id/nav_mediclaim"
+            android:icon="@drawable/advance"
+            android:title="Mediclaim" />
+        <item
+            android:id="@+id/nav_lta"
+            android:icon="@drawable/advance"
+            android:title="LTA" />
+        <item
             android:id="@+id/nav_reports"
             android:icon="@drawable/reports"
             android:title="Reports" />
