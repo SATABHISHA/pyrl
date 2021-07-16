@@ -232,7 +232,7 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
                     double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
                     int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
                     String requisition_status="Saved";
-                    int approved_requisition_amount=0;
+                    Double approved_requisition_amount=0.0;
                     int approved_by_id=0;
                     String approved_date="";
                     String supervisor_remark="";
@@ -278,7 +278,7 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
                     double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
                     int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
                     String requisition_status="Submitted";
-                    int approved_requisition_amount=0;
+                    Double approved_requisition_amount=0.0;
                     int approved_by_id=0;
                     String approved_date="";
                     String supervisor_remark="";
@@ -422,7 +422,7 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
                         double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
                         int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
                         String requisition_status="Canceled";
-                        int approved_requisition_amount=Integer.parseInt(ed_approved_amount.getText().toString());
+                        Double approved_requisition_amount=Double.parseDouble(ed_approved_amount.getText().toString());
                         int approved_by_id=0;
                         String approved_date="";
                         String supervisor_remark=ed_approval_remark.getText().toString();
@@ -462,7 +462,7 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
                         double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
                         int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
                         String requisition_status="Approved";
-                        int approved_requisition_amount=Integer.parseInt(ed_approved_amount.getText().toString());
+                        Double approved_requisition_amount=Double.parseDouble(ed_approved_amount.getText().toString());
                         int approved_by_id=0;
                         String approved_date="";
                         String supervisor_remark=ed_approval_remark.getText().toString();
@@ -501,7 +501,7 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
                         double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
                         int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
                         String requisition_status="Returned";
-                        int approved_requisition_amount=Integer.parseInt(ed_approved_amount.getText().toString());
+                        Double approved_requisition_amount=Double.parseDouble(ed_approved_amount.getText().toString());
                         int approved_by_id=0;
                         String approved_date="";
                         String supervisor_remark=ed_approval_remark.getText().toString();
@@ -528,7 +528,7 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
                                        int requisition_reason, double requisition_amount,
                                        String description, double ctc_amount,
                                        int return_period_in_months, String requisition_status,
-                                       int approved_requisition_amount, int approved_by_id, String approved_date,
+                                       Double approved_requisition_amount, int approved_by_id, String approved_date,
                                        String supervisor_remark, int supervisor1_id, int supervisor2_id) {
         try {
             my_requisition_jsonBody.put("corp_id",corp_id);

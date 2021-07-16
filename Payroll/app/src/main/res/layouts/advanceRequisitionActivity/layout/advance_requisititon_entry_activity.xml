@@ -39,257 +39,258 @@
             android:scrollbars="none"
             android:layout_marginBottom="20dp">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp">
 
-    <TextView
-        android:id="@+id/tv_requisitionnum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Requisition No"
-        android:textColor="#000"
-        ></TextView>
-    <TextView
-        android:id="@+id/edtv_requisition_no"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:padding="5dp"
-        android:textColor="#3C3C3C"
-        android:layout_below="@id/tv_requisitionnum"
-        android:gravity="top"
-        android:background="@drawable/layout6"/>
+                <TextView
+                    android:id="@+id/tv_requisitionnum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Requisition No"
+                    android:textColor="#000"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/edtv_requisition_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="5dp"
+                    android:textColor="#3C3C3C"
+                    android:layout_below="@id/tv_requisitionnum"
+                    android:gravity="top"
+                    android:background="@drawable/layout6"/>
 
-    <TextView
-        android:id="@+id/tv_employee_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Employee Name "
-        android:layout_marginTop="8dp"
-        android:textColor="#000"
-        android:layout_below="@id/edtv_requisition_no"
-        ></TextView>
-    <TextView
-        android:id="@+id/edtv_employee_name"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:padding="5dp"
-        android:textColor="#3C3C3C"
-        android:layout_below="@id/tv_employee_name"
-        android:gravity="top"
-        android:background="@drawable/layout6"/>
+                <TextView
+                    android:id="@+id/tv_employee_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Employee Name "
+                    android:layout_marginTop="8dp"
+                    android:textColor="#000"
+                    android:layout_below="@id/edtv_requisition_no"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/edtv_employee_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="5dp"
+                    android:textColor="#3C3C3C"
+                    android:layout_below="@id/tv_employee_name"
+                    android:gravity="top"
+                    android:background="@drawable/layout6"/>
 
 
-    <LinearLayout
-        android:id="@+id/ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edtv_employee_name"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/tv_requisition_amount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Requisition Amount *"
-            android:layout_weight="1"
-            android:textColor="#000"
-            ></TextView>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="0.12"></LinearLayout>
-        <TextView
-            android:id="@+id/tv_ctc"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="CTC"
-            android:layout_weight="1"
-            android:textColor="#000"
-            ></TextView>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/ll_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal">
-        <EditText
-            android:id="@+id/ed_requisition_amount"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:padding="5dp"
+                <LinearLayout
+                    android:id="@+id/ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/edtv_employee_name"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_requisition_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Requisition Amount *"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        ></TextView>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.12"></LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_ctc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="CTC"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        ></TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ll"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/ed_requisition_amount"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:padding="5dp"
 
-            android:textColor="#3C3C3C"
-            android:layout_below="@id/tv_requisitionnum"
-            android:gravity="end"
-            android:background="@drawable/layout6"/>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="0.12"></LinearLayout>
-        <EditText
-            android:id="@+id/ed_ctc"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:padding="5dp"
-            android:textColor="#3C3C3C"
-            android:gravity="end"
-        android:layout_below="@id/tv_requisitionnum"
-            android:background="@drawable/layout6"/>
-    </LinearLayout>
+                        android:textColor="#3C3C3C"
+                        android:layout_below="@id/tv_requisitionnum"
+                        android:gravity="end"
+                        android:background="@drawable/layout6"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.12"></LinearLayout>
+                    <EditText
+                        android:id="@+id/ed_ctc"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:padding="5dp"
+                        android:textColor="#3C3C3C"
+                        android:gravity="end"
+                        android:layout_below="@id/tv_requisitionnum"
+                        android:background="@drawable/layout6"/>
+                </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_reason"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reason for Advance *"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/ll_1"
-        android:textColor="#000"
-        ></TextView>
+                <TextView
+                    android:id="@+id/tv_reason"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reason for Advance *"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@id/ll_1"
+                    android:textColor="#000"
+                    ></TextView>
 
-    <LinearLayout
-        android:id="@+id/ll_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="40dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/layout6"
-        android:layout_below="@id/tv_reason"
-        >
-        <fr.ganfra.materialspinner.MaterialSpinner
-            android:id="@+id/spinner_reason_advance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:paddingLeft="0dp"
-            android:gravity="left"
-            app:ms_multiline="false"
-            app:ms_hint="Select Type"
-            app:ms_hintColor="#3C3C3C"
-            app:ms_hintTextSize="15sp"
-            app:ms_enableFloatingLabel="false"
-            app:ms_enableErrorLabel="false"
-            app:ms_thickness="0dp"
-            app:ms_arrowColor="#c2c2c2"
-            app:ms_arrowSize="16dp"
-            app:ms_alignLabels="false"
-            android:layout_gravity="center"
-            android:overlapAnchor="false"/>
-    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/layout6"
+                    android:layout_below="@id/tv_reason"
+                    >
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_reason_advance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:paddingLeft="0dp"
+                        android:gravity="left"
+                        app:ms_multiline="false"
+                        app:ms_hint="Select Type"
+                        app:ms_hintColor="#3C3C3C"
+                        app:ms_hintTextSize="15sp"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_thickness="0dp"
+                        app:ms_arrowColor="#c2c2c2"
+                        app:ms_arrowSize="16dp"
+                        app:ms_alignLabels="false"
+                        android:layout_gravity="center"
+                        android:overlapAnchor="false"/>
+                </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_narration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Narration "
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/ll_spinner"
-        android:textColor="#000"
-        ></TextView>
-    <EditText
-        android:id="@+id/ed_narration"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:padding="5dp"
-        android:textColor="#3C3C3C"
-        android:layout_below="@id/tv_narration"
-        android:gravity="top"
-        android:background="@drawable/layout6"/>
-    <TextView
-        android:id="@+id/tv_return_period"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Return Period (in Months) "
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/ed_narration"
-        android:textColor="#000"
-        ></TextView>
-    <EditText
-        android:id="@+id/ed_return_period"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:padding="5dp"
-        android:maxLength="2"
-        android:inputType="number"
-        android:textColor="#3C3C3C"
-        android:layout_below="@id/tv_return_period"
-        android:gravity="top"
-        android:background="@drawable/layout6"/>
+                <TextView
+                    android:id="@+id/tv_narration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Narration "
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@id/ll_spinner"
+                    android:textColor="#000"
+                    ></TextView>
+                <EditText
+                    android:id="@+id/ed_narration"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="5dp"
+                    android:textColor="#3C3C3C"
+                    android:layout_below="@id/tv_narration"
+                    android:gravity="top"
+                    android:background="@drawable/layout6"/>
+                <TextView
+                    android:id="@+id/tv_return_period"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Return Period (in Months) "
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@id/ed_narration"
+                    android:textColor="#000"
+                    ></TextView>
+                <EditText
+                    android:id="@+id/ed_return_period"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="5dp"
+                    android:maxLength="2"
+                    android:inputType="number"
+                    android:textColor="#3C3C3C"
+                    android:layout_below="@id/tv_return_period"
+                    android:gravity="top"
+                    android:background="@drawable/layout6"/>
 
-    <TextView
-        android:id="@+id/tv_approved_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Approved Amount "
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/ed_return_period"
-        android:textColor="#000"
-        ></TextView>
-    <EditText
-        android:id="@+id/ed_approved_amount"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:padding="5dp"
-        android:textColor="#3C3C3C"
-        android:layout_below="@id/tv_approved_amount"
-        android:gravity="end"
-        android:background="@drawable/layout6"/>
+                <TextView
+                    android:id="@+id/tv_approved_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Approved Amount "
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@id/ed_return_period"
+                    android:textColor="#000"
+                    ></TextView>
+                <EditText
+                    android:id="@+id/ed_approved_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="5dp"
+                    android:textColor="#3C3C3C"
+                    android:layout_below="@id/tv_approved_amount"
+                    android:gravity="end"
+                    android:background="@drawable/layout6"/>
 
-    <TextView
-        android:id="@+id/tv_approval_remark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Approval Remark "
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/ed_approved_amount"
-        android:textColor="#000"
-        ></TextView>
-    <EditText
-        android:id="@+id/ed_approval_remark"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:padding="5dp"
-        android:textColor="#3C3C3C"
-        android:layout_below="@id/tv_approval_remark"
-        android:background="@drawable/layout6"/>
+                <TextView
+                    android:id="@+id/tv_approval_remark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Approval Remark "
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@id/ed_approved_amount"
+                    android:textColor="#000"
+                    ></TextView>
 
-    <TextView
-        android:id="@+id/tv_application_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Application Status "
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/ed_approval_remark"
-        android:textColor="#000"
-        ></TextView>
+                <EditText
+                    android:id="@+id/ed_approval_remark"
+                    android:layout_width="357dp"
+                    android:layout_height="49dp"
+                    android:layout_below="@id/tv_approval_remark"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/layout6"
+                    android:padding="5dp"
+                    android:textColor="#3C3C3C" />
 
-    <TextView
-        android:id="@+id/edtv_application_status"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:padding="5dp"
-        android:textColor="#3C3C3C"
-        android:layout_below="@id/tv_application_status"
-        android:gravity="start"
-        android:background="@drawable/layout6"/>
+                <TextView
+                    android:id="@+id/tv_application_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Application Status "
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@id/ed_approval_remark"
+                    android:textColor="#000"
+                    ></TextView>
 
-</RelativeLayout>
+                <TextView
+                    android:id="@+id/edtv_application_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="5dp"
+                    android:textColor="#3C3C3C"
+                    android:layout_below="@id/tv_application_status"
+                    android:gravity="start"
+                    android:background="@drawable/layout6"/>
+
+            </RelativeLayout>
 
         </ScrollView>
 
@@ -299,7 +300,17 @@
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
-
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Back"
+                android:textAllCaps="false"
+                android:background="@drawable/layout6"
+                android:textSize="15sp"
+                android:textColor="#504E4E"
+                />
             <Button
                 android:id="@+id/btn_cancel"
                 android:layout_width="0dp"
@@ -355,6 +366,7 @@
                 android:textSize="15sp"
                 android:textColor="#504E4E"
                 />
+
         </LinearLayout>
 
     </RelativeLayout>
