@@ -1,12 +1,11 @@
-package org.wrkplan.payroll.Model;
+package org.wrkplan.payroll.Model.Mediclaim;
 
-public class Mediclaim_Details_Model {
+public class Subordinate_Mediclaim_Details_Model {
 
     String approved_by_id,approved_by_name,approved_date,approved_mediclaim_amount,description,direct_approved_by_id,
             direct_approved_by_yn,employee_id,mediclaim_amount,mediclaim_date,mediclaim_id,mediclaim_no,
             mediclaim_status,payment_amount,payment_by,payment_date,payment_remark,saved_from_mobile_app,
             supervisor1_id,supervisor2_id,supervisor_remark;
-
 
     public String getApproved_by_id() {
         return approved_by_id;
@@ -175,6 +174,4 @@ public class Mediclaim_Details_Model {
     public void setSupervisor_remark(String supervisor_remark) {
         this.supervisor_remark = supervisor_remark;
     }
-
-
 }

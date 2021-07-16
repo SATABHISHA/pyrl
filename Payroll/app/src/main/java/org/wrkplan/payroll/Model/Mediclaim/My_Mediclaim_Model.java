@@ -1,6 +1,6 @@
-package org.wrkplan.payroll.Model;
+package org.wrkplan.payroll.Model.Mediclaim;
 
-public class Subordinate_Mediclaim_Model {
+public class My_Mediclaim_Model {
     String approved_mediclaim_amount,employee_id,employee_name,mediclaim_amount,mediclaim_date,mediclaim_id,
             mediclaim_no,mediclaim_status,payment_amount;
 
@@ -76,7 +76,7 @@ public class Subordinate_Mediclaim_Model {
         this.payment_amount = payment_amount;
     }
 
-    public Subordinate_Mediclaim_Model(String approved_mediclaim_amount, String employee_id, String employee_name, String mediclaim_amount, String mediclaim_date, String mediclaim_id, String mediclaim_no, String mediclaim_status, String payment_amount) {
+    public My_Mediclaim_Model(String approved_mediclaim_amount, String employee_id, String employee_name, String mediclaim_amount, String mediclaim_date, String mediclaim_id, String mediclaim_no, String mediclaim_status, String payment_amount) {
         this.approved_mediclaim_amount = approved_mediclaim_amount;
         this.employee_id = employee_id;
         this.employee_name = employee_name;

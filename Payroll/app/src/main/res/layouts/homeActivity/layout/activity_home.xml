@@ -657,7 +657,7 @@
                         android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:visibility="visible"
-                        android:src="@drawable/reports"
+                        android:src="@drawable/mediclaim"
                         ></ImageView>
 
                 </LinearLayout>
@@ -744,7 +744,7 @@
                         android:layout_gravity="center"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/advance"
+                        android:src="@drawable/lta"
                         />
 
 

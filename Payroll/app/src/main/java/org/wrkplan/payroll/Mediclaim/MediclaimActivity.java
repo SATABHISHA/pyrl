@@ -27,8 +27,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
-import org.wrkplan.payroll.Model.My_Mediclaim_Model;
-import org.wrkplan.payroll.Model.Subordinate_Mediclaim_Model;
+import org.wrkplan.payroll.Home.HomeActivity;
+import org.wrkplan.payroll.Model.Mediclaim.My_Mediclaim_Model;
+import org.wrkplan.payroll.Model.Mediclaim.Subordinate_Mediclaim_Model;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
@@ -45,18 +46,47 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
     RecyclerView mediclaim_recycler_view,mediclaim_subordinate_recycler_view;
 
     //Custom Adapter
-      public  static CustomMediclaimListAdapter customMediclaimListAdapter;
-      public static  CustomSubordinateMediclaimListAdapter subordinateMediclaimListAdapter;
+    public  static CustomMediclaimListAdapter customMediclaimListAdapter;
+    public static  CustomSubordinateMediclaimListAdapter subordinateMediclaimListAdapter;
     //Arraylist
     ArrayList<My_Mediclaim_Model> mediclaim_modelArrayList=new ArrayList<>();
     ArrayList<Subordinate_Mediclaim_Model> subordinate_mediclaim_modelArrayList=new ArrayList<>();
 
 
+    @Override
+    public void onBackPressed() {
+        if(Url.isSubordinateMediclaim==true)
+        {
+
+            rl_btn_new.setVisibility(View.GONE);
+            btn_subadv_mediclaim.setVisibility(View.GONE);
+            ll_recycler.setVisibility(View.VISIBLE);
+            ll_1recycler.setVisibility(View.GONE);
+
+            Intent intent=new Intent(MediclaimActivity.this,MediclaimActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        if(Url.isMyMediclaim==true)
+        {
+
+            Url.isSubordinateMediclaim=false;
+            rl_btn_new.setVisibility(View.VISIBLE);
+            btn_subadv_mediclaim.setVisibility(View.VISIBLE);
+            ll_recycler.setVisibility(View.VISIBLE);
+            ll_1recycler.setVisibility(View.GONE);
+
+            Intent intent=new Intent(MediclaimActivity.this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mediclaim_activity);
+
 
         //-----------intialize view start-------------//
 

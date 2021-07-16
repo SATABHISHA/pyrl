@@ -1,4 +1,4 @@
-package org.wrkplan.payroll.Model;
+package org.wrkplan.payroll.Model.Mediclaim;
 
 public class Model_Base64 {
     String file_name,file_base64;

@@ -220,7 +220,7 @@ android:layout_centerInParent="true"
                 android:layout_centerHorizontal="true"
                 android:layout_above="@id/rl_5"
                 android:layout_marginBottom="10dp"
-                android:text="Version 1.2020.02.07">
+                android:text="Version 1.2021.07.16">
 
 
             </TextView>

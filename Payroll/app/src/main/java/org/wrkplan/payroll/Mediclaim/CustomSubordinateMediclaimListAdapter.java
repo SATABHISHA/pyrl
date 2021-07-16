@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.wrkplan.payroll.Config.Url;
-import org.wrkplan.payroll.Model.Subordinate_Mediclaim_Model;
+import org.wrkplan.payroll.Model.Mediclaim.Subordinate_Mediclaim_Model;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
@@ -37,13 +37,13 @@ public class CustomSubordinateMediclaimListAdapter extends RecyclerView.Adapter<
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CustomSubordinateMediclaimListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_subordinate_mediclaim_list_custom_row,parent,false);
-        return new ViewHolder(view);
+        return new CustomSubordinateMediclaimListAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CustomSubordinateMediclaimListAdapter.ViewHolder holder, int position) {
         Subordinate_Mediclaim_Model mediclaim_model=modelArrayList.get(position);
 
         holder.tv_sub_employee_name.setText(modelArrayList.get(position).getEmployee_name());

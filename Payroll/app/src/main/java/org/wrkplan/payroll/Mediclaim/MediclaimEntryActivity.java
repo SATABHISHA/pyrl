@@ -26,9 +26,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
-import org.wrkplan.payroll.Model.Mediclaim_Details_Model;
-import org.wrkplan.payroll.Model.Model_Base64;
-import org.wrkplan.payroll.Model.Upload_PDF_Model;
+import org.wrkplan.payroll.Model.Mediclaim.Mediclaim_Details_Model;
+import org.wrkplan.payroll.Model.Mediclaim.Model_Base64;
+import org.wrkplan.payroll.Model.Mediclaim.Subordinate_Mediclaim_Details_Model;
+import org.wrkplan.payroll.Model.Mediclaim.Subordinate_Model_Base64;
+import org.wrkplan.payroll.Model.Mediclaim.Upload_PDF_Model;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
@@ -41,7 +43,11 @@ public class MediclaimEntryActivity extends AppCompatActivity implements  View.O
     EditText ed_mediclaim_amount,ed_reason,ed_approved_amount,ed_approval_remark;
 
     Button btn_cancel,btn_return,btn_approve,btn_submit,btn_save,btn_back;
+    //employee mediclaim details model
     ArrayList<Mediclaim_Details_Model> details_modelArrayList=new ArrayList<>();
+    //subordinate mediclaim details model
+    ArrayList<Subordinate_Mediclaim_Details_Model> subordinate_details_arrayList=new ArrayList<>();
+
 
     //---------------------- popup text views and button----------------
     TextView tv_period,txt_period,tv_unutilized_amount,txt_unutilized_amount,tv_1years,tv_limit_year,
@@ -51,6 +57,8 @@ public class MediclaimEntryActivity extends AppCompatActivity implements  View.O
 
     JSONObject my_mediclaim_jsonBody=new JSONObject();
     ArrayList<Model_Base64> arrayList=new ArrayList<>();
+    ArrayList<Subordinate_Model_Base64> arrayList1=new ArrayList<>();
+    String mediclaim_status,sub_mediclaim_status;
     //----------------------------X-------------------------------------
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,7 +82,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements  View.O
         tv_application_status=findViewById(R.id.tv_application_status);
         edtv_application_status=findViewById(R.id.edtv_application_status);
         // -------initialize text views end--------------//
-    //-------------------------------------------------------------------------------//
+        //-------------------------------------------------------------------------------//
         // -------initialize edit text start--------------//
         ed_mediclaim_amount=findViewById(R.id.ed_mediclaim_amount);
         ed_reason=findViewById(R.id.ed_reason);
@@ -104,65 +112,65 @@ public class MediclaimEntryActivity extends AppCompatActivity implements  View.O
         btn_submit.setOnClickListener(this);
         btn_back.setOnClickListener(this);
 
-        if(! MediclaimDocumentsActivity.pdf_modelArrayList.isEmpty())
-        {
-            MediclaimDocumentsActivity.pdf_modelArrayList.clear();
-        }
 
 
         //------------------------Open Check Balance POPUP-----------------------------------------//
-            tv_check_balance.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MediclaimEntryActivity.this);
-                    builder.setTitle("");
-                    final  View custom=getLayoutInflater().inflate(R.layout.popup_account_balance_activity,null);
+        tv_check_balance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MediclaimEntryActivity.this);
+                builder.setTitle("");
+                final  View custom=getLayoutInflater().inflate(R.layout.popup_account_balance_activity,null);
 
 
 
-                    tv_period=custom.findViewById(R.id.tv_period);
-                    txt_period=custom.findViewById(R.id.txt_period);
-                    tv_unutilized_amount=custom.findViewById(R.id.tv_unutilized_amount);
-                    txt_unutilized_amount=custom.findViewById(R.id.txt_unutilized_amount);
-                    tv_1years=custom.findViewById(R.id.tv_1years);
-                    tv_limit_year=custom.findViewById(R.id.tv_limit_year);
-                    txt_limit_year=custom.findViewById(R.id.txt_limit_year);
-                    tv_2years=custom.findViewById(R.id.tv_2years);
-                    tv_amount_disbursed=custom.findViewById(R.id.tv_amount_disbursed);
-                    txt_amount_disbursed=custom.findViewById(R.id.txt_amount_disbursed);
-                    tv_balance_available=custom.findViewById(R.id.tv_balance_available);
-                    txt_balance_available=custom.findViewById(R.id.txt_balance_available);
-                    btn_ok=custom.findViewById(R.id.btn_ok);
+                tv_period=custom.findViewById(R.id.tv_period);
+                txt_period=custom.findViewById(R.id.txt_period);
+                tv_unutilized_amount=custom.findViewById(R.id.tv_unutilized_amount);
+                txt_unutilized_amount=custom.findViewById(R.id.txt_unutilized_amount);
+                tv_1years=custom.findViewById(R.id.tv_1years);
+                tv_limit_year=custom.findViewById(R.id.tv_limit_year);
+                txt_limit_year=custom.findViewById(R.id.txt_limit_year);
+                tv_2years=custom.findViewById(R.id.tv_2years);
+                tv_amount_disbursed=custom.findViewById(R.id.tv_amount_disbursed);
+                txt_amount_disbursed=custom.findViewById(R.id.txt_amount_disbursed);
+                tv_balance_available=custom.findViewById(R.id.tv_balance_available);
+                txt_balance_available=custom.findViewById(R.id.txt_balance_available);
+                btn_ok=custom.findViewById(R.id.btn_ok);
 
 
 
 
-                    builder.setView(custom);
-                    final AlertDialog dialog = builder.create();
-                    dialog.show();
+                builder.setView(custom);
+                final AlertDialog dialog = builder.create();
+                dialog.show();
 
 
-                    btn_ok.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
+                btn_ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
 
-                    });
+                });
 
-                }
-            });
+            }
+        });
         //------------------------Close Check Balance POPUP-----------------------------------------//
-  if(Url.isMyMediclaim==true)
-  {
-      tv_docs.setText(MediclaimDocumentsActivity.arraylistSize+" Doc(s)");
-  }
+        if(Url.isMyMediclaim==true)
+        {
+            tv_docs.setText(MediclaimDocumentsActivity.arraylistSize+" Doc(s)");
+        }
         if(Url.isNewEntryMediclaim==true)
         {
 
-           tv_docs.setText(MediclaimDocumentsActivity.arraylistSize+" Doc(s)");
+            tv_docs.setText(MediclaimDocumentsActivity.arraylistSize+" Doc(s)");
 
+        }
 
+        if(Url.isSubordinateMediclaim==true)
+        {
+            tv_docs.setText(MediclaimDocumentsActivity.arraylistSize+" Doc(s)");
         }
 
 
@@ -175,6 +183,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements  View.O
                     Url.isMyMediclaim=false;
                     Url.isSubordinateMediclaim=false;
                     Intent intent=new Intent(MediclaimEntryActivity.this,MediclaimDocumentsActivity.class);
+
                     startActivity(intent);
                 }
                 if(Url.isMyMediclaim==true)
@@ -182,6 +191,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements  View.O
                     Url.isNewEntryMediclaim=false;
                     Url.isSubordinateMediclaim=false;
                     Intent intent=new Intent(MediclaimEntryActivity.this,MediclaimDocumentsActivity.class);
+                    intent.putExtra("employee_status=>",mediclaim_status);
                     startActivity(intent);
                 }
                 if(Url.isSubordinateMediclaim==true)
@@ -189,10 +199,11 @@ public class MediclaimEntryActivity extends AppCompatActivity implements  View.O
                     Url.isNewEntryMediclaim=false;
                     Url.isMyMediclaim=false;
                     Intent intent=new Intent(MediclaimEntryActivity.this,MediclaimDocumentsActivity.class);
+                    intent.putExtra("subordinate_mediclaim_status=>",sub_mediclaim_status);
                     startActivity(intent);
                 }
 
-                //finish();
+
             }
         });
 
@@ -215,13 +226,13 @@ public class MediclaimEntryActivity extends AppCompatActivity implements  View.O
         }
 
 
-        if(Url.isNewEntryMediclaim==false && Url.isSubordinateMediclaim==false)
+        if(Url.isNewEntryMediclaim==false)
         {
             EditEmployeeMode();
             tv_mediclaim_title.setText("My Mediclaim Detail");
             edtv_employee_name.setText(userSingletonModel.getFull_employee_name());
         }
-        
+
         if(Url.isNewEntryMediclaim==false && Url.isMyMediclaim==false)
         {
             EditSubordinateMediclaim();
@@ -235,9 +246,10 @@ public class MediclaimEntryActivity extends AppCompatActivity implements  View.O
     private void EditSubordinateMediclaim() {
         if(Url.isSubordinateMediclaim==true)
         {
-            LoadEmployeeData();
 
-            //LoadSubordinateData();
+            LoadSubordinateData();
+
+
             if(CustomSubordinateMediclaimListAdapter.mediclaim_status.contentEquals("Submitted"))
             {
                 btn_cancel.setVisibility(View.VISIBLE);
@@ -280,326 +292,276 @@ public class MediclaimEntryActivity extends AppCompatActivity implements  View.O
 
     }
 
+    private void LoadSubordinateData() {
+        String url=Url.BASEURL()+"mediclaim/detail/"+userSingletonModel.getCorporate_id()+"/"+CustomSubordinateMediclaimListAdapter.mediclaim_id;
+        Log.d("my_sub_mediclaim_url=>",url);
+        final ProgressDialog loading = ProgressDialog.show(MediclaimEntryActivity.this, "Loading", "Please wait...", true, false);
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+
+                    if(!subordinate_details_arrayList.isEmpty())
+                    {
+                        subordinate_details_arrayList.clear();
+                    }
+                    JSONObject jsonObject=new JSONObject(response);
+                    JSONObject jb1=jsonObject.getJSONObject("fields");
+                    String mediclaim_no=jb1.getString("mediclaim_no");
+                    String mediclaim_amount=jb1.getString("mediclaim_amount");
+                    String description=jb1.getString("description");
+                    sub_mediclaim_status=jb1.getString("mediclaim_status");
+                    String supervisor_remark=jb1.getString("supervisor_remark");
+                    String approved_mediclaim_amount=jb1.getString("approved_mediclaim_amount");
+
+
+                    Subordinate_Mediclaim_Details_Model model=new Subordinate_Mediclaim_Details_Model();
+                    model.setMediclaim_no(mediclaim_no);
+                    model.setMediclaim_amount(mediclaim_amount);
+                    model.setDescription(description);
+                    model.setMediclaim_status(sub_mediclaim_status);
+                    model.setSupervisor_remark(supervisor_remark);
+                    model.setMediclaim_amount(approved_mediclaim_amount);
+
+                    edtv_mediclaim_no.setText(mediclaim_no);
+                    ed_mediclaim_amount.setText(mediclaim_amount);
+                    ed_reason.setText(description);
+                    edtv_application_status.setText(sub_mediclaim_status);
+                    ed_approval_remark.setText(supervisor_remark);
+                    ed_approved_amount.setText(approved_mediclaim_amount);
+
+
+                    loading.dismiss();
+
+                } catch (JSONException e) {
+                    loading.dismiss();
+                    e.printStackTrace();
+                    Toast.makeText(MediclaimEntryActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                Toast.makeText(MediclaimEntryActivity.this, "could not connect to the server", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Volley.newRequestQueue(MediclaimEntryActivity.this).add(stringRequest);
+
+    }
 
 
     private void EditEmployeeMode() {
-       // open edit mode
-        LoadEmployeeData();
-       // loadDocuments();
+        // open edit mode
 
-
-        if(CustomMediclaimListAdapter.mediclaim_status.contentEquals("Saved"))
-
-        {
-
-            btn_approve.setVisibility(View.GONE);
-            btn_return.setVisibility(View.GONE);
-            btn_cancel.setVisibility(View.GONE);
-            btn_submit.setVisibility(View.VISIBLE);
-            btn_save.setVisibility(View.VISIBLE);
-            btn_back.setVisibility(View.VISIBLE);
-
-            ed_approved_amount.setEnabled(false);
-            ed_approval_remark.setEnabled(false);
-            edtv_application_status.setEnabled(false);
-
-        }
-        if(CustomMediclaimListAdapter.mediclaim_status.contentEquals("Submitted") ||CustomMediclaimListAdapter.mediclaim_status.contentEquals("Approved"))
-
-        {
-            btn_submit.setVisibility(View.GONE);
-            btn_approve.setVisibility(View.GONE);
-            btn_return.setVisibility(View.GONE);
-            btn_save.setVisibility(View.GONE);
-            btn_cancel.setVisibility(View.GONE);
-            btn_back.setVisibility(View.VISIBLE);
-
-
-            ed_mediclaim_amount.setEnabled(false);
-            ed_approved_amount.setEnabled(false);
-            ed_approval_remark.setEnabled(false);
-            ed_reason.setEnabled(false);
-            ed_reason.setEnabled(false);
-
-        }
-
-        if(CustomMediclaimListAdapter.mediclaim_status.contentEquals("Returned"))
-        {
-            btn_save.setVisibility(View.GONE);
-            btn_approve.setVisibility(View.GONE);
-            btn_return.setVisibility(View.GONE);
-            btn_cancel.setVisibility(View.GONE);
-            btn_submit.setVisibility(View.VISIBLE);
-            btn_back.setVisibility(View.VISIBLE);
-        }
-
-        if(CustomMediclaimListAdapter.mediclaim_status.contentEquals("Canceled"))
-        {
-            btn_submit.setVisibility(View.GONE);
-            btn_approve.setVisibility(View.GONE);
-            btn_return.setVisibility(View.GONE);
-            btn_save.setVisibility(View.GONE);
-            btn_cancel.setVisibility(View.GONE);
-            btn_back.setVisibility(View.VISIBLE);
-
-
-            ed_mediclaim_amount.setEnabled(false);
-            ed_approved_amount.setEnabled(false);
-            ed_approval_remark.setEnabled(false);
-            ed_reason.setEnabled(false);
-            ed_reason.setEnabled(false);
-
-
-
-        }
-    }
-
-    private void loadDocuments() {
         if(Url.isMyMediclaim==true)
         {
-            Url.isNewEntryMediclaim=false;
-            String url= Url.BASEURL()+"mediclaim/detail/"+userSingletonModel.getCorporate_id()+"/"+CustomMediclaimListAdapter.mediclaim_id;
-            Log.d("my_mediclaim_url=>",url);
-            final ProgressDialog loading = ProgressDialog.show(MediclaimEntryActivity.this, "Loading", "Please wait...", true, false);
-            StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        if(! MediclaimDocumentsActivity.pdf_modelArrayList.isEmpty())
-                        {
-                            MediclaimDocumentsActivity.pdf_modelArrayList.clear();
-                        }
-                        JSONObject jsonObject=new JSONObject(response);
-                        JSONArray jsonArray=jsonObject.getJSONArray("documents");
-                        for (int i=0;i<jsonArray.length();i++)
-                        {
-                            JSONObject jb1=jsonArray.getJSONObject(i);
-                            // Upload_PDF_Model model=new Upload_PDF_Model("1",getfileName(getApplicationContext(),uripdf),getStringPdf(uripdf),CustomMediclaimListAdapter.mediclaim_id);
-                            Upload_PDF_Model model=new Upload_PDF_Model(jb1.getString("file_base64"),
-                                    jb1.getString("file_name"),
-                                    jb1.getString("file_path"),
-                                    jb1.getString("mediclaim_id"));
-                            MediclaimDocumentsActivity.pdf_modelArrayList.add(model);
-
-                            MediclaimDocumentsActivity.arraylistSize=   MediclaimDocumentsActivity.pdf_modelArrayList.size();
+            LoadEmployeeData();
 
 
-                        }
-                        tv_docs.setText(MediclaimDocumentsActivity.arraylistSize+" Doc(s)");
 
-                        loading.dismiss();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        loading.dismiss();
-                        Toast.makeText(MediclaimEntryActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    loading.dismiss();
-                    Toast.makeText(MediclaimEntryActivity.this, "Could't connect to the server", Toast.LENGTH_SHORT).show();
-                }
-            });
-            Volley.newRequestQueue(MediclaimEntryActivity.this).add(stringRequest);
+            if(CustomMediclaimListAdapter.mediclaim_status.contentEquals("Saved"))
+
+            {
+
+                btn_approve.setVisibility(View.GONE);
+                btn_return.setVisibility(View.GONE);
+                btn_cancel.setVisibility(View.GONE);
+                btn_submit.setVisibility(View.VISIBLE);
+                btn_save.setVisibility(View.VISIBLE);
+                btn_back.setVisibility(View.VISIBLE);
+
+                ed_approved_amount.setEnabled(false);
+                ed_approval_remark.setEnabled(false);
+                edtv_application_status.setEnabled(false);
+
+            }
+            if(CustomMediclaimListAdapter.mediclaim_status.contentEquals("Submitted") ||CustomMediclaimListAdapter.mediclaim_status.contentEquals("Approved"))
+
+            {
+                btn_submit.setVisibility(View.GONE);
+                btn_approve.setVisibility(View.GONE);
+                btn_return.setVisibility(View.GONE);
+                btn_save.setVisibility(View.GONE);
+                btn_cancel.setVisibility(View.GONE);
+                btn_back.setVisibility(View.VISIBLE);
+
+
+                ed_mediclaim_amount.setEnabled(false);
+                ed_approved_amount.setEnabled(false);
+                ed_approval_remark.setEnabled(false);
+                ed_reason.setEnabled(false);
+                ed_reason.setEnabled(false);
+
+            }
+
+            if(CustomMediclaimListAdapter.mediclaim_status.contentEquals("Returned"))
+            {
+                btn_save.setVisibility(View.GONE);
+                btn_approve.setVisibility(View.GONE);
+                btn_return.setVisibility(View.GONE);
+                btn_cancel.setVisibility(View.GONE);
+                btn_submit.setVisibility(View.VISIBLE);
+                btn_back.setVisibility(View.VISIBLE);
+                ed_approved_amount.setEnabled(false);
+                ed_approval_remark.setEnabled(false);
+            }
+
+            if(CustomMediclaimListAdapter.mediclaim_status.contentEquals("Canceled"))
+            {
+                btn_submit.setVisibility(View.GONE);
+                btn_approve.setVisibility(View.GONE);
+                btn_return.setVisibility(View.GONE);
+                btn_save.setVisibility(View.GONE);
+                btn_cancel.setVisibility(View.GONE);
+                btn_back.setVisibility(View.VISIBLE);
+
+
+                ed_mediclaim_amount.setEnabled(false);
+                ed_approved_amount.setEnabled(false);
+                ed_approval_remark.setEnabled(false);
+                ed_reason.setEnabled(false);
+                ed_reason.setEnabled(false);
+
+
+
+            }
         }
 
     }
+
+
 
     private void LoadEmployeeData() {
 
-        if(Url.isMyMediclaim==true)
-        {
-            Url.isSubordinateMediclaim=false;
-            String url=Url.BASEURL()+"mediclaim/detail/"+userSingletonModel.getCorporate_id()+"/"+CustomMediclaimListAdapter.mediclaim_id;
-            Log.d("my_mediclaim_url=>",url);
-            final ProgressDialog loading = ProgressDialog.show(MediclaimEntryActivity.this, "Loading", "Please wait...", true, false);
-
-            StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-
-                    try {
-                        if(!details_modelArrayList.isEmpty())
-                        {
-                            details_modelArrayList.clear();
-                        }
-                        JSONObject jsonObject=new JSONObject(response);
-                        JSONObject jb1=jsonObject.getJSONObject("fields");
-
-                        String mediclaim_no=jb1.getString("mediclaim_no");
-                        String mediclaim_amount=jb1.getString("mediclaim_amount");
-                        String description=jb1.getString("description");
-                        String mediclaim_status=jb1.getString("mediclaim_status");
-                        String supervisor_remark=jb1.getString("supervisor_remark");
-                        String approved_mediclaim_amount=jb1.getString("approved_mediclaim_amount");
 
 
+        String url=Url.BASEURL()+"mediclaim/detail/"+userSingletonModel.getCorporate_id()+"/"+CustomMediclaimListAdapter.mediclaim_id;
+        Log.d("my_mediclaim_url=>",url);
+        final ProgressDialog loading = ProgressDialog.show(MediclaimEntryActivity.this, "Loading", "Please wait...", true, false);
 
-//                        JSONArray jsonArray=jsonObject.getJSONArray("documents");
-//                        for (int i=0;i<jsonArray.length();i++)
-//                        {
-//                            JSONObject jb2=jsonArray.getJSONObject(i);
-//                            // Upload_PDF_Model model=new Upload_PDF_Model("1",getfileName(getApplicationContext(),uripdf),getStringPdf(uripdf),CustomMediclaimListAdapter.mediclaim_id);
-//                            Upload_PDF_Model model=new Upload_PDF_Model(jb1.getString("file_base64"),
-//                                    jb2.getString("file_name"),
-//                                    jb2.getString("file_path"),
-//                                    jb2.getString("mediclaim_id"));
-//                            MediclaimDocumentsActivity.pdf_modelArrayList.add(model);
-//
-//                            MediclaimDocumentsActivity.arraylistSize=   MediclaimDocumentsActivity.pdf_modelArrayList.size();
-//
-//
-//                        }
-//                        Toast.makeText(MediclaimEntryActivity.this, ""+ MediclaimDocumentsActivity.arraylistSize, Toast.LENGTH_SHORT).show();
-//                        tv_docs.setText(MediclaimDocumentsActivity.arraylistSize+" Doc(s)");
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
 
-
-
-                        Mediclaim_Details_Model model=new Mediclaim_Details_Model();
-                        model.setMediclaim_no(mediclaim_no);
-                        model.setMediclaim_amount(mediclaim_amount);
-                        model.setDescription(description);
-                        model.setMediclaim_status(mediclaim_status);
-                        model.setApproved_mediclaim_amount(approved_mediclaim_amount);
-                        model.setSupervisor_remark(supervisor_remark);
-
-
-                        details_modelArrayList.add(model);
-
-                        edtv_mediclaim_no.setText(mediclaim_no);
-                        ed_mediclaim_amount.setText(mediclaim_amount);
-                        ed_reason.setText(description);
-                        edtv_application_status.setText(mediclaim_status);
-                        ed_mediclaim_amount.setText(approved_mediclaim_amount);
-                        ed_approval_remark.setText(supervisor_remark);
-
-
-
-                        loading.dismiss();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        loading.dismiss();
-                        Toast.makeText(MediclaimEntryActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                try {
+                    if(!details_modelArrayList.isEmpty())
+                    {
+                        details_modelArrayList.clear();
                     }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
+                    JSONObject jsonObject=new JSONObject(response);
+
+                    JSONObject jb1=jsonObject.getJSONObject("fields");
+                    String mediclaim_no=jb1.getString("mediclaim_no");
+                    String mediclaim_amount=jb1.getString("mediclaim_amount");
+                    String description=jb1.getString("description");
+                    mediclaim_status=jb1.getString("mediclaim_status");
+                    String supervisor_remark=jb1.getString("supervisor_remark");
+                    String approved_mediclaim_amount=jb1.getString("approved_mediclaim_amount");
+
+                    Mediclaim_Details_Model model=new Mediclaim_Details_Model();
+
+                    model.setMediclaim_no(mediclaim_no);
+                    model.setMediclaim_amount(mediclaim_amount);
+                    model.setDescription(description);
+                    model.setMediclaim_status(mediclaim_status);
+                    model.setApproved_mediclaim_amount(approved_mediclaim_amount);
+                    model.setSupervisor_remark(supervisor_remark);
+
+
+                    details_modelArrayList.add(model);
+
+                    edtv_mediclaim_no.setText(mediclaim_no);
+                    ed_mediclaim_amount.setText(mediclaim_amount);
+                    ed_reason.setText(description);
+                    edtv_application_status.setText(mediclaim_status);
+                    ed_approved_amount.setText(approved_mediclaim_amount);
+                    ed_approval_remark.setText(supervisor_remark);
+
+
+
                     loading.dismiss();
-                    Toast.makeText(MediclaimEntryActivity.this, "Could't connect to the server", Toast.LENGTH_SHORT).show();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    loading.dismiss();
+                    Toast.makeText(MediclaimEntryActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            });
-
-            Volley.newRequestQueue(MediclaimEntryActivity.this).add(stringRequest);
-        }
-
-if(Url.isSubordinateMediclaim==true)
-{
-    Url.isMyMediclaim=false;
-    String url=Url.BASEURL()+"mediclaim/detail/"+userSingletonModel.getCorporate_id()+"/"+CustomSubordinateMediclaimListAdapter.mediclaim_id;
-    Log.d("my_mediclaim_url=>",url);
-    final ProgressDialog loading = ProgressDialog.show(MediclaimEntryActivity.this, "Loading", "Please wait...", true, false);
-
-    StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
-
-            try {
-                if(!details_modelArrayList.isEmpty())
-                {
-                    details_modelArrayList.clear();
-                }
-                JSONObject jsonObject=new JSONObject(response);
-                JSONObject jb1=jsonObject.getJSONObject("fields");
-
-                String mediclaim_no=jb1.getString("mediclaim_no");
-                String mediclaim_amount=jb1.getString("mediclaim_amount");
-                String description=jb1.getString("description");
-                String mediclaim_status=jb1.getString("mediclaim_status");
-                String supervisor_remark=jb1.getString("supervisor_remark");
-                String approved_mediclaim_amount=jb1.getString("approved_mediclaim_amount");
-
-
-
-                Mediclaim_Details_Model model=new Mediclaim_Details_Model();
-                model.setMediclaim_no(mediclaim_no);
-                model.setMediclaim_amount(mediclaim_amount);
-                model.setDescription(description);
-                model.setMediclaim_status(mediclaim_status);
-                model.setApproved_mediclaim_amount(approved_mediclaim_amount);
-                model.setSupervisor_remark(supervisor_remark);
-
-                details_modelArrayList.add(model);
-
-                edtv_mediclaim_no.setText(mediclaim_no);
-                ed_mediclaim_amount.setText(mediclaim_amount);
-                ed_reason.setText(description);
-                edtv_application_status.setText(mediclaim_status);
-                ed_mediclaim_amount.setText(approved_mediclaim_amount);
-                ed_approval_remark.setText(supervisor_remark);
-
-
-                loading.dismiss();
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-                loading.dismiss();
-                Toast.makeText(MediclaimEntryActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }
-    }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            loading.dismiss();
-            Toast.makeText(MediclaimEntryActivity.this, "Could't connect to the server", Toast.LENGTH_SHORT).show();
-        }
-    });
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                Toast.makeText(MediclaimEntryActivity.this, "Could't connect to the server", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-    Volley.newRequestQueue(MediclaimEntryActivity.this).add(stringRequest);
-}
+        Volley.newRequestQueue(MediclaimEntryActivity.this).add(stringRequest);
+    }
 
-        }
+
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_save:
-                    String corp_id=userSingletonModel.getCorporate_id();
-                    String mediclaim_id=CustomMediclaimListAdapter.mediclaim_id;
-                    String mediclaim_no=CustomMediclaimListAdapter.mediclaim_no;
-                     int employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
-                    double mediclaim_amount=Double.parseDouble(ed_mediclaim_amount.getText().toString());
-                    double approved_mediclaim_amount=0;
-                    String description=ed_reason.getText().toString();
-                    String supervisor_remark="";
-                    String mediclaim_status="Saved";
-                    int approved_by_id=0;
-                    String approved_by_name="";
-                    String payment_remark="";
-                    int payment_amount=0;
+                String corp_id=userSingletonModel.getCorporate_id();
+                String mediclaim_id=CustomMediclaimListAdapter.mediclaim_id;
+                String mediclaim_no=CustomMediclaimListAdapter.mediclaim_no;
+                int employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
+                double mediclaim_amount=Double.parseDouble(ed_mediclaim_amount.getText().toString());
+                double approved_mediclaim_amount=0;
+                String description=ed_reason.getText().toString();
+                String supervisor_remark="";
+                String mediclaim_status="Saved";
+                int approved_by_id=0;
+                String approved_by_name="";
+                String payment_remark="";
+                int payment_amount=0;
                 SaveMyMediclaimData(corp_id,mediclaim_id,mediclaim_no,employee_id,mediclaim_amount,approved_mediclaim_amount,description,supervisor_remark,
                         mediclaim_status,approved_by_id,approved_by_name,payment_remark,payment_amount);
 
                 break;
             case  R.id.btn_cancel:
+                if(Url.isSubordinateMediclaim==true)
+                {
+
+                    corp_id=userSingletonModel.getCorporate_id();
+                    mediclaim_id=CustomSubordinateMediclaimListAdapter.mediclaim_id;
+                    mediclaim_no=CustomSubordinateMediclaimListAdapter.mediclaim_no;
+                    employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
+                    mediclaim_amount=Double.parseDouble(ed_mediclaim_amount.getText().toString());
+                    approved_mediclaim_amount=Double.parseDouble(ed_approved_amount.getText().toString());
+                    description=ed_reason.getText().toString();
+                    supervisor_remark=ed_approval_remark.getText().toString();
+                    mediclaim_status="Canceled";
+                    approved_by_id=0;
+                    approved_by_name=userSingletonModel.getFull_employee_name();
+                    payment_remark="";
+                    payment_amount=0;
+                    SaveMyMediclaimData(corp_id,mediclaim_id,mediclaim_no,employee_id,mediclaim_amount,approved_mediclaim_amount,description,supervisor_remark,
+                            mediclaim_status,approved_by_id,approved_by_name,payment_remark,payment_amount);
+
+                }
 
                 break;
             case  R.id.btn_submit:
 
                 corp_id=userSingletonModel.getCorporate_id();
                 mediclaim_id=CustomMediclaimListAdapter.mediclaim_id;
-                 mediclaim_no=CustomMediclaimListAdapter.mediclaim_no;
-                 employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
-                 mediclaim_amount=Double.parseDouble(ed_mediclaim_amount.getText().toString());
-                 approved_mediclaim_amount=0;
+                mediclaim_no=CustomMediclaimListAdapter.mediclaim_no;
+                employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
+                mediclaim_amount=Double.parseDouble(ed_mediclaim_amount.getText().toString());
+                approved_mediclaim_amount=0;
                 description=ed_reason.getText().toString();
                 supervisor_remark="";
-                 mediclaim_status="Submitted";
-                 approved_by_id=0;
+                mediclaim_status="Submitted";
+                approved_by_id=0;
                 approved_by_name="";
-                 payment_remark="";
+                payment_remark="";
                 payment_amount=0;
                 SaveMyMediclaimData(corp_id,mediclaim_id,mediclaim_no,employee_id,mediclaim_amount,approved_mediclaim_amount,description,supervisor_remark,
                         mediclaim_status,approved_by_id,approved_by_name,payment_remark,payment_amount);
@@ -612,12 +574,13 @@ if(Url.isSubordinateMediclaim==true)
 
                 if(Url.isSubordinateMediclaim==true)
                 {
+
                     corp_id=userSingletonModel.getCorporate_id();
                     mediclaim_id=CustomSubordinateMediclaimListAdapter.mediclaim_id;
                     mediclaim_no=CustomSubordinateMediclaimListAdapter.mediclaim_no;
                     employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
                     mediclaim_amount=Double.parseDouble(ed_mediclaim_amount.getText().toString());
-                    approved_mediclaim_amount=Double.parseDouble(ed_mediclaim_amount.getText().toString());
+                    approved_mediclaim_amount=Double.parseDouble(ed_approved_amount.getText().toString());
                     description=ed_reason.getText().toString();
                     supervisor_remark=ed_approval_remark.getText().toString();
                     mediclaim_status="Approved";
@@ -627,15 +590,48 @@ if(Url.isSubordinateMediclaim==true)
                     payment_amount=0;
                     SaveMyMediclaimData(corp_id,mediclaim_id,mediclaim_no,employee_id,mediclaim_amount,approved_mediclaim_amount,description,supervisor_remark,
                             mediclaim_status,approved_by_id,approved_by_name,payment_remark,payment_amount);
-                }
 
+                }
 
 
                 break;
             case  R.id.btn_return:
+                if(Url.isSubordinateMediclaim==true)
+                {
+
+                    corp_id=userSingletonModel.getCorporate_id();
+                    mediclaim_id=CustomSubordinateMediclaimListAdapter.mediclaim_id;
+                    mediclaim_no=CustomSubordinateMediclaimListAdapter.mediclaim_no;
+                    employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
+                    mediclaim_amount=Double.parseDouble(ed_mediclaim_amount.getText().toString());
+                    approved_mediclaim_amount=Double.parseDouble(ed_approved_amount.getText().toString());
+                    description=ed_reason.getText().toString();
+                    supervisor_remark=ed_approval_remark.getText().toString();
+                    mediclaim_status="Returned";
+                    approved_by_id=0;
+                    approved_by_name=userSingletonModel.getFull_employee_name();
+                    payment_remark="";
+                    payment_amount=0;
+                    SaveMyMediclaimData(corp_id,mediclaim_id,mediclaim_no,employee_id,mediclaim_amount,approved_mediclaim_amount,description,supervisor_remark,
+                            mediclaim_status,approved_by_id,approved_by_name,payment_remark,payment_amount);
+
+                }
 
                 break;
             case  R.id.btn_back:
+
+                if(Url.isSubordinateMediclaim==true)
+                {
+                    onBackPressed();
+                }
+                if(Url.isMyMediclaim==true)
+                {
+                    onBackPressed();
+                }
+                if(Url.isNewEntryMediclaim==true)
+                {
+                    onBackPressed();
+                }
 
                 break;
             default:
@@ -672,7 +668,6 @@ if(Url.isSubordinateMediclaim==true)
             my_mediclaim_jsonBody.put("payment_remark",payment_remark);
             my_mediclaim_jsonBody.put("payment_amount",payment_amount);
 
-
             for (int i=0;i<MediclaimDocumentsActivity.pdf_modelArrayList.size();i++)
             {
                 String name=MediclaimDocumentsActivity.pdf_modelArrayList.get(i).getFile_name();
@@ -682,6 +677,34 @@ if(Url.isSubordinateMediclaim==true)
 
             }
             my_mediclaim_jsonBody.put("documents", new JSONArray(new Gson().toJson(arrayList)));
+
+
+            if(Url.isSubordinateMediclaim==true)
+            {
+                for (int i=0;i<MediclaimDocumentsActivity.subordinate_arraylist.size();i++)
+                {
+                    String name=MediclaimDocumentsActivity.subordinate_arraylist.get(i).getFile_name();
+                    String base=MediclaimDocumentsActivity.subordinate_arraylist.get(i).getFile_base64();
+
+                    arrayList1.add(new Subordinate_Model_Base64(name,base));
+
+                }
+                my_mediclaim_jsonBody.put("documents", new JSONArray(new Gson().toJson(arrayList1)));
+            }
+            else
+            {
+                for (int i=0;i<MediclaimDocumentsActivity.pdf_modelArrayList.size();i++)
+                {
+                    String name=MediclaimDocumentsActivity.pdf_modelArrayList.get(i).getFile_name();
+                    String base=MediclaimDocumentsActivity.pdf_modelArrayList.get(i).getFile_base64();
+
+                    arrayList.add(new Model_Base64(name,base));
+
+                }
+                my_mediclaim_jsonBody.put("documents", new JSONArray(new Gson().toJson(arrayList)));
+
+            }
+
 
 
 //
@@ -713,8 +736,8 @@ if(Url.isSubordinateMediclaim==true)
                         Intent intent = new Intent(MediclaimEntryActivity.this, MediclaimActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
-                                //finish(); // commented by sr
-                    //    Toast.makeText(getApplicationContext(),""+message,Toast.LENGTH_LONG).show();
+                        //finish(); // commented by sr
+                        //    Toast.makeText(getApplicationContext(),""+message,Toast.LENGTH_LONG).show();
 
 //
                     } catch (JSONException e) {
@@ -736,6 +759,6 @@ if(Url.isSubordinateMediclaim==true)
             Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-  }
+    }
 
 }

@@ -50,11 +50,11 @@
             android:title="Advance" />
         <item
             android:id="@+id/nav_mediclaim"
-            android:icon="@drawable/advance"
+            android:icon="@drawable/mediclaim"
             android:title="Mediclaim" />
         <item
             android:id="@+id/nav_lta"
-            android:icon="@drawable/advance"
+            android:icon="@drawable/lta"
             android:title="LTA" />
         <item
             android:id="@+id/nav_reports"

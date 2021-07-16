@@ -1,4 +1,4 @@
-package org.wrkplan.payroll.Model;
+package org.wrkplan.payroll.Model.Mediclaim;
 
 public class Upload_PDF_Model {
    String file_base64,file_name,file_path,mediclaim_id;

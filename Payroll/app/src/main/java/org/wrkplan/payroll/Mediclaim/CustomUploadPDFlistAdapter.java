@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.wrkplan.payroll.Model.Upload_PDF_Model;
+import org.wrkplan.payroll.Model.Mediclaim.Upload_PDF_Model;
 import org.wrkplan.payroll.R;
 
 import java.util.ArrayList;
@@ -28,13 +28,13 @@ public class CustomUploadPDFlistAdapter extends RecyclerView.Adapter<CustomUploa
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CustomUploadPDFlistAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.select_custom_pdf_layout_row,parent,false);
-        return new ViewHolder(view);
+        return new CustomUploadPDFlistAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CustomUploadPDFlistAdapter.ViewHolder holder, int position) {
         Upload_PDF_Model model=pdf_modelArrayList.get(position);
         holder.tv_index.setText(position+1+ "");
         holder.tv_pdf_file.setText(pdf_modelArrayList.get(position).getFile_name());
@@ -64,6 +64,10 @@ public class CustomUploadPDFlistAdapter extends RecyclerView.Adapter<CustomUploa
                 alert.show();
             }
         });
+        if(MediclaimDocumentsActivity.flag==true)
+        {
+            holder.img_pdf_icon_delete.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void delete_record(int position) {

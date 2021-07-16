@@ -26,7 +26,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
-import org.wrkplan.payroll.Model.My_Mediclaim_Model;
+import org.wrkplan.payroll.Model.Mediclaim.My_Mediclaim_Model;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
@@ -48,13 +48,13 @@ public class CustomMediclaimListAdapter extends RecyclerView.Adapter<CustomMedic
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CustomMediclaimListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_my_mediclaim_list_custom_row,parent,false);
-        return new ViewHolder(view);
+        return new CustomMediclaimListAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CustomMediclaimListAdapter.ViewHolder holder, int position) {
 
         My_Mediclaim_Model model=mediclaimList.get(position);
         holder.tv_mediclaim_no.setText(mediclaimList.get(position).getMediclaim_no());
@@ -97,7 +97,7 @@ public class CustomMediclaimListAdapter extends RecyclerView.Adapter<CustomMedic
                 mediclaim_status=mediclaimList.get(position).getMediclaim_status();
                 mediclaim_no=mediclaimList.get(position).getMediclaim_no();
                 Intent intent=new Intent(context,MediclaimEntryActivity.class);
-               // Toast.makeText(context, "employee form", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(context, "employee form", Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
             }
         });

@@ -59,14 +59,39 @@
                 android:layout_marginRight="10dp"
                 android:background="#C3C3C3"></View>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_pdf"
+            <RelativeLayout
+                android:id="@+id/rl1"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/view1"
+                android:layout_below="@id/view1">
 
-                tools:listitem="@layout/select_custom_pdf_layout_row"
-                android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_pdf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/select_custom_pdf_layout_row"
+                    android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl2"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view1">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/subordinate_recycler_pdf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/select_custom_pdf_layout_row"
+                    android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
+
+
+
 
         </RelativeLayout>
 
@@ -79,28 +104,28 @@
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textAllCaps="false"
-            android:text="Cancel"
-            android:textSize="15sp"
-            android:background="@drawable/layout6"
-            android:textColor="#504E4E"
-            />
-        <Button
-            android:id="@+id/btn_done"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Done"
-            android:textAllCaps="false"
-            android:background="@drawable/layout6"
-            android:textSize="15sp"
-            android:textColor="#504E4E"
-            />
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:text="Cancel"
+                android:textSize="15sp"
+                android:background="@drawable/layout6"
+                android:textColor="#504E4E"
+                />
+            <Button
+                android:id="@+id/btn_done"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Done"
+                android:textAllCaps="false"
+                android:background="@drawable/layout6"
+                android:textSize="15sp"
+                android:textColor="#504E4E"
+                />
         </LinearLayout>
     </RelativeLayout>
 
