@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -289,30 +290,14 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
             case R.id.btn_cancel:
                 makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), ed_approved_amount.getText().toString(), ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Cancelled", userSingletonModel.getEmployee_id());
 
-                if (LtaListActivity.EmployeeType == "Supervisor"){
-                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
-                }else if (LtaListActivity.EmployeeType == "Employee") {
-                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
-                }
-
                 break;
             case R.id.btn_return:
                 makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), ed_approved_amount.getText().toString(), ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Returned", userSingletonModel.getEmployee_id());
 
-                if (LtaListActivity.EmployeeType == "Supervisor"){
-                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
-                }else if (LtaListActivity.EmployeeType == "Employee") {
-                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
-                }
                 break;
             case R.id.btn_approve:
                 makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), ed_approved_amount.getText().toString(), ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Approved", userSingletonModel.getEmployee_id());
 
-                if (LtaListActivity.EmployeeType == "Supervisor"){
-                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
-                }else if (LtaListActivity.EmployeeType == "Employee") {
-                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
-                }
                 break;
             case R.id.btn_submit:
                 if (LtaListActivity.new_create_yn == 1) {
@@ -321,11 +306,6 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                     makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), "0.0", ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Submitted", "0");
                 }
 
-                if (LtaListActivity.EmployeeType == "Supervisor"){
-                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
-                }else if (LtaListActivity.EmployeeType == "Employee") {
-                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
-                }
                 break;
             case R.id.btn_save:
                 if (LtaListActivity.new_create_yn == 1) {
@@ -334,11 +314,6 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                     makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), "0.0", ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Saved", "0");
                 }
 
-                if (LtaListActivity.EmployeeType == "Supervisor"){
-                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
-                }else if (LtaListActivity.EmployeeType == "Employee") {
-                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
-                }
 
                 break;
             case R.id.imgBtnCalenderFrom:
@@ -720,6 +695,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
             String URL = Url.BASEURL()+"lta/save";
             Log.d("ltaurl-=>",URL);
             try {
+                final ProgressDialog loading = ProgressDialog.show(LtaRequestActivity.this, "Loading", "Please wait...", true, false);
                 request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
                         new Response.Listener<JSONObject>() {
                             @Override
@@ -736,8 +712,65 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                                         if(resobj.getString("status").contentEquals("true")){
                                             Toast.makeText(getApplicationContext(),resobj.getString("message"),Toast.LENGTH_LONG).show();
                                             finish();
-                                            startActivity(getIntent());
+                                            loading.dismiss();
+//                                            startActivity(getIntent());
+                                            if (LtaListActivity.EmployeeType == "Supervisor"){
+                                                startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                                            }else if (LtaListActivity.EmployeeType == "Employee") {
+                                                startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+                                            }
                                         }else{
+//                                            finish();
+                                            Handler handler = new Handler();
+                                            if (LtaListActivity.EmployeeType == "Supervisor"){
+                                                /*final Runnable r = new Runnable() {
+                                                    public void run() {
+//                                                        handler.postDelayed(this, 5000);
+                                                        handler.postDelayed(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                //Write whatever to want to do after delay specified (1 sec)
+//                                                                Log.d("Handler", "Running Handler");
+                                                                loading.dismiss();
+                                                                Intent intent = new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class);
+                                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                                startActivity(intent);
+                                                            }
+                                                        }, 2000);
+
+//                                                        startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                                                    }
+                                                };*/
+                                                loading.dismiss();
+                                                Intent intent = new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(intent);
+
+                                            }else if (LtaListActivity.EmployeeType == "Employee") {
+                                               /* final Runnable r = new Runnable() {
+                                                    public void run() {
+//                                                        handler.postDelayed(this, 5000);
+                                                        handler.postDelayed(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                //Write whatever to want to do after delay specified (1 sec)
+//                                                                Log.d("Handler", "Running Handler");
+                                                                loading.dismiss();
+                                                                Intent intent = new Intent(LtaRequestActivity.this, LtaListActivity.class);
+                                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                                startActivity(intent);
+                                                            }
+                                                        }, 2000);
+
+//                                                        startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+                                                    }
+                                                };*/
+                                                loading.dismiss();
+                                                Intent intent = new Intent(LtaRequestActivity.this, LtaListActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(intent);
+
+                                            }
                                             Toast.makeText(getApplicationContext(),resobj.getString("message"),Toast.LENGTH_LONG).show();
                                         }
                                     }catch (JSONException e){

@@ -3,6 +3,7 @@ package org.wrkplan.payroll.Lta;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -63,6 +64,8 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
         recycler_view.setHasFixedSize(true);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         //==========Recycler code initializing and setting layoutManager ends======
+
+
         loadData();
 //        load_temp_data();
 
