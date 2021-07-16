@@ -171,7 +171,7 @@ public class CustomLTAListActivityAdapter extends RecyclerView.Adapter<CustomLTA
                             .setCancelable(false)
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-//                                    delete_api_call(position);
+                                    delete_api_call(position);
                                     dialog.cancel();
                                 }
                             })
@@ -191,8 +191,8 @@ public class CustomLTAListActivityAdapter extends RecyclerView.Adapter<CustomLTA
     }
 
 
-    /*public void delete_api_call(final int position){
-        String url = Url.BASEURL()+"od/request/delete/"+userSingletonModel.getCorporate_id()+"/"+outDoorListModelArrayList.get(position).getOd_request_id();
+    public void delete_api_call(final int position){
+        String url = Url.BASEURL()+"lta/delete/"+userSingletonModel.getCorporate_id()+"/"+ltaModelArrayList.get(position).getLta_application_id();
         Log.d("url-=>",url);
         final ProgressDialog loading = ProgressDialog.show(context, "Loading", "Please wait...", true, false);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
@@ -204,8 +204,8 @@ public class CustomLTAListActivityAdapter extends RecyclerView.Adapter<CustomLTA
                             JSONObject jsonObject1 = jsonObject.getJSONObject("response");
                             if (jsonObject1.getString("status").contentEquals("true")) {
                                 Toast.makeText(context,jsonObject1.getString("message"),Toast.LENGTH_LONG).show();
-                                outDoorListModelArrayList.remove(position);
-                                customOutdoorListAdapter.notifyItemRemoved(position);
+                                ltaModelArrayList.remove(position);
+                                customLTAListActivityAdapter.notifyItemRemoved(position);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -223,5 +223,5 @@ public class CustomLTAListActivityAdapter extends RecyclerView.Adapter<CustomLTA
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(stringRequest);
-    }*/
+    }
 }
