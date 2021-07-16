@@ -108,11 +108,11 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
             }
             if (LtaListActivity.mediclaim_status.contentEquals("Returned")){
 
-                tv_button_done.setVisibility(View.GONE);
-                tv_button_cancel.setVisibility(View.GONE);
-                ll_button.setVisibility(View.GONE);
-                img_add.setVisibility(View.GONE);
-                view_dcmnts_border_line.setVisibility(View.GONE);
+                tv_button_done.setVisibility(View.VISIBLE);
+                tv_button_cancel.setVisibility(View.VISIBLE);
+                ll_button.setVisibility(View.VISIBLE);
+                img_add.setVisibility(View.VISIBLE);
+                view_dcmnts_border_line.setVisibility(View.VISIBLE);
 //                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);
 
             }
