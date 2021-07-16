@@ -723,48 +723,12 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 //                                            finish();
                                             Handler handler = new Handler();
                                             if (LtaListActivity.EmployeeType == "Supervisor"){
-                                                /*final Runnable r = new Runnable() {
-                                                    public void run() {
-//                                                        handler.postDelayed(this, 5000);
-                                                        handler.postDelayed(new Runnable() {
-                                                            @Override
-                                                            public void run() {
-                                                                //Write whatever to want to do after delay specified (1 sec)
-//                                                                Log.d("Handler", "Running Handler");
-                                                                loading.dismiss();
-                                                                Intent intent = new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class);
-                                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                                startActivity(intent);
-                                                            }
-                                                        }, 2000);
-
-//                                                        startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
-                                                    }
-                                                };*/
                                                 loading.dismiss();
                                                 Intent intent = new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
 
                                             }else if (LtaListActivity.EmployeeType == "Employee") {
-                                               /* final Runnable r = new Runnable() {
-                                                    public void run() {
-//                                                        handler.postDelayed(this, 5000);
-                                                        handler.postDelayed(new Runnable() {
-                                                            @Override
-                                                            public void run() {
-                                                                //Write whatever to want to do after delay specified (1 sec)
-//                                                                Log.d("Handler", "Running Handler");
-                                                                loading.dismiss();
-                                                                Intent intent = new Intent(LtaRequestActivity.this, LtaListActivity.class);
-                                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                                startActivity(intent);
-                                                            }
-                                                        }, 2000);
-
-//                                                        startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
-                                                    }
-                                                };*/
                                                 loading.dismiss();
                                                 Intent intent = new Intent(LtaRequestActivity.this, LtaListActivity.class);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -851,7 +815,8 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 ed_supervisor_remark.setText(jsonObject2.getString("supervisor_remark"));
                 ed_final_supervisor_remark.setText(jsonObject2.getString("final_supervisor_remark"));
                 int total_days = jsonObject2.getInt("total_days");
-                tv_total_days.setText(String.valueOf(total_days));
+//                tv_total_days.setText(String.valueOf(total_days));
+                tv_total_days.setText(get_date_difference(jsonObject2.getString("date_from"), jsonObject2.getString("date_to")));
 
                 JSONArray jsonArray = jsonObject.getJSONArray("documents");
                 for(int i = 0; i<jsonArray.length(); i++){
