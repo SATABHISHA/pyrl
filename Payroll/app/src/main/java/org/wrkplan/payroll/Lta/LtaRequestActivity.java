@@ -467,6 +467,68 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 TxtReason.isUserInteractionEnabled = false
                 TxtApprovedAmount.isUserInteractionEnabled = true
                 TxtViewApprovalRemark.isUserInteractionEnabled = true*/
+
+                //----added chekin for approved amount on 19th July 2021, code starts---
+                Double lta_amount = Double.parseDouble(ed_lta_amount.getText().toString());
+                ed_approved_amount.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        try {
+                            Double approved_amount = Double.parseDouble(ed_approved_amount.getText().toString());
+                            if (approved_amount > lta_amount) {
+                                //----to display message in snackbar, code starts
+                                String message_notf = "Approved amount canot be more than LTA amount";
+                                int color = Color.parseColor("#FFFFFF");
+                                View v1 = findViewById(R.id.cordinatorLayout);
+                                new org.wrkplan.payroll.Config.Snackbar(message_notf, v1, color);
+
+                                btn_cancel.setClickable(false);
+                                btn_cancel.setAlpha(0.6f);
+
+                                btn_approve.setClickable(false);
+                                btn_approve.setAlpha(0.6f);
+
+                                btn_return.setClickable(false);
+                                btn_return.setAlpha(0.6f);
+                            } else {
+                                btn_cancel.setClickable(true);
+                                btn_cancel.setAlpha(1.0f);
+
+                                btn_approve.setClickable(true);
+                                btn_approve.setAlpha(1.0f);
+
+                                btn_return.setClickable(true);
+                                btn_return.setAlpha(1.0f);
+                            }
+                        }catch (NumberFormatException e){
+                            String message_notf = "Field cannot be left blank";
+                            int color = Color.parseColor("#FFFFFF");
+                            View v1 = findViewById(R.id.cordinatorLayout);
+                            new org.wrkplan.payroll.Config.Snackbar(message_notf, v1, color);
+
+                            btn_cancel.setClickable(false);
+                            btn_cancel.setAlpha(0.6f);
+
+                            btn_approve.setClickable(false);
+                            btn_approve.setAlpha(0.6f);
+
+                            btn_return.setClickable(false);
+                            btn_return.setAlpha(0.6f);
+                        }
+                        }
+
+                });
+                //----added chekin for approved amount on 19th July 2021, code ends---
             }
             if ((LtaListActivity.mediclaim_status.contentEquals("Returned")) ||
                     (LtaListActivity.mediclaim_status.contentEquals("Approved")) ||
