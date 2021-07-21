@@ -125,6 +125,10 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".Mediclaim.MediclaimDocumentsActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mediclaim.PdfViewActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mediclaim.SubordinatePdfViewActivity"
+            android:screenOrientation="portrait"></activity>
 
 
         <!-- Firebase Notifications -->

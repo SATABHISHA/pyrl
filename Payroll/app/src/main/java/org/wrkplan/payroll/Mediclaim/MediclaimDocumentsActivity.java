@@ -40,7 +40,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class MediclaimDocumentsActivity extends AppCompatActivity implements View.OnClickListener{
+public class MediclaimDocumentsActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static ArrayList<Upload_PDF_Model> pdf_modelArrayList = new ArrayList<>();
     public static CustomUploadPDFlistAdapter adapter;
@@ -54,9 +54,10 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
     Uri uripdf = null;
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     String encodedPdf = "";
-    String med_status="";
+    public  static  String med_status="";
     String sub_med_status="";
     public static boolean flag=false;
+    public static boolean sub_flag=false;
 
     RelativeLayout rl1,rl2;
 
@@ -132,9 +133,10 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
         btn_done.setOnClickListener(this);
         img_add.setOnClickListener(this);
 
-        if (!pdf_modelArrayList.isEmpty()) {
-            pdf_modelArrayList.clear();
-        }
+//        if (!pdf_modelArrayList.isEmpty()) {
+//            pdf_modelArrayList.clear();
+//            Toast.makeText(this, "ArrayList cleared", Toast.LENGTH_SHORT).show();
+//        }
         adapter = new CustomUploadPDFlistAdapter(pdf_modelArrayList, MediclaimDocumentsActivity.this);
         recycler_pdf.setAdapter(adapter);
 
@@ -195,18 +197,27 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
             {
                 img_add.setVisibility(View.GONE);
                 btn_done.setVisibility(View.GONE);
+                sub_flag=true;
 
             }
             if(sub_med_status.equals("Approved"))
             {
                 img_add.setVisibility(View.GONE);
                 btn_done.setVisibility(View.GONE);
+                sub_flag=true;
 
             }
             if(sub_med_status.equals("Canceled"))
             {
                 img_add.setVisibility(View.GONE);
                 btn_done.setVisibility(View.GONE);
+                sub_flag=true;
+            }
+            if(sub_med_status.equals("Returned"))
+            {
+                img_add.setVisibility(View.GONE);
+                btn_done.setVisibility(View.GONE);
+                sub_flag=true;
             }
         }
 
@@ -233,11 +244,18 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jb1 = jsonArray.getJSONObject(i);
 
-                            Subordinate_Upload_PDF_Model model1 = new Subordinate_Upload_PDF_Model(jb1.getString("file_base64"),
-                                    jb1.getString("file_name"),
-                                    jb1.getString("file_path"),
-                                    jb1.getString("mediclaim_id"));
-                            subordinate_arraylist.add(model1);
+//                            Subordinate_Upload_PDF_Model model1 = new Subordinate_Upload_PDF_Model(jb1.getString("file_base64"),
+//                                    jb1.getString("file_name"),
+//                                    jb1.getString("file_path"),
+//                                    jb1.getString("mediclaim_id"));
+                            Subordinate_Upload_PDF_Model model=new Subordinate_Upload_PDF_Model();
+                            model.setFile_base64(jb1.getString("file_base64"));
+                            model.setFile_name(jb1.getString("file_name"));
+                            model.setFile_path(jb1.getString("file_path"));
+                            model.setFile_path(jb1.getString("mediclaim_id"));
+
+
+                            subordinate_arraylist.add(model);
                             subordinate_adapter = new CustomSubordinateUploadPDFlistAdapter(subordinate_arraylist, MediclaimDocumentsActivity.this);
                             subordinate_recycler_pdf.setAdapter(subordinate_adapter);
                             arraylistSize = subordinate_arraylist.size();
@@ -279,7 +297,8 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
             uripdf = data.getData();
 
 //            Upload_PDF_Model model=new Upload_PDF_Model(getBase64(),getfileName(getApplicationContext(),uripdf),getStringPdf(uripdf),CustomMediclaimListAdapter.mediclaim_id);
-            Upload_PDF_Model model = new Upload_PDF_Model(ConvertToString(uripdf), getfileName(getApplicationContext(), uripdf), getStringPdf(uripdf), CustomMediclaimListAdapter.mediclaim_id);
+            Upload_PDF_Model model = new Upload_PDF_Model(ConvertToString(uripdf), getfileName(getApplicationContext(), uripdf), getStringPdf(uripdf), CustomMediclaimListAdapter.mediclaim_id,uripdf);
+            //  Upload_PDF_Model model = new Upload_PDF_Model(ConvertToString(uripdf), getfileName(getApplicationContext(), uripdf), getStringPdf(uripdf), CustomMediclaimListAdapter.mediclaim_id);
             boolean isAlreadyIn = false;
 
             for (int i = 0; i < pdf_modelArrayList.size(); i++) {
@@ -353,10 +372,17 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jb1 = jsonArray.getJSONObject(i);
 
-                            Upload_PDF_Model model = new Upload_PDF_Model(jb1.getString("file_base64"),
-                                    jb1.getString("file_name"),
-                                    jb1.getString("file_path"),
-                                    jb1.getString("mediclaim_id"));
+//                            Upload_PDF_Model model = new Upload_PDF_Model(jb1.getString("file_base64"),
+//                                    jb1.getString("file_name"),
+//                                    jb1.getString("file_path"),
+//                                    jb1.getString("mediclaim_id"));
+
+                            Upload_PDF_Model model = new Upload_PDF_Model();
+                            model.setFile_base64(jb1.getString("file_base64"));
+                            model.setFile_name(jb1.getString("file_name"));
+                            model.setFile_path(jb1.getString("file_path"));
+                            model.setFile_path(jb1.getString("mediclaim_id"));
+
                             pdf_modelArrayList.add(model);
                             adapter = new CustomUploadPDFlistAdapter(pdf_modelArrayList, MediclaimDocumentsActivity.this);
                             recycler_pdf.setAdapter(adapter);
@@ -423,10 +449,10 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
 
                 break;
             case R.id.btn_done:
-
-                Intent intent = new Intent(MediclaimDocumentsActivity.this, MediclaimEntryActivity.class);
-                startActivity(intent);
-
+//
+//                Intent intent = new Intent(MediclaimDocumentsActivity.this, MediclaimEntryActivity.class);
+//                startActivity(intent);
+                onBackPressed();
                 break;
 
             case R.id.img_add:

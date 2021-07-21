@@ -1,7 +1,10 @@
 package org.wrkplan.payroll.Model.Mediclaim;
 
+import android.net.Uri;
+
 public class Upload_PDF_Model {
-   String file_base64,file_name,file_path,mediclaim_id;
+    String file_base64,file_name,file_path,mediclaim_id;
+    Uri uri;
 
     public String getFile_base64() {
         return file_base64;
@@ -35,10 +38,24 @@ public class Upload_PDF_Model {
         this.mediclaim_id = mediclaim_id;
     }
 
-    public Upload_PDF_Model(String file_base64, String file_name, String file_path, String mediclaim_id) {
+    public Upload_PDF_Model(String file_base64, String file_name, String file_path, String mediclaim_id, Uri uri) {
         this.file_base64 = file_base64;
         this.file_name = file_name;
         this.file_path = file_path;
         this.mediclaim_id = mediclaim_id;
+        this.uri = uri;
+    }
+
+    public Upload_PDF_Model()
+    {
+
+    }
+
+    public Uri getUri() {
+        return uri;
+    }
+
+    public void setUri(Uri uri) {
+        this.uri = uri;
     }
 }

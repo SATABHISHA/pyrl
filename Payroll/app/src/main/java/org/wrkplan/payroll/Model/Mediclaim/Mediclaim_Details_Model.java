@@ -8,6 +8,8 @@ public class Mediclaim_Details_Model {
             supervisor1_id,supervisor2_id,supervisor_remark;
 
 
+
+
     public String getApproved_by_id() {
         return approved_by_id;
     }
