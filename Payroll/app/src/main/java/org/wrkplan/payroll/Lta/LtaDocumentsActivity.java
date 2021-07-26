@@ -1,6 +1,7 @@
 package org.wrkplan.payroll.Lta;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -164,12 +165,37 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
 //                startActivity(new Intent(LtaDocumentsActivity.this, LtaRequestActivity.class));
                 break;
             case R.id.tv_button_cancel:
-                if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
+                /*if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
                     LtaRequestActivity.ltaDocumentsModelArrayList.clear();
                 }
                 LtaRequestActivity.tv_docs.setText(String.valueOf(LtaRequestActivity.ltaDocumentsModelArrayList.size())+" Doc(s)");
-                super.onBackPressed();
+                super.onBackPressed();*/
 //                startActivity(new Intent(LtaDocumentsActivity.this, LtaRequestActivity.class));
+                //----added pn 26th julu, code starts------
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(LtaDocumentsActivity.this);
+                builder.setMessage("Your unsaved data would be lost. Are you sure you want to cancel?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
+                                    LtaRequestActivity.ltaDocumentsModelArrayList.clear();
+                                }
+                                LtaRequestActivity.tv_docs.setText(String.valueOf(LtaRequestActivity.ltaDocumentsModelArrayList.size())+" Doc(s)");
+                                onBackPressed();
+
+
+                                dialog.cancel();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+                androidx.appcompat.app.AlertDialog alert = builder.create();
+                alert.show();
+                //----added pn 26th julu, code ends------
                 break;
         }
 

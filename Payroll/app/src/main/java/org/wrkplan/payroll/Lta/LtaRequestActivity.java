@@ -862,6 +862,10 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 
     public void getResponseData(String response){
         try {
+            if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
+                LtaRequestActivity.ltaDocumentsModelArrayList.clear();
+            }
+
             JSONObject jsonObject = new JSONObject(response);
             Log.d("jsonData-=>",jsonObject.toString());
             JSONObject jsonObject1 = jsonObject.getJSONObject("response");
