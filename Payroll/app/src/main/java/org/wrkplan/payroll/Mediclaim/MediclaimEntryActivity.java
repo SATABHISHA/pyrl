@@ -490,10 +490,10 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                         JSONObject object = jsonArray.getJSONObject(i);
                         Upload_PDF_Model upload_pdf_model = new Upload_PDF_Model();
 
-                        upload_pdf_model.setFile_path(object.getString("file_base64"));
-                        upload_pdf_model.setFile_path(object.getString("file_name"));
+                        upload_pdf_model.setFile_base64(object.getString("file_base64"));
+                        upload_pdf_model.setFile_name(object.getString("file_name"));
                         upload_pdf_model.setFile_path(object.getString("file_path"));
-                        upload_pdf_model.setFile_path(object.getString("mediclaim_id"));
+                        upload_pdf_model.setMediclaim_id(object.getString("mediclaim_id"));
 
                         MediclaimDocumentsActivity.pdf_modelArrayList.add(upload_pdf_model);
                     }
@@ -938,20 +938,58 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                 for (int i = 0; i < MediclaimDocumentsActivity.subordinate_arraylist.size(); i++) {
                     String name = MediclaimDocumentsActivity.subordinate_arraylist.get(i).getFile_name();
                     String base = MediclaimDocumentsActivity.subordinate_arraylist.get(i).getFile_base64();
-                    arrayList1.clear();
+                    //  arrayList1.clear();
                     arrayList1.add(new Subordinate_Model_Base64(name, base));
                     Log.d("arrayList", String.valueOf(arrayList1.size()));
                 }
                 my_mediclaim_jsonBody.put("documents", new JSONArray(new Gson().toJson(arrayList1)));
-            } else {
+            } else if(Url.isMyMediclaim==true) {
                 for (int i = 0; i < MediclaimDocumentsActivity.pdf_modelArrayList.size(); i++) {
                     String name = MediclaimDocumentsActivity.pdf_modelArrayList.get(i).getFile_name();
                     String base = MediclaimDocumentsActivity.pdf_modelArrayList.get(i).getFile_base64();
-                    arrayList.clear();
+                    //arrayList.clear();
+                    if(name.contains("/"))
+                    {
+                        name=name.replace("/","_");
+                    }
+                    else if(name.contains("+"))
+                    {
+                        name=name.replace("+","_");
+                    }
+                    else if(name.contains(" "))
+                    {
+                        name=name.replace(" ","_");
+                    }
                     arrayList.add(new Model_Base64(name, base));
 
+                }
+
+                my_mediclaim_jsonBody.put("documents", new JSONArray(new Gson().toJson(arrayList)));
+
+            }
+            else if(Url.isNewEntryMediclaim==true)
+            {
+                for (int i = 0; i < MediclaimDocumentsActivity.pdf_modelArrayList.size(); i++) {
+                    String name = MediclaimDocumentsActivity.pdf_modelArrayList.get(i).getFile_name();
+                    String base = MediclaimDocumentsActivity.pdf_modelArrayList.get(i).getFile_base64();
+                    // arrayList.clear();
+
+                    if(name.contains("/"))
+                    {
+                        name=name.replace("/","_");
+                    }
+                    else if(name.contains("+"))
+                    {
+                        name=name.replace("+","_");
+                    }
+                    else if(name.contains(" "))
+                    {
+                        name=name.replace(" ","_");
+                    }
+                    arrayList.add(new Model_Base64(name, base));
 
                 }
+
                 my_mediclaim_jsonBody.put("documents", new JSONArray(new Gson().toJson(arrayList)));
 
             }

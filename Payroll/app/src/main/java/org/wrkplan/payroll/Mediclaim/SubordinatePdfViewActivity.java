@@ -24,9 +24,9 @@ import java.io.IOException;
 public class SubordinatePdfViewActivity extends AppCompatActivity {
 
 
-  //  Uri uri;
+    //  Uri uri;
     PDFView pdfView;
-   // String base64;
+    // String base64;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,31 +38,31 @@ public class SubordinatePdfViewActivity extends AppCompatActivity {
         pdfView = findViewById(R.id.pdfView);
 
         if (!Url.base64.equalsIgnoreCase("")) {
-            File extDir = Environment.getExternalStorageDirectory();
-            String filename = "myFile.pdf";
-            File fullFilename = new File(extDir.getAbsolutePath() + "/" + filename);
-
-            try {
-                fullFilename.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            fullFilename.setWritable(true);
+//            File extDir = Environment.getExternalStorageDirectory();
+//            String filename = "myFile.pdf";
+//            File fullFilename = new File(extDir.getAbsolutePath() + "/" + filename);
+//
+//            try {
+//                fullFilename.createNewFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            fullFilename.setWritable(true);
 
             byte[] pdfAsBytes = Base64.decode(Url.base64, 0);
-            FileOutputStream os;
+//            FileOutputStream os;
+//
+//            try {
+//                os = new FileOutputStream(fullFilename, false);
+//                os.write(pdfAsBytes);
+//                os.flush();
+//                os.close();
+//            } catch (Exception exp) {
+//                exp.printStackTrace();
+//            }
 
             try {
-                os = new FileOutputStream(fullFilename, false);
-                os.write(pdfAsBytes);
-                os.flush();
-                os.close();
-            } catch (Exception exp) {
-                exp.printStackTrace();
-            }
-
-            try {
-                pdfView.fromFile(fullFilename)
+                pdfView.fromBytes(pdfAsBytes)
                         .defaultPage(1)
                         .onPageChange(new OnPageChangeListener() {
                             @Override

@@ -122,6 +122,21 @@ public class CustomUploadPDFlistAdapter extends RecyclerView.Adapter<CustomUploa
                 Toast.makeText(context.getApplicationContext(), "Erre", Toast.LENGTH_LONG).show();
             }
         }
+        else if (MediclaimDocumentsActivity.med_status.equalsIgnoreCase("Returned"))
+        {
+            Intent intent = new Intent(context, PdfViewActivity.class);
+//            intent.putExtra("base64", pdf_modelArrayList.get(position).getFile_base64());
+//            intent.putExtra("uri", "");
+            Url.base64=pdf_modelArrayList.get(position).getFile_base64();
+            Url.uri="";
+
+            try {
+                context.startActivity(intent);
+            } catch (Exception exception)
+            {
+                Toast.makeText(context.getApplicationContext(), "Erre", Toast.LENGTH_LONG).show();
+            }
+        }
         else if (MediclaimDocumentsActivity.flag)
         {
             Intent intent = new Intent(context, PdfViewActivity.class);

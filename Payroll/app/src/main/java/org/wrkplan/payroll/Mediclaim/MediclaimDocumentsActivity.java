@@ -137,8 +137,12 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
 //            pdf_modelArrayList.clear();
 //            Toast.makeText(this, "ArrayList cleared", Toast.LENGTH_SHORT).show();
 //        }
+
         adapter = new CustomUploadPDFlistAdapter(pdf_modelArrayList, MediclaimDocumentsActivity.this);
         recycler_pdf.setAdapter(adapter);
+
+
+
 
 
         if(Url.isMyMediclaim==true || Url.isNewEntryMediclaim==true)
@@ -148,6 +152,7 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
             rl1.setVisibility(View.VISIBLE);
         }
 
+
         if(Url.isSubordinateMediclaim==true)
         {
             rl2.setVisibility(View.VISIBLE);
@@ -156,7 +161,7 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
         }
 
         //load documents for employees end
-        loadDocuments();
+        // loadDocuments();
 
 
 
@@ -314,6 +319,7 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
                 adapter = new CustomUploadPDFlistAdapter(pdf_modelArrayList, MediclaimDocumentsActivity.this);
                 recycler_pdf.setAdapter(adapter);
                 arraylistSize = pdf_modelArrayList.size();
+                Toast.makeText(this, ""+pdf_modelArrayList.size(), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -446,6 +452,7 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
             case R.id.btn_cancel:
 
                 onBackPressed();
+                pdf_modelArrayList.clear();
 
                 break;
             case R.id.btn_done:
