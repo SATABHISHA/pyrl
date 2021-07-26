@@ -776,6 +776,9 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                                             finish();
                                             loading.dismiss();
 //                                            startActivity(getIntent());
+                                            if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
+                                                LtaRequestActivity.ltaDocumentsModelArrayList.clear();
+                                            }
                                             if (LtaListActivity.EmployeeType == "Supervisor"){
                                                 startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
                                             }else if (LtaListActivity.EmployeeType == "Employee") {
@@ -784,6 +787,9 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                                         }else{
 //                                            finish();
                                             Handler handler = new Handler();
+                                            if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
+                                                LtaRequestActivity.ltaDocumentsModelArrayList.clear();
+                                            }
                                             if (LtaListActivity.EmployeeType == "Supervisor"){
                                                 loading.dismiss();
                                                 Intent intent = new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class);
