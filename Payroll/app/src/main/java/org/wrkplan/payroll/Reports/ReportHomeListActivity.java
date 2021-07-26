@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,6 +73,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                 final Spinner spinner_year =  dialog.findViewById(R.id.spinner_year);
                 final String[] item = new String[1];
                 TextView tv_button_continue = dialog.findViewById(R.id.tv_button_continue);
+                ImageView img_view_close = dialog.findViewById(R.id.img_view_close);
 
 
 
@@ -110,6 +112,13 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                     public void onClick(View v) {
                         alertDialog.dismiss();
                         loadData(year_code);
+                    }
+                });
+
+                img_view_close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
                     }
                 });
                 break;
