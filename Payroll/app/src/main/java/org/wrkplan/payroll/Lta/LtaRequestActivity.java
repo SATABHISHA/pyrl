@@ -64,6 +64,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     Integer flag_datefield_check = 1;
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList = new ArrayList<>();
+    public static ArrayList<Integer> delete_documents_id_arraylist = new ArrayList<>();
 
 
 
@@ -113,6 +114,10 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         btn_save.setOnClickListener(this);
         btn_submit.setOnClickListener(this);
 
+        if (!delete_documents_id_arraylist.isEmpty()){
+            delete_documents_id_arraylist.clear();
+        }
+
         if (LtaListActivity.new_create_yn == 1) {
             imgBtnCalenderTo.setVisibility(View.VISIBLE);
             imgBtnCalenderFrom.setVisibility(View.VISIBLE);
@@ -139,6 +144,9 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
             ed_final_supervisor_remark.setFocusable(false);
 
             buttonEnableDisable();
+
+            tv_docs.setText("0 Doc(s)");
+
 
         }
         if (LtaListActivity.new_create_yn == 0) {
@@ -750,6 +758,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
             /*DocumentElementobj.put("entry_user", LoginActivity.entry_user);
             DocumentElementobj.put("saved_from_mobile_app", 1);*/
             DocumentElementobj.put("documents", req);
+//            DocumentElementobj.put("deleted_documents", LtaRequestActivity.delete_documents_id_arraylist);
 
             Log.d("jsontesting-=>",DocumentElementobj.toString());
             //------calling api to save data
@@ -894,8 +903,10 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 for(int i = 0; i<jsonArray.length(); i++){
                     JSONObject jsonObject3 = jsonArray.getJSONObject(i);
                     LtaDocumentsModel ltaDocumentsModel = new LtaDocumentsModel();
+                    ltaDocumentsModel.setLta_id(jsonObject3.getString("lta_application_id"));
                     ltaDocumentsModel.setLta_filename(jsonObject3.getString("file_name"));
                     ltaDocumentsModel.setLta_file_base64(jsonObject3.getString("file_base64"));
+                    ltaDocumentsModel.setLta_file_from_api_yn("Yes");
                     ltaDocumentsModelArrayList.add(ltaDocumentsModel);
                 }
 

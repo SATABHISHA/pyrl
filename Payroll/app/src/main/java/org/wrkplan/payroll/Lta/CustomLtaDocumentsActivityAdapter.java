@@ -33,6 +33,7 @@ public class CustomLtaDocumentsActivityAdapter extends RecyclerView.Adapter<Cust
     private Context context;
     public  static String base64String = "", filename = "";
     public static ImageView img_view_delete;
+
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
 
 //    public static ProgressDialog loading;
@@ -153,8 +154,12 @@ public class CustomLtaDocumentsActivityAdapter extends RecyclerView.Adapter<Cust
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
 //                                    delete_api_call(position);
+                                    if(ltaDocumentsModelArrayList.get(position).getLta_file_from_api_yn().contains("Yes")){
+                                        LtaRequestActivity.delete_documents_id_arraylist.add(Integer.parseInt(ltaDocumentsModelArrayList.get(position).getLta_id()));
+                                    }
                                     ltaDocumentsModelArrayList.remove(position);
 //                                    customLtaDocumentsActivityAdapter.notifyItemRemoved(position);
+
                                     load_data();
                                     dialog.cancel();
                                 }

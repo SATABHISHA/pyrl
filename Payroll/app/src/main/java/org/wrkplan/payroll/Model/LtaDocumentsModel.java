@@ -1,7 +1,7 @@
 package org.wrkplan.payroll.Model;
 
 public class LtaDocumentsModel {
-    String lta_id, lta_filename, lta_file_base64, lta_file_size;
+    String lta_id, lta_filename, lta_file_base64, lta_file_size, lta_file_from_api_yn;
 
     //=========Getter method starts=======
 
@@ -21,6 +21,9 @@ public class LtaDocumentsModel {
         return lta_file_size;
     }
 
+    public String getLta_file_from_api_yn() {
+        return lta_file_from_api_yn;
+    }
     //=========Getter method ends=======
 
     //=========Setter method starts=======
@@ -39,6 +42,10 @@ public class LtaDocumentsModel {
 
     public void setLta_file_size(String lta_file_size) {
         this.lta_file_size = lta_file_size;
+    }
+
+    public void setLta_file_from_api_yn(String lta_file_from_api_yn) {
+        this.lta_file_from_api_yn = lta_file_from_api_yn;
     }
 
     //=========Setter method ends=======

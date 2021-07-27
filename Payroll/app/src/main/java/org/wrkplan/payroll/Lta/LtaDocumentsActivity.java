@@ -38,7 +38,8 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
     public static TextView tv_nodata, tv_button_done, tv_button_cancel;
     public static RecyclerView recycler_view;
     public static CustomLtaDocumentsActivityAdapter customLtaDocumentsActivityAdapter;
-    ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayListTemp = new ArrayList<>();
+    public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayListTemp = new ArrayList<>();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +53,14 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
         view_dcmnts_border_line = findViewById(R.id.view_dcmnts_border_line);
         ll_button = findViewById(R.id.ll_button);
 
+
         if (!ltaDocumentsModelArrayListTemp.isEmpty()){
             ltaDocumentsModelArrayListTemp.clear();
         }
-        ltaDocumentsModelArrayListTemp = (ArrayList)LtaRequestActivity.ltaDocumentsModelArrayList.clone();
+        if (!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
+            ltaDocumentsModelArrayListTemp = (ArrayList)LtaRequestActivity.ltaDocumentsModelArrayList.clone();
+        }
+
 
 //        customLtaDocumentsActivityAdapter = new CustomLtaDocumentsActivityAdapter(this,LtaRequestActivity.ltaDocumentsModelArrayList);
         customLtaDocumentsActivityAdapter = new CustomLtaDocumentsActivityAdapter(this,ltaDocumentsModelArrayListTemp);
@@ -107,8 +112,10 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
                     (LtaListActivity.mediclaim_status.contentEquals("Canceled"))){
 
                 tv_button_done.setVisibility(View.GONE);
-                tv_button_cancel.setVisibility(View.GONE);
-                ll_button.setVisibility(View.GONE);
+//                tv_button_cancel.setVisibility(View.GONE);
+                tv_button_cancel.setVisibility(View.VISIBLE);
+//                ll_button.setVisibility(View.GONE);
+                ll_button.setVisibility(View.VISIBLE);
                 img_add.setVisibility(View.GONE);
                 view_dcmnts_border_line.setVisibility(View.GONE);
 //                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);
@@ -131,8 +138,10 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
 //            btn_reason_select_type.alpha = 0.6
             if (LtaListActivity.mediclaim_status.contentEquals("Submitted")){
                 tv_button_done.setVisibility(View.GONE);
-                tv_button_cancel.setVisibility(View.GONE);
-                ll_button.setVisibility(View.GONE);
+//                tv_button_cancel.setVisibility(View.GONE);
+                tv_button_cancel.setVisibility(View.VISIBLE);
+//                ll_button.setVisibility(View.GONE);
+                ll_button.setVisibility(View.VISIBLE);
                 img_add.setVisibility(View.GONE);
                 view_dcmnts_border_line.setVisibility(View.GONE);
 //                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);
@@ -143,8 +152,10 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
                     (LtaListActivity.mediclaim_status.contentEquals("Cancelled"))){
 
                 tv_button_done.setVisibility(View.GONE);
-                tv_button_cancel.setVisibility(View.GONE);
-                ll_button.setVisibility(View.GONE);
+//                tv_button_cancel.setVisibility(View.GONE);
+                tv_button_cancel.setVisibility(View.VISIBLE);
+//                ll_button.setVisibility(View.GONE);
+                ll_button.setVisibility(View.VISIBLE);
                 img_add.setVisibility(View.GONE);
                 view_dcmnts_border_line.setVisibility(View.GONE);
 //                CustomLtaDocumentsActivityAdapter.img_view_delete.setVisibility(View.INVISIBLE);
@@ -175,6 +186,8 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
                 LtaRequestActivity.tv_docs.setText(String.valueOf(LtaRequestActivity.ltaDocumentsModelArrayList.size())+" Doc(s)");
                 super.onBackPressed();
 //                startActivity(new Intent(LtaDocumentsActivity.this, LtaRequestActivity.class));
+
+                Log.d("DeleteTesting-=>",LtaRequestActivity.delete_documents_id_arraylist.toString());
                 break;
             case R.id.tv_button_cancel:
                 /*if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
@@ -225,7 +238,8 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
         tv_nodata.setVisibility(View.GONE);
 
         recycler_view.setAdapter(customLtaDocumentsActivityAdapter);*/
-        if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
+//        if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
+        if(!ltaDocumentsModelArrayListTemp.isEmpty()){
             ll_recycler.setVisibility(View.VISIBLE);
             tv_nodata.setVisibility(View.GONE);
 
@@ -261,6 +275,8 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
             ltaDocumentsModel.setLta_file_base64(getStringPdf(uripdf));
             ltaDocumentsModel.setLta_filename(getfileName(getApplicationContext(),uripdf));
             ltaDocumentsModel.setLta_file_size(getStringPDFsIZE(getApplicationContext(),uripdf));
+            ltaDocumentsModel.setLta_file_from_api_yn("No");
+            ltaDocumentsModel.setLta_id("0");
 
 //            LtaRequestActivity.ltaDocumentsModelArrayList.add(ltaDocumentsModel);
             ltaDocumentsModelArrayListTemp.add(ltaDocumentsModel);
