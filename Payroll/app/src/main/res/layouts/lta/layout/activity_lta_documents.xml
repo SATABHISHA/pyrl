@@ -118,7 +118,7 @@
                 android:textSize="18sp"
                 android:textColor="#2e5772"
                 android:layout_weight="1"
-                android:text="Cancel"/>
+                android:text="Close"/>
             <RelativeLayout
                 android:layout_width="1dp"
                 android:layout_height="match_parent"

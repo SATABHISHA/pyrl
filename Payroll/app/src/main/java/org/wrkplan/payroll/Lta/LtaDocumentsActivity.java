@@ -38,6 +38,7 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
     public static TextView tv_nodata, tv_button_done, tv_button_cancel;
     public static RecyclerView recycler_view;
     public static CustomLtaDocumentsActivityAdapter customLtaDocumentsActivityAdapter;
+    ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayListTemp = new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,13 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
         view_dcmnts_border_line = findViewById(R.id.view_dcmnts_border_line);
         ll_button = findViewById(R.id.ll_button);
 
-        customLtaDocumentsActivityAdapter = new CustomLtaDocumentsActivityAdapter(this,LtaRequestActivity.ltaDocumentsModelArrayList);
+        if (!ltaDocumentsModelArrayListTemp.isEmpty()){
+            ltaDocumentsModelArrayListTemp.clear();
+        }
+        ltaDocumentsModelArrayListTemp = (ArrayList)LtaRequestActivity.ltaDocumentsModelArrayList.clone();
+
+//        customLtaDocumentsActivityAdapter = new CustomLtaDocumentsActivityAdapter(this,LtaRequestActivity.ltaDocumentsModelArrayList);
+        customLtaDocumentsActivityAdapter = new CustomLtaDocumentsActivityAdapter(this,ltaDocumentsModelArrayListTemp);
 
 
 
@@ -160,6 +167,11 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
                 startActivityForResult(Intent.createChooser(intent,"Select PDF file"),1);
                 break;
             case R.id.tv_button_done:
+                if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
+                    LtaRequestActivity.ltaDocumentsModelArrayList.clear();
+                }
+                LtaRequestActivity.ltaDocumentsModelArrayList = (ArrayList)ltaDocumentsModelArrayListTemp.clone();
+//                LtaRequestActivity.tv_docs.setText(String.valueOf(LtaRequestActivity.ltaDocumentsModelArrayList.size())+" Doc(s)");
                 LtaRequestActivity.tv_docs.setText(String.valueOf(LtaRequestActivity.ltaDocumentsModelArrayList.size())+" Doc(s)");
                 super.onBackPressed();
 //                startActivity(new Intent(LtaDocumentsActivity.this, LtaRequestActivity.class));
@@ -172,7 +184,7 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
                 super.onBackPressed();*/
 //                startActivity(new Intent(LtaDocumentsActivity.this, LtaRequestActivity.class));
                 //----added pn 26th julu, code starts------
-                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(LtaDocumentsActivity.this);
+               /* androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(LtaDocumentsActivity.this);
                 builder.setMessage("Your unsaved data would be lost. Are you sure you want to cancel?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -194,8 +206,15 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
                             }
                         });
                 androidx.appcompat.app.AlertDialog alert = builder.create();
-                alert.show();
+                alert.show();*/
                 //----added pn 26th julu, code ends------
+                //----added on 27th July, code starts----
+                if(!ltaDocumentsModelArrayListTemp.isEmpty()){
+                    ltaDocumentsModelArrayListTemp.clear();
+                }
+                LtaRequestActivity.tv_docs.setText(String.valueOf(LtaRequestActivity.ltaDocumentsModelArrayList.size())+" Doc(s)");
+                onBackPressed();
+                //----added on 27th July, code ends----
                 break;
         }
 
@@ -243,7 +262,8 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
             ltaDocumentsModel.setLta_filename(getfileName(getApplicationContext(),uripdf));
             ltaDocumentsModel.setLta_file_size(getStringPDFsIZE(getApplicationContext(),uripdf));
 
-            LtaRequestActivity.ltaDocumentsModelArrayList.add(ltaDocumentsModel);
+//            LtaRequestActivity.ltaDocumentsModelArrayList.add(ltaDocumentsModel);
+            ltaDocumentsModelArrayListTemp.add(ltaDocumentsModel);
 
 //          loadDocuments();
             load_data();
