@@ -64,7 +64,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     Integer flag_datefield_check = 1;
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList = new ArrayList<>();
-    public static ArrayList<Integer> delete_documents_id_arraylist = new ArrayList<>();
+    public static ArrayList<LtaDocumentsModel> delete_documents_id_arraylist = new ArrayList<>();
 
 
 
@@ -734,6 +734,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 
         final JSONObject DocumentElementobj = new JSONObject();
         JSONArray req = new JSONArray();
+        JSONArray req_deleted_ids = new JSONArray();
         JSONObject reqObjdt = new JSONObject();
         try {
                 for (int i = 0; i < ltaDocumentsModelArrayList.size(); i++) {
@@ -743,6 +744,13 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                     reqObj.put("file_base64", ltaDocumentsModelArrayList.get(i).getLta_file_base64());
                     req.put(reqObj);
                 }
+            for (int i = 0; i < delete_documents_id_arraylist.size(); i++) {
+                JSONObject reqObj = new JSONObject();
+//                reqObj.put("od_duty_task_head_id", Integer.parseInt(outDoorTaskModelArrayList.get(i).getOd_duty_task_detail_id()));
+                reqObj.put("id", Integer.parseInt(delete_documents_id_arraylist.get(i).getLta_id()));
+                reqObj.put("file_path", delete_documents_id_arraylist.get(i).getFile_path());
+                req_deleted_ids.put(reqObj);
+            }
             DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
             DocumentElementobj.put("lta_application_id", Integer.parseInt(lta_application_id));
             DocumentElementobj.put("employee_id", Integer.parseInt(userSingletonModel.getEmployee_id()));
@@ -758,6 +766,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
             /*DocumentElementobj.put("entry_user", LoginActivity.entry_user);
             DocumentElementobj.put("saved_from_mobile_app", 1);*/
             DocumentElementobj.put("documents", req);
+            DocumentElementobj.put("deleted_documents", req_deleted_ids);
 //            DocumentElementobj.put("deleted_documents", LtaRequestActivity.delete_documents_id_arraylist);
 
             Log.d("jsontesting-=>",DocumentElementobj.toString());
@@ -906,6 +915,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                     ltaDocumentsModel.setLta_id(jsonObject3.getString("lta_application_id"));
                     ltaDocumentsModel.setLta_filename(jsonObject3.getString("file_name"));
                     ltaDocumentsModel.setLta_file_base64(jsonObject3.getString("file_base64"));
+                    ltaDocumentsModel.setFile_path(jsonObject3.getString("file_path"));
                     ltaDocumentsModel.setLta_file_from_api_yn("Yes");
                     ltaDocumentsModelArrayList.add(ltaDocumentsModel);
                 }
