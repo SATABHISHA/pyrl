@@ -102,7 +102,7 @@ public class CustomSubordinateRequisitionListAdapter extends RecyclerView.Adapte
                 requisition_status=subrequsitionList.get(position).getRequisition_status();
                 supervisor_remark=subrequsitionList.get(position).getSupervisor_remark();
                 reason=subrequsitionList.get(position).getReason();
-                return_period_in_months=subrequsitionList.get(position).getReturn_period_in_months();
+                return_period_in_months=subrequsitionList.get(position).getReturn_period_in_months().replace("."," ").split(" ")[0];
                 employee_name=subrequsitionList.get(position).getEmployee_name();
 
                 Intent intent=new Intent(context,AdvanceRequisitionEntryActivity.class);
