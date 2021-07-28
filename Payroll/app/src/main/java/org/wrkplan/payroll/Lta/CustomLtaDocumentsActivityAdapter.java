@@ -157,6 +157,7 @@ public class CustomLtaDocumentsActivityAdapter extends RecyclerView.Adapter<Cust
                                     if(ltaDocumentsModelArrayList.get(position).getLta_file_from_api_yn().contains("Yes")){
                                         LtaDocumentsModel ltaDocumentsModel = new LtaDocumentsModel();
                                         ltaDocumentsModel.setLta_id(ltaDocumentsModelArrayList.get(position).getLta_id());
+                                        ltaDocumentsModel.setLta_filename(ltaDocumentsModelArrayList.get(position).getLta_filename());
                                         ltaDocumentsModel.setFile_path(ltaDocumentsModelArrayList.get(position).getFile_path());
                                         LtaRequestActivity.delete_documents_id_arraylist.add(ltaDocumentsModel);
                                     }

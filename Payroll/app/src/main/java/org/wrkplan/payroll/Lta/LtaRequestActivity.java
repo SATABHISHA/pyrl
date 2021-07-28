@@ -748,7 +748,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 JSONObject reqObj = new JSONObject();
 //                reqObj.put("od_duty_task_head_id", Integer.parseInt(outDoorTaskModelArrayList.get(i).getOd_duty_task_detail_id()));
                 reqObj.put("id", Integer.parseInt(delete_documents_id_arraylist.get(i).getLta_id()));
-                reqObj.put("file_path", delete_documents_id_arraylist.get(i).getFile_path());
+                reqObj.put("file_name", delete_documents_id_arraylist.get(i).getLta_filename());
                 req_deleted_ids.put(reqObj);
             }
             DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
