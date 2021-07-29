@@ -175,7 +175,7 @@
                         android:paddingLeft="0dp"
                         android:gravity="left"
                         app:ms_multiline="false"
-                        app:ms_hint="Select Type"
+
                         app:ms_hintColor="#3C3C3C"
                         app:ms_hintTextSize="15sp"
                         app:ms_enableFloatingLabel="false"
@@ -222,8 +222,7 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
                     android:padding="5dp"
-                    android:maxLength="2"
-                    android:inputType="number"
+                    android:maxLength="4"
                     android:textColor="#3C3C3C"
                     android:layout_below="@id/tv_return_period"
                     android:gravity="top"

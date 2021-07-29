@@ -22,11 +22,14 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Model.Requisition_Reason_Spinner_Model;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
@@ -49,6 +52,9 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
     Button btn_cancel,btn_return,btn_approve,btn_submit,btn_save,btn_back;
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
 
+    private ArrayList<String> reasonspinnerlist = new ArrayList<String>();
+    ArrayList<Requisition_Reason_Spinner_Model> spinner_modelArrayList=new ArrayList<>();
+
     // Spinner item
     int item;
     //current date for requisition date
@@ -56,7 +62,7 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
     public static String status_message = "";
 
     String ctc="";
-
+    private String reason_id;
 
 
     @Override
@@ -122,53 +128,45 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
 
 
 
-        List<String> reason_spinner=new ArrayList<>();
-        reason_spinner.add("i) Serious and / prolonged illness in the family ('Family' means self, wife and dependent children) of the employee");
-        reason_spinner.add("ii) His / her own marriage");
-        reason_spinner.add("iii) Son’s / Daughter’s or real Sister’s marriage");
-        reason_spinner.add("iv) Rehabilitation due to natural calamity, such as flood, fire, accident etc");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AdvanceRequisitionEntryActivity.this, android.R.layout.simple_spinner_item, reason_spinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_reason_advance.setAdapter(adapter);
-        if(Url.isNewEntry==true)
-        {
-            spinner_reason_advance.setSelection(0);
-        }
-        if(Url.isMyRequisition==true)
-        {
-            spinner_reason_advance.setSelection(Integer.parseInt(CustomRequisitionListAdapter.reason));
-        }
-        if(Url.isSubordinateRequisition==true)
-        {
-            spinner_reason_advance.setSelection(Integer.parseInt(CustomSubordinateRequisitionListAdapter.reason));
-        }
-
-
-        spinner_reason_advance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                item=position+1;
-
-
-                //Toast.makeText(AdvanceRequisitionEntryActivity.this, ""+item, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//            List<String> reason_spinner=new ArrayList<>();
+//            reason_spinner.add("i) Serious and / prolonged illness in the family ('Family' means self, wife and dependent children) of the employee");
+//            reason_spinner.add("ii) His / her own marriage");
+//            reason_spinner.add("iii) Son’s / Daughter’s or real Sister’s marriage");
+//            reason_spinner.add("iv) Rehabilitation due to natural calamity, such as flood, fire, accident etc");
+//
+//            ArrayAdapter<String> adapter = new ArrayAdapter<String>(AdvanceRequisitionEntryActivity.this, android.R.layout.simple_spinner_item, reason_spinner);
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//            spinner_reason_advance.setAdapter(adapter);
+//
+//
+//
+//            spinner_reason_advance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                    item=position+1;
+//
+//
+//                    //Toast.makeText(AdvanceRequisitionEntryActivity.this, ""+item, Toast.LENGTH_SHORT).show();
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> parent) {
+//
+//                }
+//            });
 
 
+        loadSpinner();
 
-        SimpleDateFormat currentDte=new SimpleDateFormat("yyyy-MM-dd");
-        Date date=new Date();
-        currntdate=(currentDte.format(date));
+
 
         //Toast.makeText(this, ""+currntdate, Toast.LENGTH_SHORT).show();
 
         //-------spinner code end---------//
+
+        SimpleDateFormat currentDte=new SimpleDateFormat("yyyy-MM-dd");
+        Date date=new Date();
+        currntdate=(currentDte.format(date));
 
         if(Url.isNewEntry==true)
         {
@@ -201,6 +199,7 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
         }
 
 
+
         // save functionality
 
         btn_save.setOnClickListener(new View.OnClickListener() {
@@ -222,27 +221,49 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
 
                 else
                 {
-                    String corp_id=userSingletonModel.getCorporate_id();
-                    String requisition_id=CustomRequisitionListAdapter.requisition_id;
-                    String requisition_date=currntdate;
-                    int employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
-                    int requisition_reason=item;
-                    double requisition_amount=Double.parseDouble(ed_requisition_amount.getText().toString());
-                    String description=ed_narration.getText().toString();
-                    double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
-                    int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
-                    String requisition_status="Saved";
-                    Double approved_requisition_amount=0.0;
-                    int approved_by_id=0;
-                    String approved_date="";
-                    String supervisor_remark="";
-                    int supervisor1_id=Integer.parseInt(userSingletonModel.getSupervisor_1());
-                    int supervisor2_id=Integer.parseInt(userSingletonModel.getSupervisor_2());
+
+                    String title="Save";
+                    String message=" Do you really want to save?";
+
+                    AlertDialog.Builder save=new AlertDialog.Builder(AdvanceRequisitionEntryActivity.this);
+                    save.setMessage(message);
+                    save.setCancelable(true);
+                    save.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String corp_id=userSingletonModel.getCorporate_id();
+                            String requisition_id=CustomRequisitionListAdapter.requisition_id;
+                            String requisition_date=currntdate;
+                            int employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
+                            int requisition_reason=Integer.parseInt(reason_id);
+                            double requisition_amount=Double.parseDouble(ed_requisition_amount.getText().toString());
+                            String description=ed_narration.getText().toString();
+                            double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
+                            int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
+                            String requisition_status="Saved";
+                            int approved_requisition_amount=0;
+                            int approved_by_id=0;
+                            String approved_date="";
+                            String supervisor_remark="";
+                            int supervisor1_id=Integer.parseInt(userSingletonModel.getSupervisor_1());
+                            int supervisor2_id=Integer.parseInt(userSingletonModel.getSupervisor_2());
 
 
-                    SaveMyRequisitionData(corp_id,requisition_id,requisition_date,employee_id,requisition_reason,requisition_amount,
-                            description,ctc_amount,return_period_in_months,requisition_status,
-                            approved_requisition_amount,approved_by_id,approved_date,supervisor_remark,supervisor1_id,supervisor2_id);
+                            SaveMyRequisitionData(corp_id,requisition_id,requisition_date,employee_id,requisition_reason,requisition_amount,
+                                    description,ctc_amount,return_period_in_months,requisition_status,
+                                    approved_requisition_amount,approved_by_id,approved_date,supervisor_remark,supervisor1_id,supervisor2_id);
+                        }
+                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    save.setTitle(title);
+                    save.show();
+
+
                 }
             }
 
@@ -268,27 +289,47 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
 
 
                 else {
-                    String corp_id=userSingletonModel.getCorporate_id();
-                    String requisition_id=CustomRequisitionListAdapter.requisition_id;
-                    String requisition_date=currntdate;
-                    int employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
-                    int requisition_reason=item;
-                    double requisition_amount=Double.parseDouble(ed_requisition_amount.getText().toString());
-                    String description=ed_narration.getText().toString();
-                    double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
-                    int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
-                    String requisition_status="Submitted";
-                    Double approved_requisition_amount=0.0;
-                    int approved_by_id=0;
-                    String approved_date="";
-                    String supervisor_remark="";
-                    int supervisor1_id=Integer.parseInt(userSingletonModel.getSupervisor_1());
-                    int supervisor2_id=Integer.parseInt(userSingletonModel.getSupervisor_2());
+                    String title="Submit";
+                    String message="Do you really want to submit now?";
 
 
-                    SaveMyRequisitionData(corp_id,requisition_id,requisition_date,employee_id,requisition_reason,requisition_amount,
-                            description,ctc_amount,return_period_in_months,requisition_status,
-                            approved_requisition_amount,approved_by_id,approved_date,supervisor_remark,supervisor1_id,supervisor2_id);
+                    AlertDialog.Builder save=new AlertDialog.Builder(AdvanceRequisitionEntryActivity.this);
+                    save.setMessage(message);
+                    save.setCancelable(true);
+                    save.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String corp_id=userSingletonModel.getCorporate_id();
+                            String requisition_id=CustomRequisitionListAdapter.requisition_id;
+                            String requisition_date=currntdate;
+                            int employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
+                            int requisition_reason=Integer.parseInt(reason_id);
+                            double requisition_amount=Double.parseDouble(ed_requisition_amount.getText().toString());
+                            String description=ed_narration.getText().toString();
+                            double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
+                            int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
+                            String requisition_status="Submitted";
+                            int approved_requisition_amount=0;
+                            int approved_by_id=0;
+                            String approved_date="";
+                            String supervisor_remark="";
+                            int supervisor1_id=Integer.parseInt(userSingletonModel.getSupervisor_1());
+                            int supervisor2_id=Integer.parseInt(userSingletonModel.getSupervisor_2());
+
+
+                            SaveMyRequisitionData(corp_id,requisition_id,requisition_date,employee_id,requisition_reason,requisition_amount,
+                                    description,ctc_amount,return_period_in_months,requisition_status,
+                                    approved_requisition_amount,approved_by_id,approved_date,supervisor_remark,supervisor1_id,supervisor2_id);
+                        }
+                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    save.setTitle(title);
+                    save.show();
                 }
 
             }
@@ -318,6 +359,93 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
 
         }
     }
+
+    private void loadSpinner() {
+        String url=Url.BASEURL()+"advance-requisition/reasons/"+userSingletonModel.corporate_id;
+
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+                if(!spinner_modelArrayList.isEmpty())
+                {
+                    spinner_modelArrayList.clear();
+                }
+
+
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+
+                    JSONArray jsonArray=jsonObject.getJSONArray("reasons");
+                    for (int i=0;i<jsonArray.length();i++)
+                    {
+                        JSONObject jb1=jsonArray.getJSONObject(i);
+
+                        Requisition_Reason_Spinner_Model model=new Requisition_Reason_Spinner_Model();
+                        model.setReason_id(jb1.getString("reason_id"));
+                        model.setDescription(jb1.getString("description"));
+
+                        spinner_modelArrayList.add(model);
+                    }
+
+                    for(int i=0;i<spinner_modelArrayList.size();i++)
+                    {
+
+                        reasonspinnerlist.add(spinner_modelArrayList.get(i).getDescription());
+                    }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(AdvanceRequisitionEntryActivity.this, android.R.layout.simple_spinner_item, reasonspinnerlist);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_reason_advance.setAdapter(adapter);
+
+//                    if(Url.isNewEntry==true)
+//                    {
+//                        spinner_reason_advance.setSelection(0);
+//                    }
+                    if(Url.isMyRequisition==true)
+                    {
+                        spinner_reason_advance.setSelection(Integer.parseInt(CustomRequisitionListAdapter.reason)-1);
+                    }
+                    if(Url.isSubordinateRequisition==true)
+                    {
+                        spinner_reason_advance.setSelection(Integer.parseInt(CustomSubordinateRequisitionListAdapter.reason)-1);
+                    }
+
+                    spinner_reason_advance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                            reason_id=spinner_modelArrayList.get(position).getReason_id();
+                            //Toast.makeText(AdvanceRequisitionEntryActivity.this, ""+item, Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(AdvanceRequisitionEntryActivity.this, ""+reason_id, Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(AdvanceRequisitionEntryActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(AdvanceRequisitionEntryActivity.this, "could't connect to the server", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Volley.newRequestQueue(AdvanceRequisitionEntryActivity.this).add(stringRequest);
+
+
+
+    }
+
+
 
     private void AlertBox() {
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
@@ -401,6 +529,14 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
             btn_cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+//                        if(!(Double.parseDouble(ed_approved_amount.getText().toString()) <Double.parseDouble(ed_requisition_amount.getText().toString())))
+//                        {
+//                            ///Toast.makeText(AdvanceRequisitionEntryActivity.this, " approved amount cannot be more than amount", Toast.LENGTH_SHORT).show();
+//                            AlertBox1();
+//                        }
+
+
                     if(ed_approved_amount.getText().toString().isEmpty())
                     {
                         AlertBox();
@@ -412,27 +548,51 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
 
 
                     else {
-                        String corp_id=userSingletonModel.getCorporate_id();
-                        String requisition_id=CustomSubordinateRequisitionListAdapter.requisition_id;
-                        String requisition_date=currntdate;
-                        int employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
-                        int requisition_reason=item;
-                        double requisition_amount=Double.parseDouble(ed_requisition_amount.getText().toString());
-                        String description=ed_narration.getText().toString();
-                        double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
-                        int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
-                        String requisition_status="Canceled";
-                        Double approved_requisition_amount=Double.parseDouble(ed_approved_amount.getText().toString());
-                        int approved_by_id=0;
-                        String approved_date="";
-                        String supervisor_remark=ed_approval_remark.getText().toString();
-                        int supervisor1_id=Integer.parseInt(userSingletonModel.getSupervisor_1());
-                        int supervisor2_id=Integer.parseInt(userSingletonModel.getSupervisor_2());
+
+                        String title="Cancel";
+                        String message="Do you really want to cancel this Advance Requisition?";
 
 
-                        SaveMyRequisitionData(corp_id,requisition_id,requisition_date,employee_id,requisition_reason,requisition_amount,
-                                description,ctc_amount,return_period_in_months,requisition_status,
-                                approved_requisition_amount,approved_by_id,approved_date,supervisor_remark,supervisor1_id,supervisor2_id);
+                        AlertDialog.Builder save=new AlertDialog.Builder(AdvanceRequisitionEntryActivity.this);
+                        save.setMessage(message);
+                        save.setCancelable(true);
+                        save.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                String corp_id=userSingletonModel.getCorporate_id();
+                                String requisition_id=CustomSubordinateRequisitionListAdapter.requisition_id;
+                                String requisition_date=currntdate;
+                                int employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
+                                int requisition_reason=Integer.parseInt(reason_id);
+                                double requisition_amount=Double.parseDouble(ed_requisition_amount.getText().toString());
+                                String description=ed_narration.getText().toString();
+                                double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
+                                int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
+                                String requisition_status="Canceled";
+                                int approved_requisition_amount=0;
+                                int approved_by_id=0;
+                                String approved_date="";
+                                String supervisor_remark=ed_approval_remark.getText().toString();
+                                int supervisor1_id=Integer.parseInt(userSingletonModel.getSupervisor_1());
+                                int supervisor2_id=Integer.parseInt(userSingletonModel.getSupervisor_2());
+
+
+                                SaveMyRequisitionData(corp_id,requisition_id,requisition_date,employee_id,requisition_reason,requisition_amount,
+                                        description,ctc_amount,return_period_in_months,requisition_status,
+                                        approved_requisition_amount,approved_by_id,approved_date,supervisor_remark,supervisor1_id,supervisor2_id);
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        save.setTitle(title);
+                        save.show();
+
+
                     }
                 }
             });
@@ -440,8 +600,13 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
             btn_approve.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(!(Double.parseDouble(ed_approved_amount.getText().toString()) <Double.parseDouble(ed_requisition_amount.getText().toString())))
+                    {
+                        ///Toast.makeText(AdvanceRequisitionEntryActivity.this, " approved amount cannot be more than amount", Toast.LENGTH_SHORT).show();
+                        AlertBox1();
+                    }
 
-                    if(ed_approved_amount.getText().toString().isEmpty())
+                    else if(ed_approved_amount.getText().toString().isEmpty())
                     {
                         AlertBox();
                     }
@@ -452,34 +617,63 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
 
 
                     else {
-                        String corp_id=userSingletonModel.getCorporate_id();
-                        String requisition_id=CustomSubordinateRequisitionListAdapter.requisition_id;
-                        String requisition_date=currntdate;
-                        int employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
-                        int requisition_reason=item;
-                        double requisition_amount=Double.parseDouble(ed_requisition_amount.getText().toString());
-                        String description=ed_narration.getText().toString();
-                        double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
-                        int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
-                        String requisition_status="Approved";
-                        Double approved_requisition_amount=Double.parseDouble(ed_approved_amount.getText().toString());
-                        int approved_by_id=0;
-                        String approved_date="";
-                        String supervisor_remark=ed_approval_remark.getText().toString();
-                        int supervisor1_id=Integer.parseInt(userSingletonModel.getSupervisor_1());
-                        int supervisor2_id=Integer.parseInt(userSingletonModel.getSupervisor_2());
+                        String title="Approve";
+                        String message="Do you want to approve this Advance Requisition?";
 
 
-                        SaveMyRequisitionData(corp_id,requisition_id,requisition_date,employee_id,requisition_reason,requisition_amount,
-                                description,ctc_amount,return_period_in_months,requisition_status,
-                                approved_requisition_amount,approved_by_id,approved_date,supervisor_remark,supervisor1_id,supervisor2_id);
+                        AlertDialog.Builder save=new AlertDialog.Builder(AdvanceRequisitionEntryActivity.this);
+                        save.setMessage(message);
+                        save.setCancelable(true);
+                        save.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                String corp_id=userSingletonModel.getCorporate_id();
+                                String requisition_id=CustomSubordinateRequisitionListAdapter.requisition_id;
+                                String requisition_date=currntdate;
+                                int employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
+                                int requisition_reason=Integer.parseInt(reason_id);
+                                double requisition_amount=Double.parseDouble(ed_requisition_amount.getText().toString());
+                                String description=ed_narration.getText().toString();
+                                double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
+                                int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
+                                String requisition_status="Approved";
+                                int approved_requisition_amount=Integer.parseInt(ed_approved_amount.getText().toString());
+                                int approved_by_id=0;
+                                String approved_date="";
+                                String supervisor_remark=ed_approval_remark.getText().toString();
+                                int supervisor1_id=Integer.parseInt(userSingletonModel.getSupervisor_1());
+                                int supervisor2_id=Integer.parseInt(userSingletonModel.getSupervisor_2());
+
+
+                                SaveMyRequisitionData(corp_id,requisition_id,requisition_date,employee_id,requisition_reason,requisition_amount,
+                                        description,ctc_amount,return_period_in_months,requisition_status,
+                                        approved_requisition_amount,approved_by_id,approved_date,supervisor_remark,supervisor1_id,supervisor2_id);
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        save.setTitle(title);
+                        save.show();
+
                     }
                 }
             });
 
             btn_return.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
+//                    if(!(Double.parseDouble(ed_approved_amount.getText().toString()) <Double.parseDouble(ed_requisition_amount.getText().toString())))
+//                    {
+//                        ///Toast.makeText(AdvanceRequisitionEntryActivity.this, " approved amount cannot be more than amount", Toast.LENGTH_SHORT).show();
+//                        AlertBox1();
+//                    }
+
                     if(ed_approved_amount.getText().toString().isEmpty())
                     {
                         AlertBox();
@@ -491,27 +685,48 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
 
 
                     else {
-                        String corp_id=userSingletonModel.getCorporate_id();
-                        String requisition_id=CustomSubordinateRequisitionListAdapter.requisition_id;
-                        String requisition_date=currntdate;
-                        int employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
-                        int requisition_reason=item;
-                        double requisition_amount=Double.parseDouble(ed_requisition_amount.getText().toString());
-                        String description=ed_narration.getText().toString();
-                        double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
-                        int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
-                        String requisition_status="Returned";
-                        Double approved_requisition_amount=Double.parseDouble(ed_approved_amount.getText().toString());
-                        int approved_by_id=0;
-                        String approved_date="";
-                        String supervisor_remark=ed_approval_remark.getText().toString();
-                        int supervisor1_id=Integer.parseInt(userSingletonModel.getSupervisor_1());
-                        int supervisor2_id=Integer.parseInt(userSingletonModel.getSupervisor_2());
+                        String title="Return";
+                        String message="Do you want to return  this Advance Requisition?";
+
+                        AlertDialog.Builder save=new AlertDialog.Builder(AdvanceRequisitionEntryActivity.this);
+                        save.setMessage(message);
+                        save.setCancelable(true);
+                        save.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                String corp_id=userSingletonModel.getCorporate_id();
+                                String requisition_id=CustomSubordinateRequisitionListAdapter.requisition_id;
+                                String requisition_date=currntdate;
+                                int employee_id=Integer.parseInt(userSingletonModel.getEmployee_id());
+                                int requisition_reason=Integer.parseInt(reason_id);
+                                double requisition_amount=Double.parseDouble(ed_requisition_amount.getText().toString());
+                                String description=ed_narration.getText().toString();
+                                double ctc_amount=Double.parseDouble(ed_ctc.getText().toString());
+                                int return_period_in_months=Integer.parseInt(ed_return_period.getText().toString());
+                                String requisition_status="Returned";
+                                int approved_requisition_amount=0;
+                                int approved_by_id=0;
+                                String approved_date="";
+                                String supervisor_remark=ed_approval_remark.getText().toString();
+                                int supervisor1_id=Integer.parseInt(userSingletonModel.getSupervisor_1());
+                                int supervisor2_id=Integer.parseInt(userSingletonModel.getSupervisor_2());
 
 
-                        SaveMyRequisitionData(corp_id,requisition_id,requisition_date,employee_id,requisition_reason,requisition_amount,
-                                description,ctc_amount,return_period_in_months,requisition_status,
-                                approved_requisition_amount,approved_by_id,approved_date,supervisor_remark,supervisor1_id,supervisor2_id);
+                                SaveMyRequisitionData(corp_id,requisition_id,requisition_date,employee_id,requisition_reason,requisition_amount,
+                                        description,ctc_amount,return_period_in_months,requisition_status,
+                                        approved_requisition_amount,approved_by_id,approved_date,supervisor_remark,supervisor1_id,supervisor2_id);
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        save.setTitle(title);
+                        save.show();
+
                     }
                 }
             });
@@ -524,11 +739,24 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
 
     }
 
+    private void AlertBox1() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setMessage("Approved amount cannot be more than claim amount");
+        builder.setCancelable(true);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                //Toast.makeText(context, "Delet item successfully of Position => "+position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.show();
+    }
+
     private void SaveMyRequisitionData(String corp_id, String requisition_id, String requisition_date, int employee_id,
                                        int requisition_reason, double requisition_amount,
                                        String description, double ctc_amount,
                                        int return_period_in_months, String requisition_status,
-                                       Double approved_requisition_amount, int approved_by_id, String approved_date,
+                                       int approved_requisition_amount, int approved_by_id, String approved_date,
                                        String supervisor_remark, int supervisor1_id, int supervisor2_id) {
         try {
             my_requisition_jsonBody.put("corp_id",corp_id);
