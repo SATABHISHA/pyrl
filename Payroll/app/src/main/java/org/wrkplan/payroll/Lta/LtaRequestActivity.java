@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -69,9 +70,10 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList = new ArrayList<>();
     public static ArrayList<LtaDocumentsModel> delete_documents_id_arraylist = new ArrayList<>();
-    MaterialSpinner spinner_from_year;
+    MaterialSpinner spinner_from_year, spinner_to_year;
     ArrayList<Load_Spinner_Model> load_spinner_models = new ArrayList<>();
-    ArrayList<String> arrayList_spinner_from_to_year=new ArrayList<>();
+    ArrayList<String> arrayList_spinner_from_to_year;
+    public static String from_year, to_year;
 
 
 
@@ -110,6 +112,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         ed_supervisor_remark = findViewById(R.id.ed_supervisor_remark);
         ed_final_supervisor_remark = findViewById(R.id.ed_final_supervisor_remark);
         spinner_from_year = findViewById(R.id.spinner_from_year);
+        spinner_to_year = findViewById(R.id.spinner_to_year);
 
 //        spinner_from_year.setOnClickListener(this);
 
@@ -164,7 +167,12 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         }else {
             LoadButtons();
         }
-        Load_Spinner_Data();
+
+        from_year = "";
+        to_year = "";
+        Load_Spinner_Data(spinner_from_year, "from");
+        Load_Spinner_Data(spinner_to_year, "to");
+
     }
 
     //=====function to enable/disable buttons according to field check, code starts====
@@ -1074,8 +1082,10 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     }
     //=====function to load data, code ends========
 
+   //====function to load spinner data, code starts=====
+    private void Load_Spinner_Data(MaterialSpinner spinner, String year_status) {
+        arrayList_spinner_from_to_year = new ArrayList<>();
 
-    private void Load_Spinner_Data() {
 
         String url=Url.BASEURL() + "finyear/" + "list/" + userSingletonModel.corporate_id;
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -1084,12 +1094,14 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 try {
                     JSONObject jsonObject=new JSONObject(response);
                     JSONArray jsonArray=jsonObject.getJSONArray("fin_years");
-                    if(!arrayList_spinner_from_to_year.isEmpty()) {
+
+                     if(!arrayList_spinner_from_to_year.isEmpty()) {
                         arrayList_spinner_from_to_year.clear();
                     }
                     if(!load_spinner_models.isEmpty()) {
                         load_spinner_models.clear();
                     }
+
                     for(int i=0;i<jsonArray.length();i++)
                     {
 
@@ -1105,7 +1117,46 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 
 
                     }
-                    initSpinnerAdapter();
+//                    Log.d("dataspnrcount-=>", String.valueOf(load_spinner_models.size()));
+
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(LtaRequestActivity.this, android.R.layout.simple_spinner_item, arrayList_spinner_from_to_year);
+                    arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(arrayAdapter);
+
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            if (position != -1) {
+                                if (year_status.contains("from")) {
+                                    from_year = load_spinner_models.get(position).getCalender_year();
+                                    Log.d("fromyear-=>", from_year);
+                                    if(to_year != ""){
+                                        if (LtaListActivity.new_create_yn == 1) {
+                                            load_lta_remaining_amount(userSingletonModel.getEmployee_id(), from_year, to_year);
+                                        }else{
+                                            load_lta_remaining_amount(LtaListActivity.employee_id, from_year, to_year);
+                                        }
+                                    }
+                                }
+                                if (year_status.contains("to")) {
+                                    to_year = load_spinner_models.get(position).getCalender_year();
+                                    Log.d("fromyear-=>", from_year);
+                                    if(from_year != "") {
+                                        if (LtaListActivity.new_create_yn == 1) {
+                                            load_lta_remaining_amount(userSingletonModel.getEmployee_id(), from_year, to_year);
+                                        }else{
+                                            load_lta_remaining_amount(LtaListActivity.employee_id, from_year, to_year);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
 
 
                 } catch (JSONException e) {
@@ -1123,12 +1174,41 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         });
         Volley.newRequestQueue(LtaRequestActivity.this).add(stringRequest);
     }
-    private void initSpinnerAdapter()
-    {
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayList_spinner_from_to_year);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_from_year.setAdapter(arrayAdapter);
+
+    //====function to load spinner data, code ends=====
+
+    //=======function to load data to get current lta amount, code starts======
+    public void load_lta_remaining_amount(String employee_id, String year_from, String year_to){
+        String url=Url.BASEURL() + "lta/balance/year-wise/" + userSingletonModel.corporate_id + "/" + employee_id + "/" + year_from + "/" + year_to ;
+        Log.d("remaingamonturl-=>",url);
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    Log.d("RemainingAmount-=>",jsonObject.toString());
+                    JSONObject jsonObject1 = jsonObject.getJSONObject("response");
+                    if(jsonObject1.getString("status").contentEquals("true")) {
+                        tv_remaining_lta_amount.setText(jsonObject.getString("balance_amount"));
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(LtaRequestActivity.this, "Could't connect to the server", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        Volley.newRequestQueue(LtaRequestActivity.this).add(stringRequest);
     }
+    //=======function to load data to get current lta amount, code ends======
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();

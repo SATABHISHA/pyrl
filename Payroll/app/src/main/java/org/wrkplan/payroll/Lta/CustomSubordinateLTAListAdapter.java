@@ -98,6 +98,7 @@ public class CustomSubordinateLTAListAdapter extends RecyclerView.Adapter<Custom
                     LtaListActivity.mediclaim_status = ltaModelArrayList.get(position).getLta_application_status();
                     LtaListActivity.new_create_yn = 0;
                     LtaListActivity.lta_application_id = ltaModelArrayList.get(position).getLta_application_id();
+                    LtaListActivity.employee_id = ltaModelArrayList.get(position).getEmployee_id();
 //                    od_request_id = outDoorListModelArrayList.get(position).getOd_request_id();
                     Intent i = new Intent(context, LtaRequestActivity.class);
                     context.startActivity(i);
