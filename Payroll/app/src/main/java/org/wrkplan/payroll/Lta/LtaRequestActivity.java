@@ -35,7 +35,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Leave_Balance.LeaveBalanceActivity;
 import org.wrkplan.payroll.Login.LoginActivity;
+import org.wrkplan.payroll.Model.Load_Spinner_Model;
 import org.wrkplan.payroll.Model.LtaDocumentsModel;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.OutDoorDuty.CustomOutdoorListAdapter;
@@ -52,6 +54,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import fr.ganfra.materialspinner.MaterialSpinner;
+
 public class LtaRequestActivity extends AppCompatActivity implements View.OnClickListener {
     TextView tv_document_view, tv_lta_no, tv_employee_name, tv_from_year_lta_limit, tv_to_year_lta_limit, tv_total_lta_amount, tv_remaining_lta_amount, tv_lta_requisition_status;
     Button btn_back, btn_cancel, btn_return, btn_approve, btn_submit, btn_save;
@@ -65,6 +69,9 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList = new ArrayList<>();
     public static ArrayList<LtaDocumentsModel> delete_documents_id_arraylist = new ArrayList<>();
+    MaterialSpinner spinner_from_year;
+    ArrayList<Load_Spinner_Model> load_spinner_models = new ArrayList<>();
+    ArrayList<String> arrayList_spinner_from_to_year=new ArrayList<>();
 
 
 
@@ -102,6 +109,9 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         ed_approved_amount = findViewById(R.id.ed_approved_amount);
         ed_supervisor_remark = findViewById(R.id.ed_supervisor_remark);
         ed_final_supervisor_remark = findViewById(R.id.ed_final_supervisor_remark);
+        spinner_from_year = findViewById(R.id.spinner_from_year);
+
+//        spinner_from_year.setOnClickListener(this);
 
         imgBtnCalenderFrom.setOnClickListener(this);
         imgBtnCalenderTo.setOnClickListener(this);
@@ -154,6 +164,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         }else {
             LoadButtons();
         }
+        Load_Spinner_Data();
     }
 
     //=====function to enable/disable buttons according to field check, code starts====
@@ -332,6 +343,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 calendarPicker(myCalendarToDate,edt_to_date_select, "to_date");
 
                 break;
+
         }
     }
     //=====onClick code ends=====
@@ -1063,6 +1075,60 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     //=====function to load data, code ends========
 
 
+    private void Load_Spinner_Data() {
+
+        String url=Url.BASEURL() + "finyear/" + "list/" + userSingletonModel.corporate_id;
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    JSONArray jsonArray=jsonObject.getJSONArray("fin_years");
+                    if(!arrayList_spinner_from_to_year.isEmpty()) {
+                        arrayList_spinner_from_to_year.clear();
+                    }
+                    if(!load_spinner_models.isEmpty()) {
+                        load_spinner_models.clear();
+                    }
+                    for(int i=0;i<jsonArray.length();i++)
+                    {
+
+                        JSONObject jb1=jsonArray.getJSONObject(i);
+                        String financial_year_code=jb1.getString("financial_year_code");
+                        String calender_year=jb1.getString("calender_year");
+                        arrayList_spinner_from_to_year.add(calender_year);
+                        Load_Spinner_Model spinnerModel=new Load_Spinner_Model();
+                        spinnerModel.setFinancial_year_code(financial_year_code);
+                        spinnerModel.setCalender_year(calender_year);
+                        // arrayList.add(jb1.getString("calender_year"));
+                        load_spinner_models.add(spinnerModel);
+
+
+                    }
+                    initSpinnerAdapter();
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(LtaRequestActivity.this, "Could't connect to the server", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        Volley.newRequestQueue(LtaRequestActivity.this).add(stringRequest);
+    }
+    private void initSpinnerAdapter()
+    {
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayList_spinner_from_to_year);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_from_year.setAdapter(arrayAdapter);
+    }
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
