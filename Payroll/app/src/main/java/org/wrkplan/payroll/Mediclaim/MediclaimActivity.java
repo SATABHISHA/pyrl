@@ -37,7 +37,7 @@ import java.util.ArrayList;
 
 public class MediclaimActivity extends AppCompatActivity implements View.OnClickListener {
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
-    TextView tv_mediclaim_title,tv_button_subordinate_mediclaim;
+    TextView tv_mediclaim_title,tv_button_subordinate_mediclaim, tv_nodata;
     RelativeLayout rl_btn_new;
     LinearLayout ll_recycler,ll_1recycler;
     RelativeLayout btn_subadv_mediclaim;
@@ -94,6 +94,7 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
         Url.isMyMediclaim=true;
         img_back=findViewById(R.id.img_back);
         tv_mediclaim_title=findViewById(R.id.tv_mediclaim_title);
+        tv_nodata=findViewById(R.id.tv_nodata);
         tv_button_subordinate_mediclaim=findViewById(R.id.tv_button_subordinate_mediclaim);
         rl_btn_new=findViewById(R.id.rl_btn_new);
         ll_1recycler=findViewById(R.id.ll_1recycler);
@@ -164,26 +165,35 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
                         mediclaim_modelArrayList.clear();
                     }
                     JSONObject jsonObject=new JSONObject(response);
-                    JSONArray jsonArray=jsonObject.getJSONArray("mediclaim_list");
-                    for (int i=0; i<jsonArray.length();i++)
-                    {
-                        JSONObject jb1=jsonArray.getJSONObject(i);
-                        My_Mediclaim_Model model=new My_Mediclaim_Model(
-                                jb1.getString("approved_mediclaim_amount"),
-                                jb1.getString("employee_id"),
-                                jb1.getString("employee_name"),
-                                jb1.getString("mediclaim_amount"),
-                                jb1.getString("mediclaim_date"),
-                                jb1.getString("mediclaim_id"),
-                                jb1.getString("mediclaim_no"),
-                                jb1.getString("mediclaim_status"),
-                                jb1.getString("payment_amount")
-                        );
-                        mediclaim_modelArrayList.add(model);
-                        customMediclaimListAdapter=new CustomMediclaimListAdapter(mediclaim_modelArrayList,MediclaimActivity.this);
-                        mediclaim_recycler_view.setAdapter(customMediclaimListAdapter);
+                    JSONObject jsonObjectResponseStatus = jsonObject.getJSONObject("response");
+                    if (jsonObjectResponseStatus.getString("status").contains("true")) {
+                        ll_recycler.setVisibility(View.VISIBLE);
+                        tv_nodata.setVisibility(View.GONE);
+                        JSONArray jsonArray = jsonObject.getJSONArray("mediclaim_list");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jb1 = jsonArray.getJSONObject(i);
+                            My_Mediclaim_Model model = new My_Mediclaim_Model(
+                                    jb1.getString("approved_mediclaim_amount"),
+                                    jb1.getString("employee_id"),
+                                    jb1.getString("employee_name"),
+                                    jb1.getString("mediclaim_amount"),
+                                    jb1.getString("mediclaim_date"),
+                                    jb1.getString("mediclaim_id"),
+                                    jb1.getString("mediclaim_no"),
+                                    jb1.getString("mediclaim_status"),
+                                    jb1.getString("payment_amount")
+                            );
+                            mediclaim_modelArrayList.add(model);
+                            customMediclaimListAdapter = new CustomMediclaimListAdapter(mediclaim_modelArrayList, MediclaimActivity.this);
+                            mediclaim_recycler_view.setAdapter(customMediclaimListAdapter);
+                        }
+                        loading.dismiss();
+                    }else if (jsonObjectResponseStatus.getString("status").contains("false")){
+                        loading.dismiss();
+                        ll_recycler.setVisibility(View.GONE);
+                        tv_nodata.setVisibility(View.VISIBLE);
+                        tv_nodata.setText(jsonObjectResponseStatus.getString("message"));
                     }
-                    loading.dismiss();
 
 
                 } catch (JSONException e) {
@@ -266,28 +276,36 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
                         mediclaim_modelArrayList.clear();
                     }
                     JSONObject jsonObject=new JSONObject(response);
-                    JSONArray jsonArray=jsonObject.getJSONArray("mediclaim_list");
-                    for (int i=0; i<jsonArray.length();i++)
-                    {
-                        JSONObject jb1=jsonArray.getJSONObject(i);
-                        Subordinate_Mediclaim_Model model=new Subordinate_Mediclaim_Model(
-                                jb1.getString("approved_mediclaim_amount"),
-                                jb1.getString("employee_id"),
-                                jb1.getString("employee_name"),
-                                jb1.getString("mediclaim_amount"),
-                                jb1.getString("mediclaim_date"),
-                                jb1.getString("mediclaim_id"),
-                                jb1.getString("mediclaim_no"),
-                                jb1.getString("mediclaim_status"),
-                                jb1.getString("payment_amount")
-                        );
-                        subordinate_mediclaim_modelArrayList.add(model);
-                        subordinateMediclaimListAdapter=new CustomSubordinateMediclaimListAdapter(subordinate_mediclaim_modelArrayList,MediclaimActivity.this);
-                        mediclaim_subordinate_recycler_view.setAdapter(subordinateMediclaimListAdapter);
+                    JSONObject jsonObjectResponseStatus = jsonObject.getJSONObject("response");
+                    if (jsonObjectResponseStatus.getString("status").contains("true")) {
+                        ll_recycler.setVisibility(View.VISIBLE);
+                        tv_nodata.setVisibility(View.GONE);
+                        JSONArray jsonArray = jsonObject.getJSONArray("mediclaim_list");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jb1 = jsonArray.getJSONObject(i);
+                            Subordinate_Mediclaim_Model model = new Subordinate_Mediclaim_Model(
+                                    jb1.getString("approved_mediclaim_amount"),
+                                    jb1.getString("employee_id"),
+                                    jb1.getString("employee_name"),
+                                    jb1.getString("mediclaim_amount"),
+                                    jb1.getString("mediclaim_date"),
+                                    jb1.getString("mediclaim_id"),
+                                    jb1.getString("mediclaim_no"),
+                                    jb1.getString("mediclaim_status"),
+                                    jb1.getString("payment_amount")
+                            );
+                            subordinate_mediclaim_modelArrayList.add(model);
+                            subordinateMediclaimListAdapter = new CustomSubordinateMediclaimListAdapter(subordinate_mediclaim_modelArrayList, MediclaimActivity.this);
+                            mediclaim_subordinate_recycler_view.setAdapter(subordinateMediclaimListAdapter);
+                        }
+                        loading.dismiss();
+
+                    }else if (jsonObjectResponseStatus.getString("status").contains("false")){
+                        loading.dismiss();
+                        ll_recycler.setVisibility(View.GONE);
+                        tv_nodata.setVisibility(View.VISIBLE);
+                        tv_nodata.setText(jsonObjectResponseStatus.getString("message"));
                     }
-                    loading.dismiss();
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     loading.dismiss();

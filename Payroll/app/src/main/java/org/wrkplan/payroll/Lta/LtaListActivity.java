@@ -128,7 +128,13 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
     }*/
     //===========Code to get data from api using volley and load data to recycler view, starts==========
     public void loadData(){
-        String url = Url.BASEURL()+"lta/list/"+userSingletonModel.getCorporate_id()+"/employee/"+userSingletonModel.getEmployee_id();
+        String fin_year_id;
+        if (userSingletonModel.getFin_year_id().contains("null")) {
+            fin_year_id = "0";
+        }else{
+            fin_year_id = userSingletonModel.getFin_year_id();
+        }
+        String url = Url.BASEURL()+"lta/list/"+userSingletonModel.getCorporate_id()+"/employee/"+userSingletonModel.getEmployee_id()+"/"+userSingletonModel.getBranch_office_id()+"/0/"+fin_year_id;
         Log.d("listurl-=>",url);
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/52";
         final ProgressDialog loading = ProgressDialog.show(LtaListActivity.this, "Loading", "Please wait...", true, false);

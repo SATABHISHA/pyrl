@@ -7,6 +7,8 @@ public class UserSingletonModel {
     }
     private UserSingletonModel() { }
 
+    //----login user variables
+    public String fin_year_id;
     //----employee variables
     public  String user_id,user_type,employee_id,employee_code,employee_fname,employee_mname,employee_lname,department_id,
             designation_id,dob,doj,date_of_rehiring,mobile_no,home_no,emergency_no,aadhar_no,employee_pan_no,passport_no,gender,
@@ -49,6 +51,9 @@ public  String casual_leave,earn_leave,sick_leave,comp_off,maternal_leave,patern
     }
 
 
+    public String getFin_year_id() {
+        return fin_year_id;
+    }
 
     public String getSupervisor_1_name() {
         return supervisor_1_name;
@@ -1102,6 +1107,10 @@ public  String casual_leave,earn_leave,sick_leave,comp_off,maternal_leave,patern
 
     public void setAttendance_with_selfie_yn(String attendance_with_selfie_yn) {
         this.attendance_with_selfie_yn = attendance_with_selfie_yn;
+    }
+
+    public void setFin_year_id(String fin_year_id) {
+        this.fin_year_id = fin_year_id;
     }
     //---------Setter method ends-----------------
 

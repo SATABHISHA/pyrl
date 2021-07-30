@@ -90,7 +90,13 @@ public class SubordinateLtaListActivity extends AppCompatActivity implements Vie
     //===========Code to get data from api using volley and load data to recycler view, starts==========
     public void loadData(){
 //        String url = Config.BaseUrlEpharma + "documents/list" ;
-        String url = Url.BASEURL()+"lta/list/"+userSingletonModel.getCorporate_id()+"/Subordinate/"+userSingletonModel.getEmployee_id();
+        String fin_year_id;
+        if (userSingletonModel.getFin_year_id().contains("null")) {
+            fin_year_id = "0";
+        }else{
+            fin_year_id = userSingletonModel.getFin_year_id();
+        }
+        String url = Url.BASEURL()+"lta/list/"+userSingletonModel.getCorporate_id()+"/Subordinate/"+userSingletonModel.getEmployee_id()+"/"+userSingletonModel.getBranch_office_id()+"/0/"+fin_year_id;
         Log.d("urltesting-=>",url);
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/20";
         final ProgressDialog loading = ProgressDialog.show(SubordinateLtaListActivity.this, "Loading", "Please wait...", true, false);

@@ -80,12 +80,19 @@ public class CustomMediclaimListAdapter extends RecyclerView.Adapter<CustomMedic
             holder.tv_mediclaim_status.setText(mediclaimList.get(position).getMediclaim_status());
             holder.tv_mediclaim_status.setTextColor(Color.parseColor("#fe52ce"));
         }
+        else if(mediclaimList.get(position).getMediclaim_status().contentEquals("Payment done"))
+        {
+            holder.tv_mediclaim_status.setText(mediclaimList.get(position).getMediclaim_status());
+            holder.tv_mediclaim_status.setTextColor(Color.parseColor("#98760E"));
+        }
         else if(mediclaimList.get(position).getMediclaim_status().contentEquals("Saved"))
         {
             holder.tv_mediclaim_status.setText(mediclaimList.get(position).getMediclaim_status());
             holder.tv_mediclaim_status.setTextColor(Color.parseColor("#2196ed"));
             holder.imgbtn_delete.setVisibility(View.VISIBLE);
         }
+
+        holder.tv_mediclaim_status.setText(mediclaimList.get(position).getMediclaim_status()); //---added by SR
 
         holder.relative_layout.setOnClickListener(new View.OnClickListener() {
             @Override

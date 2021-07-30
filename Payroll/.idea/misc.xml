@@ -12,7 +12,7 @@
         <entry key="app/src/main/res/layouts/SubodinateLeaveApplication/layout/subodinate_leave_application.xml" value="0.17" />
         <entry key="app/src/main/res/layouts/advanceRequisitionActivity/layout/advance_requisititon_entry_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/advanceRequisitionActivity/layout/advance_requsation_activity.xml" value="0.10815602836879433" />
-        <entry key="app/src/main/res/layouts/companyDocumentsActivity/layout/activity_company_documents.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/companyDocumentsActivity/layout/activity_company_documents.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/employeeDocumentsActivity/layout/activity_employee_documents.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/employeeFacilitiesActivities/layout/activity_employee_facilities.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/employeeInformationActivity/layout/activity_employee_information.xml" value="0.10815602836879433" />
@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/layouts/homeActivity/layout/dialog_change_password.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/insuranceDetailActivity/layout/insurance_main.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/leaveBalanceActivity/layout/activity_leave_balance.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/loginActivity/layout/activity_login_new.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_document_pdf_viewer.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_documents.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_list.xml" value="0.10815602836879433" />

@@ -63,6 +63,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/btn_subadv_mediclaim">
+            <TextView
+                android:id="@+id/tv_nodata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:text="No List to show"
+                android:textSize="20sp"
+                android:visibility="gone" />
             <LinearLayout
                 android:id="@+id/ll_recycler"
                 android:layout_width="match_parent"
@@ -72,12 +82,12 @@
                 android:paddingRight="10dp"
                 android:visibility="visible"
                 android:orientation="vertical">
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/mediclaim_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
+                    android:visibility="visible"
                     tools:listitem="@layout/activity_my_mediclaim_list_custom_row"
                     android:scrollbars="vertical"
                     />

@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public static String entry_user = ""; //---added by Satabhisha on 6th May
 
-    public static String url_check = "test"; //----as per discussion on 12th sept, Base url(live or test) distinction should be handled by using static variable
+    public static String url_check = "live"; //----as per discussion on 12th sept, Base url(live or test) distinction should be handled by using static variable
 //    final  String url="http://192.168.10.175:9018/api/login/payroll_713/1/1";
 
 
@@ -105,6 +105,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
           userSingletonModel.setUser_id(sharedPreferences.getString("user_id", ""));
           userSingletonModel.setUser_type(sharedPreferences.getString("user_id", ""));
+          userSingletonModel.setFin_year_id(sharedPreferences.getString("fin_year_id", ""));
             //============================
 
           userSingletonModel.setEmployee_id(sharedPreferences.getString("employee_id", ""));
@@ -336,6 +337,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 editor.putString("username", username);
                                 editor.putString("user_id", jb_user.getString("user_id"));
                                 editor.putString("user_type", jb_user.getString("user_type"));
+                                editor.putString("fin_year_id", jb_user.getString("fin_year_id"));
                                 //----------------------
 
                                 editor.putString("employee_id", jb_employee.getString("employee_id"));
@@ -423,6 +425,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 editor.putString("p_tax", jb_employee.getString("p_tax"));
                                 editor.putString("archive_date", jb_employee.getString("archive_date"));
                                 editor.putString("nominee_relation", jb_employee.getString("nominee_relation"));
+                                editor.putString("branch_office_id", jb_employee.getString("branch_office_id"));
 
 
                                 editor.putString("salary_on_appointment", jb_employee.getString("salary_on_appointment"));
@@ -481,6 +484,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             userSingletonModel.setUser_id(jb_user.getString("user_id"));
                             userSingletonModel.setUser_type(jb_user.getString("user_type"));
+                            userSingletonModel.setFin_year_id(jb_user.getString("fin_year_id"));
+                            userSingletonModel.setBranch_office_id(jb_employee.getString("branch_office_id"));
 
 
                             userSingletonModel.setEmployee_id(jb_employee.getString("employee_id"));
