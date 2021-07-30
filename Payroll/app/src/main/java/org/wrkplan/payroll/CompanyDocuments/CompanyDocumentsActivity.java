@@ -51,6 +51,7 @@ public class CompanyDocumentsActivity extends AppCompatActivity {
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
     ListView lv1;
     Button btn_ok;
+    TextView tv_nodata;
 
     @Override
     public void onBackPressed() {
@@ -65,6 +66,7 @@ public class CompanyDocumentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_company_documents);
         lv1=findViewById(R.id.lv1);
         btn_ok=findViewById(R.id.btn_ok);
+        tv_nodata=findViewById(R.id.tv_nodata);
         btn_ok.setVisibility(View.GONE);
 
         btn_ok.setOnClickListener(new View.OnClickListener() {
@@ -96,22 +98,33 @@ public class CompanyDocumentsActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject=new JSONObject(response);
                     Log.d("companydata-=>",response);
-                    JSONArray jsonArray=jsonObject.getJSONArray("docs");
-                    for(int i=0;i<jsonArray.length();i++)
-                    {
-                        JSONObject jb1=jsonArray.getJSONObject(i);
-                        String name=jb1.getString("name");
-                        String upload_datetime=jb1.getString("upload_datetime");
-                        String file_name=jb1.getString("file_name");
-                        Documents documents=new Documents();
-                        documents.setName(name);
-                        documents.setUpload_datetime(upload_datetime);
-                        documents.setFile_name(file_name);
+                    JSONObject jsonObjectResponseStatus = jsonObject.getJSONObject("response");
+                    if (jsonObjectResponseStatus.getString("status").contains("true")) {
+                        lv1.setVisibility(View.VISIBLE);
+                        tv_nodata.setVisibility(View.GONE);
+                        JSONArray jsonArray = jsonObject.getJSONArray("docs");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jb1 = jsonArray.getJSONObject(i);
+                            String name = jb1.getString("name");
+                            String upload_datetime = jb1.getString("upload_datetime");
+                            String file_name = jb1.getString("file_name");
+                            Documents documents = new Documents();
+                            documents.setName(name);
+                            documents.setUpload_datetime(upload_datetime);
+                            documents.setFile_name(file_name);
 
-                        arrayList.add(documents);
+                            arrayList.add(documents);
 
+                        }
+                        lv1.setAdapter(new Nr());
+                    }else if (jsonObjectResponseStatus.getString("status").contains("false")) {
+                        lv1.setVisibility(View.GONE);
+                        tv_nodata.setVisibility(View.VISIBLE);
+                        tv_nodata.setText(jsonObjectResponseStatus.getString("message"));
+                    }else{
+                        lv1.setVisibility(View.GONE);
+                        tv_nodata.setVisibility(View.VISIBLE);
                     }
-                    lv1.setAdapter(new Nr());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

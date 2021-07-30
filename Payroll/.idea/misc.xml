@@ -6,7 +6,9 @@
         <entry key="app/src/main/res/layout/cmpdocuments.xml" value="0.15" />
         <entry key="app/src/main/res/layout/empdocuments.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/advanceRequisitionActivity/layout/advance_requisititon_entry_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/companyDocumentsActivity/layout/activity_company_documents.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/employeeDocumentsActivity/layout/activity_employee_documents.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/lta/layout/activity_lta_list.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_request.xml" value="0.25" />
       </map>
     </option>

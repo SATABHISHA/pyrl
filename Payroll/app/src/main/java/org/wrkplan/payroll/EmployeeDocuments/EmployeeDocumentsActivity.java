@@ -41,6 +41,7 @@ import java.util.ArrayList;
 public class EmployeeDocumentsActivity extends AppCompatActivity {
     ListView lv1;
     Button btn_ok;
+    TextView tv_nodata;
 
     ArrayList<EmpDocuments> arrayList=new ArrayList<>();
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
@@ -60,6 +61,7 @@ public class EmployeeDocumentsActivity extends AppCompatActivity {
         lv1=findViewById(R.id.lv1);
 
         btn_ok=findViewById(R.id.btn_ok);
+        tv_nodata = findViewById(R.id.tv_nodata);
 
         btn_ok.setVisibility(View.GONE);
         btn_ok.setOnClickListener(new View.OnClickListener() {
@@ -83,22 +85,31 @@ public class EmployeeDocumentsActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject=new JSONObject(response);
                     Log.d("data-=>",response);
-                    JSONArray jsonArray=jsonObject.getJSONArray("docs");
-                    for (int i=0;i<jsonArray.length();i++)
-                    {
-                        JSONObject jb1=jsonArray.getJSONObject(i);
-                        String name=jb1.getString("name");
-                        String file_path=jb1.getString("file_path");
-                        EmpDocuments empDocuments=new EmpDocuments();
-                        empDocuments.setName(name);
-                        empDocuments.setFile_path(file_path);
-                        arrayList.add(empDocuments);
+                    JSONObject jsonObjectResponseStatus = jsonObject.getJSONObject("response");
+                    if (jsonObjectResponseStatus.getString("status").contains("true")) {
+                        lv1.setVisibility(View.VISIBLE);
+                        tv_nodata.setVisibility(View.GONE);
+                        JSONArray jsonArray = jsonObject.getJSONArray("docs");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jb1 = jsonArray.getJSONObject(i);
+                            String name = jb1.getString("name");
+                            String file_path = jb1.getString("file_path");
+                            EmpDocuments empDocuments = new EmpDocuments();
+                            empDocuments.setName(name);
+                            empDocuments.setFile_path(file_path);
+                            arrayList.add(empDocuments);
 
-                    }
+                        }
 
                         lv1.setAdapter(new Nr());
-
-
+                    }else if (jsonObjectResponseStatus.getString("status").contains("false")) {
+                        lv1.setVisibility(View.GONE);
+                        tv_nodata.setVisibility(View.VISIBLE);
+                        tv_nodata.setText(jsonObjectResponseStatus.getString("message"));
+                    }else{
+                        lv1.setVisibility(View.GONE);
+                        tv_nodata.setVisibility(View.VISIBLE);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
