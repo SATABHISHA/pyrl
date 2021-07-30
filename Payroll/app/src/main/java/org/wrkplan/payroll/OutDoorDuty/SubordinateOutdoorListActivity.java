@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ import org.wrkplan.payroll.R;
 
 import java.util.ArrayList;
 
-public class SubordinateOutdoorListActivity extends AppCompatActivity {
+public class SubordinateOutdoorListActivity extends AppCompatActivity implements View.OnClickListener {
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     ArrayList<OutDoorListModel> outdoorListActivityArrayList = new ArrayList<>();
     ArrayList<OutDoorListModel> filteredData = new ArrayList<>();
@@ -42,11 +43,13 @@ public class SubordinateOutdoorListActivity extends AppCompatActivity {
     TextView tv_nodata;
     RecyclerView recycler_view;
     EditText ed_search;
+    ImageView img_back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subordinate_outdoor_list);
 
+        img_back=findViewById(R.id.img_back);
         ll_recycler = findViewById(R.id.ll_recycler);
         tv_nodata = findViewById(R.id.tv_nodata);
         ed_search = findViewById(R.id.ed_search);
@@ -76,6 +79,7 @@ public class SubordinateOutdoorListActivity extends AppCompatActivity {
         });
         loadData();
         display_filtered_data("");
+        img_back.setOnClickListener(this);
     }
 
     //===========Code to get data from api using volley and load data to recycler view, starts==========
@@ -195,5 +199,16 @@ public class SubordinateOutdoorListActivity extends AppCompatActivity {
         Intent intent_odlist = new Intent(this,OutdoorListActivity.class);
         intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_odlist);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.img_back:
+                Intent intent_odlist = new Intent(this,OutdoorListActivity.class);
+                intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent_odlist);
+                break;
+        }
     }
 }

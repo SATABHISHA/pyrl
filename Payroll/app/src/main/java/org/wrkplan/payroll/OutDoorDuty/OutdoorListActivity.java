@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,6 +41,7 @@ public class OutdoorListActivity extends AppCompatActivity implements View.OnCli
     RecyclerView recycler_view;
     public static int new_create_yn = 1;
     public static  CustomOutdoorListAdapter customOutdoorListAdapter;
+    ImageView img_back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class OutdoorListActivity extends AppCompatActivity implements View.OnCli
 
         customOutdoorListAdapter = new CustomOutdoorListAdapter(this,outdoorListActivityArrayList);
 
+        img_back=findViewById(R.id.img_back);
         ll_recycler = findViewById(R.id.ll_recycler);
         tv_nodata = findViewById(R.id.tv_nodata);
         tv_button_subordinate = findViewById(R.id.tv_button_subordinate);
@@ -61,12 +64,18 @@ public class OutdoorListActivity extends AppCompatActivity implements View.OnCli
 
         tv_button_subordinate.setOnClickListener(this);
         tv_btn_new_rqst.setOnClickListener(this);
+        img_back.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View view) {
        switch (view.getId()){
+           case R.id.img_back:
+               Intent intent_home = new Intent(this, HomeActivity.class);
+               intent_home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+               startActivity(intent_home);
+               break;
            case R.id.tv_button_subordinate:
                new_create_yn = 0;
                Intent i = new Intent(OutdoorListActivity.this, SubordinateOutdoorListActivity.class);

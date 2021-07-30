@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -54,10 +55,13 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
     Button btn_save, btn_cancel;
     public static String od_status="";
     int flag_edt_rmarks_chck = 0;
+    ImageView img_back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subordinate_outdoor_request);
+
+        img_back=findViewById(R.id.img_back);
         tv_emp_name = findViewById(R.id.tv_emp_name);
         tv_requisition_no = findViewById(R.id.tv_requisition_no);
         edt_from_date_select = findViewById(R.id.edt_from_date_select);
@@ -70,6 +74,7 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
         btn_save = findViewById(R.id.btn_save);
         btn_cancel = findViewById(R.id.btn_cancel);
 
+        img_back.setOnClickListener(this);
         btn_save.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
         btn_save.setClickable(false);
@@ -84,6 +89,7 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
            case R.id.btn_save:
                saveData();
                break;
+           case R.id.img_back:
            case R.id.btn_cancel:
                Intent intent_subordinate_odlist = new Intent(this,SubordinateOutdoorListActivity.class);
                intent_subordinate_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);

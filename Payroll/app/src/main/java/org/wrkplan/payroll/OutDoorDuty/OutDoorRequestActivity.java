@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -71,6 +72,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
     String od_status;
     Integer flag_datefield_check = 1;
     public String from_date_select_api_data, to_date_select_api_data;
+    ImageView img_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +81,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
+        img_back=findViewById(R.id.img_back);
         tv_emp_name = findViewById(R.id.tv_emp_name);
         tv_requisition_no = findViewById(R.id.tv_requisition_no);
         edt_from_date_select = findViewById(R.id.edt_from_date_select);
@@ -102,6 +105,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
         btn_cancel.setOnClickListener(this);
         imgBtnCalenderFrom.setOnClickListener(this);
         imgBtnCalenderTo.setOnClickListener(this);
+        img_back.setOnClickListener(this);
 
         if(OutdoorListActivity.new_create_yn == 0) {
             radioGroup.setOnCheckedChangeListener(this); //--added on 21st May
@@ -149,6 +153,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                    Log.d("test","no");
                }
                break;
+           case R.id.img_back:
            case R.id.btn_cancel:
 
                if(OutdoorListActivity.new_create_yn == 1){
