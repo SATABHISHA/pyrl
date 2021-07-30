@@ -53,7 +53,7 @@ import java.util.Date;
 
 import static java.lang.System.exit;
 
-public class HolidayDetailActivity extends AppCompatActivity {
+public class HolidayDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     //---------------Caldroid function name-----------------------//
@@ -91,6 +91,7 @@ public class HolidayDetailActivity extends AppCompatActivity {
     Date date = new Date();
     String currntdate;
     SimpleDateFormat currentDte = new SimpleDateFormat("dd/MM/yyyy");
+    ImageView img_back;
 
 
 //    int flag=0;
@@ -111,6 +112,7 @@ public class HolidayDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_holiday_detail);
+        img_back=findViewById(R.id.img_back);
         lv1 = findViewById(R.id.lv1);
         btn_ok = findViewById(R.id.btn_ok);
         rl11 = findViewById(R.id.rl11);
@@ -125,6 +127,8 @@ public class HolidayDetailActivity extends AppCompatActivity {
 
         currntdate = (currentDte.format(date));
         //  Toast.makeText(this, currntdate, Toast.LENGTH_SHORT).show();
+
+        img_back.setOnClickListener(this);
 
 
         img_list.setOnClickListener(new View.OnClickListener() {
@@ -430,6 +434,15 @@ public class HolidayDetailActivity extends AppCompatActivity {
         Volley.newRequestQueue(HolidayDetailActivity.this).add(stringRequest);
 
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.img_back:
+            onBackPressed();
+            break;
+        }
     }
 
 

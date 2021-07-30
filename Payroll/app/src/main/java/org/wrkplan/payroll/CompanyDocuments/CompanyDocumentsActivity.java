@@ -45,13 +45,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class CompanyDocumentsActivity extends AppCompatActivity {
+public class CompanyDocumentsActivity extends AppCompatActivity implements View.OnClickListener {
 
     ArrayList<Documents> arrayList=new ArrayList<>();
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
     ListView lv1;
     Button btn_ok;
     TextView tv_nodata;
+    ImageView img_back;
 
     @Override
     public void onBackPressed() {
@@ -66,9 +67,11 @@ public class CompanyDocumentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_company_documents);
         lv1=findViewById(R.id.lv1);
         btn_ok=findViewById(R.id.btn_ok);
+        img_back=findViewById(R.id.img_back);
         tv_nodata=findViewById(R.id.tv_nodata);
         btn_ok.setVisibility(View.GONE);
 
+        img_back.setOnClickListener(this);
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +140,17 @@ public class CompanyDocumentsActivity extends AppCompatActivity {
             }
         });
         Volley.newRequestQueue(CompanyDocumentsActivity.this).add(stringRequest);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.img_back:
+                Intent intent=new Intent(CompanyDocumentsActivity.this,HomeActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
     }
 
     class Nr extends BaseAdapter{

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -35,7 +36,7 @@ import org.wrkplan.payroll.SwipeGesture.OnSwipeTouchListener;
 
 import java.util.ArrayList;
 
-public class InsuranceDetail1 extends AppCompatActivity {
+public class InsuranceDetail1 extends AppCompatActivity implements View.OnClickListener {
 
     TextView txt_policy_type,txt_provider_name,txt_policy_no,txt_amount,txt_expiry_date,txt_msg,txt_premium;
     Button bt_privious,bt_close,bt_next;
@@ -49,6 +50,7 @@ public class InsuranceDetail1 extends AppCompatActivity {
     int i=0;
     int count=0;
     int arraySize;
+    ImageView img_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class InsuranceDetail1 extends AppCompatActivity {
 
         //===============Initialize Views Start=====================//
 
+        img_back=findViewById(R.id.img_back);
         txt_policy_type=findViewById(R.id.txt_policy_type);
         txt_provider_name=findViewById(R.id.txt_provider_name);
         txt_policy_no=findViewById(R.id.txt_policy_no);
@@ -81,6 +84,7 @@ public class InsuranceDetail1 extends AppCompatActivity {
         getdata(0);
         Getsize();
 
+        img_back.setOnClickListener(this);
 
         bt_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -354,6 +358,17 @@ public class InsuranceDetail1 extends AppCompatActivity {
         Intent intent=new Intent(InsuranceDetail1.this, HomeActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.img_back:
+                Intent intent=new Intent(InsuranceDetail1.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
     }
 
     class NR  extends BaseAdapter{

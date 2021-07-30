@@ -38,13 +38,14 @@ import org.wrkplan.payroll.R;
 
 import java.util.ArrayList;
 
-public class EmployeeDocumentsActivity extends AppCompatActivity {
+public class EmployeeDocumentsActivity extends AppCompatActivity implements View.OnClickListener {
     ListView lv1;
     Button btn_ok;
     TextView tv_nodata;
 
     ArrayList<EmpDocuments> arrayList=new ArrayList<>();
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
+    ImageView img_back;
 
     @Override
     public void onBackPressed() {
@@ -59,11 +60,14 @@ public class EmployeeDocumentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_documents);
         lv1=findViewById(R.id.lv1);
+        img_back=findViewById(R.id.img_back);
 
         btn_ok=findViewById(R.id.btn_ok);
         tv_nodata = findViewById(R.id.tv_nodata);
 
         btn_ok.setVisibility(View.GONE);
+
+        img_back.setOnClickListener(this);
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,6 +127,17 @@ public class EmployeeDocumentsActivity extends AppCompatActivity {
             }
         });
         Volley.newRequestQueue(EmployeeDocumentsActivity.this).add(stringRequest);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.img_back:
+                Intent intent=new Intent(EmployeeDocumentsActivity.this,HomeActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
     }
 
     public  class  Nr extends BaseAdapter{

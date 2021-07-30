@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,11 +35,12 @@ import org.wrkplan.payroll.R;
 
 import java.util.ArrayList;
 
-public class EmployeeFacilitiesActivity extends AppCompatActivity {
+public class EmployeeFacilitiesActivity extends AppCompatActivity implements View.OnClickListener {
     ListView lv1;
     Button btn_ok;
     ArrayList<Facilitis> arrayList=new ArrayList<>();
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
+    ImageView img_back;
 
     @Override
     public void onBackPressed() {
@@ -52,10 +54,13 @@ public class EmployeeFacilitiesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_facilities);
         lv1=findViewById(R.id.lv1);
+        img_back=findViewById(R.id.img_back);
         btn_ok=findViewById(R.id.btn_ok);
         btn_ok.setVisibility(View.GONE);
 
         Getdata();
+
+        img_back.setOnClickListener(this);
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +107,17 @@ public class EmployeeFacilitiesActivity extends AppCompatActivity {
 
         });
         Volley.newRequestQueue(EmployeeFacilitiesActivity.this).add(stringRequest);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.img_back:
+                Intent intent_home = new Intent(this, HomeActivity.class);
+                intent_home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent_home);
+                break;
+        }
     }
 
     class Nr extends BaseAdapter{

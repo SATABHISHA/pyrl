@@ -81,7 +81,9 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.img_back:
-                onBackPressed();
+                Intent intent_home = new Intent(this, HomeActivity.class);
+                intent_home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent_home);
                 break;
             case R.id.tv_button_subordinate:
                 new_create_yn = 0;
