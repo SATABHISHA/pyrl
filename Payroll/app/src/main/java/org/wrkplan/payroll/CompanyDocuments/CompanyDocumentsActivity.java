@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,12 +78,14 @@ public class CompanyDocumentsActivity extends AppCompatActivity {
 
     private void getdata() {
         String url= Url.BASEURL() + "companydocs/"+"list/"+userSingletonModel.corporate_id;
+        Log.d("CompanyDocs-=>",url);
 
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject=new JSONObject(response);
+                    Log.d("companydata-=>",response);
                     JSONArray jsonArray=jsonObject.getJSONArray("docs");
                     for(int i=0;i<jsonArray.length();i++)
                     {
