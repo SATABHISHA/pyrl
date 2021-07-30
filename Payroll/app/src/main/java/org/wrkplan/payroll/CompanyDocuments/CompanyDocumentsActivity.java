@@ -1,7 +1,9 @@
 package org.wrkplan.payroll.CompanyDocuments;
 
+import android.Manifest;
 import android.app.DownloadManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,9 +17,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -32,6 +36,7 @@ import org.wrkplan.payroll.CompanyDocumentsModel.Documents;
 import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.EmployeeFacilitisModel.Facilitis;
 import org.wrkplan.payroll.Home.HomeActivity;
+import org.wrkplan.payroll.Login.LoginActivity;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
@@ -73,6 +78,11 @@ public class CompanyDocumentsActivity extends AppCompatActivity {
         getdata();
 
 
+        //---code for file download/file access permission, starts (added on 30th July)
+        ActivityCompat.requestPermissions(CompanyDocumentsActivity.this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                1);
+        //---code for file download/file access permission, ends
 
     }
 
@@ -153,15 +163,19 @@ public class CompanyDocumentsActivity extends AppCompatActivity {
                     // concatinate above fileExtension to fileName
                     fileName += "." + fileExtension;
 
-                    DownloadManager.Request request = new DownloadManager.Request(Uri.parse(fileUrl))
-                            .setTitle(getApplicationContext().getString(R.string.app_name))
-                            .setDescription("Downloading " + fileName)
-                            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE | DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                            .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
-                            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+                    try {
+                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(fileUrl))
+                                .setTitle(getApplicationContext().getString(R.string.app_name))
+                                .setDescription("Downloading " + fileName)
+                                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE | DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                                .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+                                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
 //                            .setDestinationInExternalPublicDir("/Caplet", fileName);
-                    DownloadManager dm = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
-                    dm.enqueue(request);
+                        DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                        dm.enqueue(request);
+                    }catch (Exception e){
+                        Toast.makeText(getApplicationContext(),"Unable to download file", Toast.LENGTH_LONG).show();
+                    }
 
                 }
             });
@@ -184,4 +198,32 @@ public class CompanyDocumentsActivity extends AppCompatActivity {
             return view;
         }
     }
+
+    //---code for file download/file access permission, starts (added on 20-o7-2021)
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(CompanyDocumentsActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+    //---code for file download/file access permission, ends
 }

@@ -40,9 +40,9 @@
             android:layout_marginRight="15dp">
 
             <ListView
+                android:id="@+id/lv1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/lv1"></ListView>
+                android:layout_height="wrap_content"></ListView>
 
         </RelativeLayout>
         <RelativeLayout

@@ -1,5 +1,6 @@
 package org.wrkplan.payroll.Login;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -42,6 +43,7 @@ import org.json.JSONObject;
 import org.wrkplan.payroll.Config.AppVersionUpgradeNotifier;
 import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.Home.HomeActivity;
+import org.wrkplan.payroll.Lta.LtaDocumentPdfViewer;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
@@ -63,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public static String entry_user = ""; //---added by Satabhisha on 6th May
 
-    public static String url_check = "test"; //----as per discussion on 12th sept, Base url(live or test) distinction should be handled by using static variable
+    public static String url_check = "live"; //----as per discussion on 12th sept, Base url(live or test) distinction should be handled by using static variable
 //    final  String url="http://192.168.10.175:9018/api/login/payroll_713/1/1";
 
 
@@ -292,7 +294,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             ed_username.setText(autofill.getString("username",null));
 
         }*/
-
+       //---code for file download/file access permission, starts (added on 30th July)
+        ActivityCompat.requestPermissions(LoginActivity.this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                1);
+        //---code for file download/file access permission, ends
         btn_login.setOnClickListener(this);
     }
 
@@ -777,6 +783,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return true;
     }
     //---verson upgrade code ends----
+
+    //---code for file download/file access permission, starts (added on 20-o7-2021)
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(LoginActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+    //---code for file download/file access permission, ends
 }
 
 

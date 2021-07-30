@@ -150,15 +150,19 @@ public class EmployeeDocumentsActivity extends AppCompatActivity {
                     // concatinate above fileExtension to fileName
                     fileName += "." + fileExtension;
 
-                    DownloadManager.Request request = new DownloadManager.Request(Uri.parse(fileUrl))
-                            .setTitle(getApplicationContext().getString(R.string.app_name))
-                            .setDescription("Downloading " + fileName)
-                            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE | DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                            .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
-                            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+                    try {
+                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(fileUrl))
+                                .setTitle(getApplicationContext().getString(R.string.app_name))
+                                .setDescription("Downloading " + fileName)
+                                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE | DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                                .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+                                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
 //                            .setDestinationInExternalPublicDir("/Caplet", fileName);
-                    DownloadManager dm = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
-                    dm.enqueue(request);
+                        DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                        dm.enqueue(request);
+                    }catch (Exception e){
+                        Toast.makeText(getApplicationContext(),"Unable to download file", Toast.LENGTH_LONG).show();
+                    }
                 }
             });
             tv_name.setText(arrayList.get(position).getName());
