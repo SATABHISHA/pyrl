@@ -37,6 +37,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Leave_Balance.LeaveBalanceActivity;
 import org.wrkplan.payroll.Model.Load_Spinner_Model;
 import org.wrkplan.payroll.Model.UserSingletonModel;
@@ -55,18 +56,26 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
     public static String year_code = "";
     private File pdfFile = null;
     private static LinkedList<Bitmap> pdfBitmapList = new LinkedList<>();
+    ImageView img_back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_report_list);
         btn_view_task = findViewById(R.id.btn_view_task);
+        img_back=findViewById(R.id.img_back);
 
         btn_view_task.setOnClickListener(this);
+        img_back.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.img_back:
+                Intent intent = new Intent(ReportHomeListActivity.this, HomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
             case R.id.btn_view_task:
                 LayoutInflater li = LayoutInflater.from(ReportHomeListActivity.this);
                 final View dialog = li.inflate(R.layout.activity_home_pf_report_popup, null);

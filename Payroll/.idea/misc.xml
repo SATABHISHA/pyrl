@@ -8,13 +8,18 @@
         <entry key="app/src/main/res/layout/leave_application.xml" value="0.22" />
         <entry key="app/src/main/res/layout/subordinate_leave.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/MyLeaveApplication/layout/myleaveappplication.xml" value="0.2" />
+        <entry key="app/src/main/res/layouts/MyLeave_Application_2/layout/activity_my_leave_application_2.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/SubodinateLeaveApplication/layout/subodinate_leave_application.xml" value="0.17" />
         <entry key="app/src/main/res/layouts/advanceRequisitionActivity/layout/advance_requisititon_entry_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/advanceRequisitionActivity/layout/advance_requsation_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/companyDocumentsActivity/layout/activity_company_documents.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/employeeDocumentsActivity/layout/activity_employee_documents.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/employeeFacilitiesActivities/layout/activity_employee_facilities.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/employeeInformationActivity/layout/activity_employee_information.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/holidayDetailActivity/layout/activity_holiday_detail.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/homeActivity/layout/dialog_change_password.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/insuranceDetailActivity/layout/insurance_main.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/leaveBalanceActivity/layout/activity_leave_balance.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_document_pdf_viewer.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_documents.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_list.xml" value="0.10815602836879433" />
@@ -32,6 +37,8 @@
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_outdoor_request.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_subordinate_outdoor_list.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_subordinate_outdoor_request.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/report/layout/activity_home_report_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/report/layout/activity_pdf_editor.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_my_attendance_log_v2.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_my_attendance_v3.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_subordinate_attendance_v2.xml" value="0.10815602836879433" />

@@ -81,7 +81,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        img_back=findViewById(R.id.img_back);
+//        img_back=findViewById(R.id.img_back);
         tv_emp_name = findViewById(R.id.tv_emp_name);
         tv_requisition_no = findViewById(R.id.tv_requisition_no);
         edt_from_date_select = findViewById(R.id.edt_from_date_select);
@@ -105,7 +105,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
         btn_cancel.setOnClickListener(this);
         imgBtnCalenderFrom.setOnClickListener(this);
         imgBtnCalenderTo.setOnClickListener(this);
-        img_back.setOnClickListener(this);
+//        img_back.setOnClickListener(this);
 
         if(OutdoorListActivity.new_create_yn == 0) {
             radioGroup.setOnCheckedChangeListener(this); //--added on 21st May
@@ -153,7 +153,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                    Log.d("test","no");
                }
                break;
-           case R.id.img_back:
+//           case R.id.img_back:
            case R.id.btn_cancel:
 
                if(OutdoorListActivity.new_create_yn == 1){

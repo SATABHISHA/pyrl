@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,6 +65,7 @@ public class OdDutyLogEmployeeTaskActivity extends AppCompatActivity implements 
 //    CustomOdDutyLogTaskAdapter customOdDutyLogTaskAdapter = new CustomOdDutyLogTaskAdapter(OdDutyLogEmployeeTaskActivity.this, outDoorTaskModelArrayList);
     public static CustomOdDutyLogTaskAdapter customOdDutyLogTaskAdapter;
     androidx.appcompat.app.AlertDialog.Builder builder;
+    ImageView img_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +78,7 @@ public class OdDutyLogEmployeeTaskActivity extends AppCompatActivity implements 
 
         builder = new androidx.appcompat.app.AlertDialog.Builder(this);
 
+        img_back=findViewById(R.id.img_back);
         ll_recycler = findViewById(R.id.ll_recycler);
         ll_supervisor = findViewById(R.id.ll_supervisor);
         ll_button = findViewById(R.id.ll_button);
@@ -101,6 +104,7 @@ public class OdDutyLogEmployeeTaskActivity extends AppCompatActivity implements 
         tv_button_return.setOnClickListener(this);
         tv_button_approve.setOnClickListener(this);
         tv_btn_new_task.setOnClickListener(this);
+        img_back.setOnClickListener(this);
 
         ed_remarks.setClickable(false);
         ed_remarks.setEnabled(false);
@@ -121,6 +125,46 @@ public class OdDutyLogEmployeeTaskActivity extends AppCompatActivity implements 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.img_back:
+                if(back_btn_save_unsave_check == 1) {
+                    //---------Alert dialog code starts(added on 1st dec)--------
+                    final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                    alertDialogBuilder.setMessage("Unsaved data will be lost.\nDo you want to continue?");
+                    alertDialogBuilder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            alertDialogBuilder.setCancelable(false);
+                            Intent intent_odlist = new Intent(OdDutyLogEmployeeTaskActivity.this,OdDutyLogListActivity.class);
+                            intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent_odlist);
+
+                            back_btn_save_unsave_check = 0;
+                        }
+                    });
+                    alertDialogBuilder.setPositiveButton("No",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    alertDialogBuilder.setCancelable(true);
+                                }
+                            });
+
+                    final AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                    //--------Alert dialog code ends--------
+                }else if(back_btn_save_unsave_check == 0){
+
+                    if(OdDutyLogListActivity.log_task_status == 0){
+                        Intent intent_odlist = new Intent(OdDutyLogEmployeeTaskActivity.this,OdDutyLogListActivity.class);
+                        intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent_odlist);
+                    }else if(OdDutyLogListActivity.log_task_status == 1){
+                        Intent intent_odlist = new Intent(OdDutyLogEmployeeTaskActivity.this,SubordinateOdDutyLogListActivity.class);
+                        intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent_odlist);
+                    }
+                }
+                break;
             case R.id.tv_button_back:
 
                 if(back_btn_save_unsave_check == 1) {

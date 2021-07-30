@@ -35,7 +35,7 @@ public class PdfEditorActivity extends AppCompatActivity implements View.OnClick
     private static final String TAG = "PdfEditorActivity";
 
     private WebView webView;
-    ImageView img_view_dwnld;
+    ImageView img_view_dwnld, img_back;
 
 
 
@@ -72,6 +72,7 @@ public class PdfEditorActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdf_editor);
         img_view_dwnld = findViewById(R.id.img_view_dwnld);
+        img_back = findViewById(R.id.img_back);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -142,10 +143,14 @@ public class PdfEditorActivity extends AppCompatActivity implements View.OnClick
         webView.loadDataWithBaseURL(null, ReportHomeListActivity.report_html, "text/html", "utf-8", null);
 
         img_view_dwnld.setOnClickListener(this);
+        img_back.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.img_back:
+                onBackPressed();
+                break;
             case R.id.img_view_dwnld:
                 webView.loadUrl("javascript:this.document.location.href = 'source://' + encodeURI(document.documentElement.outerHTML);");
                 break;

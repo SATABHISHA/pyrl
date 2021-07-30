@@ -453,6 +453,9 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
+                onBackPressed();
+                pdf_modelArrayList.clear();
+                break;
             case R.id.btn_cancel:
 
                 onBackPressed();

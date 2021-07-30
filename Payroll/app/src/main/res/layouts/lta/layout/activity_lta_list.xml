@@ -22,7 +22,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@id/rl_btn_new"
-                android:text="My LTA Requisition"
+                android:text="My LTA Requisition List"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
 
