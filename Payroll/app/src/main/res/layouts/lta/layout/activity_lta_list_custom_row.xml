@@ -65,15 +65,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="5dp"
-                android:textSize="17sp"
-                android:textColor="#504E4E"
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:text="AR/2020/2"/>
+                android:text="AR/2020/2"
+                android:textColor="#504E4E"
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/tv_lta_date"

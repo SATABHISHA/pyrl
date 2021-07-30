@@ -5,11 +5,16 @@
       <map>
         <entry key="app/src/main/res/layout/cmpdocuments.xml" value="0.15" />
         <entry key="app/src/main/res/layout/empdocuments.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layout/leave_application.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/subordinate_leave.xml" value="0.25" />
+        <entry key="app/src/main/res/layouts/SubodinateLeaveApplication/layout/subodinate_leave_application.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/advanceRequisitionActivity/layout/advance_requisititon_entry_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/companyDocumentsActivity/layout/activity_company_documents.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/employeeDocumentsActivity/layout/activity_employee_documents.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_list.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/lta/layout/activity_lta_list_custom_row.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_request.xml" value="0.25" />
+        <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_outdoor_list_custom_row.xml" value="0.10815602836879433" />
       </map>
     </option>
   </component>

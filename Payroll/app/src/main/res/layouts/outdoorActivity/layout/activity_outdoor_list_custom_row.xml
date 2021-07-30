@@ -165,14 +165,15 @@
                 android:layout_toLeftOf="@id/imgbtn_delete"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true">
+
                 <TextView
                     android:id="@+id/tv_day_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
                     android:layout_centerHorizontal="true"
-                    android:text="1"/>
+                    android:text="1"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
                 <TextView
                     android:layout_below="@id/tv_day_no"
                     android:layout_width="wrap_content"
