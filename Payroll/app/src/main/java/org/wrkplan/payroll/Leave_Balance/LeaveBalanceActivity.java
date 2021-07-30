@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,7 @@ import org.wrkplan.payroll.SubOrdinateLeaveApplication.SubordinateLeaveApplicati
 
 import java.util.ArrayList;
 
-public class LeaveBalanceActivity extends AppCompatActivity {
+public class LeaveBalanceActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tv_casual_leave,tv_earn_leav,tv_sick_leave,tv_matarnal_leave,tv_paternal_leave,tv_comp_off;
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
@@ -44,6 +45,7 @@ public class LeaveBalanceActivity extends AppCompatActivity {
     Button bt_ok,btn_leave,btn_subordinate;
     String year;
     Spinner spinner1;
+    ImageView img_back;
 
     @Override
     public void onBackPressed() {
@@ -58,6 +60,7 @@ public class LeaveBalanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_leave_balance);
 
         //------------------Initialize Views-------------------//
+        img_back=findViewById(R.id.img_back);
         tv_casual_leave=findViewById(R.id.tv_casual_leave);
         tv_earn_leav=findViewById(R.id.tv_earn_leav);
         tv_sick_leave=findViewById(R.id.tv_sick_leave);
@@ -73,6 +76,7 @@ public class LeaveBalanceActivity extends AppCompatActivity {
 
 
         //------------------End Initialize Views-------------//
+        img_back.setOnClickListener(this);
 
         btn_leave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -262,5 +266,13 @@ public class LeaveBalanceActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.img_back:
+                onBackPressed();
+                break;
+        }
+    }
 }
 
