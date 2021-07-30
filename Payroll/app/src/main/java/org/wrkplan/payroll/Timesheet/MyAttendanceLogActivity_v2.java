@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,12 +45,14 @@ public class MyAttendanceLogActivity_v2 extends AppCompatActivity implements Vie
     TextView tv_nodata, tv_title;
     String month_name, year = "", month_number = "";
     ImageButton imgbtn_prev, imgbtn_next;
+    ImageView img_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_attendance_log_v2);
 
+        img_back=findViewById(R.id.img_back);
         tv_nodata = findViewById(R.id.tv_nodata);
         tv_title = findViewById(R.id.tv_title);
         imgbtn_prev = findViewById(R.id.imgbtn_prev);
@@ -72,6 +75,7 @@ public class MyAttendanceLogActivity_v2 extends AppCompatActivity implements Vie
 
         imgbtn_prev.setOnClickListener(this);
         imgbtn_next.setOnClickListener(this);
+        img_back.setOnClickListener(this);
 
         loadData();
     }
@@ -166,6 +170,11 @@ public class MyAttendanceLogActivity_v2 extends AppCompatActivity implements Vie
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.img_back:
+                Intent intent_myattendence = new Intent(MyAttendanceLogActivity_v2.this, MyAttendanceActivity_v3.class);
+                intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent_myattendence);
+                break;
             case R.id.imgbtn_prev:
                 int temp_month_no = Integer.parseInt(month_number);
                 int temp_year = Integer.parseInt(year);

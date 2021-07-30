@@ -14,6 +14,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -64,6 +65,7 @@ public class OdDutyLogListActivity extends AppCompatActivity implements View.OnC
     public String latitude = "", longitude = "", locationAddress=""; //---added by Satabhisha
     public static String od_duty_status = "";
     LocationManager locationManager;
+    ImageView img_back;
 
     public static String od_request_id = "", od_log_date = "";
     @Override
@@ -71,6 +73,7 @@ public class OdDutyLogListActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.od_duty_log_list_activity);
 
+        img_back=findViewById(R.id.img_back);
         ll_recycler = findViewById(R.id.ll_recycler);
         tv_nodata = findViewById(R.id.tv_nodata);
         tv_button_subordinate = findViewById(R.id.tv_button_subordinate);
@@ -98,6 +101,7 @@ public class OdDutyLogListActivity extends AppCompatActivity implements View.OnC
         tv_start.setOnClickListener(this);
         tv_pause.setOnClickListener(this);
         tv_stop.setOnClickListener(this);
+        img_back.setOnClickListener(this);
 
         statusCheck(); //--added on 1st sept
 
@@ -119,6 +123,11 @@ public class OdDutyLogListActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
        switch (view.getId()){
+           case R.id.img_back:
+               Intent intent_home = new Intent(this, HomeActivity.class);
+               intent_home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+               startActivity(intent_home);
+               break;
            case R.id.tv_button_subordinate:
                startActivity(new Intent(this,SubordinateOdDutyLogListActivity.class));
                break;

@@ -17,9 +17,17 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/img_back"
                 android:text="Subordinate OD Duty Log"
                 android:textColor="#ffffff"
                 android:textSize="20sp"/>
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/backarrow" />
 
         </RelativeLayout>
         <!-- <androidx.appcompat.widget.Toolbar

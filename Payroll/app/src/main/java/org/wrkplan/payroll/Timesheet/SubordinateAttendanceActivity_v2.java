@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,6 +46,7 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity implemen
     RecyclerView recycler_view;
     RelativeLayout rl_button, rl_out, rl_in;
     TextView tv_button_subordinate, tv_nodata, tv_date;
+    ImageView img_back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,7 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity implemen
         tv_nodata = findViewById(R.id.tv_nodata);
         tv_date = findViewById(R.id.tv_date);
         tv_button_subordinate = findViewById(R.id.tv_button_subordinate);
+        img_back=findViewById(R.id.img_back);
 
         //=========get current date and set curretnt date, code starts========
         Date c = Calendar.getInstance().getTime();
@@ -71,6 +74,7 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity implemen
         //==========Recycler code initializing and setting layoutManager ends======
 
         tv_button_subordinate.setOnClickListener(this);
+        img_back.setOnClickListener(this);
 
         loadData();
     }
@@ -167,6 +171,11 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity implemen
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.img_back:
+                Intent intent_myattendence = new Intent(SubordinateAttendanceActivity_v2.this, MyAttendanceActivity_v3.class);
+                intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent_myattendence);
+                break;
             case R.id.tv_button_subordinate:
                 Intent intent = new Intent(SubordinateAttendanceActivity_v2.this,SubordinateMonthlyAttendanceLog.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);

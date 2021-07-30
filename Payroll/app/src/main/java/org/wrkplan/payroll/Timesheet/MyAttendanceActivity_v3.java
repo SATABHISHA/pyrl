@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -85,6 +86,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 
     public static final int RequestPermissionCode = 1;
     public static String base64String, SelfieInOut, SelfieMessage;
+    ImageView img_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,6 +101,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 
        /* tv_time_in = findViewById(R.id.tv_time_in);
         tv_time_out = findViewById(R.id.tv_time_out);*/
+        img_back=findViewById(R.id.img_back);
         tv_in = findViewById(R.id.tv_in);
         tv_out = findViewById(R.id.tv_out);
         tv_date = findViewById(R.id.tv_date);
@@ -114,6 +117,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 //        tv_button_subordinate.setOnClickListener(this);
         tv_in.setOnClickListener(this);
         tv_out.setOnClickListener(this);
+        img_back.setOnClickListener(this);
 
         btn_subordinate_attendance_log.setOnClickListener(this);
         btn_my_attendance_log.setOnClickListener(this);
@@ -167,6 +171,11 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.img_back:
+                Intent intent_myattendence = new Intent(MyAttendanceActivity_v3.this, HomeActivity.class);
+                intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent_myattendence);
+                break;
            /* case R.id.rl_button:
                 startActivity(new Intent(this, SubordinateAttendanceActivity.class));
                 break;

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,12 +35,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class OdDutyLogDetailActivity extends AppCompatActivity {
+public class OdDutyLogDetailActivity extends AppCompatActivity implements View.OnClickListener {
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     ArrayList<OutDoorDetailModel> outDoorDetailModelArrayList = new ArrayList<>();
     LinearLayout ll_recycler;
     TextView tv_nodata, tv_empname, tv_log_date_time;
     RecyclerView recycler_view;
+    ImageView img_back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,7 @@ public class OdDutyLogDetailActivity extends AppCompatActivity {
         tv_nodata = findViewById(R.id.tv_nodata);
         tv_empname = findViewById(R.id.tv_empname);
         tv_log_date_time = findViewById(R.id.tv_log_date_time);
+        img_back = findViewById(R.id.img_back);
 
         //==========Recycler code initializing and setting layoutManager starts======
         recycler_view = findViewById(R.id.recycler_view);
@@ -56,6 +59,8 @@ public class OdDutyLogDetailActivity extends AppCompatActivity {
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         //==========Recycler code initializing and setting layoutManager ends======
         loadData();
+
+        img_back.setOnClickListener(this);
     }
 
     //===========Code to get data from api using volley and load data to recycler view, starts==========
@@ -138,6 +143,15 @@ public class OdDutyLogDetailActivity extends AppCompatActivity {
 
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.img_back:
+                onBackPressed();
+                break;
         }
     }
     //===========Code to get data from api and load data to recycler view, ends==========

@@ -21,7 +21,14 @@
         <entry key="app/src/main/res/layouts/lta/layout/activity_subordinate_lta_list.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/mediclaimActivity/layout/mediclaim_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/mediclaimActivity/layout/mediclaim_documents_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/od_duty_log_detail_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/od_duty_log_employee_task_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/od_duty_log_list_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/subordinate_od_duty_log_list_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_outdoor_list_custom_row.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_my_attendance_log_v2.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_my_attendance_v3.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_subordinate_attendance_v2.xml" value="0.10815602836879433" />
       </map>
     </option>
   </component>
