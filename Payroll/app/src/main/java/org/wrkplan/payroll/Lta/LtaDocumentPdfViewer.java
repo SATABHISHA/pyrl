@@ -29,6 +29,7 @@ public class LtaDocumentPdfViewer extends AppCompatActivity implements View.OnCl
     byte[] decodedString;
     ImageView img_view_dwnld;
     BufferedWriter out = null;
+    ImageView img_back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +37,13 @@ public class LtaDocumentPdfViewer extends AppCompatActivity implements View.OnCl
 
         pdfView = findViewById(R.id.pdfView);
         img_view_dwnld = findViewById(R.id.img_view_dwnld);
+        img_back=findViewById(R.id.img_back);
 
         decodedString = Base64.decode(CustomLtaDocumentsActivityAdapter.base64String, Base64.DEFAULT);
         pdfView.fromBytes(decodedString).load();
 
         img_view_dwnld.setOnClickListener(this);
+        img_back.setOnClickListener(this);
 
         //---code for file download/file access permission, starts
         ActivityCompat.requestPermissions(LtaDocumentPdfViewer.this,
@@ -90,6 +93,9 @@ public class LtaDocumentPdfViewer extends AppCompatActivity implements View.OnCl
                         }
                     });
                 }
+                break;
+            case R.id.img_back:
+                super.onBackPressed();
                 break;
         }
     }

@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,6 +75,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
     ArrayList<Load_Spinner_Model> load_spinner_models = new ArrayList<>();
     ArrayList<String> arrayList_spinner_from_to_year;
     public static String from_year, to_year;
+    ImageView img_back;
 
 
 
@@ -82,6 +84,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lta_request);
 
+        img_back=findViewById(R.id.img_back);
         btn_back = findViewById(R.id.btn_back);
         btn_cancel = findViewById(R.id.btn_cancel);
         btn_return = findViewById(R.id.btn_return);
@@ -119,6 +122,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         imgBtnCalenderFrom.setOnClickListener(this);
         imgBtnCalenderTo.setOnClickListener(this);
 
+        img_back.setOnClickListener(this);
         tv_document_view.setOnClickListener(this);
         btn_back.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
@@ -296,6 +300,18 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         });
     }
     //=====function to enable/disable buttons according to field check, code ends====
+    //=====added on 30th July, 2021, code starts===
+    public void back(){
+        if(!ltaDocumentsModelArrayList.isEmpty()){
+            ltaDocumentsModelArrayList.clear();
+        }
+        if (LtaListActivity.EmployeeType == "Supervisor"){
+            startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+        }else if (LtaListActivity.EmployeeType == "Employee") {
+            startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+        }
+    }
+    //=====added on 30th July, 2021, code ends===
     //=====onClick code starts=====
     @Override
     public void onClick(View v) {
@@ -304,15 +320,13 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
             case R.id.tv_document_view:
                 startActivity(new Intent(LtaRequestActivity.this,LtaDocumentsActivity.class));
                 break;
+            case R.id.img_back:
+                back();
+
+                break;
             case R.id.btn_back:
-                if(!ltaDocumentsModelArrayList.isEmpty()){
-                    ltaDocumentsModelArrayList.clear();
-                }
-                if (LtaListActivity.EmployeeType == "Supervisor"){
-                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
-                }else if (LtaListActivity.EmployeeType == "Employee") {
-                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
-                }
+                back();
+
                 break;
             case R.id.btn_cancel:
                 makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), ed_approved_amount.getText().toString(), ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Cancelled", userSingletonModel.getEmployee_id());

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -47,6 +48,7 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
     public static int new_create_yn = 1;
     public static CustomLTAListActivityAdapter customLTAListActivityAdapter;
     public static String EmployeeType = "", mediclaim_status = "", lta_application_id = "", employee_id = "";
+    ImageView img_back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,7 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
 
         customLTAListActivityAdapter = new CustomLTAListActivityAdapter(this,ltaModelArrayList);
 
+        img_back=findViewById(R.id.img_back);
         ll_recycler = findViewById(R.id.ll_recycler);
         tv_nodata = findViewById(R.id.tv_nodata);
         tv_button_subordinate = findViewById(R.id.tv_button_subordinate);
@@ -71,11 +74,15 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
 
         tv_button_subordinate.setOnClickListener(this);
         tv_btn_new_rqst.setOnClickListener(this);
+        img_back.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.img_back:
+                onBackPressed();
+                break;
             case R.id.tv_button_subordinate:
                 new_create_yn = 0;
                 Intent i = new Intent(LtaListActivity.this, SubordinateLtaListActivity.class);

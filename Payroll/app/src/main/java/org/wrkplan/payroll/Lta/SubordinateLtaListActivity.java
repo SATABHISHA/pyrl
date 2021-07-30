@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,7 +38,7 @@ import org.wrkplan.payroll.R;
 
 import java.util.ArrayList;
 
-public class SubordinateLtaListActivity extends AppCompatActivity {
+public class SubordinateLtaListActivity extends AppCompatActivity implements View.OnClickListener {
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     ArrayList<LTAModel> ltaModelArrayList = new ArrayList<>();
     ArrayList<LTAModel> filteredData = new ArrayList<>();
@@ -45,11 +46,13 @@ public class SubordinateLtaListActivity extends AppCompatActivity {
     TextView tv_nodata;
     RecyclerView recycler_view;
     EditText ed_search;
+    ImageView img_back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subordinate_lta_list);
 
+        img_back=findViewById(R.id.img_back);
         ll_recycler = findViewById(R.id.ll_recycler);
         tv_nodata = findViewById(R.id.tv_nodata);
         ed_search = findViewById(R.id.ed_search);
@@ -79,6 +82,8 @@ public class SubordinateLtaListActivity extends AppCompatActivity {
         });
         loadData();
         display_filtered_data("");
+
+        img_back.setOnClickListener(this);
 
     }
 
@@ -185,5 +190,14 @@ public class SubordinateLtaListActivity extends AppCompatActivity {
     public void onBackPressed() {
 //        super.onBackPressed();
         startActivity(new Intent(SubordinateLtaListActivity.this, LtaListActivity.class));
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.img_back:
+                onBackPressed();
+                break;
+        }
     }
 }

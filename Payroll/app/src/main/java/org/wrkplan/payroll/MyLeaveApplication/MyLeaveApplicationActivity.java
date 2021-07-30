@@ -40,10 +40,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MyLeaveApplicationActivity extends AppCompatActivity {
+public class MyLeaveApplicationActivity extends AppCompatActivity implements View.OnClickListener {
     Button entry_form;
     TextView myleave_title;
     ListView lv1;
+    ImageView img_back;
     ArrayList<LeaveApplication> arrayList=new ArrayList<>();
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
 
@@ -67,10 +68,12 @@ public class MyLeaveApplicationActivity extends AppCompatActivity {
         entry_form=findViewById(R.id.entry_form);
         lv1=findViewById(R.id.lv1);
         myleave_title=findViewById(R.id.myleave_title);
+        img_back=findViewById(R.id.img_back);
         myleave_title.setText("My Leave Application");
         entry_form.setTransformationMethod(null);
 
 
+        img_back.setOnClickListener(this);
 
         entry_form.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,6 +168,19 @@ public class MyLeaveApplicationActivity extends AppCompatActivity {
             }
         });
         Volley.newRequestQueue(MyLeaveApplicationActivity.this).add(stringRequest);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.img_back:
+                Intent intent=new Intent(MyLeaveApplicationActivity.this,LeaveBalanceActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 
     class Nr extends BaseAdapter{

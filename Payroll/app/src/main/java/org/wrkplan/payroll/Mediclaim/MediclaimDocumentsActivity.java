@@ -60,6 +60,7 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
     public static boolean sub_flag=false;
 
     RelativeLayout rl1,rl2;
+    ImageView img_back;
 
     public static String getStringPDFsIZE(Context context, Uri uri) {
         String filesize = "";
@@ -113,6 +114,7 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
 
         //-----------------initialize view start--------------------//
 
+        img_back=findViewById(R.id.img_back);
         img_add = findViewById(R.id.img_add);
         recycler_pdf = findViewById(R.id.recycler_pdf);
         btn_cancel = findViewById(R.id.btn_cancel);
@@ -132,6 +134,7 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
         btn_cancel.setOnClickListener(this);
         btn_done.setOnClickListener(this);
         img_add.setOnClickListener(this);
+        img_back.setOnClickListener(this);
 
 //        if (!pdf_modelArrayList.isEmpty()) {
 //            pdf_modelArrayList.clear();
@@ -449,12 +452,13 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.img_back:
             case R.id.btn_cancel:
 
                 onBackPressed();
                 pdf_modelArrayList.clear();
-
                 break;
+
             case R.id.btn_done:
 //
 //                Intent intent = new Intent(MediclaimDocumentsActivity.this, MediclaimEntryActivity.class);

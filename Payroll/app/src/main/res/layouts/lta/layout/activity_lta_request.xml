@@ -15,17 +15,26 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/tv_lta_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/img_back"
                 android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:textColor="#ffffff"
                 android:text="My LTA Requisition Detail"
-                android:textSize="20sp"/>
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/backarrow" />
 
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>

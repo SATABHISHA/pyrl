@@ -47,7 +47,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
+public class SubordinateLeaveApplicationActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView entry_forms,img_list;
     TextView subordinate_title;
     ListView lv1;
@@ -56,6 +56,7 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
     EditText ed_search;
     //Nr nr;
     SqliteDb sqliteDb=new SqliteDb(this);
+    ImageView img_back;
 
 
     @Override
@@ -74,12 +75,15 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
         //getSupportActionBar().setTitle("Subordinate Leave Application");
         entry_forms=findViewById(R.id.entry_forms);
         img_list=findViewById(R.id.img_list);
+        img_back=findViewById(R.id.img_back);
         lv1=findViewById(R.id.lv1);
         ed_search=findViewById(R.id.ed_search);
         subordinate_title=findViewById(R.id.subordinate_title);
         subordinate_title.setText("Subordinate Leave Application");
 
         sqliteDb.deleteAll();
+
+        img_back.setOnClickListener(this);
 
 
        /* lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -245,6 +249,19 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.img_back:
+                Intent intent=new Intent(SubordinateLeaveApplicationActivity.this,LeaveBalanceActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 
 //    private void Getdata() {

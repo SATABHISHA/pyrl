@@ -52,6 +52,7 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
     ArrayList<My_Mediclaim_Model> mediclaim_modelArrayList=new ArrayList<>();
     ArrayList<Subordinate_Mediclaim_Model> subordinate_mediclaim_modelArrayList=new ArrayList<>();
 
+    ImageView img_back;
 
     @Override
     public void onBackPressed() {
@@ -91,6 +92,7 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
         //-----------intialize view start-------------//
 
         Url.isMyMediclaim=true;
+        img_back=findViewById(R.id.img_back);
         tv_mediclaim_title=findViewById(R.id.tv_mediclaim_title);
         tv_button_subordinate_mediclaim=findViewById(R.id.tv_button_subordinate_mediclaim);
         rl_btn_new=findViewById(R.id.rl_btn_new);
@@ -120,6 +122,7 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
 
         tv_button_subordinate_mediclaim.setOnClickListener(this);
         rl_btn_new.setOnClickListener(this);
+        img_back.setOnClickListener(this);
 
         loadMyMediclaimList();
 
@@ -202,6 +205,33 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.img_back:
+                if(Url.isSubordinateMediclaim==true)
+                {
+
+                    rl_btn_new.setVisibility(View.GONE);
+                    btn_subadv_mediclaim.setVisibility(View.GONE);
+                    ll_recycler.setVisibility(View.VISIBLE);
+                    ll_1recycler.setVisibility(View.GONE);
+
+                    Intent intent=new Intent(MediclaimActivity.this,MediclaimActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                if(Url.isMyMediclaim==true)
+                {
+
+                    Url.isSubordinateMediclaim=false;
+                    rl_btn_new.setVisibility(View.VISIBLE);
+                    btn_subadv_mediclaim.setVisibility(View.VISIBLE);
+                    ll_recycler.setVisibility(View.VISIBLE);
+                    ll_1recycler.setVisibility(View.GONE);
+
+                    Intent intent=new Intent(MediclaimActivity.this, HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                break;
             case R.id.tv_button_subordinate_mediclaim:
                 ll_recycler.setVisibility(View.GONE);
                 ll_1recycler.setVisibility(View.VISIBLE);

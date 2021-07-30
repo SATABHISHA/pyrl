@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ import org.wrkplan.payroll.R;
 
 import java.util.ArrayList;
 
-public class AdvanceRequisitionActivity extends AppCompatActivity  {
+public class AdvanceRequisitionActivity extends AppCompatActivity implements View.OnClickListener {
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     RelativeLayout rl_btn_new,btn_subadv_req;
     LinearLayout ll_recycler,ll_1recycler;
@@ -52,6 +53,7 @@ public class AdvanceRequisitionActivity extends AppCompatActivity  {
     ArrayList<Requisition_Model> requisitionlist=new ArrayList<>();
     ArrayList<Subordinate_Requsition_Model>subordinate_requsition_modelsList=new ArrayList<>();
 
+    ImageView img_back;
 
     @Override
     public void onBackPressed() {
@@ -97,6 +99,7 @@ public class AdvanceRequisitionActivity extends AppCompatActivity  {
 
         // ........initialize views starts..........//
 
+        img_back=findViewById(R.id.img_back);
         rl_btn_new=findViewById(R.id.rl_btn_new);
         btn_subadv_req=findViewById(R.id.btn_subadv_req);
         ll_recycler=findViewById(R.id.ll_recycler);
@@ -107,6 +110,8 @@ public class AdvanceRequisitionActivity extends AppCompatActivity  {
         tv_requisition_title=findViewById(R.id.tv_requisition_title);
         ed_search=findViewById(R.id.ed_search);
         tv_requisition_title.setText("My Advance Requisition List");
+
+        img_back.setOnClickListener(this);
 
 
 
@@ -319,4 +324,12 @@ public class AdvanceRequisitionActivity extends AppCompatActivity  {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.img_back:
+                onBackPressed();
+                break;
+        }
+    }
 }

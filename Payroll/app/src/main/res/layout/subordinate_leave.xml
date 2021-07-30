@@ -20,7 +20,7 @@
             android:text="EL/23"
             android:textColor="#504E4E"
             android:textSize="17sp"
-            android:textStyle="bold">
+            android:textStyle="normal">
 
         </TextView>
 

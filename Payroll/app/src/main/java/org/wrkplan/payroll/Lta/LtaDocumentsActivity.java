@@ -33,6 +33,7 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
     public ImageView img_add;
     public View view_dcmnts_border_line;
     Uri uripdf=null;
+    ImageView img_back;
 //    public static ArrayList<LtaDocumentsModel> ltaDocumentsModelArrayList = new ArrayList<>();
     public static LinearLayout ll_recycler, ll_button;
     public static TextView tv_nodata, tv_button_done, tv_button_cancel;
@@ -50,6 +51,7 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
         tv_nodata = findViewById(R.id.tv_nodata);
         tv_button_done = findViewById(R.id.tv_button_done);
         tv_button_cancel = findViewById(R.id.tv_button_cancel);
+        img_back=findViewById(R.id.img_back);
         view_dcmnts_border_line = findViewById(R.id.view_dcmnts_border_line);
         ll_button = findViewById(R.id.ll_button);
 
@@ -72,6 +74,7 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
         recycler_view.setHasFixedSize(true);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         //==========Recycler code initializing and setting layoutManager ends======
+        img_back.setOnClickListener(this);
         img_add.setOnClickListener(this);
         tv_button_done.setOnClickListener(this);
         tv_button_cancel.setOnClickListener(this);
@@ -188,6 +191,13 @@ public class LtaDocumentsActivity extends AppCompatActivity implements View.OnCl
 //                startActivity(new Intent(LtaDocumentsActivity.this, LtaRequestActivity.class));
 
                 Log.d("DeleteTesting-=>",LtaRequestActivity.delete_documents_id_arraylist.toString());
+                break;
+            case R.id.img_back:
+                if(!ltaDocumentsModelArrayListTemp.isEmpty()){
+                    ltaDocumentsModelArrayListTemp.clear();
+                }
+                LtaRequestActivity.tv_docs.setText(String.valueOf(LtaRequestActivity.ltaDocumentsModelArrayList.size())+" Doc(s)");
+                onBackPressed();
                 break;
             case R.id.tv_button_cancel:
                 /*if(!LtaRequestActivity.ltaDocumentsModelArrayList.isEmpty()){
