@@ -790,6 +790,27 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
             DocumentElementobj.put("supervisor_remark", supervisor_remark);
             DocumentElementobj.put("lta_application_status", lta_application_status);
             DocumentElementobj.put("approved_by_id", Integer.parseInt(approved_by_id));
+
+            //-----added on 2nd Aug, code starts-----
+            DocumentElementobj.put("year_from", from_year);
+            DocumentElementobj.put("year_to", to_year);
+            if(tv_from_year_lta_limit.getText().toString().isEmpty()){
+                DocumentElementobj.put("year_from_limit", 0.0);
+            }else {
+                DocumentElementobj.put("year_from_limit", Double.parseDouble(tv_from_year_lta_limit.getText().toString()));
+            }
+            if(tv_to_year_lta_limit.getText().toString().isEmpty()){
+                DocumentElementobj.put("year_to_limit", 0.0);
+            }else{
+                DocumentElementobj.put("year_to_limit", Double.parseDouble(tv_to_year_lta_limit.getText().toString()));
+            }
+            if(tv_total_lta_amount.getText().toString().isEmpty()){
+                DocumentElementobj.put("lta_total_limit", 0.0);
+            }else{
+                DocumentElementobj.put("lta_total_limit", Double.parseDouble(tv_total_lta_amount.getText().toString()));
+            }
+
+            //-----added on 2nd Aug, code ends-----
             /*DocumentElementobj.put("entry_user", LoginActivity.entry_user);
             DocumentElementobj.put("saved_from_mobile_app", 1);*/
             DocumentElementobj.put("documents", req);
@@ -1095,11 +1116,13 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
 
 
         String url=Url.BASEURL() + "finyear/" + "list/" + userSingletonModel.corporate_id;
+        Log.d("yeartest-=>",url);
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject=new JSONObject(response);
+                    Log.d("amount-=>",response);
                     JSONArray jsonArray=jsonObject.getJSONArray("fin_years");
 
                      if(!arrayList_spinner_from_to_year.isEmpty()) {
