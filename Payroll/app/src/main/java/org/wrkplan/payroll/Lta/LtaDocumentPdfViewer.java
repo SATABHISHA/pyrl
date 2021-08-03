@@ -39,8 +39,12 @@ public class LtaDocumentPdfViewer extends AppCompatActivity implements View.OnCl
         img_view_dwnld = findViewById(R.id.img_view_dwnld);
         img_back=findViewById(R.id.img_back);
 
-        decodedString = Base64.decode(CustomLtaDocumentsActivityAdapter.base64String, Base64.DEFAULT);
-        pdfView.fromBytes(decodedString).load();
+        try {
+            decodedString = Base64.decode(CustomLtaDocumentsActivityAdapter.base64String, Base64.DEFAULT);
+            pdfView.fromBytes(decodedString).load();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         img_view_dwnld.setOnClickListener(this);
         img_back.setOnClickListener(this);

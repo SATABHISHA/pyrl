@@ -296,9 +296,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         }*/
        //---code for file download/file access permission, starts (added on 30th July)
-        ActivityCompat.requestPermissions(LoginActivity.this,
+       /* ActivityCompat.requestPermissions(LoginActivity.this,
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                1);
+                1);*/
         //---code for file download/file access permission, ends
         btn_login.setOnClickListener(this);
     }
@@ -790,7 +790,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //---verson upgrade code ends----
 
     //---code for file download/file access permission, starts (added on 20-o7-2021)
-    @Override
+   /* @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
@@ -814,7 +814,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // other 'case' lines to check for other
             // permissions this app might request
         }
-    }
+    }*/
     //---code for file download/file access permission, ends
 }
 
