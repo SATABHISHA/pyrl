@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Model.Mediclaim.Delete_Model;
 import org.wrkplan.payroll.Model.Mediclaim.Upload_PDF_Model;
 import org.wrkplan.payroll.R;
 
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 public class CustomUploadPDFlistAdapter extends RecyclerView.Adapter<CustomUploadPDFlistAdapter.ViewHolder> {
 
     ArrayList<Upload_PDF_Model> pdf_modelArrayList = new ArrayList<>();
+    public static ArrayList<Delete_Model> deleteModelArrayList=new ArrayList<>();
     Context context;
 
     public CustomUploadPDFlistAdapter(ArrayList<Upload_PDF_Model> pdf_modelArrayList, Context context) {
@@ -52,6 +54,11 @@ public class CustomUploadPDFlistAdapter extends RecyclerView.Adapter<CustomUploa
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                if(pdf_modelArrayList.get(position).isFromapi_yn())
+                                {
+                                    Delete_Model model1=new Delete_Model(pdf_modelArrayList.get(position).getMediclaim_id(),pdf_modelArrayList.get(position).getFile_name());
+                                    deleteModelArrayList.add(model1);
+                                }
                                 delete_record(holder.getAdapterPosition());
                                 dialog.cancel();
                                 //Toast.makeText(context, "Delet item successfully of Position => "+position, Toast.LENGTH_SHORT).show();

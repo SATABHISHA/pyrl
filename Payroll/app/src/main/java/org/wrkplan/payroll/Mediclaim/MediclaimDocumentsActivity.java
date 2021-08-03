@@ -44,7 +44,7 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
 
     public static ArrayList<Upload_PDF_Model> pdf_modelArrayList = new ArrayList<>();
     public static CustomUploadPDFlistAdapter adapter;
-
+    public ArrayList<String> posArrayList = new ArrayList<>();
     public static ArrayList<Subordinate_Upload_PDF_Model> subordinate_arraylist = new ArrayList<>();
     public static CustomSubordinateUploadPDFlistAdapter subordinate_adapter;
     public static int arraylistSize;
@@ -58,9 +58,11 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
     String sub_med_status="";
     public static boolean flag=false;
     public static boolean sub_flag=false;
+    boolean iscancel=false;
+    boolean isdone=false;
+    ImageView img_back;
 
     RelativeLayout rl1,rl2;
-    ImageView img_back;
 
     public static String getStringPDFsIZE(Context context, Uri uri) {
         String filesize = "";
@@ -104,6 +106,41 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
             cursor.close();
         }
         return filename;
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+
+        if(isdone)
+        {
+            super.onBackPressed();
+        }
+        else
+        {
+
+            if(Url.isNewEntryMediclaim==true)
+            {
+                super.onBackPressed();
+                pdf_modelArrayList.clear();
+            }
+            else if(Url.isMyMediclaim==true)
+            {
+                for (int i=0;i<posArrayList.size(); i++)
+                {
+                    int pos = Integer.parseInt(posArrayList.get(i));
+                    pdf_modelArrayList.remove(pos-i);
+                }
+                super.onBackPressed();
+            } else if(Url.isSubordinateMediclaim==true)
+            {
+                super.onBackPressed();
+            }
+
+        }
+
 
     }
 
@@ -306,6 +343,7 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
 
 //            Upload_PDF_Model model=new Upload_PDF_Model(getBase64(),getfileName(getApplicationContext(),uripdf),getStringPdf(uripdf),CustomMediclaimListAdapter.mediclaim_id);
             Upload_PDF_Model model = new Upload_PDF_Model(ConvertToString(uripdf), getfileName(getApplicationContext(), uripdf), getStringPdf(uripdf), CustomMediclaimListAdapter.mediclaim_id,uripdf);
+            model.setFromapi_yn(false);
             //  Upload_PDF_Model model = new Upload_PDF_Model(ConvertToString(uripdf), getfileName(getApplicationContext(), uripdf), getStringPdf(uripdf), CustomMediclaimListAdapter.mediclaim_id);
             boolean isAlreadyIn = false;
 
@@ -318,6 +356,7 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
             if (isAlreadyIn) {
                 Toast.makeText(this, model.getFile_name() + " file is already selected", Toast.LENGTH_SHORT).show();
             } else {
+                posArrayList.add(String.valueOf(pdf_modelArrayList.size()));
                 pdf_modelArrayList.add(model);
                 adapter = new CustomUploadPDFlistAdapter(pdf_modelArrayList, MediclaimDocumentsActivity.this);
                 recycler_pdf.setAdapter(adapter);
@@ -453,20 +492,24 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
+                iscancel=true;
                 onBackPressed();
-                pdf_modelArrayList.clear();
                 break;
             case R.id.btn_cancel:
 
+                iscancel=true;
                 onBackPressed();
-                pdf_modelArrayList.clear();
-                break;
 
+                break;
             case R.id.btn_done:
 //
 //                Intent intent = new Intent(MediclaimDocumentsActivity.this, MediclaimEntryActivity.class);
 //                startActivity(intent);
+
+                isdone=true;
                 onBackPressed();
+
+
                 break;
 
             case R.id.img_add:

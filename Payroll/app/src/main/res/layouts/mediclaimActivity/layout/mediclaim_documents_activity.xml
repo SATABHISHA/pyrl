@@ -26,6 +26,7 @@
                 android:text="Mediclaim Supporting Documents"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
+
             <ImageView
                 android:id="@+id/img_back"
                 android:layout_width="40dp"

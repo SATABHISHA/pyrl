@@ -96,6 +96,11 @@ public class CustomSubordinateMediclaimListAdapter extends RecyclerView.Adapter<
         return modelArrayList.size();
     }
 
+    public void filltered(ArrayList<Subordinate_Mediclaim_Model> filterlist) {
+        modelArrayList=filterlist;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tv_sub_mediclaim_no;

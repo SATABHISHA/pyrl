@@ -28,10 +28,10 @@
 
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -40,304 +40,304 @@
             android:scrollbars="none"
             android:layout_marginBottom="20dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp">
-            <TextView
-                android:id="@+id/tv_mediclaim_no"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mediclaim No"
-                android:textColor="#000"
-                ></TextView>
-            <TextView
-                android:id="@+id/edtv_mediclaim_no"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:padding="5dp"
-                android:textColor="#3C3C3C"
-                android:layout_below="@id/tv_mediclaim_no"
-                android:gravity="top"
-                android:background="@drawable/layout6"/>
-
-            <TextView
-                android:id="@+id/tv_employee_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Employee Name "
-                android:layout_marginTop="8dp"
-                android:textColor="#000"
-                android:layout_below="@id/edtv_mediclaim_no"
-                ></TextView>
-            <TextView
-                android:id="@+id/edtv_employee_name"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:padding="5dp"
-                android:textColor="#3C3C3C"
-                android:layout_below="@id/tv_employee_name"
-                android:gravity="top"
-                android:background="@drawable/layout6"/>
-
-            <TextView
-                android:id="@+id/tv_mediclaim_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mediclaim Amount * "
-                android:layout_marginTop="8dp"
-                android:textColor="#000"
-                android:layout_below="@id/edtv_employee_name"
-                ></TextView>
-
             <RelativeLayout
-                android:id="@+id/rl_1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@id/tv_mediclaim_amount"
-                android:layout_marginTop="8dp">
-                <EditText
-                    android:id="@+id/ed_mediclaim_amount"
+                android:layout_height="match_parent"
+                android:padding="20dp">
+                <TextView
+                    android:id="@+id/tv_mediclaim_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mediclaim No"
+                    android:textColor="#000"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/edtv_mediclaim_no"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
                     android:padding="5dp"
-                    android:layout_toLeftOf="@id/tv_check_balance"
-                    android:inputType="number"
                     android:textColor="#3C3C3C"
-                    android:gravity="end"
-                    android:layout_marginRight="10dp"
+                    android:layout_below="@id/tv_mediclaim_no"
+                    android:gravity="top"
                     android:background="@drawable/layout6"/>
 
                 <TextView
-                    android:id="@+id/tv_check_balance"
-                    android:layout_width="70dp"
+                    android:id="@+id/tv_employee_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Employee Name "
+                    android:layout_marginTop="8dp"
+                    android:textColor="#000"
+                    android:layout_below="@id/edtv_mediclaim_no"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/edtv_employee_name"
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
-                    android:textSize="13dp"
-                    android:layout_alignParentRight="true"
                     android:padding="5dp"
+                    android:textColor="#3C3C3C"
+                    android:layout_below="@id/tv_employee_name"
+                    android:gravity="top"
+                    android:background="@drawable/layout6"/>
+
+                <TextView
+                    android:id="@+id/tv_mediclaim_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mediclaim Amount * "
+                    android:layout_marginTop="8dp"
                     android:textColor="#000"
-                    android:gravity="center"
-                    android:textAllCaps="false"
-                    android:text="Check
+                    android:layout_below="@id/edtv_employee_name"
+                    ></TextView>
+
+                <RelativeLayout
+                    android:id="@+id/rl_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/tv_mediclaim_amount"
+                    android:layout_marginTop="8dp">
+                    <EditText
+                        android:id="@+id/ed_mediclaim_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:padding="5dp"
+                        android:layout_toLeftOf="@id/tv_check_balance"
+                        android:inputType="number"
+                        android:textColor="#3C3C3C"
+                        android:gravity="end"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/layout6"/>
+
+                    <TextView
+                        android:id="@+id/tv_check_balance"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:textSize="13dp"
+                        android:layout_alignParentRight="true"
+                        android:padding="5dp"
+                        android:textColor="#000"
+                        android:gravity="center"
+                        android:textAllCaps="false"
+                        android:text="Check
                     Balance"
-                    android:background="@drawable/layout11"/>
+                        android:background="@drawable/layout11"/>
 
 
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/tv_reason"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reason * "
-                android:layout_marginTop="8dp"
-                android:textColor="#000"
-                android:layout_below="@id/rl_1"
-                ></TextView>
-
-            <EditText
-                android:id="@+id/ed_reason"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:padding="5dp"
-                android:textColor="#3C3C3C"
-                android:gravity="start"
-                android:layout_below="@id/tv_reason"
-                android:background="@drawable/layout6"/>
-
-
-            <TextView
-                android:id="@+id/tv_documents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Supporting Documents "
-                android:layout_marginTop="8dp"
-                android:textColor="#000"
-                android:layout_below="@id/ed_reason"
-                ></TextView>
-
-            <RelativeLayout
-                android:id="@+id/rl_2"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
-                android:background="@drawable/layout11"
-                android:layout_below="@id/tv_documents"
-                android:layout_marginTop="8dp">
+                </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/tv_docs"
-                    android:layout_width="301dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="0dp"
-                    android:layout_toLeftOf="@id/tv_views"
-                    android:background="@drawable/layout11"
-                    android:padding="5dp"
-                    android:text=""
-                    android:layout_centerVertical="true"
-                    android:textColor="#000" />
-                <TextView
-                    android:id="@+id/tv_views"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:textSize="15dp"
-                    android:layout_alignParentRight="true"
-                    android:padding="5dp"
+                    android:id="@+id/tv_reason"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reason * "
+                    android:layout_marginTop="8dp"
                     android:textColor="#000"
-                    android:gravity="center"
-                    android:textAllCaps="false"
-                    android:text="View"
-                    android:background="@drawable/layout11"/>
+                    android:layout_below="@id/rl_1"
+                    ></TextView>
+
+                <EditText
+                    android:id="@+id/ed_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="5dp"
+                    android:textColor="#3C3C3C"
+                    android:gravity="start"
+                    android:layout_below="@id/tv_reason"
+                    android:background="@drawable/layout6"/>
+
+
+                <TextView
+                    android:id="@+id/tv_documents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Supporting Documents "
+                    android:layout_marginTop="8dp"
+                    android:textColor="#000"
+                    android:layout_below="@id/ed_reason"
+                    ></TextView>
+
+                <RelativeLayout
+                    android:id="@+id/rl_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/layout11"
+                    android:layout_below="@id/tv_documents"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tv_docs"
+                        android:layout_width="301dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="0dp"
+                        android:layout_toLeftOf="@id/tv_views"
+                        android:background="@drawable/layout11"
+                        android:padding="5dp"
+                        android:text=""
+                        android:layout_centerVertical="true"
+                        android:textColor="#000" />
+                    <TextView
+                        android:id="@+id/tv_views"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:textSize="15dp"
+                        android:layout_alignParentRight="true"
+                        android:padding="5dp"
+                        android:textColor="#000"
+                        android:gravity="center"
+                        android:textAllCaps="false"
+                        android:text="View"
+                        android:background="@drawable/layout11"/>
+
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_approved_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Approved Amount "
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@id/rl_2"
+                    android:textColor="#000"
+                    ></TextView>
+                <EditText
+                    android:id="@+id/ed_approved_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="5dp"
+                    android:textColor="#3C3C3C"
+                    android:layout_below="@id/tv_approved_amount"
+                    android:gravity="end"
+                    android:background="@drawable/layout6"/>
+
+                <TextView
+                    android:id="@+id/tv_approval_remark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Approval Remark "
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@id/ed_approved_amount"
+                    android:textColor="#000"
+                    ></TextView>
+                <EditText
+                    android:id="@+id/ed_approval_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="5dp"
+                    android:textColor="#3C3C3C"
+                    android:layout_below="@id/tv_approval_remark"
+                    android:background="@drawable/layout6"/>
+
+                <TextView
+                    android:id="@+id/tv_application_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Application Status "
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@id/ed_approval_remark"
+                    android:textColor="#000"
+                    ></TextView>
+
+                <TextView
+                    android:id="@+id/edtv_application_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="5dp"
+                    android:textColor="#3C3C3C"
+                    android:layout_below="@id/tv_application_status"
+                    android:gravity="start"
+                    android:background="@drawable/layout6"/>
+
 
 
             </RelativeLayout>
-
-
-            <TextView
-                android:id="@+id/tv_approved_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Approved Amount "
-                android:layout_marginTop="8dp"
-                android:layout_below="@id/rl_2"
-                android:textColor="#000"
-                ></TextView>
-            <EditText
-                android:id="@+id/ed_approved_amount"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:padding="5dp"
-                android:textColor="#3C3C3C"
-                android:layout_below="@id/tv_approved_amount"
-                android:gravity="end"
-                android:background="@drawable/layout6"/>
-
-            <TextView
-                android:id="@+id/tv_approval_remark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Approval Remark "
-                android:layout_marginTop="8dp"
-                android:layout_below="@id/ed_approved_amount"
-                android:textColor="#000"
-                ></TextView>
-            <EditText
-                android:id="@+id/ed_approval_remark"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="8dp"
-                android:padding="5dp"
-                android:textColor="#3C3C3C"
-                android:layout_below="@id/tv_approval_remark"
-                android:background="@drawable/layout6"/>
-
-            <TextView
-                android:id="@+id/tv_application_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Application Status "
-                android:layout_marginTop="8dp"
-                android:layout_below="@id/ed_approval_remark"
-                android:textColor="#000"
-                ></TextView>
-
-            <TextView
-                android:id="@+id/edtv_application_status"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:padding="5dp"
-                android:textColor="#3C3C3C"
-                android:layout_below="@id/tv_application_status"
-                android:gravity="start"
-                android:background="@drawable/layout6"/>
-
-
-
-        </RelativeLayout>
         </ScrollView>
-            <LinearLayout
-                android:id="@+id/ll_button"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:orientation="horizontal">
-                <Button
-                    android:id="@+id/btn_back"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Back"
-                    android:textAllCaps="false"
-                    android:background="@drawable/layout6"
-                    android:textSize="15sp"
-                    android:textColor="#504E4E"
-                    />
+        <LinearLayout
+            android:id="@+id/ll_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Back"
+                android:textAllCaps="false"
+                android:background="@drawable/layout6"
+                android:textSize="15sp"
+                android:textColor="#504E4E"
+                />
 
-                <Button
-                    android:id="@+id/btn_cancel"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textAllCaps="false"
-                    android:text="Cancel"
-                    android:textSize="15sp"
-                    android:background="@drawable/layout6"
-                    android:textColor="#504E4E"
-                    />
-                <Button
-                    android:id="@+id/btn_return"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Return"
-                    android:textAllCaps="false"
-                    android:background="@drawable/layout6"
-                    android:textSize="15sp"
-                    android:textColor="#504E4E"
-                    />
-                <Button
-                    android:id="@+id/btn_approve"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textAllCaps="false"
-                    android:text="Approve"
-                    android:textSize="15sp"
-                    android:background="@drawable/layout6"
-                    android:textColor="#504E4E"
-                    />
-                <Button
-                    android:id="@+id/btn_submit"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Submit"
-                    android:textAllCaps="false"
-                    android:background="@drawable/layout6"
-                    android:textSize="15sp"
-                    android:textColor="#504E4E"
-                    />
-                <Button
-                    android:id="@+id/btn_save"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Save"
-                    android:textAllCaps="false"
-                    android:background="@drawable/layout6"
-                    android:textSize="15sp"
-                    android:textColor="#504E4E"
-                    />
-            </LinearLayout>
-        </RelativeLayout>
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:text="Cancel"
+                android:textSize="15sp"
+                android:background="@drawable/layout6"
+                android:textColor="#504E4E"
+                />
+            <Button
+                android:id="@+id/btn_return"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Return"
+                android:textAllCaps="false"
+                android:background="@drawable/layout6"
+                android:textSize="15sp"
+                android:textColor="#504E4E"
+                />
+            <Button
+                android:id="@+id/btn_approve"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:text="Approve"
+                android:textSize="15sp"
+                android:background="@drawable/layout6"
+                android:textColor="#504E4E"
+                />
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Submit"
+                android:textAllCaps="false"
+                android:background="@drawable/layout6"
+                android:textSize="15sp"
+                android:textColor="#504E4E"
+                />
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Save"
+                android:textAllCaps="false"
+                android:background="@drawable/layout6"
+                android:textSize="15sp"
+                android:textColor="#504E4E"
+                />
+        </LinearLayout>
+    </RelativeLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

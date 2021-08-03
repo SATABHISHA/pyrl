@@ -5,6 +5,15 @@ import android.net.Uri;
 public class Upload_PDF_Model {
     String file_base64,file_name,file_path,mediclaim_id;
     Uri uri;
+    public  boolean fromapi_yn=true;
+
+    public boolean isFromapi_yn() {
+        return fromapi_yn;
+    }
+
+    public void setFromapi_yn(boolean fromapi_yn) {
+        this.fromapi_yn = fromapi_yn;
+    }
 
     public String getFile_base64() {
         return file_base64;

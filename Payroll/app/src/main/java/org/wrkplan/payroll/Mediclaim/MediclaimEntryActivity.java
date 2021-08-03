@@ -351,14 +351,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                     if (Url.isSubordinateMediclaim == true) {
                         tv_docs.setText(MediclaimDocumentsActivity.subordinate_arraylist.size() + " Doc(s)");
 
-//                        document_count=MediclaimDocumentsActivity.subordinate_arraylist.size();
-//                        if(document_count>=1)
-//                        {
-//                            tv_views.setEnabled(true);
-//                        }
-//                        else {
-//                            tv_views.setEnabled(false);
-//                        }
+
 
                     }
 
@@ -526,13 +519,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                         tv_docs.setText(MediclaimDocumentsActivity.pdf_modelArrayList.size() + " Doc(s)");
 
                         document_count=MediclaimDocumentsActivity.pdf_modelArrayList.size();
-                        if(document_count>=1)
-                        {
-                            tv_views.setEnabled(true);
-                        }
-                        else {
-                            tv_views.setEnabled(false);
-                        }
+
 
                     }
                     if (Url.isNewEntryMediclaim == true) {
@@ -943,6 +930,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                     Log.d("arrayList", String.valueOf(arrayList1.size()));
                 }
                 my_mediclaim_jsonBody.put("documents", new JSONArray(new Gson().toJson(arrayList1)));
+                my_mediclaim_jsonBody.put("deleted_documents",new JSONArray(new Gson().toJson(CustomUploadPDFlistAdapter.deleteModelArrayList)));
             } else if(Url.isMyMediclaim==true) {
                 for (int i = 0; i < MediclaimDocumentsActivity.pdf_modelArrayList.size(); i++) {
                     String name = MediclaimDocumentsActivity.pdf_modelArrayList.get(i).getFile_name();
@@ -965,6 +953,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                 }
 
                 my_mediclaim_jsonBody.put("documents", new JSONArray(new Gson().toJson(arrayList)));
+                my_mediclaim_jsonBody.put("deleted_documents",new JSONArray(new Gson().toJson(CustomUploadPDFlistAdapter.deleteModelArrayList)));
 
             }
             else if(Url.isNewEntryMediclaim==true)
@@ -991,6 +980,8 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                 }
 
                 my_mediclaim_jsonBody.put("documents", new JSONArray(new Gson().toJson(arrayList)));
+                my_mediclaim_jsonBody.put("deleted_documents",new JSONArray(new Gson().toJson(CustomUploadPDFlistAdapter.deleteModelArrayList)));
+                // my_mediclaim_jsonBody.put("deleted_documents",new JSONArray());
 
             }
 

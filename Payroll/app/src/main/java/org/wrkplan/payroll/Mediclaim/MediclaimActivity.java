@@ -3,6 +3,8 @@ package org.wrkplan.payroll.Mediclaim;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -94,8 +96,8 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
         Url.isMyMediclaim=true;
         img_back=findViewById(R.id.img_back);
         tv_mediclaim_title=findViewById(R.id.tv_mediclaim_title);
-        tv_nodata=findViewById(R.id.tv_nodata);
         tv_button_subordinate_mediclaim=findViewById(R.id.tv_button_subordinate_mediclaim);
+        tv_nodata=findViewById(R.id.tv_nodata);
         rl_btn_new=findViewById(R.id.rl_btn_new);
         ll_1recycler=findViewById(R.id.ll_1recycler);
         ll_recycler=findViewById(R.id.ll_recycler);
@@ -251,6 +253,24 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
                 Url.isSubordinateMediclaim=true;
                 Url.isMyMediclaim=false;
                 LoadSubordinateMediclaim();
+
+                ed_search.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        filter(s.toString());
+
+                    }
+                });
                 break;
             case  R.id.rl_btn_new:
                 Url.isNewEntryMediclaim=true;
@@ -261,6 +281,20 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
             default:
                 break;
         }
+    }
+
+    private void filter(String text) {
+        ArrayList<Subordinate_Mediclaim_Model> filterlist=new ArrayList<>();
+        for(Subordinate_Mediclaim_Model item:subordinate_mediclaim_modelArrayList)
+        {
+            if(item.getEmployee_name().toLowerCase().contains(text.toLowerCase()))
+            {
+                filterlist.add(item);
+            }
+
+        }
+
+        subordinateMediclaimListAdapter.filltered(filterlist);
     }
 
     private void LoadSubordinateMediclaim() {
