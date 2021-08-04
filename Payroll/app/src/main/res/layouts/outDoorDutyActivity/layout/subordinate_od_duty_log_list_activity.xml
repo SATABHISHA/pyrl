@@ -45,62 +45,64 @@
         android:layout_height="match_parent"
         android:background="#ffffff"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:padding="0dp"
-            app:cardElevation="0dp"
             android:layout_weight="1"
             android:background="#ffffff"
+            android:padding="0dp"
+            app:cardElevation="0dp"
             app:cardUseCompatPadding="false">
+
             <TextView
                 android:id="@+id/tv_nodata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_gravity="center"
-                android:visibility="gone"
-                android:textSize="14dp"
-                android:text="No List to show"/>
+                android:gravity="center"
+                android:text="No record found"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
             <LinearLayout
                 android:id="@+id/ll_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:paddingLeft="0dp"
                 android:paddingRight="0dp"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:visibility="gone">
                 <!--Search section newly added on 15th April, code starts -->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="#fff"
-                    >
+                    android:background="#fff">
+
                     <EditText
                         android:id="@+id/ed_search"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_toLeftOf="@id/img_search_logo"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@id/img_search_logo"
                         android:background="@null"
-                        android:textSize="17sp"
                         android:hint="Type Search Text Here"
                         android:padding="5dp"
-                        android:layout_marginLeft="10dp"></EditText>
+                        android:textSize="17sp"></EditText>
 
                     <ImageView
                         android:id="@+id/img_search_logo"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:padding="5dp"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/magnifier"
-                        android:layout_marginRight="15dp"
                         android:layout_alignParentRight="true"
-                        ></ImageView>
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dp"
+                        android:padding="5dp"
+                        android:src="@drawable/magnifier"></ImageView>
 
                 </RelativeLayout>
 
@@ -109,7 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1dp"
-                    android:background="#DDDDDD"/>
+                    android:background="#DDDDDD" />
                 <!--Search section newly added on 15th April, code ends -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"

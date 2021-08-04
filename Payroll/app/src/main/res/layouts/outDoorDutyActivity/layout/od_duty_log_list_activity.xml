@@ -210,8 +210,8 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:visibility="gone"
-                android:textSize="14dp"
-                android:text="No List to show"/>
+                android:textSize="14sp"
+                android:text="No record found"/>
             <LinearLayout
                 android:id="@+id/ll_recycler"
                 android:layout_width="match_parent"

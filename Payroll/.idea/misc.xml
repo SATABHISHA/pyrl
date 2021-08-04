@@ -17,16 +17,18 @@
         <entry key="app/src/main/res/layouts/employeeFacilitiesActivities/layout/activity_employee_facilities.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/employeeInformationActivity/layout/activity_employee_information.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/holidayDetailActivity/layout/activity_holiday_detail.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/homeActivity/layout/activity_home.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/homeActivity/layout/dialog_change_password.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/insuranceDetailActivity/layout/insurance_main.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/leaveBalanceActivity/layout/activity_leave_balance.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/loginActivity/layout/activity_login_new.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_document_pdf_viewer.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_documents.xml" value="0.10815602836879433" />
-        <entry key="app/src/main/res/layouts/lta/layout/activity_lta_list.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/lta/layout/activity_lta_list.xml" value="0.2" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_list_custom_row.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_request.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_subordinate_lta_list.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/mediclaimActivity/layout/activity_pdf_view.xml" value="0.18614130434782608" />
         <entry key="app/src/main/res/layouts/mediclaimActivity/layout/mediclaim_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/mediclaimActivity/layout/mediclaim_documents_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/mediclaimActivity/layout/mediclaim_entry_activity.xml" value="0.20018115942028986" />
@@ -44,6 +46,7 @@
         <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_my_attendance_log_v2.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_my_attendance_v3.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_subordinate_attendance_v2.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_subordinate_monthly_attendancelog.xml" value="0.18614130434782608" />
       </map>
     </option>
   </component>

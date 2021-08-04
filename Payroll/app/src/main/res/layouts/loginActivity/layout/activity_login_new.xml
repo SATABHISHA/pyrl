@@ -239,7 +239,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Copyright \u00a9 2020 ARB Software India Pvt Ltd"
+            android:text="Copyright \u00a9 ARB Software India Pvt Ltd"
             android:textColor="#505050"
             android:textSize="13sp"
             android:gravity="center"

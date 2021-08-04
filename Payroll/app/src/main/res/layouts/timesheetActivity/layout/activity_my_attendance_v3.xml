@@ -284,6 +284,7 @@
                 android:layout_marginTop="5dp"
                 android:background="#454444"/>
         </RelativeLayout>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -291,29 +292,32 @@
             android:layout_below="@id/rl_attendance"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:padding="0dp"
-            app:cardElevation="0dp"
             android:layout_weight="1"
             android:background="#ffffff"
+            android:padding="0dp"
+            app:cardElevation="0dp"
             app:cardUseCompatPadding="false">
+
             <TextView
                 android:id="@+id/tv_nodata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_gravity="center"
-                android:visibility="gone"
-                android:textSize="14dp"
-                android:text="No List to show"/>
+                android:gravity="center"
+                android:text="No record found"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
             <LinearLayout
                 android:id="@+id/ll_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp"
                 android:paddingTop="0dp"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:paddingRight="20dp"
+                android:visibility="gone">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
