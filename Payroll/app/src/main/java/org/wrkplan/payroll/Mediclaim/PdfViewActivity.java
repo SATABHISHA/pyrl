@@ -71,7 +71,7 @@ public class PdfViewActivity extends AppCompatActivity {
                         .onPageChange(new OnPageChangeListener() {
                             @Override
                             public void onPageChanged(int page, int pageCount) {
-                                Toast.makeText(PdfViewActivity.this, "Page: " + page + 1, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(PdfViewActivity.this, "Page: " + page + 1, Toast.LENGTH_SHORT).show();
                             }
                         })
                         .enableAnnotationRendering(true)
@@ -86,7 +86,7 @@ public class PdfViewActivity extends AppCompatActivity {
                         .onPageError(new OnPageErrorListener() {
                             @Override
                             public void onPageError(int page, Throwable t) {
-                                Toast.makeText(PdfViewActivity.this, "Error to show PDF", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(PdfViewActivity.this, "Error to show PDF", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .load();
@@ -104,7 +104,7 @@ public class PdfViewActivity extends AppCompatActivity {
                         .onPageChange(new OnPageChangeListener() {
                             @Override
                             public void onPageChanged(int page, int pageCount) {
-                                Toast.makeText(PdfViewActivity.this, "Page: " + page + 1, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(PdfViewActivity.this, "Page: " + page + 1, Toast.LENGTH_SHORT).show();
                             }
                         })
                         .enableAnnotationRendering(true)
@@ -119,7 +119,7 @@ public class PdfViewActivity extends AppCompatActivity {
                         .onPageError(new OnPageErrorListener() {
                             @Override
                             public void onPageError(int page, Throwable t) {
-                                Toast.makeText(PdfViewActivity.this, "Error to show PDF", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(PdfViewActivity.this, "Error to show PDF", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .load();

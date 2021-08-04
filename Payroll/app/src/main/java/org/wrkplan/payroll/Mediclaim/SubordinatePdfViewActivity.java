@@ -67,7 +67,7 @@ public class SubordinatePdfViewActivity extends AppCompatActivity {
                         .onPageChange(new OnPageChangeListener() {
                             @Override
                             public void onPageChanged(int page, int pageCount) {
-                                Toast.makeText(SubordinatePdfViewActivity.this, "Page: " + page + 1, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(SubordinatePdfViewActivity.this, "Page: " + page + 1, Toast.LENGTH_SHORT).show();
                             }
                         })
                         .enableAnnotationRendering(true)
@@ -82,7 +82,7 @@ public class SubordinatePdfViewActivity extends AppCompatActivity {
                         .onPageError(new OnPageErrorListener() {
                             @Override
                             public void onPageError(int page, Throwable t) {
-                                Toast.makeText(SubordinatePdfViewActivity.this, "Error to show PDF", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(SubordinatePdfViewActivity.this, "Error to show PDF", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .load();

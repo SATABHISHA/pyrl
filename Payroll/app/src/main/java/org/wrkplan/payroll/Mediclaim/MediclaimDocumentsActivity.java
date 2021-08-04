@@ -304,7 +304,7 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
                             subordinate_adapter = new CustomSubordinateUploadPDFlistAdapter(subordinate_arraylist, MediclaimDocumentsActivity.this);
                             subordinate_recycler_pdf.setAdapter(subordinate_adapter);
                             arraylistSize = subordinate_arraylist.size();
-                            Toast.makeText(MediclaimDocumentsActivity.this, "" + arraylistSize, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(MediclaimDocumentsActivity.this, "" + arraylistSize, Toast.LENGTH_SHORT).show();
 
                         }
                         loading.dismiss();
@@ -361,7 +361,7 @@ public class MediclaimDocumentsActivity extends AppCompatActivity implements Vie
                 adapter = new CustomUploadPDFlistAdapter(pdf_modelArrayList, MediclaimDocumentsActivity.this);
                 recycler_pdf.setAdapter(adapter);
                 arraylistSize = pdf_modelArrayList.size();
-                Toast.makeText(this, ""+pdf_modelArrayList.size(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, ""+pdf_modelArrayList.size(), Toast.LENGTH_SHORT).show();
             }
         }
     }
