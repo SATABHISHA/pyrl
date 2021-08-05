@@ -2,6 +2,7 @@ package org.wrkplan.payroll.Lta;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -177,6 +179,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         Load_Spinner_Data(spinner_from_year, "from");
         Load_Spinner_Data(spinner_to_year, "to");
 
+
     }
 
     //=====function to enable/disable buttons according to field check, code starts====
@@ -311,15 +314,16 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 break;
 //            case R.id.img_back:
             case R.id.btn_back:
-                if(!ltaDocumentsModelArrayList.isEmpty()){
+               /* if(!ltaDocumentsModelArrayList.isEmpty()){
                     ltaDocumentsModelArrayList.clear();
                 }
                 if (LtaListActivity.EmployeeType == "Supervisor"){
                     startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
                 }else if (LtaListActivity.EmployeeType == "Employee") {
                     startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
-                }
+                }*/
 
+                customiseBackwithAlert(); //--added on 5-Aug-2021, as per discussion on back button
                 break;
             case R.id.btn_cancel:
                 makeJsonObjectAndSaveDataToServer(LtaListActivity.lta_application_id, edt_from_date_select.getText().toString(), edt_to_date_select.getText().toString(), tv_total_days.getText().toString(), ed_lta_amount.getText().toString(), ed_approved_amount.getText().toString(), ed_detail.getText().toString(), ed_supervisor_remark.getText().toString(), "Cancelled", userSingletonModel.getEmployee_id());
@@ -362,6 +366,87 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         }
     }
     //=====onClick code ends=====
+
+    //-----function to add alert logic on back button, code starts-----
+    public void customiseBackwithAlert(){
+        if (LtaListActivity.EmployeeType == "Employee"){
+            tv_employee_name.setText(userSingletonModel.getFull_employee_name());
+
+            if (LtaListActivity.mediclaim_status.contentEquals("")){
+               AlertBox();
+
+            }
+            if (LtaListActivity.mediclaim_status.contentEquals("Saved")){
+                AlertBox();
+            }
+            if ((LtaListActivity.mediclaim_status.contentEquals("Submitted")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Approved")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Payment done")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Cancelled"))){
+
+                if(!ltaDocumentsModelArrayList.isEmpty()){
+                    ltaDocumentsModelArrayList.clear();
+                }
+                if (LtaListActivity.EmployeeType == "Supervisor"){
+                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                }else if (LtaListActivity.EmployeeType == "Employee") {
+                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+                }
+
+            }
+            if (LtaListActivity.mediclaim_status.contentEquals("Returned")){
+
+                AlertBox();
+
+            }
+        }
+        if (LtaListActivity.EmployeeType == "Supervisor"){
+            if (LtaListActivity.mediclaim_status.contentEquals("Submitted")){
+                AlertBox();
+            }
+            if ((LtaListActivity.mediclaim_status.contentEquals("Returned")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Approved")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Payment done")) ||
+                    (LtaListActivity.mediclaim_status.contentEquals("Cancelled"))){if(!ltaDocumentsModelArrayList.isEmpty()){
+                ltaDocumentsModelArrayList.clear();
+            }
+                if (LtaListActivity.EmployeeType == "Supervisor"){
+                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                }else if (LtaListActivity.EmployeeType == "Employee") {
+                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+                }
+
+
+            }
+        }
+    }
+    private void AlertBox() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setMessage("You may lost any unsaved data. Do you really want to go back?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                if(!ltaDocumentsModelArrayList.isEmpty()){
+                    ltaDocumentsModelArrayList.clear();
+                }
+                if (LtaListActivity.EmployeeType == "Supervisor"){
+                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                }else if (LtaListActivity.EmployeeType == "Employee") {
+                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+                }
+                //Toast.makeText(context, "Delet item successfully of Position => "+position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                //Toast.makeText(context, "Delet item successfully of Position => "+position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.show();
+    }
+    //-----function to add alert logic on back button, code ends-----
     //----function to load buttons acc to the logic, code starts
     public void LoadButtons(){
 
