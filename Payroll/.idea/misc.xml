@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/layout4.xml" value="0.1925925925925926" />
         <entry key="app/src/main/res/layout/cmpdocuments.xml" value="0.15" />
         <entry key="app/src/main/res/layout/empdocuments.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layout/empfasilities.xml" value="0.1634963768115942" />
         <entry key="app/src/main/res/layout/leave_application.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/popup.xml" value="0.1634963768115942" />
         <entry key="app/src/main/res/layout/subordinate_leave.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/MyLeaveApplication/layout/myleaveappplication.xml" value="0.2" />
         <entry key="app/src/main/res/layouts/MyLeave_Application_2/layout/activity_my_leave_application_2.xml" value="0.1" />

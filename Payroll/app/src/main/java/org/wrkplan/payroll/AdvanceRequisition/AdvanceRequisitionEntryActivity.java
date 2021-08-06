@@ -181,7 +181,8 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    onBackPressed();
+//                    onBackPressed();
+                    AlertBack(); //added on 6-Aug-2021
                 }
             });
 
@@ -445,7 +446,29 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
 
     }
 
+    //-----function for Back button logic for Alert, code starts (added on 6-Aug-2021)---
+    private void AlertBack() {
 
+        String message="You may lost any unsaved data. Do you really want to go back?";
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(AdvanceRequisitionEntryActivity.this);
+        builder.setMessage(message);
+        builder.setCancelable(true);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onBackPressed();
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+
+    }
+    //-----function for Back button logic for Alert, code ends (added on 6-Aug-2021)---
 
     private void AlertBox() {
         AlertDialog.Builder builder=new AlertDialog.Builder(this);

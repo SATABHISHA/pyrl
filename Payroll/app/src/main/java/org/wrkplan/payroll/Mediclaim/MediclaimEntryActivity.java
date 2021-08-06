@@ -841,7 +841,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.btn_back:
 
-                if (Url.isSubordinateMediclaim == true) {
+                /*if (Url.isSubordinateMediclaim == true) {
                     onBackPressed();
                 }
                 if (Url.isMyMediclaim == true) {
@@ -849,15 +849,69 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                 }
                 if (Url.isNewEntryMediclaim == true) {
                     onBackPressed();
-                }
+                }*/ //commented on 6-Aug-2021
 
+                //---added on 06-Aug-2021, code starts--
+                if (Url.isSubordinateMediclaim == true) {
+
+                    if(sub_mediclaim_status.contentEquals("Submitted"))
+                    {
+                        AlertBack();
+                    }
+                    else
+                    {
+                        onBackPressed();
+                    }
+
+
+                }
+                if (Url.isMyMediclaim == true) {
+
+                    if(mediclaim_status.contentEquals("Saved") || mediclaim_status.contentEquals("Returned"))
+                    {
+                        AlertBack();
+                    }
+                    else
+                    {
+                        onBackPressed();
+
+                    }
+
+                }
+                if (Url.isNewEntryMediclaim == true) {
+
+                    AlertBack();
+                    //onBackPressed();
+                }
+                //---added on 06-Aug-2021, code ends--
                 break;
             default:
                 break;
         }
     }
 
+    //-----function for Back button logic for Alert, code starts (added on 6-Aug-2021)---
+    private void AlertBack() {
 
+        String message="You may lost any unsaved data. Do you really want to go back?";
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(MediclaimEntryActivity.this);
+        builder.setMessage(message);
+        builder.setCancelable(true);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onBackPressed();
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+    //-----function for Back button logic for Alert, code ends (added on 6-Aug-2021)---
 
     private void AlertBox1() {
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
