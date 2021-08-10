@@ -116,14 +116,15 @@
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/layout6">
+
             <TextView
                 android:id="@+id/tv_button_subordinate"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textSize="18sp"
+                android:text="Subordinate LTA Requisition"
                 android:textColor="#2e5772"
-                android:text="Subordinate LTA Requisition"/>
+                android:textSize="18sp" />
         </RelativeLayout>
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

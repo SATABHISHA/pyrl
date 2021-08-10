@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/activity_my_attendance_shape.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/drawable/activity_my_attendance_shape1.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/layout4.xml" value="0.1925925925925926" />
+        <entry key="app/src/main/res/drawable/layout6.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/drawable/top_border_button.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/layout/cmpdocuments.xml" value="0.15" />
         <entry key="app/src/main/res/layout/empdocuments.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layout/empfasilities.xml" value="0.1634963768115942" />
