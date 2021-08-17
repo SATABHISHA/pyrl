@@ -193,7 +193,9 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
     //===========Code to get financial year data w.r.t pdf generation from api using volley and load data to recycler view, starts==========
     public void loadData(String financial_year){
 //        String url = "http://14.99.211.60:9018/api/reports/pf-deduction/demo_test/95/2020" ;
-        String url = Url.BASEURL() + "reports/pf-deduction/" + userSingletonModel.corporate_id + "/" + userSingletonModel.employee_id + "/" + financial_year;
+//        String url = Url.BASEURL() + "reports/pf-deduction/" + userSingletonModel.corporate_id + "/" + userSingletonModel.employee_id + "/" + financial_year; //--commented on 17-Aug-2021
+        String url = Url.BASEURL() + "reports/pf-deduction/" + userSingletonModel.corporate_id + "/" + userSingletonModel.employee_id + "/" + financial_year + "/" + userSingletonModel.getBranch_office_id() +"/" + "ALL"; //--added on 17-Aug-2021(added two parameters)
+        Log.d("url->",url);
         final ProgressDialog loading = ProgressDialog.show(ReportHomeListActivity.this, "Loading", "Please wait...", true, false);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
                 Response.Listener<String>() {
