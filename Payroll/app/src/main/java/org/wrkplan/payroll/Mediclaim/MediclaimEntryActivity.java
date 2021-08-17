@@ -1058,6 +1058,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                 @Override
                 public void onResponse(JSONObject response) {
 
+                    Log.d("getData-=>",response.toString());
                     try {
                         String status = response.getString("status");
                         String message = response.getString("message");
