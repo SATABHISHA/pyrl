@@ -18,26 +18,26 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/img_doc"
-                android:layout_toLeftOf="@id/img_download"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/img_download"
+                android:layout_toRightOf="@id/img_doc"
                 android:text="Name"
                 android:textColor="#788087"
                 android:textSize="16sp"></TextView>
 
             <TextView
+                android:id="@+id/tv_date_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="upload_datetimeupload"
-                android:textSize="14sp"
-                android:layout_toRightOf="@id/img_doc"
-                android:layout_toLeftOf="@id/img_download"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/tv_date_time"
                 android:layout_below="@id/tv_name"
-                android:textColor="#B5B2B3"></TextView>
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/img_download"
+                android:layout_toRightOf="@id/img_doc"
+                android:text="upload_datetimeupload"
+                android:textColor="#B5B2B3"
+                android:textSize="14sp"></TextView>
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
