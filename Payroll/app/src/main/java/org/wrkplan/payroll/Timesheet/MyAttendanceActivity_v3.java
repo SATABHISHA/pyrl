@@ -680,7 +680,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 //        String url = Url.BASEURL+"od/request/check-exist/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
         String url = Url.BASEURL()+"timesheet/biometric/fetch/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
 //        String url = Url.BASEURL+"timesheet/log/today/EMC_NEW/42";
-        Log.d("url-=>",url);
+        Log.d("urlbio-=>",url);
 //        String url = Url.BASEURL+"od/request/detail/20/1/1";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
                 Response.Listener<String>() {

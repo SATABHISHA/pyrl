@@ -66,15 +66,16 @@
                 android:textSize="22sp"
                 android:layout_marginRight="7dp"
                 android:textColor="#000000"/>
+
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_below="@id/tv_tile"
                 android:layout_centerHorizontal="true"
-                android:textSize="15sp"
-                android:text="2020-Jun-05"/>
+                android:layout_marginTop="5dp"
+                android:text="2020-Jun-05"
+                android:textSize="15sp" />
             <CheckBox
                 android:id="@+id/chck_wrk_frm_home"
                 android:layout_width="wrap_content"
