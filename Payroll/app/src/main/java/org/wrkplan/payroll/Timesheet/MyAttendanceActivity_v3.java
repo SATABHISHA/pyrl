@@ -876,7 +876,19 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
                 alertDialog.dismiss();
 //                saveInOut("OUT","PUNCHED_OUT");
                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra("android.intent.extras.CAMERA_FACING", 1);
+                //--added on 14th sept,2021, code starts--
+                intent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT);
+                intent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
+                intent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
+                // Samsung
+                intent.putExtra("camerafacing", "front");
+                intent.putExtra("previous_mode", "front");
+
+                // Huawei
+                intent.putExtra("default_camera", "1");
+                intent.putExtra("default_mode", "com.huawei.camera2.mode.photo.PhotoMode");
+                //--added on 14th sept,2021, code ends--
+//                intent.putExtra("android.intent.extras.CAMERA_FACING", 1); //--commented on 14th Sept 2021
                 startActivityForResult(intent, 7);
 
             }
