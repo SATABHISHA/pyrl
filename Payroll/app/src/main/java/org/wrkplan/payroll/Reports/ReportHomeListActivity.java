@@ -48,7 +48,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ReportHomeListActivity extends AppCompatActivity implements View.OnClickListener {
-    Button btn_view_task;
+    Button btn_view_task, btn_view_salary_slip;
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     ArrayList<Load_Spinner_Model> load_spinner_models = new ArrayList<>();
     ArrayList<String>arrayList=new ArrayList<>();
@@ -65,6 +65,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
         img_back=findViewById(R.id.img_back);
 
         btn_view_task.setOnClickListener(this);
+        btn_view_salary_slip.setOnClickListener(this);
         img_back.setOnClickListener(this);
     }
 
@@ -130,6 +131,8 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                         alertDialog.dismiss();
                     }
                 });
+                break;
+            case R.id.btn_view_salary_slip:
                 break;
             default:
                 break;
