@@ -63,6 +63,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_home_report_list);
         btn_view_task = findViewById(R.id.btn_view_task);
         img_back=findViewById(R.id.img_back);
+        btn_view_salary_slip=findViewById(R.id.btn_view_salary_slip);
 
         btn_view_task.setOnClickListener(this);
         btn_view_salary_slip.setOnClickListener(this);
@@ -133,6 +134,59 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                 });
                 break;
             case R.id.btn_view_salary_slip:
+                LayoutInflater li_salary_slip = LayoutInflater.from(ReportHomeListActivity.this);
+                final View dialog_salary_slip = li_salary_slip.inflate(R.layout.activity_home_salary_report_popup, null);
+                final Spinner spinner_year_salary_slip =  dialog_salary_slip.findViewById(R.id.spinner_year);
+                final String[] item_salary_slip = new String[1];
+                TextView tv_salary_slip_button_continue = dialog_salary_slip.findViewById(R.id.tv_button_continue);
+                ImageView img_salary_slip_view_close = dialog_salary_slip.findViewById(R.id.img_view_close);
+
+
+
+                AlertDialog.Builder alert_salary_slip = new AlertDialog.Builder(ReportHomeListActivity.this);
+                alert_salary_slip.setView(dialog_salary_slip);
+                alert_salary_slip.setCancelable(false);
+                //Creating an alert dialog
+                final AlertDialog alertDialogSalarySlip = alert_salary_slip.create();
+                alertDialogSalarySlip.show();
+                Load_Spinner_Data(spinner_year_salary_slip);
+                spinner_year_salary_slip.setSelection(1);
+                tv_salary_slip_button_continue.setAlpha(0.4f);
+                tv_salary_slip_button_continue.setClickable(false);
+                spinner_year_salary_slip.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                        item[0] =load_spinner_models.get(position).getFinancial_year_code();
+                        if(position > 0) {
+                            Log.d("getdata-=>", load_spinner_models.get(position).getFinancial_year_code());
+                            year_code = load_spinner_models.get(position).getFinancial_year_code();
+                            tv_salary_slip_button_continue.setAlpha(1.0f);
+                            tv_salary_slip_button_continue.setClickable(true);
+                        }else{
+                            tv_salary_slip_button_continue.setAlpha(0.4f);
+                            tv_salary_slip_button_continue.setClickable(false);
+                        }
+
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView <?> parent) {
+                    }
+                });
+                tv_salary_slip_button_continue.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialogSalarySlip.dismiss();
+                        loadData(year_code);
+                    }
+                });
+
+                img_salary_slip_view_close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialogSalarySlip.dismiss();
+                    }
+                });
                 break;
             default:
                 break;
