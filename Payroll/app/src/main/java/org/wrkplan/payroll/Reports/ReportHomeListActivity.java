@@ -52,6 +52,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     ArrayList<Load_Spinner_Model> load_spinner_models = new ArrayList<>();
     ArrayList<String>arrayList=new ArrayList<>();
+    ArrayList<String> arrayListMonth = new ArrayList<>();
     public static String report_html = "";
     public static String year_code = "";
     private File pdfFile = null;
@@ -137,6 +138,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                 LayoutInflater li_salary_slip = LayoutInflater.from(ReportHomeListActivity.this);
                 final View dialog_salary_slip = li_salary_slip.inflate(R.layout.activity_home_salary_report_popup, null);
                 final Spinner spinner_year_salary_slip =  dialog_salary_slip.findViewById(R.id.spinner_year);
+                final Spinner spinner_month =  dialog_salary_slip.findViewById(R.id.spinner_month);
                 final String[] item_salary_slip = new String[1];
                 TextView tv_salary_slip_button_continue = dialog_salary_slip.findViewById(R.id.tv_button_continue);
                 ImageView img_salary_slip_view_close = dialog_salary_slip.findViewById(R.id.img_view_close);
@@ -149,8 +151,15 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                 //Creating an alert dialog
                 final AlertDialog alertDialogSalarySlip = alert_salary_slip.create();
                 alertDialogSalarySlip.show();
+
+                //----making spinner_month default false, code starts---
+                spinner_month.setClickable(false);
+                spinner_month.setAlpha(0.4f);
+                //----making spinner_month default false, code ends---
+
+                //----Spinner for year, code starts-----
                 Load_Spinner_Data(spinner_year_salary_slip);
-                spinner_year_salary_slip.setSelection(1);
+                spinner_year_salary_slip.setSelection(0);
                 tv_salary_slip_button_continue.setAlpha(0.4f);
                 tv_salary_slip_button_continue.setClickable(false);
                 spinner_year_salary_slip.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -158,9 +167,40 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //
 //                        item[0] =load_spinner_models.get(position).getFinancial_year_code();
-                        if(position > 0) {
+                        if(position > -1) {
                             Log.d("getdata-=>", load_spinner_models.get(position).getFinancial_year_code());
                             year_code = load_spinner_models.get(position).getFinancial_year_code();
+
+                            spinner_month.setClickable(true);
+                            spinner_month.setAlpha(1.0f);
+                            /* tv_salary_slip_button_continue.setAlpha(1.0f);
+                            tv_salary_slip_button_continue.setClickable(true);*/
+                        }else{
+                            spinner_month.setClickable(false);
+                            spinner_month.setAlpha(0.4f);
+                            /*tv_salary_slip_button_continue.setAlpha(0.4f);
+                            tv_salary_slip_button_continue.setClickable(false);*/
+                        }
+
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView <?> parent) {
+                    }
+                });
+                //----Spinner for year, code ends-----
+
+                //------Spinner for month, code starts-----
+                LoadSpinnerDataForMonth(spinner_month);
+                spinner_month.setSelection(0);
+                tv_salary_slip_button_continue.setAlpha(0.4f);
+                tv_salary_slip_button_continue.setClickable(false);
+                spinner_month.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                        item[0] =load_spinner_models.get(position).getFinancial_year_code();
+                        if(position > 0) {
+                            Log.d("MonthSelect-=>",arrayListMonth.get(position).toString());
                             tv_salary_slip_button_continue.setAlpha(1.0f);
                             tv_salary_slip_button_continue.setClickable(true);
                         }else{
@@ -173,6 +213,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                     public void onNothingSelected(AdapterView <?> parent) {
                     }
                 });
+                //------Spinner for month, code ends-----
                 tv_salary_slip_button_continue.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -247,6 +288,28 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
         spinner_year.setAdapter(arrayAdapter);
     }
 
+    public void LoadSpinnerDataForMonth(Spinner spinner_month){
+        if(!arrayListMonth.isEmpty()){
+            arrayListMonth.clear();
+        }
+        arrayListMonth.add("--Select--");
+        arrayListMonth.add("January");
+        arrayListMonth.add("February");
+        arrayListMonth.add("March");
+        arrayListMonth.add("April");
+        arrayListMonth.add("May");
+        arrayListMonth.add("June");
+        arrayListMonth.add("July");
+        arrayListMonth.add("August");
+        arrayListMonth.add("September");
+        arrayListMonth.add("October");
+        arrayListMonth.add("November");
+        arrayListMonth.add("December");
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayListMonth);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_month.setAdapter(arrayAdapter);
+    }
     //===========Code to get financial year data w.r.t pdf generation from api using volley and load data to recycler view, starts==========
     public void loadData(String financial_year){
 //        String url = "http://14.99.211.60:9018/api/reports/pf-deduction/demo_test/95/2020" ;

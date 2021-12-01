@@ -53,8 +53,9 @@
                     android:layout_weight="1"
                     android:orientation="horizontal"
                     android:background="@drawable/layout6">
+
                     <fr.ganfra.materialspinner.MaterialSpinner
-                        android:id="@+id/spinner_month"
+                        android:id="@+id/spinner_year"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
@@ -72,8 +73,9 @@
                         app:ms_alignLabels="false"
                         android:layout_gravity="center"
                         android:overlapAnchor="false"/>
+
                     <fr.ganfra.materialspinner.MaterialSpinner
-                        android:id="@+id/spinner_year"
+                        android:id="@+id/spinner_month"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
