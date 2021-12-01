@@ -292,7 +292,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
         if(!arrayListMonth.isEmpty()){
             arrayListMonth.clear();
         }
-        arrayListMonth.add("--Select--");
+        arrayListMonth.add("--Select Month--");
         arrayListMonth.add("January");
         arrayListMonth.add("February");
         arrayListMonth.add("March");
