@@ -143,11 +143,11 @@
                         android:id="@+id/btn_view_salary_slip"
                         android:layout_width="wrap_content"
                         android:layout_height="60dp"
-                        android:layout_marginTop="1dp"
                         android:layout_alignParentRight="true"
+                        android:layout_marginTop="1dp"
+                        android:text="View"
                         android:textAllCaps="false"
-                        android:textColor="#686666"
-                        android:text="View"/>
+                        android:textColor="#686666" />
                     <!--  <Button
                           android:id="@+id/btn_view_time_log"
                           android:layout_width="wrap_content"

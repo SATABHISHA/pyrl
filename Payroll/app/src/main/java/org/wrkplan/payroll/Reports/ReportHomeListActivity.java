@@ -54,7 +54,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
     ArrayList<String>arrayList=new ArrayList<>();
     ArrayList<String> arrayListMonth = new ArrayList<>();
     public static String report_html = "";
-    public static String year_code = "";
+    public static String year_code = "", month_name = "";
     private File pdfFile = null;
     private static LinkedList<Bitmap> pdfBitmapList = new LinkedList<>();
     ImageView img_back;
@@ -203,6 +203,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                             Log.d("MonthSelect-=>",arrayListMonth.get(position).toString());
                             tv_salary_slip_button_continue.setAlpha(1.0f);
                             tv_salary_slip_button_continue.setClickable(true);
+                            month_name = arrayListMonth.get(position).toString();
                         }else{
                             tv_salary_slip_button_continue.setAlpha(0.4f);
                             tv_salary_slip_button_continue.setClickable(false);
@@ -218,7 +219,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                     @Override
                     public void onClick(View v) {
                         alertDialogSalarySlip.dismiss();
-                        loadData(year_code);
+                        loadSalarySlipData(year_code, month_name);
                     }
                 });
 
@@ -353,4 +354,47 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
         }
     }
     //===========Code to get financial year data w.r.t pdf generation from api and load data to recycler view, ends==========
+//===========Code to get salary slip w.r.t pdf generation from api using volley and load data, code starts==========
+    public void loadSalarySlipData(String financial_year, String month_name){
+//        String url = "http://14.99.211.60:9018/api/reports/pf-deduction/demo_test/95/2020" ;
+//        String url = Url.BASEURL() + "reports/pf-deduction/" + userSingletonModel.corporate_id + "/" + userSingletonModel.employee_id + "/" + financial_year; //--commented on 17-Aug-2021
+        String url = Url.BASEURL() + "reports/pay-slip/" + userSingletonModel.corporate_id + "/" + userSingletonModel.employee_id + "/" + month_name + "/" + financial_year + "/" + userSingletonModel.getBranch_office_id() +"/" + "ALL"; //--added on 17-Aug-2021(added two parameters)
+        Log.d("url->",url);
+        final ProgressDialog loading = ProgressDialog.show(ReportHomeListActivity.this, "Loading", "Please wait...", true, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
+                Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        getResponseData(response);
+                        loading.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                error.printStackTrace();
+            }
+        });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+    }
+    public void getResponseSalarySlipData(String response){
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+
+            Log.d("jsonData-=>",jsonObject.toString());
+            JSONObject jsonObject1 = jsonObject.getJSONObject("response");
+            if(jsonObject1.getString("status").contentEquals("true")){
+                report_html = jsonObject.getString("report_html");
+                startActivity(new Intent(ReportHomeListActivity.this,PdfEditorActivity.class));
+            }else if(jsonObject1.getString("status").contentEquals("false")){
+                Toast.makeText(getApplicationContext(),jsonObject1.getString("message"), Toast.LENGTH_LONG).show();
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+//===========Code to get salary slip w.r.t pdf generation from api using volley and load data, code ends==========
 }
