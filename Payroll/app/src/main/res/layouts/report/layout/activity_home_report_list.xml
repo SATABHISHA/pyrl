@@ -157,8 +157,8 @@
                           android:textColor="#686666"
                           android:text="View\nTime Log"/> -->
                     <LinearLayout
-                        android:id="@+id/ll_border"
-                        android:layout_below="@id/btn_view_task"
+                        android:id="@+id/ll_border_salary_slip"
+                        android:layout_below="@id/btn_view_salary_slip"
                         android:layout_width="match_parent"
                         android:layout_marginTop="4dp"
                         android:layout_height="1dp"
