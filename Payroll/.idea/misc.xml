@@ -49,7 +49,7 @@
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_subordinate_outdoor_list.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_subordinate_outdoor_request.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/report/layout/activity_home_pf_report_popup.xml" value="0.1" />
-        <entry key="app/src/main/res/layouts/report/layout/activity_home_report_list.xml" value="0.18" />
+        <entry key="app/src/main/res/layouts/report/layout/activity_home_report_list.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/report/layout/activity_home_salary_report_popup.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/report/layout/activity_pdf_editor.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/report/layout/custom_activity_home_list_row.xml" value="0.16" />

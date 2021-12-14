@@ -41,17 +41,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="#F9F9F9">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:layout_marginRight="2.5dp"
                     android:background="@drawable/layout6">
 
                     <fr.ganfra.materialspinner.MaterialSpinner
@@ -73,7 +73,15 @@
                         app:ms_alignLabels="false"
                         android:layout_gravity="center"
                         android:overlapAnchor="false"/>
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="2.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout6">
                     <fr.ganfra.materialspinner.MaterialSpinner
                         android:id="@+id/spinner_month"
                         android:layout_width="match_parent"
