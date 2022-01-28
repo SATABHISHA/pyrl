@@ -242,7 +242,6 @@
             android:layout_marginBottom="20dp"
             android:text="Version 1.2022.01.28a"
             android:textSize="11sp" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
