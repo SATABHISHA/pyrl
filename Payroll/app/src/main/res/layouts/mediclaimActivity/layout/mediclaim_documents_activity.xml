@@ -19,11 +19,11 @@
                 android:id="@+id/tv_mediclaim_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/img_back"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Mediclaim Supporting Documents"
+                android:layout_toRightOf="@id/img_back"
+                android:text="Medical Reimb Supporting Documents"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
 

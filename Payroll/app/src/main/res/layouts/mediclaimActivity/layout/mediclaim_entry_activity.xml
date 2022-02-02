@@ -14,17 +14,18 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/tv_mediclaim_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:text="My Medical Reimb Detail"
                 android:textColor="#ffffff"
-                android:text="My Mediclaim Detail"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>

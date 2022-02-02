@@ -708,7 +708,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:textStyle="bold"
-                        android:text="Mediclaim"
+                        android:text="Medical Reimb"
                         android:visibility="visible"
                         android:textColor="#2e5772"
                         ></TextView>

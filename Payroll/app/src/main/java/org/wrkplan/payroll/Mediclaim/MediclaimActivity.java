@@ -108,7 +108,7 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
         mediclaim_subordinate_recycler_view=findViewById(R.id.mediclaim_subordinate_recycler_view);
 
         //-----------intialize view end-------------//
-        tv_mediclaim_title.setText(" My Mediclaim List");
+        tv_mediclaim_title.setText(" My Medical Reimb List");
 
 
         //==========Recycler code initializing and setting layoutManager starts======
@@ -248,7 +248,7 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
                 ll_recycler.setVisibility(View.GONE);
                 ll_1recycler.setVisibility(View.VISIBLE);
                 btn_subadv_mediclaim.setVisibility(View.GONE);
-                tv_mediclaim_title.setText("Subordinate Mediclaim List");
+                tv_mediclaim_title.setText("Subordinate Medical Reimb List");
                 rl_btn_new.setVisibility(View.GONE);
                 Url.isSubordinateMediclaim=true;
                 Url.isMyMediclaim=false;
