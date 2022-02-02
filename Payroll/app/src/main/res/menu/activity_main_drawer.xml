@@ -51,7 +51,7 @@
         <item
             android:id="@+id/nav_mediclaim"
             android:icon="@drawable/mediclaim"
-            android:title="Mediclaim" />
+            android:title="Medical Reimb" />
         <item
             android:id="@+id/nav_lta"
             android:icon="@drawable/lta"

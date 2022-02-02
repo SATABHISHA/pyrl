@@ -63,6 +63,7 @@
         <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_my_attendance_v3.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_subordinate_attendance_v2.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_subordinate_monthly_attendancelog.xml" value="0.18614130434782608" />
+        <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.22604166666666667" />
       </map>
     </option>
   </component>
