@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -41,7 +42,8 @@ public class PdfViewActivity extends AppCompatActivity {
 
 
 
-        if (!Url.base64.equalsIgnoreCase("")) {
+        try {
+            if (!Url.base64.equalsIgnoreCase("")) {
 //            File extDir = Environment.getExternalStorageDirectory();
 //            String filename = "myFile.pdf";
 //            File fullFilename = new File(extDir.getAbsolutePath() + "/" + filename);
@@ -53,7 +55,7 @@ public class PdfViewActivity extends AppCompatActivity {
 //            }
 //            fullFilename.setWritable(true);
 
-            byte[] pdfAsBytes = Base64.decode(Url.base64, 0);
+                byte[] pdfAsBytes = Base64.decode(Url.base64, 0);
 //            FileOutputStream os;
 //
 //            try {
@@ -65,68 +67,74 @@ public class PdfViewActivity extends AppCompatActivity {
 //                exp.printStackTrace();
 //            }
 
-            try {
-                pdfView.fromBytes(pdfAsBytes)
-                        .defaultPage(1)
-                        .onPageChange(new OnPageChangeListener() {
-                            @Override
-                            public void onPageChanged(int page, int pageCount) {
+                try {
+                    pdfView.fromBytes(pdfAsBytes)
+                            .defaultPage(1)
+                            .onPageChange(new OnPageChangeListener() {
+                                @Override
+                                public void onPageChanged(int page, int pageCount) {
 //                                Toast.makeText(PdfViewActivity.this, "Page: " + page + 1, Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .enableAnnotationRendering(true)
-                        .onLoad(new OnLoadCompleteListener() {
-                            @Override
-                            public void loadComplete(int nbPages) {
+                                }
+                            })
+                            .enableAnnotationRendering(true)
+                            .onLoad(new OnLoadCompleteListener() {
+                                @Override
+                                public void loadComplete(int nbPages) {
 
-                            }
-                        })
-                        .scrollHandle(new DefaultScrollHandle(this))
-                        .spacing(10) // in dp
-                        .onPageError(new OnPageErrorListener() {
-                            @Override
-                            public void onPageError(int page, Throwable t) {
+                                }
+                            })
+                            .scrollHandle(new DefaultScrollHandle(this))
+                            .spacing(10) // in dp
+                            .onPageError(new OnPageErrorListener() {
+                                @Override
+                                public void onPageError(int page, Throwable t) {
 //                                Toast.makeText(PdfViewActivity.this, "Error to show PDF", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .load();
-            } catch (Exception exp) {
-                exp.printStackTrace();
-            }
+                                }
+                            })
+                            .load();
+                } catch (Exception exp) {
+                    exp.printStackTrace();
+                }
 
-        }
-        // else if (!uri.toString().isEmpty())
-        else  {
-            try {
-                // pdfView.fromFile()
-                pdfView.fromUri(Uri.parse(Url.uri))
-                        .defaultPage(1)
-                        .onPageChange(new OnPageChangeListener() {
-                            @Override
-                            public void onPageChanged(int page, int pageCount) {
+            }
+            // else if (!uri.toString().isEmpty())
+            else  {
+                try {
+                    // pdfView.fromFile()
+                    pdfView.fromUri(Uri.parse(Url.uri))
+                            .defaultPage(1)
+                            .onPageChange(new OnPageChangeListener() {
+                                @Override
+                                public void onPageChanged(int page, int pageCount) {
 //                                Toast.makeText(PdfViewActivity.this, "Page: " + page + 1, Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .enableAnnotationRendering(true)
-                        .onLoad(new OnLoadCompleteListener() {
-                            @Override
-                            public void loadComplete(int nbPages) {
+                                }
+                            })
+                            .enableAnnotationRendering(true)
+                            .onLoad(new OnLoadCompleteListener() {
+                                @Override
+                                public void loadComplete(int nbPages) {
 
-                            }
-                        })
-                        .scrollHandle(new DefaultScrollHandle(this))
-                        .spacing(10) // in dp
-                        .onPageError(new OnPageErrorListener() {
-                            @Override
-                            public void onPageError(int page, Throwable t) {
+                                }
+                            })
+                            .scrollHandle(new DefaultScrollHandle(this))
+                            .spacing(10) // in dp
+                            .onPageError(new OnPageErrorListener() {
+                                @Override
+                                public void onPageError(int page, Throwable t) {
 //                                Toast.makeText(PdfViewActivity.this, "Error to show PDF", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .load();
-            } catch (Exception exp) {
-                exp.printStackTrace();
+                                }
+                            })
+                            .load();
+                } catch (Exception exp) {
+                    exp.printStackTrace();
+                }
             }
         }
+        catch (Exception e)
+        {
+            Log.d("Error",e.toString());
+        }
+
 //        else {
 //            Toast.makeText(this, "Nothing to show", Toast.LENGTH_SHORT).show();
 //        }
