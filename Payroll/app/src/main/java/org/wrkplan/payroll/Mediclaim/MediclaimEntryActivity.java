@@ -117,6 +117,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
 
         // Clear the ArrayList Here
         MediclaimDocumentsActivity.pdf_modelArrayList.clear();
+        MediclaimDocumentsActivity.subordinate_arraylist.clear();
         // Toast.makeText(this, "Size: "+ MediclaimDocumentsActivity.pdf_modelArrayList.size(), Toast.LENGTH_SHORT).show();
 
         //------------------------Open Check Balance POPUP-----------------------------------------//
@@ -298,6 +299,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
 
                     if (!subordinate_details_arrayList.isEmpty()) {
                         subordinate_details_arrayList.clear();
+                        // MediclaimDocumentsActivity.subordinate_arraylist.clear();
                     }
                     JSONObject jsonObject = new JSONObject(response);
                     JSONObject jb1 = jsonObject.getJSONObject("fields");
