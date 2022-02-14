@@ -381,7 +381,6 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
-
     }
     public void getResponseSalarySlipData(String response){
         try {
