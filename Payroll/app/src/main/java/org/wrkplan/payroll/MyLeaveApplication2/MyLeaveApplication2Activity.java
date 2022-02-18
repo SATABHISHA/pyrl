@@ -113,7 +113,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     LinearLayout  ll_save_cancel,llone_save_cancel;
     public static String status_message = "";
 
-
+    long days;
 
 
 
@@ -615,119 +615,32 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                 // if (rb1.isChecked() == true || rb2.isChecked() == true) {
 
 
-                try {
-
-                    jsonBody.put("corp_id", userSingletonModel.corporate_id);
-
-                    // Log.d("sdss",jsonBody.getString("corp_id"));
-                    if (Url.isNew == true) {
-                        jsonBody.put("appliction_id", 0);
-
-
-                    } else {
-                        jsonBody.put("appliction_id", Url.currtent_application_id);
-
-
-                    }
-
-//                    jsonBody.put("leave_id", leaveID); //commented by satabhisha
-                    jsonBody.put("leave_id", Integer.parseInt(leaveID));
-//                    jsonBody.put("employee_id", userSingletonModel.employee_id); //commented by satabhisha on 9th April
-                    jsonBody.put("employee_id", Integer.parseInt(userSingletonModel.employee_id));
-
-                    //---from/to date code starts----
-                    DateFormat inputFormat = new SimpleDateFormat("dd-MMM-yyyy");
-                    DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    String inputTextFromDate = txt_from_date.getText().toString();
-                    String inputTextToDate = txt_to_date.getText().toString();
-                    Date fromDate = null, toDate = null;
-                    try {
-                        fromDate = inputFormat.parse(inputTextFromDate);
-                        toDate = inputFormat.parse(inputTextToDate);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    String outputTextFromDate = outputFormat.format(fromDate);
-                    String outputTextToDate = outputFormat.format(toDate);
-
-//                edt_date_to_select.setTextColor(Color.parseColor("#b2b2b2"));
-                    //---from/to date code ends----
-
-                    jsonBody.put("from_date", outputTextFromDate);
-                    jsonBody.put("to_date", outputTextToDate);
-//                    jsonBody.put("total_days", txt_total_number.getText().toString()); //commented by sr
-                    jsonBody.put("total_days", Double.parseDouble(txt_total_number.getText().toString()));
-                    jsonBody.put("description", ed_details.getText().toString());
-                    jsonBody.put("supervisor_remark", ed_supervisor_remark.getText().toString());
-//                if (save == true) {
-//                    jsonBody.put("leave_status", rb1.getText().toString());
-//                }
-                    jsonBody.put("leave_status",rb1.getText().toString());
-
-                    if (submit == true) {
-                        jsonBody.put("leave_status", rb2.getText().toString());
-                        status_message = "Submitted";
-                    }else{
-                        status_message = "Saved";
-                    }
-                    jsonBody.put("approved_by_id", 0);
-                    jsonBody.put("approved_date", "");
-                    jsonBody.put("supervisor1_id", 0);
-                    jsonBody.put("supervisor2_id", 0);
-
-                    Log.d("from_date", jsonBody.getString("from_date"));
-                    Log.d("leave_status", jsonBody.getString("leave_status"));
-                    Log.d("supervisor2_id", jsonBody.getString("supervisor2_id"));
-
-                    if (jsonBody == null) {
-                        Toast.makeText(MyLeaveApplication2Activity.this, "OBject is null", Toast.LENGTH_SHORT).show();
-
-                    }
-
-                } catch (Exception e) {
-                    e.toString();
-
+                if(txt_from_date.getText().toString().contentEquals(""))
+                {
+                    Toast.makeText(MyLeaveApplication2Activity.this, "From date is required", Toast.LENGTH_SHORT).show();
+                }
+                else if(txt_to_date.getText().toString().contentEquals(""))
+                {
+                    Toast.makeText(MyLeaveApplication2Activity.this, "To date is required", Toast.LENGTH_SHORT).show();
+                }
+                else if(ed_details.getText().toString().contentEquals(""))
+                {
+                    Toast.makeText(MyLeaveApplication2Activity.this, "Details is required", Toast.LENGTH_SHORT).show();
                 }
 
-                Log.d("jsonbody-=>",jsonBody.toString());
-                String url = Url.BASEURL() + "leave/application/save";
 
-                try {
-                    JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonBody.toString())
-                            , new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                // JSONObject jsonObject=new JSONObject(String.valueOf(response));
 
-                                String message = response.getString("message");
-//                                Toast.makeText(MyLeaveApplication2Activity.this, message, Toast.LENGTH_SHORT).show(); //as per discussion on 13jan 21
-//                                Toast.makeText(getApplicationContext(), status_message, Toast.LENGTH_LONG).show();
-                                Log.d("hgsdfhg",status_message);
-                                Log.d("responseData",response.toString());
-                                Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-//                                finish(); // commented by sr
-                                Toast.makeText(getApplicationContext(),"Leave application "+status_message,Toast.LENGTH_LONG).show();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                Toast.makeText(MyLeaveApplication2Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                    }, new ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(MyLeaveApplication2Activity.this, "Couldnot connect to the server", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                    Volley.newRequestQueue(MyLeaveApplication2Activity.this).add(stringRequest);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                else if(days<0)
+                {
+                    Toast.makeText(MyLeaveApplication2Activity.this, "'To Date' should be greater than 'From Date'", Toast.LENGTH_SHORT).show();
                 }
+
+                else
+                {
+                    saveLeaveInfo();
+                }
+
+
 
 //        }
 //        else {
@@ -836,6 +749,123 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                 // }
             }
         });
+
+    }
+
+    private void saveLeaveInfo() {
+        try {
+
+            jsonBody.put("corp_id", userSingletonModel.corporate_id);
+
+            // Log.d("sdss",jsonBody.getString("corp_id"));
+            if (Url.isNew == true) {
+                jsonBody.put("appliction_id", 0);
+
+
+            } else {
+                jsonBody.put("appliction_id", Url.currtent_application_id);
+
+
+            }
+
+//                    jsonBody.put("leave_id", leaveID); //commented by satabhisha
+            jsonBody.put("leave_id", Integer.parseInt(leaveID));
+//                    jsonBody.put("employee_id", userSingletonModel.employee_id); //commented by satabhisha on 9th April
+            jsonBody.put("employee_id", Integer.parseInt(userSingletonModel.employee_id));
+
+            //---from/to date code starts----
+            DateFormat inputFormat = new SimpleDateFormat("dd-MMM-yyyy");
+            DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String inputTextFromDate = txt_from_date.getText().toString();
+            String inputTextToDate = txt_to_date.getText().toString();
+            Date fromDate = null, toDate = null;
+            try {
+                fromDate = inputFormat.parse(inputTextFromDate);
+                toDate = inputFormat.parse(inputTextToDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            String outputTextFromDate = outputFormat.format(fromDate);
+            String outputTextToDate = outputFormat.format(toDate);
+
+//                edt_date_to_select.setTextColor(Color.parseColor("#b2b2b2"));
+            //---from/to date code ends----
+
+            jsonBody.put("from_date", outputTextFromDate);
+            jsonBody.put("to_date", outputTextToDate);
+//                    jsonBody.put("total_days", txt_total_number.getText().toString()); //commented by sr
+            jsonBody.put("total_days", Double.parseDouble(txt_total_number.getText().toString()));
+            jsonBody.put("description", ed_details.getText().toString());
+            jsonBody.put("supervisor_remark", ed_supervisor_remark.getText().toString());
+//                if (save == true) {
+//                    jsonBody.put("leave_status", rb1.getText().toString());
+//                }
+            jsonBody.put("leave_status",rb1.getText().toString());
+
+            if (submit == true) {
+                jsonBody.put("leave_status", rb2.getText().toString());
+                status_message = "Submitted";
+            }else{
+                status_message = "Saved";
+            }
+            jsonBody.put("approved_by_id", 0);
+            jsonBody.put("approved_date", "");
+            jsonBody.put("supervisor1_id", 0);
+            jsonBody.put("supervisor2_id", 0);
+
+            Log.d("from_date", jsonBody.getString("from_date"));
+            Log.d("leave_status", jsonBody.getString("leave_status"));
+            Log.d("supervisor2_id", jsonBody.getString("supervisor2_id"));
+
+            if (jsonBody == null) {
+                Toast.makeText(MyLeaveApplication2Activity.this, "OBject is null", Toast.LENGTH_SHORT).show();
+
+            }
+
+        } catch (Exception e) {
+            e.toString();
+
+        }
+
+        Log.d("jsonbody-=>",jsonBody.toString());
+        String url = Url.BASEURL() + "leave/application/save";
+
+        try {
+            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonBody.toString())
+                    , new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        // JSONObject jsonObject=new JSONObject(String.valueOf(response));
+
+                        String message = response.getString("message");
+//                                Toast.makeText(MyLeaveApplication2Activity.this, message, Toast.LENGTH_SHORT).show(); //as per discussion on 13jan 21
+//                                Toast.makeText(getApplicationContext(), status_message, Toast.LENGTH_LONG).show();
+                        Log.d("hgsdfhg",status_message);
+                        Log.d("responseData",response.toString());
+                        Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+//                                finish(); // commented by sr
+                        Toast.makeText(getApplicationContext(),"Leave application "+status_message,Toast.LENGTH_LONG).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(MyLeaveApplication2Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }, new ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(MyLeaveApplication2Activity.this, "Couldnot connect to the server", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            Volley.newRequestQueue(MyLeaveApplication2Activity.this).add(stringRequest);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -1080,7 +1110,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     {
                         btn_save.setEnabled(false);
                         txt_check_leave.setEnabled(false);
-                      //by sr, starts
+                        //by sr, starts
                         rb2.setChecked(true);
                         rb2.setClickable(false);
                         rb1.setClickable(false);
@@ -1099,8 +1129,8 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         spinner1.setEnabled(true);
 //                        spinner2.setEnabled(true);
                         if (leave_status.equals("Save")) {
-                        rb1.setChecked(true);
-                    }else if(leave_status.equals("Return")){
+                            rb1.setChecked(true);
+                        }else if(leave_status.equals("Return")){
                             rb2.setChecked(true);
                         }
                     }
@@ -1131,9 +1161,10 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     }
 
     private void DteDifference() {
-        long days = TimeUnit.DAYS.convert(SecondDate.getTime() - firstDate.getTime(), TimeUnit.MILLISECONDS) + 1;
+        days = TimeUnit.DAYS.convert(SecondDate.getTime() - firstDate.getTime(), TimeUnit.MILLISECONDS) + 1;
         txt_total_number.setText(String.valueOf(days));
     }
+
 
     private void GetLeave() {
         String url= Url.BASEURL() + "leave/" + "type/"+userSingletonModel.corporate_id;
@@ -1255,9 +1286,13 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         c.set(Calendar.MONTH, monthOfYear);
                         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         SecondDate=c.getTime();
+
                         String currentDateString1 = simpleDateFormat.format(c.getTime());
                         txt_to_date.setText(currentDateString1);
-                        DteDifference();
+                        if(!txt_from_date.getText().toString().contentEquals(""))
+                        {
+                            DteDifference();
+                        }
 
 
 
@@ -1265,7 +1300,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
                     }
                 }, mYear, mMonth, mDay);
-        datePickerDialog1.getDatePicker().setMinDate(firstDate.getTime());
+        // datePickerDialog1.getDatePicker().setMinDate(firstDate.getTime());
 
         datePickerDialog1.show();
 
@@ -1290,6 +1325,11 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         firstDate=c.getTime();
                         String currentDateString = simpleDateFormat.format(c.getTime());
                         txt_from_date.setText(currentDateString);
+
+                        if(!txt_to_date.getText().toString().contentEquals(""))
+                        {
+                            DteDifference();
+                        }
 
 
 

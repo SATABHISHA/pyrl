@@ -394,7 +394,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                 btn_return.setVisibility(View.GONE);
                 btn_cancel.setVisibility(View.GONE);
                 btn_submit.setVisibility(View.VISIBLE);
-                btn_save.setVisibility(View.VISIBLE);
+                btn_save.setVisibility(View.VISIBLE) ;
                 btn_back.setVisibility(View.VISIBLE);
 
                 ed_approved_amount.setEnabled(false);
@@ -402,7 +402,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                 edtv_application_status.setEnabled(false);
 
             }
-            if (CustomMediclaimListAdapter.mediclaim_status.contentEquals("Submitted") || CustomMediclaimListAdapter.mediclaim_status.contentEquals("Approved")) {
+            if (CustomMediclaimListAdapter.mediclaim_status.contentEquals("Submitted") || CustomMediclaimListAdapter.mediclaim_status.contentEquals("Approved") || CustomMediclaimListAdapter.mediclaim_status.contentEquals("Payment done")) {
                 btn_submit.setVisibility(View.GONE);
                 btn_approve.setVisibility(View.GONE);
                 btn_return.setVisibility(View.GONE);
