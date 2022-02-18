@@ -630,7 +630,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
 
 
-                else if(days<0)
+                else if(days<=0)
                 {
                     Toast.makeText(MyLeaveApplication2Activity.this, "'To Date' should be greater than 'From Date'", Toast.LENGTH_SHORT).show();
                 }
