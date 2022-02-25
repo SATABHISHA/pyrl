@@ -105,6 +105,7 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity implemen
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
     }
+
     public void getResponseData(String response){
         try {
             if(!timesheetSubordinateModelArrayList.isEmpty()){

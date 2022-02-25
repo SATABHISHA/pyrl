@@ -10,6 +10,8 @@
         <entry key="app/src/main/res/drawable/button_border.xml" value="0.201" />
         <entry key="app/src/main/res/drawable/layout4.xml" value="0.1925925925925926" />
         <entry key="app/src/main/res/drawable/layout6.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/drawable/loglist_corner_radius_absent.xml" value="0.115" />
+        <entry key="app/src/main/res/drawable/loglist_corner_radius_present.xml" value="0.115" />
         <entry key="app/src/main/res/drawable/spinner_item.xml" value="0.115" />
         <entry key="app/src/main/res/drawable/top_border_button.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/layout/cmpdocuments.xml" value="0.15" />
