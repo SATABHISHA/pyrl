@@ -641,7 +641,6 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                 }
 
 
-
 //        }
 //        else {
 //            //Toast.makeText(MyLeaveApplication2Activity.this, "Please choice the application type", Toast.LENGTH_SHORT).show();
