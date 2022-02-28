@@ -235,7 +235,6 @@
                         android:textColor="#2e5772"
                        ></TextView>
 
-
                 </LinearLayout>
 
 
@@ -270,18 +269,21 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/ll_timesheet"
                     android:layout_width="0dp"
                     android:layout_height="170dp"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/layout3"
                     android:gravity="center"
+                    android:visibility="visible"
                     android:layout_weight="1">
                     <ImageView
-                        android:id="@+id/img_insurance_details"
+                        android:id="@+id/img_timesheet"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/insurance"
+                        android:visibility="visible"
+                        android:src="@drawable/timesheet"
                         ></ImageView>
 
                 </LinearLayout>
@@ -326,15 +328,15 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/tv_insurance_details"
+                        android:id="@+id/tv_timesheet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:textStyle="bold"
-                        android:text="Insurance Detail"
+                        android:text="Attendance"
+                        android:visibility="visible"
                         android:textColor="#2e5772"
                         ></TextView>
-
 
                 </LinearLayout>
 
@@ -536,24 +538,22 @@
 
                 </RelativeLayout>
                 <LinearLayout
-                    android:id="@+id/ll_timesheet"
                     android:layout_width="0dp"
                     android:layout_height="170dp"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/layout3"
                     android:gravity="center"
-                    android:visibility="visible"
                     android:layout_weight="1">
                     <ImageView
-                        android:id="@+id/img_timesheet"
+                        android:id="@+id/img_insurance_details"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
-                        android:visibility="visible"
-                        android:src="@drawable/timesheet"
+                        android:src="@drawable/insurance"
                         ></ImageView>
 
                 </LinearLayout>
+
 
 
 
@@ -594,17 +594,16 @@
                     android:background="@drawable/layout2"
                     android:gravity="center"
                     android:layout_weight="1">
-
                     <TextView
-                        android:id="@+id/tv_timesheet"
+                        android:id="@+id/tv_insurance_details"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:textStyle="bold"
-                        android:text="Timesheet"
-                        android:visibility="visible"
+                        android:text="Insurance Detail"
                         android:textColor="#2e5772"
                         ></TextView>
+
 
 
                 </LinearLayout>
