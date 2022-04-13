@@ -274,10 +274,9 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
                             android:gravity="center_horizontal"
                             android:text="IN"
                             android:textColor="#8C8B8C"
@@ -289,10 +288,9 @@
                             android:background="#A2A2A2" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
                             android:gravity="center_horizontal"
                             android:text="OUT"
                             android:textColor="#8C8B8C"
@@ -305,9 +303,8 @@
                             android:orientation="horizontal">
                             <LinearLayout
                                 android:id="@+id/ll_in_time"
-                                android:layout_width="wrap_content"
+                                android:layout_width="150dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="1"
                                 android:gravity="center"
                                 android:orientation="horizontal">
                                 <TextView
@@ -326,12 +323,15 @@
                                     android:textColor="#74706E"
                                     android:text="AM"/>
                             </LinearLayout>
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:background="#DADADA"/>
 
                             <LinearLayout
                                 android:id="@+id/ll_out_time"
-                                android:layout_width="wrap_content"
+                                android:layout_width="150dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="1"
                                 android:gravity="center"
                                 android:orientation="horizontal">
                                 <TextView
@@ -355,6 +355,96 @@
 
                 </RelativeLayout>
                 <!--Attendance Details, code ends -->
+
+                <!--Calendar Details, code starts -->
+                <RelativeLayout
+                    android:id="@+id/rl_calendar_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="460dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#56D1F9">
+
+                    <LinearLayout
+                        android:id="@+id/ll_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="321dp"
+                        android:background="#ffffff"
+                        android:orientation="vertical" />
+                    <TextView
+                        android:id="@+id/txt_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ll_date"
+                        android:layout_marginTop="20dp"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="16sp"
+                        android:textColor="#444444"
+                        android:text="13-Apr-2022"/>
+                    <TextView
+                        android:id="@+id/txt_day_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txt_date"
+                        android:layout_marginTop="0dp"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="14sp"
+                        android:textColor="#444444"
+                        android:text="Wednesday"/>
+
+                    <TextView
+                        android:id="@+id/txt_holiday_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txt_day_name"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="0dp"
+                        android:text="Good Friday"
+                        android:textColor="#FB4E4E"
+                        android:textSize="14sp" />
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_below="@id/txt_holiday_name"
+                        android:orientation="horizontal">
+                        <RelativeLayout
+                            android:id="@+id/ll_custombtn_leave_apply"
+                            android:layout_width="wrap_content"
+                            android:layout_height="38dp"
+                            android:background="#2571FF"
+                            android:layout_weight="1">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Apply For Leave"
+                                android:textColor="#ffffff"
+                                android:textSize="14sp"
+                                android:layout_centerInParent="true"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/ll_custombtn_od_apply"
+                            android:layout_width="wrap_content"
+                            android:layout_height="38dp"
+                            android:background="#2571FF"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Apply For OD"
+                                android:textColor="#ffffff"
+                                android:textSize="14sp"
+                                android:layout_centerInParent="true"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <!--Calendar Details, code ends -->
 
 
             </LinearLayout>
