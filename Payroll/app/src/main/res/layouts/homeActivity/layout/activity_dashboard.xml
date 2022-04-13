@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/cordinatorLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2e5772"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#2e5772"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+            <!-- android:background="?attr/colorPrimary"-->
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_marginTop="55dp"
+            android:background="#F3F2F0"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Linear"
+                android:orientation="vertical">
+
+                <!--Employee Details, code starts -->
+               <RelativeLayout
+                   android:id="@+id/rl_emp_detail"
+                   android:layout_width="match_parent"
+                   android:layout_height="200dp"
+                   android:layout_margin="20dp"
+                   android:background="#56D1F9">
+
+                   <RelativeLayout
+                       android:id="@+id/emp_detail_title_bar"
+                       android:layout_width="match_parent"
+                       android:layout_height="44dp"
+                       android:background="#BFBFBF">
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_centerVertical="true"
+                           android:layout_marginLeft="8dp"
+                           android:text="Employee Detail"
+                           android:textColor="#ffffff"
+                           android:textSize="17sp" />
+                   </RelativeLayout>
+                   <LinearLayout
+                       android:id="@+id/ll_emp_detail"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/emp_detail_title_bar"
+                       android:layout_marginTop="6dp"
+                       android:orientation="vertical">
+
+                       <TextView
+                           android:id="@+id/txt_emp_name"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="B Banerjee"
+                           android:textSize="20sp"
+                           android:layout_marginLeft="8dp"
+                           android:textColor="#356B8C"/>
+                       <TextView
+                           android:id="@+id/txt_designation"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="SR MANAGER"
+                           android:textSize="15sp"
+                           android:layout_marginLeft="8dp"
+                           android:textColor="#7B7B7B"/>
+                       <TextView
+                           android:id="@+id/txt_department"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Demo India"
+                           android:textSize="15sp"
+                           android:layout_marginLeft="8dp"
+                           android:textColor="#7B7B7B"/>
+                   </LinearLayout>
+                   <TextView
+                       android:id="@+id/txt_corid"
+                       android:layout_below="@id/emp_detail_title_bar"
+                       android:layout_alignParentRight="true"
+                       android:layout_marginRight="8dp"
+                       android:layout_marginTop="14dp"
+                       android:layout_width="90dp"
+                       android:layout_height="30dp"
+                       android:text="Arb002"
+                       android:gravity="center"
+                       android:background="#E6C862"
+                       android:textColor="#000000"/>
+
+                   <!--Sup1 Details -->
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="20.33dp"
+                       android:layout_below="@+id/ll_emp_detail"
+                       android:layout_marginLeft="8dp"
+                       android:orientation="vertical">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Supervisor 1"
+                           android:textColor="#000000"
+                           android:textSize="17sp"/>
+                       <TextView
+                           android:id="@+id/txt_supervisor1"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="B Banerjee"
+                           android:textColor="#7B7B7B"
+                           android:textSize="15sp"/>
+                   </LinearLayout>
+
+                   <!--Sup2 Details -->
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="20.33dp"
+                       android:layout_below="@+id/ll_emp_detail"
+                       android:layout_alignParentRight="true"
+                       android:layout_marginRight="8dp"
+                       android:orientation="vertical">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Supervisor 1"
+                           android:textColor="#000000"
+                           android:textSize="17sp"/>
+                       <TextView
+                           android:id="@+id/txt_supervisor2"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="B Banerjee"
+                           android:textColor="#7B7B7B"
+                           android:textSize="15sp"/>
+                   </LinearLayout>
+
+               </RelativeLayout>
+                <!--Employee Details, code ends -->
+
+                <!--Attendance Details, code starts -->
+                <RelativeLayout
+                    android:id="@+id/rl_attendance_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="20dp"
+                    android:background="#56D1F9">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_attendance_detail_title_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="#BFBFBF">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="8dp"
+                            android:text="Attendance Detail"
+                            android:textColor="#ffffff"
+                            android:textSize="17sp" />
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="28dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="8dp"
+                            android:text="13-Apr-2022"
+                            android:layout_marginRight="8dp"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center"
+                            android:textColor="#ffffff"
+                            android:background="#898A8A"
+                            android:textSize="17sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <!--Attendance Details, code ends -->
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+   <!-- <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_home"
+        app:menu="@menu/activity_main_drawer" /> -->
+
+</androidx.drawerlayout.widget.DrawerLayout>

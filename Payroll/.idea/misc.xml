@@ -1,5 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../../Volumes/SatabhishaSSD/SSDUser/SSDLibrary/SSDAndroidSdk/platforms/android-30/data/res/layout/simple_spinner_dropdown_item.xml" value="0.21920289855072464" />
+        <entry key="../../../../../../Volumes/SatabhishaSSD/SSDUser/SSDLibrary/SSDAndroidSdk/platforms/android-30/data/res/layout/simple_spinner_item.xml" value="0.21920289855072464" />
+        <entry key="app/src/main/res/drawable/activity_my_attendance_shape.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/drawable/activity_my_attendance_shape1.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/drawable/button_border.xml" value="0.201" />
+        <entry key="app/src/main/res/drawable/layout4.xml" value="0.1925925925925926" />
+        <entry key="app/src/main/res/drawable/layout6.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/drawable/loglist_corner_radius_absent.xml" value="0.115" />
+        <entry key="app/src/main/res/drawable/loglist_corner_radius_present.xml" value="0.115" />
+        <entry key="app/src/main/res/drawable/spinner_item.xml" value="0.115" />
+        <entry key="app/src/main/res/drawable/top_border_button.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/cmpdocuments.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/empdocuments.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layout/empfasilities.xml" value="0.1634963768115942" />
+        <entry key="app/src/main/res/layout/leave_application.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/popup.xml" value="0.1634963768115942" />
+        <entry key="app/src/main/res/layout/subordinate_leave.xml" value="0.25" />
+        <entry key="app/src/main/res/layouts/MyLeaveApplication/layout/myleaveappplication.xml" value="0.2" />
+        <entry key="app/src/main/res/layouts/MyLeave_Application_2/layout/activity_my_leave_application_2.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/SubodinateLeaveApplication/layout/subodinate_leave_application.xml" value="0.17" />
+        <entry key="app/src/main/res/layouts/advanceRequisitionActivity/layout/advance_requisititon_entry_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/advanceRequisitionActivity/layout/advance_requsation_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/companyDocumentsActivity/layout/activity_company_documents.xml" value="0.25" />
+        <entry key="app/src/main/res/layouts/employeeDocumentsActivity/layout/activity_employee_documents.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/employeeFacilitiesActivities/layout/activity_employee_facilities.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/employeeInformationActivity/layout/activity_employee_information.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/holidayDetailActivity/layout/activity_holiday_detail.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/homeActivity/layout/activity_dashboard.xml" value="0.22638549804687502" />
+        <entry key="app/src/main/res/layouts/homeActivity/layout/activity_home.xml" value="0.17" />
+        <entry key="app/src/main/res/layouts/homeActivity/layout/dialog_change_password.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/insuranceDetailActivity/layout/insurance_main.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/leaveBalanceActivity/layout/activity_leave_balance.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/loginActivity/layout/activity_login_new.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/lta/layout/activity_lta_document_pdf_viewer.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/lta/layout/activity_lta_documents.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/lta/layout/activity_lta_list.xml" value="0.2" />
+        <entry key="app/src/main/res/layouts/lta/layout/activity_lta_list_custom_row.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/lta/layout/activity_lta_request.xml" value="0.22" />
+        <entry key="app/src/main/res/layouts/lta/layout/activity_subordinate_lta_list.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/mediclaimActivity/layout/activity_my_mediclaim_list_custom_row.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layouts/mediclaimActivity/layout/activity_pdf_view.xml" value="0.18614130434782608" />
+        <entry key="app/src/main/res/layouts/mediclaimActivity/layout/activity_subordinate_mediclaim_list_custom_row.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layouts/mediclaimActivity/layout/activity_subordinate_pdf_view.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layouts/mediclaimActivity/layout/mediclaim_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/mediclaimActivity/layout/mediclaim_documents_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/mediclaimActivity/layout/mediclaim_entry_activity.xml" value="0.20018115942028986" />
+        <entry key="app/src/main/res/layouts/mediclaimActivity/layout/select_custom_pdf_layout_row.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layouts/mediclaimActivity/layout/subordinate_custom_pdf_layout_row.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/od_duty_log_detail_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/od_duty_log_employee_task_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/od_duty_log_list_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/subordinate_od_duty_log_list_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_outdoor_list.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_outdoor_list_custom_row.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_outdoor_request.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_subordinate_outdoor_list.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_subordinate_outdoor_request.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/report/layout/activity_home_pf_report_popup.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/report/layout/activity_home_report_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layouts/report/layout/activity_home_salary_report_popup.xml" value="0.25" />
+        <entry key="app/src/main/res/layouts/report/layout/activity_pdf_editor.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/report/layout/custom_activity_home_list_row.xml" value="0.16" />
+        <entry key="app/src/main/res/layouts/report/layout/spinner_item.xml" value="0.21920289855072464" />
+        <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_my_attendance_log_v2.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_my_attendance_v3.xml" value="0.25" />
+        <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_subordinate_attendance_v2.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_subordinate_monthly_attendancelog.xml" value="0.18614130434782608" />
+        <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.22604166666666667" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
