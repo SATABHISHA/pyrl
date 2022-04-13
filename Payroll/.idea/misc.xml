@@ -66,6 +66,7 @@
         <entry key="app/src/main/res/layouts/report/layout/activity_pdf_editor.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/report/layout/custom_activity_home_list_row.xml" value="0.16" />
         <entry key="app/src/main/res/layouts/report/layout/spinner_item.xml" value="0.21920289855072464" />
+        <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_my_attendance.xml" value="0.16259057971014493" />
         <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_my_attendance_log_v2.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_my_attendance_v3.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/timesheetActivity/layout/activity_subordinate_attendance_v2.xml" value="0.10815602836879433" />
