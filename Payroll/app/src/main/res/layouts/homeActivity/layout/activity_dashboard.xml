@@ -241,20 +241,43 @@
                     </LinearLayout>
 
                     <RelativeLayout
+                        android:id="@+id/rl_out"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_below="@id/rl_attendance_detail_title_bar"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="13dp"
                         android:layout_marginRight="13dp"
+                        android:visibility="gone"
                         android:background="#F41515">
 
                         <TextView
-                            android:id="@+id/tv_in_out"
+                            android:id="@+id/tv_out"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:text="OUT"
+                            android:textColor="#ffffff"
+                            android:textSize="30dp" />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_in"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_below="@id/rl_attendance_detail_title_bar"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginRight="13dp"
+                        android:visibility="visible"
+                        android:background="#4C84D8">
+
+                        <TextView
+                            android:id="@+id/tv_in"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="IN"
                             android:textColor="#ffffff"
                             android:textSize="30dp" />
 

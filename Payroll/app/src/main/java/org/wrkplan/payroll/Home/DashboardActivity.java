@@ -5,6 +5,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,13 @@ public class DashboardActivity extends AppCompatActivity {
     List<Date> selectedDateRangeList = new ArrayList<>();
     public static int count = 0;
     //----Calendar variable, code ends---
+
+    //----Attendance variable, code starts-----
+    RelativeLayout rl_out, rl_in;
+    TextView tv_out, tv_in, txt_in_time, txt_in_time_abbrebiation, txt_out_time, txt_out_time_abbrebiation;
+    CheckBox chck_wrk_frm_home;
+    //----Attendance variable, code ends-----
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +68,20 @@ public class DashboardActivity extends AppCompatActivity {
         LoadCalendarData(savedInstanceState);
 
     }
+
+    //=========Attendance code, starts======
+    public void LoadAttendanceData(){
+        rl_out = findViewById(R.id.rl_out);
+        rl_in = findViewById(R.id.rl_in);
+        tv_out = findViewById(R.id.tv_out);
+        tv_in = findViewById(R.id.tv_in);
+        txt_in_time = findViewById(R.id.txt_in_time);
+        txt_in_time_abbrebiation = findViewById(R.id.txt_in_time_abbrebiation);
+        txt_out_time = findViewById(R.id.txt_out_time);
+        txt_out_time_abbrebiation = findViewById(R.id.txt_out_time_abbrebiation);
+        chck_wrk_frm_home = findViewById(R.id.chck_wrk_frm_home);
+    }
+    //=========Attendance code, ends======
 
     //-------Calendar code, starts-----
     public void LoadCalendarData(Bundle savedInstanceState){
@@ -274,4 +297,5 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     //-------Calendar code, ends-----
+
 }
