@@ -227,6 +227,7 @@
                                 android:text="Work\nFrom\nHome"/>
                         </LinearLayout>
                         <EditText
+                            android:id="@+id/ed_wrk_frm_home_detail"
                             android:layout_width="195dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="right"
@@ -248,13 +249,14 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="13dp"
                         android:layout_marginRight="13dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:background="#F41515">
 
                         <TextView
                             android:id="@+id/tv_out"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
                             android:layout_centerInParent="true"
                             android:text="OUT"
                             android:textColor="#ffffff"
@@ -269,13 +271,14 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="13dp"
                         android:layout_marginRight="13dp"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:background="#4C84D8">
 
                         <TextView
                             android:id="@+id/tv_in"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
                             android:layout_centerInParent="true"
                             android:text="IN"
                             android:textColor="#ffffff"
