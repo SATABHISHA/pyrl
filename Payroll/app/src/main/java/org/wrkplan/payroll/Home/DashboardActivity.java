@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -46,6 +47,9 @@ public class DashboardActivity extends AppCompatActivity {
     String dateString, holiday_name1;
     TextView txt_date, txt_day_name, txt_holiday_name;
     public static Bundle savedInstanceState;
+    SimpleDateFormat myFormat = new SimpleDateFormat("MM-dd-yyyy");
+    List<Date> selectedDateRangeList = new ArrayList<>();
+    public static int count = 0;
     //----Calendar variable, code ends---
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,17 +98,44 @@ public class DashboardActivity extends AppCompatActivity {
         final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
         final CaldroidListener listener = new CaldroidListener() {
 
+
             @Override
             public void onSelectDate(Date date, View view) {
+               count = count + 1;
+
+
                 // Toast.makeText(getApplicationContext(), formatter.format(date), Toast.LENGTH_SHORT).show();
                 Log.d("date==", date.toString());
                 SimpleDateFormat inputformat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy");
                 //SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+                //---get current day date, code starts---
+
+                if (count <= 2) {
+                    ColorDrawable color = new ColorDrawable(Color.parseColor("#E4FCAD"));
+                    caldroidFragment.setBackgroundDrawableForDate(color, date);
+                    caldroidFragment.refreshView();
+                    selectedDateRangeList.add(date);
+                }else if(count>2){
+                    for(int i=0; i<selectedDateRangeList.size(); i++){
+
+                        caldroidFragment.clearBackgroundDrawableForDate(selectedDateRangeList.get(i));
+                        caldroidFragment.refreshView();
+                    }
+                    selectedDateRangeList.clear();
+                    count = 0;
+
+                }
+                //---get current day date, code ends---
+
+
                 try {
                     Date d1 = inputformat.parse(date.toString());
                     Log.d("niladri=>", d1.toString());
                     String formateDate = new SimpleDateFormat("dd/MM/yyyy").format(d1);
                     Log.d("DraftDate1-=>", formateDate);
+
+
                     for (int j = 0; j < arrayList1.size(); j++) {
                         if (formateDate.equals(arrayList1.get(j).getFrom_date())) {
 
@@ -212,6 +243,14 @@ public class DashboardActivity extends AppCompatActivity {
 
 
                     }
+
+                    //---get current day date, code starts---
+                    Date cDate = new Date();
+                    String fDate = new SimpleDateFormat("MM-dd-yyyy").format(cDate);
+                    Date today = (Date) myFormat.parse(fDate);
+                    //---get current day date, code ends---
+                    ColorDrawable color = new ColorDrawable(Color.parseColor("#E4FCAD"));
+                    caldroidFragment.setBackgroundDrawableForDate(color, today);
 
 
 //                    lv1.setAdapter(new HolidayDetailActivity.Nr());
