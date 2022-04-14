@@ -572,11 +572,14 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     }
 
 
-                    txt_in_time.setText(outputFormat.format(date_log_time_in));
+//                    txt_in_time.setText(outputFormat.format(date_log_time_in));
+                    txt_in_time.setText(outputFormat.format(date_log_time_in).substring(0,outputFormat.format(date_log_time_in).length()-2));
+                    txt_in_time_abbrebiation.setText(outputFormat.format(date_log_time_in).substring(outputFormat.format(date_log_time_in).length()-2));
 
 
                 } else {
                     txt_in_time.setText("");
+                    txt_in_time_abbrebiation.setText("");
                 }
                 if (!jsonObject.getString("time_out").contentEquals("")) {
                     String inputText_time_out = jsonObject.getString("time_out");
@@ -587,11 +590,13 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    txt_out_time.setText(outputFormat.format(date_log_time_out));
+                    txt_out_time.setText(outputFormat.format(date_log_time_out).substring(0,outputFormat.format(date_log_time_out).length()-2));
+                    txt_out_time_abbrebiation.setText(outputFormat.format(date_log_time_out).substring(outputFormat.format(date_log_time_out).length()-2));
 
 
                 } else {
                     txt_out_time.setText("");
+                    txt_out_time_abbrebiation.setText("");
                 }
 
             }
