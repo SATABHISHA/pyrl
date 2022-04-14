@@ -42,6 +42,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.AppVersionUpgradeNotifier;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Lta.LtaDocumentPdfViewer;
 import org.wrkplan.payroll.Model.UserSingletonModel;
@@ -634,7 +635,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             userSingletonModel.setAttendance_with_selfie_yn(jb_company.getString("attendance_with_selfie_yn"));
 
 
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class); //--commented on 14th April, 22
+                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                             startActivity(intent);
                             finish();
 //                            Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();

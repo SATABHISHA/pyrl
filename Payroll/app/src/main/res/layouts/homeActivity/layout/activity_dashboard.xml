@@ -359,7 +359,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_calendar_detail"
                     android:layout_width="match_parent"
-                    android:layout_height="460dp"
+                    android:layout_height="560dp"
                     android:layout_marginLeft="0dp"
                     android:layout_marginRight="0dp"
                     android:layout_marginTop="20dp"
@@ -368,19 +368,29 @@
                     <LinearLayout
                         android:id="@+id/ll_date"
                         android:layout_width="match_parent"
-                        android:layout_height="321dp"
+                        android:layout_height="wrap_content"
                         android:background="#ffffff"
-                        android:orientation="vertical" />
+                        android:orientation="vertical" >
+                        <RelativeLayout
+                            android:id="@+id/calendar_date_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="11">
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
                     <TextView
                         android:id="@+id/txt_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ll_date"
-                        android:layout_marginTop="20dp"
                         android:layout_centerHorizontal="true"
-                        android:textSize="16sp"
+                        android:layout_marginTop="20dp"
+                        android:text="13-Apr-2022"
                         android:textColor="#444444"
-                        android:text="13-Apr-2022"/>
+                        android:textSize="16sp" />
                     <TextView
                         android:id="@+id/txt_day_name"
                         android:layout_width="wrap_content"
