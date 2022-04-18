@@ -575,8 +575,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 //                    txt_in_time.setText(outputFormat.format(date_log_time_in));
                     txt_in_time.setText(outputFormat.format(date_log_time_in).substring(0,outputFormat.format(date_log_time_in).length()-2));
                     txt_in_time_abbrebiation.setText(outputFormat.format(date_log_time_in).substring(outputFormat.format(date_log_time_in).length()-2));
-
-
                 } else {
                     txt_in_time.setText("");
                     txt_in_time_abbrebiation.setText("");
