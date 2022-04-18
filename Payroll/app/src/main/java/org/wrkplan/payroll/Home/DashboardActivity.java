@@ -20,10 +20,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,12 +58,15 @@ import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.HolidayDetail.HolidayDetailActivity;
 import org.wrkplan.payroll.HolidayModel.Holiday;
 import org.wrkplan.payroll.Model.DashboardPendingItemModel;
+import org.wrkplan.payroll.Model.Load_Spinner_Model;
 import org.wrkplan.payroll.Model.OutDoorLogListModel;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel_v3;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.OutDoorDutyLog.SubordinateOdDutyLogListActivity;
 import org.wrkplan.payroll.R;
+import org.wrkplan.payroll.Reports.PdfEditorActivity;
+import org.wrkplan.payroll.Reports.ReportHomeListActivity;
 import org.wrkplan.payroll.Timesheet.MyAttendanceActivity_LogList_Adapter_v3;
 import org.wrkplan.payroll.Timesheet.MyAttendanceActivity_v3;
 
@@ -113,6 +119,17 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     ArrayList<DashboardPendingItemModel> dashboardPendingItemModelArrayList = new ArrayList<>();
     //-----Pending Items variable, code ends----
 
+    //-----Salary slip variable, code starts-----
+    Spinner spinner_year_salary_slip, spinner_month;
+    ArrayList<Load_Spinner_Model> load_spinner_models = new ArrayList<>();
+    ArrayList<String> arrayListMonth = new ArrayList<>();
+    ArrayList<String> arrayListSalarySlipClendarYear = new ArrayList<>();
+    public static String report_html = "";
+    public static String year_code = "", month_name = "";
+    LinearLayout ll_salary_slip_dropdown;
+    RelativeLayout rl_custombtn_view_report;
+    //-----Salary slip variable, code ends-----
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,8 +138,200 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         LoadCalendarData(savedInstanceState);
         LoadAttendanceData();
         LoadPendingItems();
+        LoadSalaryData();
 
     }
+
+    //=========///----Salary Slip, code starts----///======
+    public void LoadSalaryData(){
+        spinner_year_salary_slip =  findViewById(R.id.spinner_year);
+        spinner_month =  findViewById(R.id.spinner_month);
+        ll_salary_slip_dropdown =  findViewById(R.id.ll_salary_slip_dropdown);
+        rl_custombtn_view_report =  findViewById(R.id.rl_custombtn_view_report);
+
+        //----Spinner for year, code starts-----
+        Load_Spinner_Data(spinner_year_salary_slip);
+        spinner_year_salary_slip.setSelection(0);
+
+        spinner_year_salary_slip.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                        item[0] =load_spinner_models.get(position).getFinancial_year_code();
+                if(position > -1) {
+                    Log.d("getdata-=>", load_spinner_models.get(position).getFinancial_year_code());
+                    year_code = load_spinner_models.get(position).getFinancial_year_code();
+
+                    spinner_month.setClickable(true);
+                    spinner_month.setAlpha(1.0f);
+                            /* tv_salary_slip_button_continue.setAlpha(1.0f);
+                            tv_salary_slip_button_continue.setClickable(true);*/
+                }else{
+                    spinner_month.setClickable(false);
+                    spinner_month.setAlpha(0.4f);
+                            /*tv_salary_slip_button_continue.setAlpha(0.4f);
+                            tv_salary_slip_button_continue.setClickable(false);*/
+                }
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView <?> parent) {
+            }
+        });
+        //----Spinner for year, code ends-----
+
+        //------Spinner for month, code starts-----
+        LoadSpinnerDataForMonth(spinner_month);
+        spinner_month.setSelection(0);
+
+        spinner_month.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                        item[0] =load_spinner_models.get(position).getFinancial_year_code();
+                if(position > 0) {
+                    Log.d("MonthSelect-=>",arrayListMonth.get(position).toString());
+
+                    month_name = arrayListMonth.get(position).toString();
+                }else{
+
+                }
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView <?> parent) {
+            }
+        });
+        //------Spinner for month, code ends-----
+
+        rl_custombtn_view_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Clicked-=>","Clicked");
+                loadSalarySlipApiData(year_code);
+            }
+        });
+
+    }
+    public void LoadSpinnerDataForMonth(Spinner spinner_month){
+        if(!arrayListMonth.isEmpty()){
+            arrayListMonth.clear();
+        }
+        arrayListMonth.add("--Select Month--");
+        arrayListMonth.add("January");
+        arrayListMonth.add("February");
+        arrayListMonth.add("March");
+        arrayListMonth.add("April");
+        arrayListMonth.add("May");
+        arrayListMonth.add("June");
+        arrayListMonth.add("July");
+        arrayListMonth.add("August");
+        arrayListMonth.add("September");
+        arrayListMonth.add("October");
+        arrayListMonth.add("November");
+        arrayListMonth.add("December");
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayListMonth);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_month.setAdapter(arrayAdapter);
+    }
+    //----------Code to get financial year data w.r.t pdf generation from api using volley and load data to recycler view, starts==========
+    public void loadSalarySlipApiData(String financial_year){
+//        String url = "http://14.99.211.60:9018/api/reports/pf-deduction/demo_test/95/2020" ;
+//        String url = Url.BASEURL() + "reports/pf-deduction/" + userSingletonModel.corporate_id + "/" + userSingletonModel.employee_id + "/" + financial_year; //--commented on 17-Aug-2021
+        String url = Url.BASEURL() + "reports/pf-deduction/" + userSingletonModel.corporate_id + "/" + userSingletonModel.employee_id + "/" + financial_year + "/" + userSingletonModel.getBranch_office_id() +"/" + "ALL"; //--added on 17-Aug-2021(added two parameters)
+        Log.d("url->",url);
+        final ProgressDialog loading = ProgressDialog.show(DashboardActivity.this, "Loading", "Please wait...", true, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
+                Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        getResponseFinancialYearData(response);
+                        loading.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                error.printStackTrace();
+            }
+        });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+    }
+    public void getResponseFinancialYearData(String response){
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+
+            Log.d("jsonData-=>",jsonObject.toString());
+            JSONObject jsonObject1 = jsonObject.getJSONObject("response");
+            if(jsonObject1.getString("status").contentEquals("true")){
+                report_html = jsonObject.getString("report_html");
+                startActivity(new Intent(DashboardActivity.this, PdfEditorActivityDashboard.class));
+            }else if(jsonObject1.getString("status").contentEquals("false")){
+                Toast.makeText(getApplicationContext(),jsonObject1.getString("message"), Toast.LENGTH_LONG).show();
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    //--------Code to get financial year data w.r.t pdf generation from api and load data to recycler view, ends---------
+    //----code to load spinner data, starts-----
+    public void Load_Spinner_Data(Spinner spinner_year) {
+
+        String url= Url.BASEURL() + "finyear/" + "list/reports/" + userSingletonModel.corporate_id+"/1";
+        Log.d("urlfinyear-=>",url);
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    JSONArray jsonArray=jsonObject.getJSONArray("fin_years");
+                    arrayListSalarySlipClendarYear.clear();
+                    load_spinner_models.clear();
+                    for(int i=0;i<jsonArray.length();i++)
+                    {
+
+                        JSONObject jb1=jsonArray.getJSONObject(i);
+                        String financial_year_code=jb1.getString("financial_year_id");
+                        String calender_year=jb1.getString("financial_year_code");
+                        arrayListSalarySlipClendarYear.add(calender_year);
+                        Load_Spinner_Model spinnerModel=new Load_Spinner_Model();
+                        spinnerModel.setFinancial_year_code(financial_year_code);
+                        spinnerModel.setCalender_year(calender_year);
+                        // arrayList.add(jb1.getString("calender_year"));
+                        load_spinner_models.add(spinnerModel);
+                    }
+                    initSpinnerAdapter(spinner_year);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(DashboardActivity.this, "Could't connect to the server", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        Volley.newRequestQueue(DashboardActivity.this).add(stringRequest);
+    }
+    //----code to load spinner data, ends-----
+    private void initSpinnerAdapter(Spinner spinner_year)
+    {
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayListSalarySlipClendarYear);
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, arrayList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_year.setAdapter(arrayAdapter);
+    }
+    //=========///----Salary Slip, code ends----///======
+
 
     //=========///----Pending Items, code starts---///======
     public void LoadPendingItems(){

@@ -585,7 +585,7 @@
 
                     <LinearLayout
                         android:id="@+id/ll_salary_slip_dropdown"
-                        android:layout_width="230dp"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_below="@id/rl_salary_slip_title_bar"
@@ -652,22 +652,24 @@
                         </LinearLayout>
 
                     </LinearLayout>
+
                     <RelativeLayout
                         android:id="@+id/rl_custombtn_view_report"
                         android:layout_width="75dp"
                         android:layout_height="38dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_alignParentRight="true"
                         android:layout_below="@id/rl_salary_slip_title_bar"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="15dp"
                         android:layout_marginRight="13dp"
                         android:background="#2571FF">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
                             android:text="View"
                             android:textColor="#ffffff"
-                            android:textSize="14sp"
-                            android:layout_centerInParent="true"/>
+                            android:textSize="14sp" />
                     </RelativeLayout>
 
                 </RelativeLayout>
