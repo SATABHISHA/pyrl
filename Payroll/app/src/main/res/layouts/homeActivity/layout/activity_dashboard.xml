@@ -554,6 +554,125 @@
                 </RelativeLayout>
                 <!--Pending Items, code ends-->
 
+                <!---Salary Slip, code starts-->
+                <RelativeLayout
+                    android:id="@+id/rl_salary_slip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#56D1F9">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_salary_slip_title_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="#BFBFBF">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="8dp"
+                            android:text="Salary Slip"
+                            android:textColor="#ffffff"
+                            android:textSize="17sp" />
+
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_salary_slip_dropdown"
+                        android:layout_width="230dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_below="@id/rl_salary_slip_title_bar"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="#F9F9F9">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1"
+                            android:layout_marginRight="2.5dp"
+                            android:background="@drawable/layout6">
+
+                            <fr.ganfra.materialspinner.MaterialSpinner
+                                android:id="@+id/spinner_month"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:paddingLeft="0dp"
+                                android:layout_marginRight="8dp"
+                                android:gravity="left"
+                                app:ms_multiline="false"
+                                app:ms_hintColor="#3C3C3C"
+                                app:ms_hintTextSize="15sp"
+                                app:ms_enableFloatingLabel="false"
+                                app:ms_enableErrorLabel="false"
+                                app:ms_thickness="0dp"
+                                app:ms_arrowColor="#c2c2c2"
+                                app:ms_arrowSize="16dp"
+                                app:ms_alignLabels="false"
+                                android:layout_gravity="center"
+                                android:overlapAnchor="false"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="2.5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/layout6">
+                            <fr.ganfra.materialspinner.MaterialSpinner
+                                android:id="@+id/spinner_year"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:paddingLeft="0dp"
+                                android:layout_marginRight="10dp"
+                                android:gravity="left"
+                                app:ms_multiline="false"
+                                app:ms_hintColor="#3C3C3C"
+                                app:ms_hintTextSize="15sp"
+                                app:ms_enableFloatingLabel="false"
+                                app:ms_enableErrorLabel="false"
+                                app:ms_thickness="0dp"
+                                app:ms_arrowColor="#c2c2c2"
+                                app:ms_arrowSize="16dp"
+                                app:ms_alignLabels="false"
+                                android:layout_gravity="center"
+                                android:overlapAnchor="false"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_custombtn_view_report"
+                        android:layout_width="75dp"
+                        android:layout_height="38dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@id/rl_salary_slip_title_bar"
+                        android:layout_marginRight="13dp"
+                        android:background="#2571FF">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="View"
+                            android:textColor="#ffffff"
+                            android:textSize="14sp"
+                            android:layout_centerInParent="true"/>
+                    </RelativeLayout>
+
+                </RelativeLayout>
+                <!---Salary Slip, code ends-->
+
 
             </LinearLayout>
 
