@@ -177,6 +177,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
                         android:background="#BFBFBF">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -185,17 +186,18 @@
                             android:text="Attendance Detail"
                             android:textColor="#ffffff"
                             android:textSize="17sp" />
+
                         <TextView
                             android:layout_width="100dp"
                             android:layout_height="28dp"
+                            android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="8dp"
-                            android:text="13-Apr-2022"
                             android:layout_marginRight="8dp"
-                            android:layout_alignParentRight="true"
-                            android:gravity="center"
-                            android:textColor="#ffffff"
                             android:background="#898A8A"
+                            android:gravity="center"
+                            android:text="13-Apr-2022"
+                            android:textColor="#ffffff"
                             android:textSize="17sp" />
                     </RelativeLayout>
                     <LinearLayout
@@ -482,6 +484,35 @@
 
                 </RelativeLayout>
                 <!--Calendar Details, code ends -->
+
+                <!--Pending Items, code starts-->
+                <RelativeLayout
+                    android:id="@+id/rl_pending_items"
+                    android:layout_width="match_parent"
+                    android:layout_height="347dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#56D1F9">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_pending_items_title_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="#BFBFBF">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="8dp"
+                            android:text="Pending Items"
+                            android:textColor="#ffffff"
+                            android:textSize="17sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <!--Pending Items, code ends-->
 
 
             </LinearLayout>
