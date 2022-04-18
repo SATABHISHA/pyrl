@@ -1,6 +1,7 @@
 package org.wrkplan.payroll.Home;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +32,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -50,9 +54,12 @@ import org.wrkplan.payroll.Config.ImageUtil;
 import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.HolidayDetail.HolidayDetailActivity;
 import org.wrkplan.payroll.HolidayModel.Holiday;
+import org.wrkplan.payroll.Model.DashboardPendingItemModel;
+import org.wrkplan.payroll.Model.OutDoorLogListModel;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel_v3;
 import org.wrkplan.payroll.Model.UserSingletonModel;
+import org.wrkplan.payroll.OutDoorDutyLog.SubordinateOdDutyLogListActivity;
 import org.wrkplan.payroll.R;
 import org.wrkplan.payroll.Timesheet.MyAttendanceActivity_LogList_Adapter_v3;
 import org.wrkplan.payroll.Timesheet.MyAttendanceActivity_v3;
@@ -99,6 +106,13 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     ArrayList<TimesheetMyAttendanceModel_v3> timesheetMyAttendanceModel_v3ArrayList = new ArrayList<>();
     //----Attendance variable, code ends-----
 
+    //-----Pending Items variable, code starts----
+    LinearLayout ll_recycler;
+    TextView tv_nodata;
+    RecyclerView recycler_view;
+    ArrayList<DashboardPendingItemModel> dashboardPendingItemModelArrayList = new ArrayList<>();
+    //-----Pending Items variable, code ends----
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,8 +120,88 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         LoadCalendarData(savedInstanceState);
         LoadAttendanceData();
+        LoadPendingItems();
 
     }
+
+    //=========///----Pending Items, code starts---///======
+    public void LoadPendingItems(){
+        ll_recycler = findViewById(R.id.ll_recycler);
+        tv_nodata = findViewById(R.id.tv_nodata);
+        recycler_view = findViewById(R.id.recycler_view);
+
+        //==========Recycler code initializing and setting layoutManager starts======
+        recycler_view = findViewById(R.id.recycler_view);
+        recycler_view.setHasFixedSize(true);
+        recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        //==========Recycler code initializing and setting layoutManager ends=====
+
+        loadPendingItemsApiData();
+    }
+
+    //===========Code to get data from api using volley and load data to recycler view, starts==========
+    public void loadPendingItemsApiData(){
+        String url = Url.BASEURL()+"pending_actions/fetch/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+        Log.d("listurl-=>",url);
+        final ProgressDialog loading = ProgressDialog.show(DashboardActivity.this, "Loading", "Please wait...", true, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
+                Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        getResponseData(response);
+                        loading.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                error.printStackTrace();
+            }
+        });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+    }
+    public void getResponseData(String response){
+        try {
+            if(!dashboardPendingItemModelArrayList.isEmpty()){
+                dashboardPendingItemModelArrayList.clear();
+            }
+            JSONObject jsonObject = new JSONObject(response);
+            Log.d("jsonData-=>",jsonObject.toString());
+            JSONObject jsonObject1 = jsonObject.getJSONObject("response");
+            if(jsonObject1.getString("status").contentEquals("true")){
+                ll_recycler.setVisibility(View.VISIBLE);
+                tv_nodata.setVisibility(View.GONE);
+                JSONArray jsonArray = jsonObject.getJSONArray("pending_actions");
+                for(int i=0; i<jsonArray.length(); i++){
+                    JSONObject jsonObject2 = jsonArray.getJSONObject(i);
+                    DashboardPendingItemModel pendingItemModel = new DashboardPendingItemModel();
+                    pendingItemModel.setEvent_name(jsonObject2.getString("event_name"));
+                    pendingItemModel.setEvent_id(jsonObject2.getString("event_id"));
+                    pendingItemModel.setEvent_type(jsonObject2.getString("event_type"));
+                    pendingItemModel.setEvent_owner_id(jsonObject2.getString("event_owner_id"));
+                    pendingItemModel.setEvent_owner_name(jsonObject2.getString("event_owner_name"));
+                    pendingItemModel.setEvent_status(jsonObject2.getString("event_status"));
+
+
+                    dashboardPendingItemModelArrayList.add(pendingItemModel);
+
+                }
+                recycler_view.setAdapter(new CustomDashboardPendingItemsListAdapter(this, dashboardPendingItemModelArrayList));
+            }else if(jsonObject1.getString("status").contentEquals("false")){
+                ll_recycler.setVisibility(View.GONE);
+                tv_nodata.setVisibility(View.VISIBLE);
+                tv_nodata.setText(jsonObject1.getString("message"));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    //===========Code to get data from api and load data to recycler view, ends==========
+    //=========///----Pending Items, code ends---///======
 
     //=========///----Attendance code, starts----///======
     public void LoadAttendanceData(){
@@ -613,6 +707,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     //--------Code for getting time_in and time_out, ends----------
     //-------------location code starts(added on 27th may)--------
+    @SuppressLint("MissingPermission")
     void getLocation() {
         try {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);

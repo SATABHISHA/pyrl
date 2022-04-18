@@ -388,7 +388,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_calendar_detail"
                     android:layout_width="match_parent"
-                    android:layout_height="560dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
                     android:layout_marginRight="0dp"
                     android:layout_marginTop="20dp"
@@ -448,6 +448,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_below="@id/txt_holiday_name"
                         android:orientation="horizontal">
                         <RelativeLayout
@@ -491,9 +492,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="347dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="20dp"
                     android:background="#56D1F9">
 
                     <RelativeLayout
@@ -511,6 +512,45 @@
                             android:textColor="#ffffff"
                             android:textSize="17sp" />
                     </RelativeLayout>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_below="@id/rl_pending_items_title_bar"
+                        android:layout_weight="1"
+                        android:background="#ffffff"
+                        android:padding="0dp"
+                        app:cardElevation="0dp"
+                        app:cardUseCompatPadding="false">
+
+                        <TextView
+                            android:id="@+id/tv_nodata"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="No record found"
+                            android:textSize="14sp"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="0dp"
+                            android:paddingRight="0dp"
+                            android:visibility="gone">
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recycler_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:scrollbars="vertical" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
                 </RelativeLayout>
                 <!--Pending Items, code ends-->
 
