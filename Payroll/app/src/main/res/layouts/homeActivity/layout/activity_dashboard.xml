@@ -205,7 +205,7 @@
                         android:id="@+id/ll_wkh_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="75dp"
-                        android:background="#c2c2c2"
+                        android:background="@drawable/activity_dashboard_wfh_shape"
                         android:layout_marginTop="13dp"
                         android:layout_marginLeft="13dp"
                         android:layout_below="@id/rl_attendance_detail_title_bar"
@@ -253,14 +253,14 @@
                         android:layout_marginTop="13dp"
                         android:layout_marginRight="13dp"
                         android:visibility="visible"
-                        android:background="#F41515">
+                        android:background="@drawable/activity_dashboard_attendance_out_shape">
 
                         <TextView
                             android:id="@+id/tv_out"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:layout_centerInParent="true"
+                            android:gravity="center"
                             android:text="OUT"
                             android:textColor="#ffffff"
                             android:textSize="30dp" />
@@ -275,7 +275,7 @@
                         android:layout_marginTop="13dp"
                         android:layout_marginRight="13dp"
                         android:visibility="gone"
-                        android:background="#4C84D8">
+                        android:background="@drawable/activity_dashboard_attendance_in_shape">
 
                         <TextView
                             android:id="@+id/tv_in"
@@ -405,13 +405,16 @@
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
                         android:orientation="vertical" >
+
                         <RelativeLayout
                             android:id="@+id/calendar_date_list"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_margin="10dp"
-                            android:layout_weight="11">
-                        </RelativeLayout>
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="11"></RelativeLayout>
 
                     </RelativeLayout>
 
@@ -701,13 +704,13 @@
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    <com.google.android.material.navigation.NavigationView
+   <!-- <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_home"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/activity_main_drawer" /> -->
 
 </androidx.drawerlayout.widget.DrawerLayout>
