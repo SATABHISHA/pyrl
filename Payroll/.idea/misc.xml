@@ -5,7 +5,10 @@
       <map>
         <entry key="../../../../../../Volumes/SatabhishaSSD/SSDUser/SSDLibrary/SSDAndroidSdk/platforms/android-30/data/res/layout/simple_spinner_dropdown_item.xml" value="0.21920289855072464" />
         <entry key="../../../../../../Volumes/SatabhishaSSD/SSDUser/SSDLibrary/SSDAndroidSdk/platforms/android-30/data/res/layout/simple_spinner_item.xml" value="0.21920289855072464" />
+        <entry key="app/src/main/res/drawable/activity_dashboard_attendance_date_shape.xml" value="0.134" />
         <entry key="app/src/main/res/drawable/activity_dashboard_calendar_btns_shape.xml" value="0.138" />
+        <entry key="app/src/main/res/drawable/activity_dashboard_emp_corpid_shape.xml" value="0.107" />
+        <entry key="app/src/main/res/drawable/activity_dashboard_salaryslip_btns.xml" value="0.107" />
         <entry key="app/src/main/res/drawable/activity_dashboard_shape.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/activity_dashboard_titlebar_shape.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/activity_my_attendance_shape.xml" value="0.23333333333333334" />
