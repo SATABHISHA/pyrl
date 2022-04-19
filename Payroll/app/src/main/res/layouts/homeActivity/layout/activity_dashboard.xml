@@ -397,11 +397,13 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/activity_dashboard_shape">
 
-                    <LinearLayout
-                        android:id="@+id/ll_date"
+                    <RelativeLayout
+                        android:id="@+id/rl_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#ffffff"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
                         android:orientation="vertical" >
                         <RelativeLayout
                             android:id="@+id/calendar_date_list"
@@ -409,15 +411,15 @@
                             android:layout_height="match_parent"
                             android:layout_margin="10dp"
                             android:layout_weight="11">
-
                         </RelativeLayout>
-                    </LinearLayout>
+
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/txt_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/ll_date"
+                        android:layout_below="@id/rl_date"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
                         android:text="13-Apr-2022"
