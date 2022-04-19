@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -17,8 +18,12 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,10 +35,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,16 +58,28 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.wrkplan.payroll.AdvanceRequisition.AdvanceRequisitionActivity;
+import org.wrkplan.payroll.CompanyDocuments.CompanyDocumentsActivity;
 import org.wrkplan.payroll.Config.ImageUtil;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.EmployeeDocuments.EmployeeDocumentsActivity;
+import org.wrkplan.payroll.EmployeeFacilities.EmployeeFacilitiesActivity;
+import org.wrkplan.payroll.EmployeeInformation.EmployeeInformationActivity;
 import org.wrkplan.payroll.HolidayDetail.HolidayDetailActivity;
 import org.wrkplan.payroll.HolidayModel.Holiday;
+import org.wrkplan.payroll.InsuranceDetail.InsuranceDetail1;
+import org.wrkplan.payroll.Leave_Balance.LeaveBalanceActivity;
+import org.wrkplan.payroll.Login.LoginActivity;
+import org.wrkplan.payroll.Lta.LtaListActivity;
+import org.wrkplan.payroll.Mediclaim.MediclaimActivity;
 import org.wrkplan.payroll.Model.DashboardPendingItemModel;
 import org.wrkplan.payroll.Model.Load_Spinner_Model;
 import org.wrkplan.payroll.Model.OutDoorLogListModel;
@@ -65,6 +88,8 @@ import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel_v3;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.MyLeaveApplication2.MyLeaveApplication2Activity;
 import org.wrkplan.payroll.OutDoorDuty.OutDoorRequestActivity;
+import org.wrkplan.payroll.OutDoorDuty.OutdoorListActivity;
+import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogListActivity;
 import org.wrkplan.payroll.OutDoorDutyLog.SubordinateOdDutyLogListActivity;
 import org.wrkplan.payroll.R;
 import org.wrkplan.payroll.Reports.PdfEditorActivity;
@@ -81,13 +106,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, LocationListener {
+public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, LocationListener, NavigationView.OnNavigationItemSelectedListener {
+
+    //------Dashboard variable, code starts-----
+    TextView tv_fullname,tv_companynam;
+    androidx.appcompat.app.AlertDialog.Builder builder;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
+    CoordinatorLayout coordinatorLayout;
+    LinearLayout Linear;
+    Context context;
+    //------Dashboard variable, code ends-----
 
     //----Calendar variable, code starts---
     CaldroidFragment caldroidFragment;
     ArrayList<Holiday> arrayList = new ArrayList<>();
     ArrayList<Holiday> arrayList1 = new ArrayList<>();
-    UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     String dateString, holiday_name1;
     TextView txt_date, txt_day_name, txt_holiday_name, tv_custombtn_leave_apply, tv_custombtn_od_apply;
     public static Bundle savedInstanceState;
@@ -138,12 +173,355 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        LoadDashboardData();
         LoadCalendarData(savedInstanceState);
         LoadAttendanceData();
         LoadPendingItems();
         LoadSalaryData();
 
     }
+
+    //=========///----Dashboard(includes navigation drawer), code starts---///=======
+    public void LoadDashboardData(){
+        Linear=findViewById(R.id.Linear);
+        sharedPreferences = getSharedPreferences("loginref", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        context = DashboardActivity.this;
+        //--------------------NAVIGATION DRAWER PORTIONS--------------------------//
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        final View header = navigationView.getHeaderView(0);
+        tv_fullname=header.findViewById(R.id.tv_fullname);
+        tv_companynam=header.findViewById(R.id.tv_companynam);
+        //  ed_userpassword=findViewById(R.id.ed_userpassword);
+        coordinatorLayout=findViewById(R.id.cordinatorLayout);
+        tv_fullname.setText(userSingletonModel.getFull_employee_name());
+        tv_companynam.setText(userSingletonModel.getCompany_name());
+        navigationView.setNavigationItemSelectedListener(this);
+        //-----------------------END OF NAVIGATION DRAWER PORTIONS--------------------//
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+        switch (id) {
+            case R.id.nav_logout:
+
+                //  finish();
+                //System.exit(0);
+//                builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
+                builder.setMessage("Are you sure you want to exit?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                LoginActivity.ed_userpassword.setText("");
+                                editor.remove("username");
+                                editor.remove("userid");
+                                editor.remove("savelogin");
+                                editor.clear();
+                                editor.commit();
+//                                a.addCategory(Intent.CATEGORY_HOME);
+//                                a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                Intent intent=new Intent(DashboardActivity.this,LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                                finish();
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //  Action for 'NO' Button
+                                Intent intent=new Intent(DashboardActivity.this,HomeActivity.class);
+                                startActivity(intent);
+                                finish();
+                                dialog.cancel();
+
+                            }
+                        });
+                //Creating dialog box
+                androidx.appcompat.app.AlertDialog alert_logout = builder.create();
+                //Setting the title manually
+                alert_logout.setTitle("Logout");
+                alert_logout.show();
+                break;
+
+
+            case R.id.emp_information:
+                Intent intent = new Intent(DashboardActivity.this, EmployeeInformationActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.leave_balance:
+                Intent intent1 = new Intent(DashboardActivity.this, LeaveBalanceActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.emp_facilities:
+                Intent intent3 = new Intent(DashboardActivity.this, EmployeeFacilitiesActivity.class);
+                startActivity(intent3);
+                break;
+            case R.id.emp_documents:
+                Intent intent4 = new Intent(DashboardActivity.this, EmployeeDocumentsActivity.class);
+                startActivity(intent4);
+                break;
+            case R.id.cmp_documents:
+                Intent intent5 = new Intent(DashboardActivity.this, CompanyDocumentsActivity.class);
+                startActivity(intent5);
+                break;
+            case R.id.insurance_detail:
+                Intent intent6 = new Intent(DashboardActivity.this, InsuranceDetail1.class);
+                startActivity(intent6);
+                break;
+            case R.id.holiday_detail:
+                Intent intent7 = new Intent(DashboardActivity.this, HolidayDetailActivity.class);
+                startActivity(intent7);
+                break;
+
+            case R.id.nav_outdoor_duty_request:
+                Intent intent8 = new Intent(DashboardActivity.this, OutdoorListActivity.class);
+                startActivity(intent8);
+                break;
+            case R.id.nav_outdoor_duty:
+                startActivity(new Intent(this, OdDutyLogListActivity.class));
+                break; //making temporary disable on 9th dec
+            case R.id.nav_timesheet:
+//                startActivity(new Intent(this, MyAttendanceActivity.class));
+                startActivity(new Intent(this, MyAttendanceActivity_v3.class));
+                break;
+            case R.id.nav_change_pswd:
+                //--------adding custom dialog on 14th may starts------
+                LayoutInflater li2 = LayoutInflater.from(this);
+                View dialog = li2.inflate(R.layout.dialog_change_password, null);
+                final EditText ed_current_password = dialog.findViewById(R.id.ed_current_password);
+                final EditText edt_new_password = dialog.findViewById(R.id.edt_new_password);
+                final EditText edt_retype_password = dialog.findViewById(R.id.edt_retype_password);
+                final TextView tv_pswd_chk = dialog.findViewById(R.id.tv_pswd_chk);
+                final TextView tv_submit = dialog.findViewById(R.id.tv_submit);
+                RelativeLayout rl_cancel = dialog.findViewById(R.id.rl_cancel);
+                final RelativeLayout rl_submit = dialog.findViewById(R.id.rl_submit);
+                android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
+                alert.setView(dialog);
+//                        alert.setCancelable(false);
+                //Creating an alert dialog
+                final android.app.AlertDialog alertDialog = alert.create();
+                alertDialog.show();
+                rl_submit.setClickable(false);
+//            tv_submit.setAlpha(0.5f);
+                rl_submit.setAlpha(0.5f);
+                rl_cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.cancel();
+                    }
+                });
+                edt_retype_password.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        if(edt_new_password.getText().toString().contentEquals(charSequence)){
+                            tv_pswd_chk.setVisibility(View.VISIBLE);
+                            tv_pswd_chk.setTextColor(Color.parseColor("#00AE00"));
+                            tv_pswd_chk.setText("Correct Password");
+//                        tv_submit.setAlpha(1.0f);
+                            rl_submit.setAlpha(1.0f);
+                            rl_submit.setClickable(true);
+                        }else {
+                            tv_pswd_chk.setVisibility(View.VISIBLE);
+                            tv_pswd_chk.setTextColor(Color.parseColor("#AE0000"));
+                            rl_submit.setClickable(false);
+//                        tv_submit.setAlpha(0.5f);
+                            rl_submit.setAlpha(0.5f);
+                            tv_pswd_chk.setText("Incorrect Password");
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                rl_submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(ed_current_password.getText().toString().contentEquals("") || edt_retype_password.getText().toString().contentEquals("") ){
+                            //----to display message in snackbar, code starts
+                            String message_notf = "Field cannot be left blank";
+                            int color = Color.parseColor("#FFFFFF");
+                            View v1 = findViewById(R.id.cordinatorLayout);
+                            new org.wrkplan.payroll.Config.Snackbar(message_notf,v1,color);
+                            //----to display message in snackbar, code ends
+                        }else{
+//                        changePswd(ed_current_password.getText().toString(),edt_new_password.getText().toString(),ed_password_hint.getText().toString());
+                            change_password(ed_current_password.getText().toString(),edt_new_password.getText().toString());
+                            alertDialog.dismiss();
+                        }
+                    }
+                });
+                break;
+            case R.id.nav_advance:
+                startActivity(new Intent(this, AdvanceRequisitionActivity.class));
+                //Toast.makeText(context, "Requisation Page", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_mediclaim:
+                startActivity(new Intent(this, MediclaimActivity.class));
+                //Toast.makeText(context, "Requisation Page", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_lta:
+                startActivity(new Intent(this, LtaListActivity.class));
+                //Toast.makeText(context, "Requisation Page", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_reports:
+                startActivity(new Intent(this, ReportHomeListActivity.class));
+                break;
+
+        }
+//        return false;
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+
+
+    }
+
+    //============function to change password, code starts========
+    public void change_password(String old_pswd, String new_pswd){
+        try {
+            final JSONObject DocumentElementobj = new JSONObject();
+            DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
+            DocumentElementobj.put("employee_id", Integer.parseInt(userSingletonModel.getEmployee_id()));
+           /* DocumentElementobj.put("corp_id", "demo_test");
+            DocumentElementobj.put("employee_id", 1234);*/
+            DocumentElementobj.put("old_pwd", old_pswd);
+            DocumentElementobj.put("new_pwd", new_pswd);
+
+            Log.d("jsonObjectTest",DocumentElementobj.toString());
+            final String URL = Url.BASEURL() + "user/change-password";
+
+            JsonObjectRequest request_json = null;
+            request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                //Process os success response
+                                JSONObject jsonObj = null;
+                                try{
+                                    String responseData = response.toString();
+                                    JSONObject resobj = new JSONObject(responseData);
+                                    Log.d("getData",resobj.toString());
+
+                                    if(resobj.getString("status").contentEquals("true")){
+//                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
+                                        //---------Alert dialog code starts(added on 21st nov)--------
+                                        final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(DashboardActivity.this);
+                                        alertDialogBuilder.setMessage(resobj.getString("message"));
+                                        alertDialogBuilder.setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface arg0, int arg1) {
+                                                        //-----following code is commented on 6th dec to get the calender saved state data------
+                                                        alertDialogBuilder.setCancelable(true);
+                                                    }
+                                                });
+                                        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                                        alertDialog.show();
+
+                                        //--------Alert dialog code ends--------
+                                    }else{
+//                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
+                                        //---------Alert dialog code starts(added on 21st nov)--------
+                                        final android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(DashboardActivity.this);
+                                        alertDialogBuilder.setMessage(resobj.getString("message"));
+                                        alertDialogBuilder.setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface arg0, int arg1) {
+                                                        //-----following code is commented on 6th dec to get the calender saved state data------
+                                                        alertDialogBuilder.setCancelable(true);
+                                                    }
+                                                });
+                                        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                                        alertDialog.show();
+
+                                        //--------Alert dialog code ends--------
+                                    }
+
+
+                                }catch (JSONException e){
+                                    //                            loading.dismiss();
+                                    e.printStackTrace();
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.e("Error: ", error.getMessage());
+                    Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
+                }
+            });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(request_json);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+    }
+    //============function to change password, code ends========
+    //=========///----Dashboard(includes navigation drawer), code ends---///=======
+
+    //========///-----Exit app on backPressed, code starts----///=======
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if(doubleBackToExitPressedOnce)
+        {
+            //  super.onBackPressed();
+            Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
+
+        }
+        else {
+            doubleBackToExitPressedOnce = true;
+
+            Snackbar snackbar = Snackbar.make(Linear, "Press BACK once more to exit", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+
+                }
+
+            }, 2000);
+        }
+
+
+    }
+    //========///-----Exit app on backPressed, code ends----///=======
 
     //=========///----Salary Slip, code starts----///======
     public void LoadSalaryData(){
