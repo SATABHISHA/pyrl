@@ -63,6 +63,7 @@ import org.wrkplan.payroll.Model.OutDoorLogListModel;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel_v3;
 import org.wrkplan.payroll.Model.UserSingletonModel;
+import org.wrkplan.payroll.MyLeaveApplication2.MyLeaveApplication2Activity;
 import org.wrkplan.payroll.OutDoorDutyLog.SubordinateOdDutyLogListActivity;
 import org.wrkplan.payroll.R;
 import org.wrkplan.payroll.Reports.PdfEditorActivity;
@@ -87,11 +88,12 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     ArrayList<Holiday> arrayList1 = new ArrayList<>();
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     String dateString, holiday_name1;
-    TextView txt_date, txt_day_name, txt_holiday_name;
+    TextView txt_date, txt_day_name, txt_holiday_name, tv_custombtn_leave_apply, tv_custombtn_od_apply;
     public static Bundle savedInstanceState;
     SimpleDateFormat myFormat = new SimpleDateFormat("MM-dd-yyyy");
     List<Date> selectedDateRangeList = new ArrayList<>();
     public static int count = 0;
+    public static Boolean DashboardToMyLeaveApplicationRequestNewCreateYN = false;
     //----Calendar variable, code ends---
 
     //----Attendance variable, code starts-----
@@ -1107,6 +1109,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         txt_date = findViewById(R.id.txt_date);
         txt_day_name = findViewById(R.id.txt_day_name);
         txt_holiday_name = findViewById(R.id.txt_holiday_name);
+        tv_custombtn_leave_apply = findViewById(R.id.tv_custombtn_leave_apply);
+        tv_custombtn_od_apply = findViewById(R.id.tv_custombtn_od_apply);
 
         caldroidFragment = new CaldroidFragment();
         // If Activity is created after rotation
@@ -1224,6 +1228,14 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         } catch (NullPointerException e) {
             e.getMessage();
         }*/
+
+        tv_custombtn_leave_apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DashboardToMyLeaveApplicationRequestNewCreateYN = true;
+                startActivity(new Intent(DashboardActivity.this, MyLeaveApplication2Activity.class));
+            }
+        });
     }
 
     public void getholiday(String year_code) {

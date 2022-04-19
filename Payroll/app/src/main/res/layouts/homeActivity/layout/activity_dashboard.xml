@@ -460,13 +460,15 @@
                             android:layout_height="38dp"
                             android:background="@drawable/activity_dashboard_calendar_btns_shape"
                             android:layout_weight="1">
+
                             <TextView
+                                android:id="@+id/tv_custombtn_leave_apply"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
                                 android:text="Apply For Leave"
                                 android:textColor="#ffffff"
-                                android:textSize="14sp"
-                                android:layout_centerInParent="true"/>
+                                android:textSize="14sp" />
                         </RelativeLayout>
                         <RelativeLayout
                             android:id="@+id/ll_custombtn_od_apply"
@@ -477,12 +479,13 @@
                             android:layout_weight="1">
 
                             <TextView
+                                android:id="@+id/tv_custombtn_od_apply"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
                                 android:text="Apply For OD"
                                 android:textColor="#ffffff"
-                                android:textSize="14sp"
-                                android:layout_centerInParent="true"/>
+                                android:textSize="14sp" />
                         </RelativeLayout>
                     </LinearLayout>
 
