@@ -40,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Leave_Balance.LeaveBalanceActivity;
 import org.wrkplan.payroll.Model.Detail_Subordinate;
@@ -427,6 +428,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
+                                DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN = false;
                                 String message=response.getString("message");
                                 status_message = "Leave application "+select_item;
                                 Toast.makeText(MyLeaveApplication2Activity.this, message, Toast.LENGTH_SHORT).show();
@@ -673,15 +675,14 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
             public void onClick(View v) {
                 if (Url.isSubordinateLeaveApplication == true)
                 {
+                    DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN = false;
                     Intent intent=new Intent(MyLeaveApplication2Activity.this, SubordinateLeaveApplicationActivity.class);
                     startActivity(intent);
 
                 }
                 else {
-
-
+                    DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN = false;
                     Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
-
                     startActivity(intent);
                 }
             }
@@ -701,6 +702,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                                     Url.isSubordinateLeaveApplication = false;
                                     Url.isMyLeaveApplication=true;
 
+                                    DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN = false;
                                     Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -725,6 +727,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
                 else
                 {
+                    DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN = false;
                     Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
                     startActivity(intent);
                     finish();

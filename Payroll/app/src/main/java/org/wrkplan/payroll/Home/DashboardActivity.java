@@ -64,6 +64,7 @@ import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel_v3;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.MyLeaveApplication2.MyLeaveApplication2Activity;
+import org.wrkplan.payroll.OutDoorDuty.OutDoorRequestActivity;
 import org.wrkplan.payroll.OutDoorDutyLog.SubordinateOdDutyLogListActivity;
 import org.wrkplan.payroll.R;
 import org.wrkplan.payroll.Reports.PdfEditorActivity;
@@ -93,7 +94,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     SimpleDateFormat myFormat = new SimpleDateFormat("MM-dd-yyyy");
     List<Date> selectedDateRangeList = new ArrayList<>();
     public static int count = 0;
-    public static Boolean DashboardToMyLeaveApplicationRequestNewCreateYN = false;
+    public static Boolean DashboardToMyLeaveApplicationRequestNewCreateYN = false , DashboardToMyODApplicationRequestNewCreateYN = false;
     //----Calendar variable, code ends---
 
     //----Attendance variable, code starts-----
@@ -1234,6 +1235,15 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             public void onClick(View view) {
                 DashboardToMyLeaveApplicationRequestNewCreateYN = true;
                 startActivity(new Intent(DashboardActivity.this, MyLeaveApplication2Activity.class));
+            }
+        });
+
+        tv_custombtn_od_apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DashboardToMyODApplicationRequestNewCreateYN = true;
+                startActivity(new Intent(DashboardActivity.this, OutDoorRequestActivity.class));
             }
         });
     }

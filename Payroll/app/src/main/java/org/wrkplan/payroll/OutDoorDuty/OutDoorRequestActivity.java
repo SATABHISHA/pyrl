@@ -43,6 +43,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
@@ -163,6 +164,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                                .setCancelable(false)
                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                    public void onClick(DialogInterface dialog, int id) {
+                                       DashboardActivity.DashboardToMyODApplicationRequestNewCreateYN = false;
                                        Intent intent_odlist = new Intent(OutDoorRequestActivity.this,OutdoorListActivity.class);
                                        intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                        startActivity(intent_odlist);
@@ -659,6 +661,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                                             }
                                         }
 
+                                        DashboardActivity.DashboardToMyODApplicationRequestNewCreateYN = false;
                                         Intent intent = new Intent(OutDoorRequestActivity.this, OutdoorListActivity.class);
                                         startActivity(intent);
                                     }else{
