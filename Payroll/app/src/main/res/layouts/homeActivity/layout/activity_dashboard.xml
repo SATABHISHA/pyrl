@@ -49,13 +49,13 @@
                    android:layout_marginLeft="20dp"
                    android:layout_marginRight="20dp"
                    android:layout_marginTop="20dp"
-                   android:background="#56D1F9">
+                   android:background="@drawable/activity_dashboard_shape">
 
                    <RelativeLayout
                        android:id="@+id/emp_detail_title_bar"
                        android:layout_width="match_parent"
                        android:layout_height="44dp"
-                       android:background="#BFBFBF">
+                       android:background="@drawable/activity_dashboard_titlebar_shape">
 
                        <TextView
                            android:layout_width="wrap_content"
@@ -170,13 +170,13 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="20dp"
-                    android:background="#56D1F9">
+                    android:background="@drawable/activity_dashboard_shape">
 
                     <RelativeLayout
                         android:id="@+id/rl_attendance_detail_title_bar"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:background="#BFBFBF">
+                        android:background="@drawable/activity_dashboard_titlebar_shape">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -389,10 +389,10 @@
                     android:id="@+id/rl_calendar_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="0dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="20dp"
-                    android:background="#56D1F9">
+                    android:background="@drawable/activity_dashboard_shape">
 
                     <LinearLayout
                         android:id="@+id/ll_date"
@@ -495,13 +495,13 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
-                    android:background="#56D1F9">
+                    android:background="@drawable/activity_dashboard_shape">
 
                     <RelativeLayout
                         android:id="@+id/rl_pending_items_title_bar"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:background="#BFBFBF">
+                        android:background="@drawable/activity_dashboard_titlebar_shape">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -512,13 +512,16 @@
                             android:textColor="#ffffff"
                             android:textSize="17sp" />
                     </RelativeLayout>
+
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_below="@id/rl_pending_items_title_bar"
                         android:layout_marginTop="0dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_below="@id/rl_pending_items_title_bar"
                         android:layout_weight="1"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
                         android:background="#ffffff"
                         android:padding="0dp"
                         app:cardElevation="0dp"
@@ -542,6 +545,7 @@
                             android:paddingLeft="0dp"
                             android:paddingRight="0dp"
                             android:visibility="gone">
+
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/recycler_view"
                                 android:layout_width="match_parent"
@@ -563,13 +567,13 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
-                    android:background="#56D1F9">
+                    android:background="@drawable/activity_dashboard_shape">
 
                     <RelativeLayout
                         android:id="@+id/rl_salary_slip_title_bar"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:background="#BFBFBF">
+                        android:background="@drawable/activity_dashboard_titlebar_shape">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -600,7 +604,7 @@
                             android:orientation="horizontal"
                             android:layout_weight="1"
                             android:layout_marginRight="2.5dp"
-                            android:background="@drawable/layout6">
+                            android:background="@drawable/layout_material_spinner_dashboard">
 
                             <fr.ganfra.materialspinner.MaterialSpinner
                                 android:id="@+id/spinner_month"
@@ -609,7 +613,7 @@
                                 android:layout_weight="0.5"
                                 android:paddingLeft="0dp"
                                 android:layout_marginRight="8dp"
-                                android:gravity="left"
+                                android:gravity="center"
                                 app:ms_multiline="false"
                                 app:ms_hintColor="#3C3C3C"
                                 app:ms_hintTextSize="15sp"
@@ -658,6 +662,7 @@
                         android:layout_width="75dp"
                         android:layout_height="38dp"
                         android:layout_below="@id/rl_salary_slip_title_bar"
+                        android:layout_toRightOf="@id/ll_salary_slip_dropdown"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="15dp"
                         android:layout_marginRight="13dp"
