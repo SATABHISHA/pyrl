@@ -705,7 +705,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                                     DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN = false;
                                     Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
                                     startActivity(intent);
-                                    finish();
+//                                    finish();
                                 }
                             })
                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -730,7 +730,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN = false;
                     Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
                     startActivity(intent);
-                    finish();
+//                    finish();
 
                 }
             }
@@ -846,7 +846,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         Log.d("hgsdfhg",status_message);
                         Log.d("responseData",response.toString());
                         Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
 //                                finish(); // commented by sr
                         Toast.makeText(getApplicationContext(),"Leave application "+status_message,Toast.LENGTH_LONG).show();
@@ -1163,8 +1163,12 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     }
 
     private void DteDifference() {
-        days = TimeUnit.DAYS.convert(SecondDate.getTime() - firstDate.getTime(), TimeUnit.MILLISECONDS) + 1;
-        txt_total_number.setText(String.valueOf(days));
+        try {
+            days = TimeUnit.DAYS.convert(SecondDate.getTime() - firstDate.getTime(), TimeUnit.MILLISECONDS) + 1;
+            txt_total_number.setText(String.valueOf(days));
+        }catch (Exception e){
+            Log.d("Date Issue---=",">");
+        }
     }
 
 

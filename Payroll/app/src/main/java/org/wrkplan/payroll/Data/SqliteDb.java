@@ -15,6 +15,7 @@ public class SqliteDb extends SQLiteOpenHelper {
     // private static final String[] TABLES = new String[] { "student_table"};
     public static final String TABLE_NAME = "EmployeeDetails";
     public static String nameColumn = "employee_name";
+    public static final String TABLE_NAME_NOTIFICATION = "NOTIFICATIONDETAILS";
 
 
 
@@ -27,11 +28,15 @@ public class SqliteDb extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         String tableEmp=("create table "+TABLE_NAME+ " (appliction_code text,appliction_id integer primary key  ,approved_by text,approved_by_id integer,approved_date text,approved_level integer,description text,employee_id integer, "+nameColumn+" text,final_approved_by text,from_date text,leave_name text,leave_status text,supervisor1_id integer,supervisor2_id integer,supervisor_remark text,total_days text,to_date text )");
         db.execSQL(tableEmp);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_NOTIFICATION);
+        String tableNotification = ("create table "+TABLE_NAME_NOTIFICATION+ "(title text, notification_id text, event_name text,event_id text,event_type text, event_owner_id text, event_owner text, event_date text, event_status text, message text)");
+        db.execSQL(tableNotification);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME + TABLE_NAME_NOTIFICATION);
 
         // Create tables again
         onCreate(db);
@@ -44,6 +49,23 @@ public class SqliteDb extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void insertNotificationData(String title, String notification_id, String event_name, String event_id, String event_type, String event_owner_id, String event_owner, String event_date, String event_status, String message ){
+        SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put("title",title);
+        values.put("notification_id",notification_id);
+        values.put("event_name",event_name);
+        values.put("event_id",event_id);
+        values.put("event_type",event_type);
+        values.put("event_owner_id",event_owner_id);
+        values.put("event_owner",event_owner);
+        values.put("event_date",event_date);
+        values.put("event_status",event_status);
+        values.put("message",message);
+
+        sqLiteDatabase.insert(TABLE_NAME_NOTIFICATION,null,values);
+        sqLiteDatabase.close();
+    }
     public void insertData(String appliction_code,Integer appliction_id, String approved_by,
                            Integer approved_by_id,String approved_date,Integer approved_level,String description,
                            Integer employee_id,String employee_name,String final_approved_by,String from_date,

@@ -53,7 +53,7 @@ public class MyLeaveApplicationActivity extends AppCompatActivity implements Vie
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent=new Intent(MyLeaveApplicationActivity.this, LeaveBalanceActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 //        finish();
     }

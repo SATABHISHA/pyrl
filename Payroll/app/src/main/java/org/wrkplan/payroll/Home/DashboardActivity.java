@@ -69,7 +69,9 @@ import org.json.JSONObject;
 import org.wrkplan.payroll.AdvanceRequisition.AdvanceRequisitionActivity;
 import org.wrkplan.payroll.CompanyDocuments.CompanyDocumentsActivity;
 import org.wrkplan.payroll.Config.ImageUtil;
+import org.wrkplan.payroll.Config.RSSPullService;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Data.SqliteDb;
 import org.wrkplan.payroll.EmployeeDocuments.EmployeeDocumentsActivity;
 import org.wrkplan.payroll.EmployeeFacilities.EmployeeFacilitiesActivity;
 import org.wrkplan.payroll.EmployeeInformation.EmployeeInformationActivity;
@@ -82,6 +84,7 @@ import org.wrkplan.payroll.Lta.LtaListActivity;
 import org.wrkplan.payroll.Mediclaim.MediclaimActivity;
 import org.wrkplan.payroll.Model.DashboardPendingItemModel;
 import org.wrkplan.payroll.Model.Load_Spinner_Model;
+import org.wrkplan.payroll.Model.NotificationModel;
 import org.wrkplan.payroll.Model.OutDoorLogListModel;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel_v3;
@@ -168,6 +171,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     RelativeLayout rl_custombtn_view_report;
     //-----Salary slip variable, code ends-----
 
+    //------Notification, code starts-----
+    ArrayList<NotificationModel> notificationModelArrayList = new ArrayList<>();
+    SqliteDb sqliteDb=new SqliteDb(this);
+    //------Notification, code ends-----
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,9 +185,90 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         LoadAttendanceData();
         LoadPendingItems();
         LoadSalaryData();
+        LoadNotificationData();
 
     }
+     //========///----Notification, code starts---///=======
+     public void LoadNotificationData(){
+//        String url = Url.BASEURL()+"pending_actions/fetch/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+         String url = Url.BASEURL()+"notification/custom/fetch/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
+         Log.d("notificationurl-=>",url);
+         final ProgressDialog loading = ProgressDialog.show(DashboardActivity.this, "Loading", "Please wait...", true, false);
+         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
+                 Response.Listener<String>() {
+                     @Override
+                     public void onResponse(String response) {
+                         getResponseNotificationData(response);
+                         loading.dismiss();
+                     }
+                 }, new Response.ErrorListener() {
+             @Override
+             public void onErrorResponse(VolleyError error) {
+                 loading.dismiss();
+                 error.printStackTrace();
+             }
+         });
+         stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,
+                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+         RequestQueue queue = Volley.newRequestQueue(this);
+         queue.add(stringRequest);
+     }
+    public void getResponseNotificationData(String response){
+        try {
 
+            JSONObject jsonObject = new JSONObject(response);
+            Log.d("jsonData-=>",jsonObject.toString());
+            JSONObject jsonObject1 = jsonObject.getJSONObject("response");
+            if(jsonObject1.getString("status").contentEquals("true")){
+
+                JSONArray jsonArray = jsonObject.getJSONArray("notifications");
+                for(int i=0; i<jsonArray.length(); i++){
+                    JSONObject jsonObject2 = jsonArray.getJSONObject(i);
+
+                    NotificationModel notificationModel = new NotificationModel();
+
+                    String[] body = jsonObject2.getString("body").split("::");
+
+                    String notification_id_body = body[0];
+                    String[] notification_id = notification_id_body.split("=");
+                    Log.d("notification_id-=>", notification_id[1]);
+                    notificationModel.setNotification_id(notification_id[1]);
+
+                    String event_name_body = body[1];
+                    String[] event_name = event_name_body.split("=");
+                    notificationModel.setEvent_name(event_name[1]);
+
+                    String event_id_body = body[2];
+                    String[] event_id = event_id_body.split("=");
+                    notificationModel.setEvent_id(event_id[1]);
+
+                    String event_owner_body = body[3];
+                    String[] event_owner = event_owner_body.split("=");
+                    notificationModel.setEvent_owner(event_owner[1]);
+
+                    String event_owner_id_body = body[4];
+                    String[] event_owner_id = event_owner_id_body.split("=");
+                    notificationModel.setEvent_owner_id(event_owner_id[1]);
+
+                    String message_body = body[5];
+                    String[] message = message_body.split("=");
+                    notificationModel.setMessage(message[1]);
+
+                    notificationModelArrayList.add(notificationModel);
+
+                }
+                for(int i=0; i<notificationModelArrayList.size(); i++){
+                    sqliteDb.insertNotificationData(notificationModelArrayList.get(i).getTitle(),notificationModelArrayList.get(i).getNotification_id(),notificationModelArrayList.get(i).getEvent_name(),notificationModelArrayList.get(i).getEvent_id(),notificationModelArrayList.get(i).getEvent_type(),notificationModelArrayList.get(i).getEvent_owner_id(),notificationModelArrayList.get(i).getEvent_owner(),notificationModelArrayList.get(i).getEvent_date(),notificationModelArrayList.get(i).getEvent_status(),notificationModelArrayList.get(i).getMessage());
+                }
+            }else if(jsonObject1.getString("status").contentEquals("false")){
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+     //========///----Notification, code ends---///=======
     //=========///----Dashboard(includes navigation drawer), code starts---///=======
     public void LoadDashboardData(){
         Linear=findViewById(R.id.Linear);
@@ -234,9 +322,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 //                                a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                                 Intent intent=new Intent(DashboardActivity.this,LoginActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
-                                finish();
+//                                finish();
 
                             }
                         })
@@ -245,7 +333,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                                 //  Action for 'NO' Button
                                 Intent intent=new Intent(DashboardActivity.this,HomeActivity.class);
                                 startActivity(intent);
-                                finish();
+//                                finish();
                                 dialog.cancel();
 
                             }
