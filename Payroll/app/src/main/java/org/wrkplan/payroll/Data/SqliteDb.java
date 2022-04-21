@@ -29,9 +29,9 @@ public class SqliteDb extends SQLiteOpenHelper {
         String tableEmp=("create table "+TABLE_NAME+ " (appliction_code text,appliction_id integer primary key  ,approved_by text,approved_by_id integer,approved_date text,approved_level integer,description text,employee_id integer, "+nameColumn+" text,final_approved_by text,from_date text,leave_name text,leave_status text,supervisor1_id integer,supervisor2_id integer,supervisor_remark text,total_days text,to_date text )");
         db.execSQL(tableEmp);
 
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_NOTIFICATION);
+       /* db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_NOTIFICATION);
         String tableNotification = ("create table "+TABLE_NAME_NOTIFICATION+ "(insertYN text, title text, notification_id text, event_name text,event_id text, event_owner_id text, event_owner text, message text)");
-        db.execSQL(tableNotification);
+        db.execSQL(tableNotification);*/
     }
 
     public int countNotificationData(){

@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -174,6 +175,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     //------Notification, code starts-----
     ArrayList<NotificationModel> notificationModelArrayList = new ArrayList<>();
     SqliteDb sqliteDb=new SqliteDb(this);
+    SQLiteDatabase db;
     //------Notification, code ends-----
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -190,6 +192,14 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     }
      //========///----Notification, code starts---///=======
      public void LoadNotificationData(){
+        try {
+            db = openOrCreateDatabase("Payroll", MODE_PRIVATE, null);
+            db.execSQL("DROP TABLE IF EXISTS NOTIFICATIONDETAILS");
+            db.execSQL("CREATE TABLE IF NOT EXISTS NOTIFICATIONDETAILS(insertYN text, title text, notification_id text, event_name text,event_id text, event_owner_id text, event_owner text, message text)");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 //        String url = Url.BASEURL()+"pending_actions/fetch/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
          String url = Url.BASEURL()+"notification/custom/fetch/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
          Log.d("notificationurl-=>",url);
@@ -215,6 +225,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
      }
     public void getResponseNotificationData(String response){
         try {
+
+
 
             JSONObject jsonObject = new JSONObject(response);
             Log.d("jsonData-=>",jsonObject.toString());
