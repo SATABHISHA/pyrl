@@ -1,6 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ll_12"
+        >
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/app"
+            android:background="#2e5772"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <!-- <androidx.appcompat.widget.Toolbar
+                 android:id="@+id/toolbar"
+                 android:layout_width="match_parent"
+                 android:layout_height="?attr/actionBarSize"
+                 android:background="#2e5772"> -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/img_back"
+                    android:text="Notification(s)"
+                    android:textColor="#fff"
+                    android:textSize="18sp"></TextView>
+
+                <ImageView
+                    android:id="@+id/img_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/backarrow" />
+
+
+
+
+            </RelativeLayout>
+
+
+            <!-- </androidx.appcompat.widget.Toolbar> -->
+            <!-- android:background="?attr/colorPrimary"-->
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rl_pending_items_title_bar"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:padding="0dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="false">
+
+            <TextView
+                android:id="@+id/tv_nodata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="No record found"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/ll_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp"
+                android:visibility="visible">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:scrollbars="vertical" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

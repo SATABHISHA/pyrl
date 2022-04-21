@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import org.wrkplan.payroll.Model.NotificationModel;
 import org.wrkplan.payroll.Model.SubordinateLeaveApplicationModel;
 
 import java.util.ArrayList;
@@ -45,7 +46,6 @@ public class SqliteDb extends SQLiteOpenHelper {
     }
 
     public int countNotificationDataWithFilter(String employee_id){
-        String countQuery = "SELECT  * FROM " + TABLE_NAME_NOTIFICATION;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM NOTIFICATIONDETAILS where employee_id = '"+employee_id+"'", null);
         int count = cursor.getCount();
@@ -117,6 +117,25 @@ public class SqliteDb extends SQLiteOpenHelper {
         sqLiteDatabase.close();
     }
 
+    public ArrayList<NotificationModel> getNotificationDataFromSqlite(String employee_id
+    ){
+        ArrayList<NotificationModel> notificationModelArrayList = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM NOTIFICATIONDETAILS where employee_id = '"+employee_id+"'", null);
+        while(cursor.moveToNext()){
+            NotificationModel notificationModel = new NotificationModel();
+            notificationModel.setEmployee_id(cursor.getString(0));
+            notificationModel.setTitle(cursor.getString(2));
+            notificationModel.setNotification_id(cursor.getString(3));
+            notificationModel.setEvent_name(cursor.getString(4));
+            notificationModel.setEvent_id(cursor.getString(5));
+            notificationModel.setEvent_owner_id(cursor.getString(6));
+            notificationModel.setEvent_owner(cursor.getString(7));
+            notificationModel.setMessage(cursor.getString(8));
+            notificationModelArrayList.add(notificationModel);
+        }
+        return notificationModelArrayList;
+    }
     public ArrayList<SubordinateLeaveApplicationModel> getAllData() {
         ArrayList<SubordinateLeaveApplicationModel> subordinateLeaveApplicationModelArrayList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
@@ -185,4 +204,6 @@ public class SqliteDb extends SQLiteOpenHelper {
         }
         return subordinateLeaveApplicationModelArrayList;
     }
+
+
 }

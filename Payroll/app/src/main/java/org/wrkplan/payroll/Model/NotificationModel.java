@@ -1,10 +1,14 @@
 package org.wrkplan.payroll.Model;
 
 public class NotificationModel {
-    String title, notification_id, event_name, event_id, event_type, event_owner_id, event_owner, event_date, event_status, message;
+    String employee_id, title, notification_id, event_name, event_id, event_type, event_owner_id, event_owner, event_date, event_status, message;
 
     //----------Getter method, starts---------
 
+
+    public String getEmployee_id() {
+        return employee_id;
+    }
 
     public String getTitle() {
         return title;
@@ -50,6 +54,10 @@ public class NotificationModel {
 
     //----------Setter method, starts---------
 
+
+    public void setEmployee_id(String employee_id) {
+        this.employee_id = employee_id;
+    }
 
     public void setTitle(String title) {
         this.title = title;

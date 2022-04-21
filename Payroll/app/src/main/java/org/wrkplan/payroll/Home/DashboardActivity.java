@@ -100,6 +100,7 @@ import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel_v3;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.MyLeaveApplication2.MyLeaveApplication2Activity;
+import org.wrkplan.payroll.Notifications.NotificationActivity;
 import org.wrkplan.payroll.OutDoorDuty.OutDoorRequestActivity;
 import org.wrkplan.payroll.OutDoorDuty.OutdoorListActivity;
 import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogListActivity;
@@ -211,8 +212,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
              e.printStackTrace();
          }
 
-
          img_notification = findViewById(R.id.img_notification);
+
+
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
              startForegroundService(new Intent(DashboardActivity.this, RSSPullService.class));
          }else{
@@ -225,6 +227,13 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
          }else{
              img_notification.setVisibility(View.GONE);
          }
+
+         img_notification.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 startActivity(new Intent(DashboardActivity.this, NotificationActivity.class));
+             }
+         });
      }
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {
