@@ -137,6 +137,9 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".Mediclaim.SubordinatePdfViewActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".Notifications.NotificationActivity"
+            android:screenOrientation="portrait"></activity>
+
         <activity android:name=".Home.DashboardActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".Home.PdfEditorActivityDashboard"
