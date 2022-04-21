@@ -34,6 +34,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -185,6 +186,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     ArrayList<NotificationModel> notificationModelArrayList = new ArrayList<>();
     SqliteDb sqliteDb=new SqliteDb(this);
     SQLiteDatabase db;
+    ImageView img_notification;
     //------Notification, code ends-----
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -202,12 +204,28 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
      //========///----Notification, code starts---///=======
      public void LoadNotificationData(){
 
+         try {
+             db = openOrCreateDatabase("Payroll", MODE_PRIVATE, null);
+//             db.execSQL("DROP TABLE IF EXISTS NOTIFICATIONDETAILS");
+             db.execSQL("CREATE TABLE IF NOT EXISTS NOTIFICATIONDETAILS(insertYN text, title text, notification_id text, event_name text,event_id text, event_owner_id text, event_owner text, message text)");
+         }catch (Exception e){
+             e.printStackTrace();
+         }
+
+
+         img_notification = findViewById(R.id.img_notification);
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
              startForegroundService(new Intent(DashboardActivity.this, RSSPullService.class));
          }else{
              startService(new Intent(this, RSSPullService.class));
          }
 
+         Log.d("CountData-=>",String.valueOf(sqliteDb.countNotificationData()));
+         if(sqliteDb.countNotificationData() > 0){
+             img_notification.setVisibility(View.VISIBLE);
+         }else{
+             img_notification.setVisibility(View.GONE);
+         }
      }
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {

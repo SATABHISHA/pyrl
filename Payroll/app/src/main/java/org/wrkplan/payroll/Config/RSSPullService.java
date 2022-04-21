@@ -208,7 +208,7 @@ public class RSSPullService extends Service {
 
         try {
             db = openOrCreateDatabase("Payroll", MODE_PRIVATE, null);
-            db.execSQL("DROP TABLE IF EXISTS NOTIFICATIONDETAILS");
+//            db.execSQL("DROP TABLE IF EXISTS NOTIFICATIONDETAILS");
             db.execSQL("CREATE TABLE IF NOT EXISTS NOTIFICATIONDETAILS(insertYN text, title text, notification_id text, event_name text,event_id text, event_owner_id text, event_owner text, message text)");
         }catch (Exception e){
             e.printStackTrace();
