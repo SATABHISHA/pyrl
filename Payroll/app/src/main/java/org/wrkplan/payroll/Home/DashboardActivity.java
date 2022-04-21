@@ -75,7 +75,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.AdvanceRequisition.AdvanceRequisitionActivity;
 import org.wrkplan.payroll.CompanyDocuments.CompanyDocumentsActivity;
+import org.wrkplan.payroll.Config.ConnectivityReceiver;
 import org.wrkplan.payroll.Config.ImageUtil;
+import org.wrkplan.payroll.Config.MyApplication;
 import org.wrkplan.payroll.Config.RSSPullService;
 import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.Data.SqliteDb;
@@ -107,6 +109,7 @@ import org.wrkplan.payroll.Reports.ReportHomeListActivity;
 import org.wrkplan.payroll.Timesheet.MyAttendanceActivity_LogList_Adapter_v3;
 import org.wrkplan.payroll.Timesheet.MyAttendanceActivity_v3;
 
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -116,7 +119,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, LocationListener, NavigationView.OnNavigationItemSelectedListener {
+public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, LocationListener, NavigationView.OnNavigationItemSelectedListener, ConnectivityReceiver.ConnectivityReceiverListener {
 
     //------Dashboard variable, code starts-----
     TextView tv_fullname,tv_companynam;
@@ -199,146 +202,50 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
      //========///----Notification, code starts---///=======
      public void LoadNotificationData(){
 
-        try {
-            db = openOrCreateDatabase("Payroll", MODE_PRIVATE, null);
-            db.execSQL("DROP TABLE IF EXISTS NOTIFICATIONDETAILS");
-            db.execSQL("CREATE TABLE IF NOT EXISTS NOTIFICATIONDETAILS(insertYN text, title text, notification_id text, event_name text,event_id text, event_owner_id text, event_owner text, message text)");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+             startForegroundService(new Intent(DashboardActivity.this, RSSPullService.class));
+         }else{
+             startService(new Intent(this, RSSPullService.class));
+         }
 
-//        String url = Url.BASEURL()+"pending_actions/fetch/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
-         String url = Url.BASEURL()+"notification/custom/fetch/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
-         Log.d("notificationurl-=>",url);
-         final ProgressDialog loading = ProgressDialog.show(DashboardActivity.this, "Loading", "Please wait...", true, false);
-         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
-                 Response.Listener<String>() {
-                     @Override
-                     public void onResponse(String response) {
-                         getResponseNotificationData(response);
-                         loading.dismiss();
-                     }
-                 }, new Response.ErrorListener() {
-             @Override
-             public void onErrorResponse(VolleyError error) {
-                 loading.dismiss();
-                 error.printStackTrace();
-             }
-         });
-         stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,
-                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-         RequestQueue queue = Volley.newRequestQueue(this);
-         queue.add(stringRequest);
      }
-    public void getResponseNotificationData(String response){
-        try {
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showSnack(isConnected);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-            JSONObject jsonObject = new JSONObject(response);
-            Log.d("jsonData-=>",jsonObject.toString());
-            JSONObject jsonObject1 = jsonObject.getJSONObject("response");
-            if(jsonObject1.getString("status").contentEquals("true")){
+        // register connection status listener
+//        MyApplication.getInstance().setConnectivityListener(this);
+    }
+    public void showSnack(boolean isConnected) {
+        String message = "";
+        int color;
+        if (isConnected) {
+            message = "Connected to Internet";
+//            color = Color.WHITE;
+        } else {
+            message = "Sorry! Not connected to internet";
+           /* color = Color.parseColor("#ffffff");
+            Snackbar snackbar = Snackbar
+                    .make(findViewById(R.id.relativeLayout), message, Snackbar.LENGTH_LONG);
 
-                JSONArray jsonArray = jsonObject.getJSONArray("notifications");
-                for(int i=0; i<jsonArray.length(); i++){
-                    JSONObject jsonObject2 = jsonArray.getJSONObject(i);
+            View sbView = snackbar.getView();
+            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(color);
+            snackbar.show();*/
 
-                    NotificationModel notificationModel = new NotificationModel();
-                    notificationModel.setTitle(jsonObject2.getString("title"));
-
-                    String[] body = jsonObject2.getString("body").split("::");
-
-                    String notification_id_body = body[0];
-                    String[] notification_id = notification_id_body.split("=");
-                    Log.d("notification_id-=>", notification_id[1]);
-                    notificationModel.setNotification_id(notification_id[1]);
-
-                    String event_name_body = body[1];
-                    String[] event_name = event_name_body.split("=");
-                    notificationModel.setEvent_name(event_name[1]);
-
-                    String event_id_body = body[2];
-                    String[] event_id = event_id_body.split("=");
-                    notificationModel.setEvent_id(event_id[1]);
-
-                    String event_owner_body = body[3];
-                    String[] event_owner = event_owner_body.split("=");
-                    notificationModel.setEvent_owner(event_owner[1]);
-
-                    String event_owner_id_body = body[4];
-                    String[] event_owner_id = event_owner_id_body.split("=");
-                    notificationModel.setEvent_owner_id(event_owner_id[1]);
-
-                    String message_body = body[5];
-                    String[] message = message_body.split("=");
-                    notificationModel.setMessage(message[1]);
-
-                    notificationModelArrayList.add(notificationModel);
-                    CustomNotificationUpdate(Integer.valueOf(String.valueOf(event_id)));
-
-                }
-                for(int i=0; i<notificationModelArrayList.size(); i++){
-                    sqliteDb.insertNotificationData("Y",notificationModelArrayList.get(i).getTitle(),notificationModelArrayList.get(i).getNotification_id(),notificationModelArrayList.get(i).getEvent_name(),notificationModelArrayList.get(i).getEvent_id(),notificationModelArrayList.get(i).getEvent_owner_id(),notificationModelArrayList.get(i).getEvent_owner(),notificationModelArrayList.get(i).getMessage());
-                }
-                if (sqliteDb.countNotificationData() > 0){
-                    Log.d("Count Data-=>", String.valueOf(sqliteDb.countNotificationData()));
-                }
-            }else if(jsonObject1.getString("status").contentEquals("false")){
-
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
+        /*View v = findViewById(R.id.cordinatorLayout);
+//            new org.arb.timesheet_demo.config.Snackbar(message,v);
+        new Snackbar(message,v,Color.parseColor("#ffffff"));*/
+
+        Toast.makeText(getApplicationContext(),message, Toast.LENGTH_LONG).show();
 
     }
 
-    public void CustomNotificationUpdate(Integer notificationId){
-        final JSONObject DocumentElementobj = new JSONObject();
-        try {
-            DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
-            DocumentElementobj.put("notification_id", notificationId);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        //------calling api to save data
-        JsonObjectRequest request_json = null;
-        String URL = Url.BASEURL()+"notification/custom/update";
-        Log.d("testsaveurl-=>",URL);
-        try {
-            request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                //Process os success response
-                                JSONObject jsonObj = null;
-                                try{
-                                    String responseData = response.toString();
-                                    String val = "";
-                                    JSONObject resobj = new JSONObject(responseData);
-                                    Log.d("getNotificationUpdate",resobj.toString());
-                                }catch (JSONException e){
-                                    //  loading.dismiss();
-                                    e.printStackTrace();
-                                }
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    VolleyLog.e("Error: ", error.getMessage());
-                }
-            });
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
-            requestQueue.add(request_json);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
      //========///----Notification, code ends---///=======
     //=========///----Dashboard(includes navigation drawer), code starts---///=======
     public void LoadDashboardData(){
@@ -1872,6 +1779,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
 
     }
+
+
 
     //-------Calendar code, ends-----
 

@@ -70,7 +70,7 @@ import java.util.Locale;
 
 public class RSSPullService extends Service {
     SQLiteDatabase db, db_customers;
-//    SqliteDb sqliteDb = new SqliteDb();
+    SqliteDb sqliteDb = new SqliteDb(this);
 
     public Context context = this;
     public Handler handler = null;
@@ -88,6 +88,8 @@ public class RSSPullService extends Service {
     @Override
     public void onCreate() {
 //        Toast.makeText(this, "Service created!", Toast.LENGTH_LONG).show();
+
+//        getLocation();
         if (Build.VERSION.SDK_INT >= 26) {
             String CHANNEL_ID = "my_channel_01";
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
@@ -104,8 +106,6 @@ public class RSSPullService extends Service {
         }else{
             startForeground(1, new Notification());
         }
-//        getLocation();
-
 
 
         //----Using thread to upload data after evry x secs
@@ -114,10 +114,11 @@ public class RSSPullService extends Service {
             public void run() {
                 while (!isInterrupted()) {
                     try {
-                        Thread.sleep(5000);  //1000ms = 1 sec
+                        Thread.sleep(1000);  //1000ms = 1 sec
 //                        upload_data_delete_sqlite_data_test();
-                        new UploadData().execute(); //--commented on 26th march temporary
+//                        new UploadData().execute(); //--commented on 26th march temporary
 
+                        LoadNotificationData();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -129,6 +130,24 @@ public class RSSPullService extends Service {
 
 
 
+    }
+    public void sendNotification(String title, String message){
+        if (Build.VERSION.SDK_INT >= 26) {
+            String CHANNEL_ID = "my_channel_01";
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+
+            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
+
+            Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setContentTitle(title)
+                    .setContentText(message).build();
+
+            startForeground(1, notification);
+        }else{
+            startForeground(1, new Notification());
+        }
     }
 
     //---------added on 22nd June to run service all time, code starts------
@@ -162,6 +181,7 @@ public class RSSPullService extends Service {
         @Override
         protected Void doInBackground(Void... voids) {
 //        fetch_sqlite_upload_data_to_server();
+            LoadNotificationData();
             return null;
         }
 
@@ -177,27 +197,38 @@ public class RSSPullService extends Service {
 //                upload_data_delete_sqlite_data_test(); //---commented on 18th march, as it is not required for NextGen
 
 //                customer_fetch_sqlite_upload_to_server_and_delete_uploaded_sqlite_data(); //---added for nextgen on 18th march
+           LoadNotificationData();
             }
         }
 
     }
 
+    //========///----Notification, code starts---///=======
     public void LoadNotificationData(){
+
+        try {
+            db = openOrCreateDatabase("Payroll", MODE_PRIVATE, null);
+            db.execSQL("DROP TABLE IF EXISTS NOTIFICATIONDETAILS");
+            db.execSQL("CREATE TABLE IF NOT EXISTS NOTIFICATIONDETAILS(insertYN text, title text, notification_id text, event_name text,event_id text, event_owner_id text, event_owner text, message text)");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 //        String url = Url.BASEURL()+"pending_actions/fetch/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
         String url = Url.BASEURL()+"notification/custom/fetch/"+userSingletonModel.getCorporate_id()+"/"+userSingletonModel.getEmployee_id();
         Log.d("notificationurl-=>",url);
-        final ProgressDialog loading = ProgressDialog.show(RSSPullService.this, "Loading", "Please wait...", true, false);
+//        final ProgressDialog loading = ProgressDialog.show(this, "Loading", "Please wait...", true, false);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new
                 Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        getResponseData(response);
-                        loading.dismiss();
+                        getResponseNotificationData(response);
+//                        loading.dismiss();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                loading.dismiss();
+//                loading.dismiss();
                 error.printStackTrace();
             }
         });
@@ -206,7 +237,7 @@ public class RSSPullService extends Service {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
     }
-    public void getResponseData(String response){
+    public void getResponseNotificationData(String response){
         try {
 
             JSONObject jsonObject = new JSONObject(response);
@@ -216,12 +247,11 @@ public class RSSPullService extends Service {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("notifications");
                 for(int i=0; i<jsonArray.length(); i++){
-
                     JSONObject jsonObject2 = jsonArray.getJSONObject(i);
 
                     NotificationModel notificationModel = new NotificationModel();
-
                     notificationModel.setTitle(jsonObject2.getString("title"));
+
                     String[] body = jsonObject2.getString("body").split("::");
 
                     String notification_id_body = body[0];
@@ -250,7 +280,16 @@ public class RSSPullService extends Service {
                     notificationModel.setMessage(message[1]);
 
                     notificationModelArrayList.add(notificationModel);
+                    CustomNotificationUpdate(Integer.parseInt(notificationModel.getNotification_id()));
 
+                    sendNotification(jsonObject2.getString("title"), message[1]);
+
+                }
+                for(int i=0; i<notificationModelArrayList.size(); i++){
+                    sqliteDb.insertNotificationData("Y",notificationModelArrayList.get(i).getTitle(),notificationModelArrayList.get(i).getNotification_id(),notificationModelArrayList.get(i).getEvent_name(),notificationModelArrayList.get(i).getEvent_id(),notificationModelArrayList.get(i).getEvent_owner_id(),notificationModelArrayList.get(i).getEvent_owner(),notificationModelArrayList.get(i).getMessage());
+                }
+                if (sqliteDb.countNotificationData() > 0){
+                    Log.d("Count Data-=>", String.valueOf(sqliteDb.countNotificationData()));
                 }
             }else if(jsonObject1.getString("status").contentEquals("false")){
 
@@ -259,7 +298,57 @@ public class RSSPullService extends Service {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
     }
+
+    public void CustomNotificationUpdate(Integer notificationId){
+        final JSONObject DocumentElementobj = new JSONObject();
+        try {
+            DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
+            DocumentElementobj.put("notification_id", notificationId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //------calling api to save data
+        JsonObjectRequest request_json = null;
+        String URL = Url.BASEURL()+"notification/custom/update";
+        Log.d("testsaveurl-=>",URL);
+        try {
+            request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                //Process os success response
+                                JSONObject jsonObj = null;
+                                try{
+                                    String responseData = response.toString();
+                                    String val = "";
+                                    JSONObject resobj = new JSONObject(responseData);
+                                    Log.d("getNotificationUpdate",resobj.toString());
+                                }catch (JSONException e){
+                                    //  loading.dismiss();
+                                    e.printStackTrace();
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.e("Error: ", error.getMessage());
+                }
+            });
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(request_json);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    //========///----Notification, code ends---///=======
 
 
     @Override
