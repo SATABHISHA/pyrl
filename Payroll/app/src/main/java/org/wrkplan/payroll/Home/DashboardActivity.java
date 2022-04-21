@@ -206,8 +206,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
          try {
              db = openOrCreateDatabase("Payroll", MODE_PRIVATE, null);
-//             db.execSQL("DROP TABLE IF EXISTS NOTIFICATIONDETAILS");
-             db.execSQL("CREATE TABLE IF NOT EXISTS NOTIFICATIONDETAILS(insertYN text, title text, notification_id text, event_name text,event_id text, event_owner_id text, event_owner text, message text)");
+             db.execSQL("CREATE TABLE IF NOT EXISTS NOTIFICATIONDETAILS(employee_id text,insertYN text, title text, notification_id text, event_name text,event_id text, event_owner_id text, event_owner text, message text)");
          }catch (Exception e){
              e.printStackTrace();
          }
@@ -221,7 +220,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
          }
 
          Log.d("CountData-=>",String.valueOf(sqliteDb.countNotificationData()));
-         if(sqliteDb.countNotificationData() > 0){
+         if(sqliteDb.countNotificationDataWithFilter(userSingletonModel.getEmployee_id()) > 0){
              img_notification.setVisibility(View.VISIBLE);
          }else{
              img_notification.setVisibility(View.GONE);

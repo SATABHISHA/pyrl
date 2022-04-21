@@ -209,7 +209,7 @@ public class RSSPullService extends Service {
         try {
             db = openOrCreateDatabase("Payroll", MODE_PRIVATE, null);
 //            db.execSQL("DROP TABLE IF EXISTS NOTIFICATIONDETAILS");
-            db.execSQL("CREATE TABLE IF NOT EXISTS NOTIFICATIONDETAILS(insertYN text, title text, notification_id text, event_name text,event_id text, event_owner_id text, event_owner text, message text)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS NOTIFICATIONDETAILS(employee_id text, insertYN text, title text, notification_id text, event_name text,event_id text, event_owner_id text, event_owner text, message text)");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -286,7 +286,8 @@ public class RSSPullService extends Service {
 
                 }
                 for(int i=0; i<notificationModelArrayList.size(); i++){
-                    sqliteDb.insertNotificationData("Y",notificationModelArrayList.get(i).getTitle(),notificationModelArrayList.get(i).getNotification_id(),notificationModelArrayList.get(i).getEvent_name(),notificationModelArrayList.get(i).getEvent_id(),notificationModelArrayList.get(i).getEvent_owner_id(),notificationModelArrayList.get(i).getEvent_owner(),notificationModelArrayList.get(i).getMessage());
+                    Log.d("EmployeeId-=>", userSingletonModel.getEmployee_id());
+                    sqliteDb.insertNotificationData(userSingletonModel.getEmployee_id(),"Y",notificationModelArrayList.get(i).getTitle(),notificationModelArrayList.get(i).getNotification_id(),notificationModelArrayList.get(i).getEvent_name(),notificationModelArrayList.get(i).getEvent_id(),notificationModelArrayList.get(i).getEvent_owner_id(),notificationModelArrayList.get(i).getEvent_owner(),notificationModelArrayList.get(i).getMessage());
                 }
                 if (sqliteDb.countNotificationData() > 0){
                     Log.d("Count Data-=>", String.valueOf(sqliteDb.countNotificationData()));

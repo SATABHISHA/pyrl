@@ -43,6 +43,16 @@ public class SqliteDb extends SQLiteOpenHelper {
             return count;
 
     }
+
+    public int countNotificationDataWithFilter(String employee_id){
+        String countQuery = "SELECT  * FROM " + TABLE_NAME_NOTIFICATION;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM NOTIFICATIONDETAILS where employee_id = '"+employee_id+"'", null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME + TABLE_NAME_NOTIFICATION);
@@ -58,9 +68,10 @@ public class SqliteDb extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void insertNotificationData(String insertYN,String title, String notification_id, String event_name, String event_id, String event_owner_id, String event_owner, String message ){
+    public void insertNotificationData(String employee_id, String insertYN,String title, String notification_id, String event_name, String event_id, String event_owner_id, String event_owner, String message ){
         SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
         ContentValues values=new ContentValues();
+        values.put("employee_id",employee_id);
         values.put("insertYN",insertYN);
         values.put("title",title);
         values.put("notification_id",notification_id);
