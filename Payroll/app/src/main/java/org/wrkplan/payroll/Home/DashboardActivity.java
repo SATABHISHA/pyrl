@@ -484,7 +484,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
 
     }
-
     //============function to change password, code starts========
     public void change_password(String old_pswd, String new_pswd){
         try {
