@@ -3,6 +3,9 @@ package org.wrkplan.payroll.Home;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +21,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -31,6 +35,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -43,6 +48,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -192,6 +198,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     }
      //========///----Notification, code starts---///=======
      public void LoadNotificationData(){
+
         try {
             db = openOrCreateDatabase("Payroll", MODE_PRIVATE, null);
             db.execSQL("DROP TABLE IF EXISTS NOTIFICATIONDETAILS");
@@ -225,8 +232,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
      }
     public void getResponseNotificationData(String response){
         try {
-
-
 
             JSONObject jsonObject = new JSONObject(response);
             Log.d("jsonData-=>",jsonObject.toString());
@@ -268,6 +273,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     notificationModel.setMessage(message[1]);
 
                     notificationModelArrayList.add(notificationModel);
+                    CustomNotificationUpdate(Integer.valueOf(String.valueOf(event_id)));
 
                 }
                 for(int i=0; i<notificationModelArrayList.size(); i++){
@@ -280,6 +286,55 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
             }
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void CustomNotificationUpdate(Integer notificationId){
+        final JSONObject DocumentElementobj = new JSONObject();
+        try {
+            DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
+            DocumentElementobj.put("notification_id", notificationId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //------calling api to save data
+        JsonObjectRequest request_json = null;
+        String URL = Url.BASEURL()+"notification/custom/update";
+        Log.d("testsaveurl-=>",URL);
+        try {
+            request_json = new JsonObjectRequest(Request.Method.POST, URL,new JSONObject(DocumentElementobj.toString()),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                //Process os success response
+                                JSONObject jsonObj = null;
+                                try{
+                                    String responseData = response.toString();
+                                    String val = "";
+                                    JSONObject resobj = new JSONObject(responseData);
+                                    Log.d("getNotificationUpdate",resobj.toString());
+                                }catch (JSONException e){
+                                    //  loading.dismiss();
+                                    e.printStackTrace();
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.e("Error: ", error.getMessage());
+                }
+            });
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(request_json);
         } catch (JSONException e) {
             e.printStackTrace();
         }
