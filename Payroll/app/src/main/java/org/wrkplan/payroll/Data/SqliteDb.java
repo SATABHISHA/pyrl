@@ -30,10 +30,19 @@ public class SqliteDb extends SQLiteOpenHelper {
         db.execSQL(tableEmp);
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_NOTIFICATION);
-        String tableNotification = ("create table "+TABLE_NAME_NOTIFICATION+ "(title text, notification_id text, event_name text,event_id text,event_type text, event_owner_id text, event_owner text, event_date text, event_status text, message text)");
+        String tableNotification = ("create table "+TABLE_NAME_NOTIFICATION+ "(insertYN text, title text, notification_id text, event_name text,event_id text, event_owner_id text, event_owner text, message text)");
         db.execSQL(tableNotification);
     }
 
+    public int countNotificationData(){
+            String countQuery = "SELECT  * FROM " + TABLE_NAME_NOTIFICATION;
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(countQuery, null);
+            int count = cursor.getCount();
+            cursor.close();
+            return count;
+
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME + TABLE_NAME_NOTIFICATION);
@@ -49,18 +58,19 @@ public class SqliteDb extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void insertNotificationData(String title, String notification_id, String event_name, String event_id, String event_type, String event_owner_id, String event_owner, String event_date, String event_status, String message ){
+    public void insertNotificationData(String insertYN,String title, String notification_id, String event_name, String event_id, String event_owner_id, String event_owner, String message ){
         SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
         ContentValues values=new ContentValues();
+        values.put("insertYN",insertYN);
         values.put("title",title);
         values.put("notification_id",notification_id);
         values.put("event_name",event_name);
         values.put("event_id",event_id);
-        values.put("event_type",event_type);
+//        values.put("event_type",event_type);
         values.put("event_owner_id",event_owner_id);
         values.put("event_owner",event_owner);
-        values.put("event_date",event_date);
-        values.put("event_status",event_status);
+//        values.put("event_date",event_date);
+//        values.put("event_status",event_status);
         values.put("message",message);
 
         sqLiteDatabase.insert(TABLE_NAME_NOTIFICATION,null,values);

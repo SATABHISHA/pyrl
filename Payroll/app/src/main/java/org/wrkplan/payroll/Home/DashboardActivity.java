@@ -226,6 +226,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     JSONObject jsonObject2 = jsonArray.getJSONObject(i);
 
                     NotificationModel notificationModel = new NotificationModel();
+                    notificationModel.setTitle(jsonObject2.getString("title"));
 
                     String[] body = jsonObject2.getString("body").split("::");
 
@@ -258,7 +259,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                 }
                 for(int i=0; i<notificationModelArrayList.size(); i++){
-                    sqliteDb.insertNotificationData(notificationModelArrayList.get(i).getTitle(),notificationModelArrayList.get(i).getNotification_id(),notificationModelArrayList.get(i).getEvent_name(),notificationModelArrayList.get(i).getEvent_id(),notificationModelArrayList.get(i).getEvent_type(),notificationModelArrayList.get(i).getEvent_owner_id(),notificationModelArrayList.get(i).getEvent_owner(),notificationModelArrayList.get(i).getEvent_date(),notificationModelArrayList.get(i).getEvent_status(),notificationModelArrayList.get(i).getMessage());
+                    sqliteDb.insertNotificationData("Y",notificationModelArrayList.get(i).getTitle(),notificationModelArrayList.get(i).getNotification_id(),notificationModelArrayList.get(i).getEvent_name(),notificationModelArrayList.get(i).getEvent_id(),notificationModelArrayList.get(i).getEvent_owner_id(),notificationModelArrayList.get(i).getEvent_owner(),notificationModelArrayList.get(i).getMessage());
+                }
+                if (sqliteDb.countNotificationData() > 0){
+                    Log.d("Count Data-=>", String.valueOf(sqliteDb.countNotificationData()));
                 }
             }else if(jsonObject1.getString("status").contentEquals("false")){
 
