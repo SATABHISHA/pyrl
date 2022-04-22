@@ -323,7 +323,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:background="#DADADA"
+                        android:background="@drawable/activity_dashboard_in_out_title"
                         android:orientation="horizontal">
 
                         <TextView
@@ -352,7 +352,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:background="#ffffff"
+                            android:background="@drawable/activity_dashboard_in_out_time"
                             android:orientation="horizontal">
                             <LinearLayout
                                 android:id="@+id/ll_in_time"
@@ -733,13 +733,13 @@
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    <com.google.android.material.navigation.NavigationView
+   <!-- <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_home"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/activity_main_drawer" /> -->
 
 </androidx.drawerlayout.widget.DrawerLayout>
