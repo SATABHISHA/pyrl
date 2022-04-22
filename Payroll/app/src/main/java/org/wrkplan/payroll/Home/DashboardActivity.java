@@ -1702,6 +1702,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         tv_custombtn_leave_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Url.isNew=true;
+                Url.isSubordinateLeaveApplication=false;
                 DashboardToMyLeaveApplicationRequestNewCreateYN = true;
                 startActivity(new Intent(DashboardActivity.this, MyLeaveApplication2Activity.class));
             }
