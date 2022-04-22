@@ -108,17 +108,36 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
         imgBtnCalenderTo.setOnClickListener(this);
 //        img_back.setOnClickListener(this);
 
-        if(OutdoorListActivity.new_create_yn == 0) {
-            radioGroup.setOnCheckedChangeListener(this); //--added on 21st May
-            loadData();
-        }else if(OutdoorListActivity.new_create_yn == 1){
+        if(DashboardActivity.DashboardToMyODApplicationRequestNewCreateYN == true){
             radioGroup.setOnCheckedChangeListener(this);
             set_data_functionalities();
+
+            edt_from_date_select.setText(DashboardActivity.from_date);
+            edt_date_to_select.setText(DashboardActivity.to_date);
+            if(!edt_from_date_select.getText().toString().trim().isEmpty() &&
+                    !edt_date_to_select.getText().toString().isEmpty()){
+                tv_total_days.setText(get_date_difference(DashboardActivity.from_date,DashboardActivity.to_date));
+            }
+        }else {
+            if (OutdoorListActivity.new_create_yn == 0) {
+                radioGroup.setOnCheckedChangeListener(this); //--added on 21st May
+                loadData();
+            } else if (OutdoorListActivity.new_create_yn == 1) {
+                radioGroup.setOnCheckedChangeListener(this);
+                set_data_functionalities();
+            }
         }
 
         //--disabling button if date field is blank, added on 29th may
-        btn_save.setClickable(false);
-        btn_save.setAlpha(0.5f);
+        if(DashboardActivity.DashboardToMyODApplicationRequestNewCreateYN == true){
+           if(!edt_from_date_select.getText().toString().trim().isEmpty() && !edt_date_to_select.getText().toString().trim().isEmpty()){
+               btn_save.setClickable(true);
+               btn_save.setAlpha(1.0f);
+           }
+        }else {
+            btn_save.setClickable(false);
+            btn_save.setAlpha(0.5f);
+        }
     }
 
     @Override
@@ -142,10 +161,14 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                if (strDate.getTime() > System.currentTimeMillis()-(1000 * 60 * 60 * 24)) {
 //                   Toast.makeText(getApplicationContext(),"Eureka",Toast.LENGTH_LONG).show();
                    Log.d("test","Eurwka");
-                   if(Double.parseDouble(tv_total_days.getText().toString())>-1) {
-                       saveData();
+                   if(!tv_total_days.getText().toString().trim().isEmpty()) {
+                       if (Double.parseDouble(tv_total_days.getText().toString()) > -1) {
+                           saveData();
+                       } else {
+                           Toast.makeText(getApplicationContext(), "\"To Date\" should be greater than \"From Date\"", Toast.LENGTH_LONG).show();
+                       }
                    }else{
-                       Toast.makeText(getApplicationContext(), "\"To Date\" should be greater than \"From Date\"", Toast.LENGTH_LONG).show();
+                       Toast.makeText(getApplicationContext(), "Please select Date", Toast.LENGTH_LONG).show();
                    }
 
                }
