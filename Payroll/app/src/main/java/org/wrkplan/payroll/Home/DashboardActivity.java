@@ -126,7 +126,7 @@ import java.util.Locale;
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, LocationListener, NavigationView.OnNavigationItemSelectedListener, ConnectivityReceiver.ConnectivityReceiverListener {
 
     //------Dashboard variable, code starts-----
-    TextView tv_fullname,tv_companynam;
+    TextView tv_fullname,tv_companynam, txt_corid, txt_emp_name, txt_designation, txt_department, txt_supervisor1, txt_supervisor2;
     androidx.appcompat.app.AlertDialog.Builder builder;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -205,6 +205,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         LoadPendingItems();
         LoadSalaryData();
         LoadNotificationData();
+        LoadEmployeeData();
 
     }
 
@@ -307,8 +308,24 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         tv_companynam.setText(userSingletonModel.getCompany_name());
         navigationView.setNavigationItemSelectedListener(this);
         //-----------------------END OF NAVIGATION DRAWER PORTIONS--------------------//
+
     }
 
+    public void LoadEmployeeData(){
+        txt_corid = findViewById(R.id.txt_corid);
+        txt_emp_name = findViewById(R.id.txt_emp_name);
+        txt_designation = findViewById(R.id.txt_designation);
+        txt_department = findViewById(R.id.txt_department);
+        txt_supervisor1 = findViewById(R.id.txt_supervisor1);
+        txt_supervisor2 = findViewById(R.id.txt_supervisor2);
+
+        txt_corid.setText(userSingletonModel.getEmployee_code());
+        txt_emp_name.setText(userSingletonModel.getFull_employee_name());
+//        txt_designation.setText(userSingletonModel.getE);
+        txt_department.setText(userSingletonModel.getSub_department_name());
+        txt_supervisor1.setText(userSingletonModel.getSupervisor_1());
+        txt_supervisor2.setText(userSingletonModel.getSupervisor_2());
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();

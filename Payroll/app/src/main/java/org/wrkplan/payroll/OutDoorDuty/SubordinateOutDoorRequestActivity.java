@@ -36,6 +36,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
 
@@ -103,10 +104,18 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
 
 
     //===========Code to get data from api using volley and load data, starts==========
+    public static String RequestId = "", EmployeeId = "";
     public void loadData(){
+        if(DashboardActivity.NotificationPendingItemsYN == true){
+            RequestId = DashboardActivity.event_id;
+            EmployeeId = DashboardActivity.event_owner_id;
+        }else {
+            RequestId = CustomSubordinateOutdoorListAdapter.od_request_id;
+            EmployeeId = String.valueOf(CustomSubordinateOutdoorListAdapter.subordinate_employee_id);
+        }
 //        String url = Config.BaseUrlEpharma + "documents/list" ;
 //        String url = Url.BASEURL+"od/request/list/"+userSingletonModel.getCorporate_id()+"/1/"+userSingletonModel.getEmployee_id();
-        String url = Url.BASEURL()+"od/request/detail/"+userSingletonModel.getCorporate_id()+"/"+CustomSubordinateOutdoorListAdapter.od_request_id+"/2";
+        String url = Url.BASEURL()+"od/request/detail/"+userSingletonModel.getCorporate_id()+"/"+RequestId+"/2";
         Log.d("url-=>",url);
 //        String url = Url.BASEURL+"od/request/detail/20/1/1";
         final ProgressDialog loading = ProgressDialog.show(SubordinateOutDoorRequestActivity.this, "Loading", "Please wait...", true, false);
@@ -336,13 +345,14 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
     //===========Code to get data from api and load data, ends==========
 
     //===========code to save data, starts==============
+
     public void saveData(){
         final JSONObject DocumentElementobj = new JSONObject();
         try {
             DocumentElementobj.put("corp_id", userSingletonModel.getCorporate_id());
             DocumentElementobj.put("od_request_id", Integer.parseInt(CustomSubordinateOutdoorListAdapter.od_request_id));
             DocumentElementobj.put("od_request_no", tv_requisition_no.getText().toString());
-            DocumentElementobj.put("employee_id", CustomSubordinateOutdoorListAdapter.subordinate_employee_id);
+            DocumentElementobj.put("employee_id", EmployeeId);
             DocumentElementobj.put("from_date", edt_from_date_select.getText().toString());
             DocumentElementobj.put("to_date", edt_date_to_select.getText().toString());
             DocumentElementobj.put("total_days", tv_total_days.getText().toString());
@@ -388,6 +398,7 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
                                     Log.d("getData",resobj.toString());
 
                                     if(resobj.getString("status").contentEquals("true")){
+                                        DashboardActivity.NotificationPendingItemsYN = false;
 //                                        Toast.makeText(getApplicationContext(),resobj.getString("message"),Toast.LENGTH_LONG).show();
                                         Toast.makeText(getApplicationContext(),spinner_rqst_status.getSelectedItem().toString()+" OD Duty Request",Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(SubordinateOutDoorRequestActivity.this, SubordinateOutdoorListActivity.class);

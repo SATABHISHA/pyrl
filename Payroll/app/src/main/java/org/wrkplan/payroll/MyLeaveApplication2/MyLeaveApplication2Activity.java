@@ -442,6 +442,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                         public void onResponse(JSONObject response) {
                             try {
                                 DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN = false;
+                                DashboardActivity.NotificationPendingItemsYN = false;
                                 String message=response.getString("message");
                                 status_message = "Leave application "+select_item;
                                 Toast.makeText(MyLeaveApplication2Activity.this, message, Toast.LENGTH_SHORT).show();
