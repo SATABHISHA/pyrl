@@ -37,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -57,6 +58,7 @@ import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Model.DashboardPendingItemModel;
 import org.wrkplan.payroll.Model.NotificationModel;
 import org.wrkplan.payroll.Model.UserSingletonModel;
+import org.wrkplan.payroll.R;
 
 import java.security.Provider;
 import java.text.SimpleDateFormat;
@@ -117,7 +119,6 @@ public class RSSPullService extends Service {
                         Thread.sleep(1000);  //1000ms = 1 sec
 //                        upload_data_delete_sqlite_data_test();
 //                        new UploadData().execute(); //--commented on 26th march temporary
-
                         LoadNotificationData();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -134,17 +135,25 @@ public class RSSPullService extends Service {
     public void sendNotification(String title, String message){
         if (Build.VERSION.SDK_INT >= 26) {
             String CHANNEL_ID = "my_channel_01";
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
-                    "Channel human readable title",
-                    NotificationManager.IMPORTANCE_DEFAULT);
+            Intent intent = new Intent(this, DashboardActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
-
-            Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.wrkplanpyrllogo2)
                     .setContentTitle(title)
-                    .setContentText(message).build();
+                    .setContentText(message)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    // Set the intent that will fire when the user taps the notification
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
 
-            startForeground(1, notification);
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+// notificationId is a unique int for each notification that you must define
+            notificationManager.notify(1, builder.build());
+
+//            startForeground(1, notification);
         }else{
             startForeground(1, new Notification());
         }
