@@ -213,13 +213,21 @@
                             android:textSize="17sp" />
                     </RelativeLayout>
                     <LinearLayout
+                        android:id="@+id/ll_wfh_in_out"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="1"
+                        android:gravity="center_horizontal"
+                        android:layout_below="@id/rl_attendance_detail_title_bar"
+                        android:orientation="horizontal">
+                    <LinearLayout
                         android:id="@+id/ll_wkh_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="75dp"
                         android:background="@drawable/activity_dashboard_wfh_shape"
                         android:layout_marginTop="13dp"
-                        android:layout_marginLeft="13dp"
-                        android:layout_below="@id/rl_attendance_detail_title_bar"
+                        android:layout_marginLeft="0dp"
+                        android:layout_weight="0.8"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -242,8 +250,9 @@
                         </LinearLayout>
                         <EditText
                             android:id="@+id/ed_wrk_frm_home_detail"
-                            android:layout_width="195dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:layout_gravity="right"
                             android:inputType="textMultiLine"
                             android:padding="5dp"
@@ -259,11 +268,12 @@
                         android:id="@+id/rl_out"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
+                        android:minWidth="65dp"
                         android:layout_below="@id/rl_attendance_detail_title_bar"
-                        android:layout_alignParentRight="true"
                         android:layout_marginTop="13dp"
-                        android:layout_marginRight="13dp"
-                        android:visibility="visible"
+                        android:layout_marginLeft="13dp"
+                        android:layout_weight="0.02"
+                        android:visibility="gone"
                         android:background="@drawable/activity_dashboard_attendance_out_shape">
 
                         <TextView
@@ -281,29 +291,30 @@
                         android:id="@+id/rl_in"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:layout_below="@id/rl_attendance_detail_title_bar"
-                        android:layout_alignParentRight="true"
+                        android:layout_weight="0.02"
+                        android:minWidth="65dp"
                         android:layout_marginTop="13dp"
-                        android:layout_marginRight="13dp"
-                        android:visibility="gone"
+                        android:layout_marginLeft="13dp"
+                        android:visibility="visible"
                         android:background="@drawable/activity_dashboard_attendance_in_shape">
 
                         <TextView
                             android:id="@+id/tv_in"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:layout_centerInParent="true"
+                            android:gravity="center"
                             android:text="IN"
                             android:textColor="#ffffff"
                             android:textSize="30dp" />
 
                     </RelativeLayout>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="301dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/ll_wkh_detail"
+                        android:layout_below="@id/ll_wfh_in_out"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="16dp"
                         android:padding="1dp"
@@ -472,7 +483,7 @@
                         android:orientation="horizontal">
                         <RelativeLayout
                             android:id="@+id/ll_custombtn_leave_apply"
-                            android:layout_width="wrap_content"
+                            android:layout_width="80dp"
                             android:layout_height="38dp"
                             android:background="@drawable/activity_dashboard_calendar_btns_shape"
                             android:layout_weight="1">
@@ -488,7 +499,7 @@
                         </RelativeLayout>
                         <RelativeLayout
                             android:id="@+id/ll_custombtn_od_apply"
-                            android:layout_width="wrap_content"
+                            android:layout_width="80dp"
                             android:layout_height="38dp"
                             android:background="@drawable/activity_dashboard_calendar_btns_shape"
                             android:layout_marginLeft="10dp"
