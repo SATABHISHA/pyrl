@@ -411,7 +411,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                 try {
 
                     jsonBody_Subordinate.put("corp_id", userSingletonModel.corporate_id);
-                    jsonBody_Subordinate.put("appliction_id", Url.currtent_application_id);
+                    jsonBody_Subordinate.put("appliction_id", application_id);
 //                    jsonBody_Subordinate.put("leave_id", leaveID); //--commented by satabhisha
                     jsonBody_Subordinate.put("leave_id", Integer.parseInt(leaveID));
 //                    jsonBody_Subordinate.put("employee_id", userSingletonModel.employee_id);
@@ -424,8 +424,10 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     jsonBody_Subordinate.put("leave_status", select_item);
                     jsonBody_Subordinate.put("approved_by_id",userSingletonModel.user_id);
                     jsonBody_Subordinate.put("approved_date", currntdate);
-                    jsonBody_Subordinate.put("supervisor1_id",Url.supervisor1_id );
-                    jsonBody_Subordinate.put("supervisor2_id",Url.supervisor2_id);
+                    /*jsonBody_Subordinate.put("supervisor1_id",Url.supervisor1_id );
+                    jsonBody_Subordinate.put("supervisor2_id",Url.supervisor2_id);*/
+                    jsonBody_Subordinate.put("supervisor1_id",Supervisor1Id );
+                    jsonBody_Subordinate.put("supervisor2_id",Supervisor2Id);
 
                 } catch (Exception e) {
                     Toast.makeText(MyLeaveApplication2Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
@@ -885,8 +887,14 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
     }
 
+    public static String application_id = "", Supervisor1Id = "", Supervisor2Id = "";
     private void GetEditForm2() {
-        String url= Url.BASEURL() + "leave/" + "application/"+ "detail/"+userSingletonModel.corporate_id+"/"+Url.currtent_application_id+"/"+2;
+        if(DashboardActivity.NotificationPendingItemsYN == true){
+            application_id = DashboardActivity.event_id;
+        }else{
+            application_id = Url.currtent_application_id;
+        }
+        String url= Url.BASEURL() + "leave/" + "application/"+ "detail/"+userSingletonModel.corporate_id+"/"+application_id+"/"+2;
 
         Log.d("urlleave->",url);
         StringRequest stringRequest =new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -903,8 +911,10 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     String description=jsonObject1.getString("description");
                     String leave_status=jsonObject1.getString("leave_status");
                     String supervisor1_id=jsonObject1.getString("supervisor1_id");
+                    Supervisor1Id=jsonObject1.getString("supervisor1_id");
                     String supervisor1_name=jsonObject1.getString("supervisor1_name");
                     String supervisor2_id=jsonObject1.getString("supervisor2_id");
+                    Supervisor2Id=jsonObject1.getString("supervisor2_id");
                     String supervisor2_name=jsonObject1.getString("supervisor2_name");
                     String leave_id=jsonObject1.getString("leave_id");
 

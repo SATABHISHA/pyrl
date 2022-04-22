@@ -191,6 +191,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     SqliteDb sqliteDb=new SqliteDb(this);
     SQLiteDatabase db;
     ImageView img_notification;
+    public static String event_id = "", event_owner_id = "", LeaveType = "";
+    public static Boolean NotificationPendingItemsYN = false;
     //------Notification, code ends-----
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

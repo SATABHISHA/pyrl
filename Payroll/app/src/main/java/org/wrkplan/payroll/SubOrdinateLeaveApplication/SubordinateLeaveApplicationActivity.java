@@ -256,7 +256,7 @@ public class SubordinateLeaveApplicationActivity extends AppCompatActivity imple
         switch (v.getId()){
             case R.id.img_back:
                 Intent intent=new Intent(SubordinateLeaveApplicationActivity.this,LeaveBalanceActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
             default:

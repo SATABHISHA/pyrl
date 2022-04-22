@@ -12,9 +12,12 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.Model.DashboardPendingItemModel;
 import org.wrkplan.payroll.Model.OutDoorLogListModel;
 import org.wrkplan.payroll.Model.UserSingletonModel;
+import org.wrkplan.payroll.MyLeaveApplication2.MyLeaveApplication2Activity;
+import org.wrkplan.payroll.OutDoorDuty.OutDoorRequestActivity;
 import org.wrkplan.payroll.OutDoorDutyLog.CustomSubordinateOdDutyLogListAdapter;
 import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogDetailActivity;
 import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogEmployeeTaskActivity;
@@ -81,7 +84,7 @@ public class CustomDashboardPendingItemsListAdapter extends RecyclerView.Adapter
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_event_status, tv_event_type, tv_event_owner_name, tv_event_name_abbrebiation;
-        RelativeLayout rl_event_name_abbrebiation;
+        RelativeLayout rl_event_name_abbrebiation, relative_layout;
 
 
 
@@ -93,6 +96,34 @@ public class CustomDashboardPendingItemsListAdapter extends RecyclerView.Adapter
             tv_event_owner_name = itemView.findViewById(R.id.tv_event_owner_name);
             tv_event_name_abbrebiation = itemView.findViewById(R.id.tv_event_name_abbrebiation);
             rl_event_name_abbrebiation = itemView.findViewById(R.id.rl_event_name_abbrebiation);
+            relative_layout = itemView.findViewById(R.id.relative_layout);
+
+            relative_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final int position = getAdapterPosition();
+
+                    if (dashboardPendingItemModelArrayList.get(position).getEvent_name().contentEquals("Leave Application")){
+                        DashboardActivity.event_id = dashboardPendingItemModelArrayList.get(position).getEvent_id();
+                        DashboardActivity.event_owner_id = dashboardPendingItemModelArrayList.get(position).getEvent_owner_id();
+                        DashboardActivity.LeaveType = dashboardPendingItemModelArrayList.get(position).getEvent_type();
+                        DashboardActivity.NotificationPendingItemsYN = true;
+                        Url.isSubordinateLeaveApplication=true;
+                        Intent i = new Intent(context, MyLeaveApplication2Activity.class);
+                        context.startActivity(i);
+
+                    }else if (dashboardPendingItemModelArrayList.get(position).getEvent_name().contentEquals("OD Application")){
+                        DashboardActivity.event_id = dashboardPendingItemModelArrayList.get(position).getEvent_id();
+                        DashboardActivity.event_owner_id = dashboardPendingItemModelArrayList.get(position).getEvent_owner_id();
+                        DashboardActivity.LeaveType = dashboardPendingItemModelArrayList.get(position).getEvent_type();
+                        DashboardActivity.NotificationPendingItemsYN = true;
+
+                        Intent i = new Intent(context, OutDoorRequestActivity.class);
+                        context.startActivity(i);
+                    }
+
+                }
+            });
 
         }
 
