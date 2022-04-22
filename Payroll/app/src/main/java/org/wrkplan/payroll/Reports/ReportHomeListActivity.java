@@ -79,7 +79,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
         switch (v.getId()) {
             case R.id.img_back:
                 Intent intent = new Intent(ReportHomeListActivity.this, DashboardActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
             case R.id.btn_view_task:
