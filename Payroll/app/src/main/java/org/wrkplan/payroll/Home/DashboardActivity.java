@@ -145,6 +145,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     List<Date> selectedDateRangeList = new ArrayList<>();
     public static int count = 0;
     public static Boolean DashboardToMyLeaveApplicationRequestNewCreateYN = false , DashboardToMyODApplicationRequestNewCreateYN = false;
+    public static String from_date = "", to_date = "";
     //----Calendar variable, code ends---
 
     //----Attendance variable, code starts-----
@@ -1575,6 +1576,20 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     //=========///-----Attendance code, ends----///==========
 
     //-------Calendar code, starts-----
+    public String getDateFormatFromCalendar(String date){
+        String FormattedDate = "";
+        try {
+            SimpleDateFormat inputformat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy");
+            Date d1 = inputformat.parse(date);
+            String formateDate = new SimpleDateFormat("dd-MM-yyyy").format(d1);
+//            Log.d("DraftDate1-=>", formateDate);
+            FormattedDate = formateDate;
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  FormattedDate;
+    }
     public void LoadCalendarData(Bundle savedInstanceState){
         txt_date = findViewById(R.id.txt_date);
         txt_day_name = findViewById(R.id.txt_day_name);
@@ -1706,6 +1721,16 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 Url.isSubordinateLeaveApplication=false;
                 DashboardToMyLeaveApplicationRequestNewCreateYN = true;
                 startActivity(new Intent(DashboardActivity.this, MyLeaveApplication2Activity.class));
+                for(int i=0; i<selectedDateRangeList.size(); i++){
+                if(i==0){
+                    from_date = selectedDateRangeList.get(i).toString();
+                }else{
+                    to_date = selectedDateRangeList.get(i).toString();
+                }
+
+            }
+                Log.d("FromDate-=>", getDateFormatFromCalendar(from_date));
+                Log.d("ToDate-=>", getDateFormatFromCalendar(to_date));
             }
         });
 

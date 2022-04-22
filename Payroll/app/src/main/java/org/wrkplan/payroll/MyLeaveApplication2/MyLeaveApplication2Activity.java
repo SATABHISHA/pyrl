@@ -158,6 +158,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                 alert.setTitle("Cancel!");
                 alert.show();
             } else {
+                DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN = false;
                 Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -241,6 +242,10 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
         if(Url.isNew==true)
         {
             rb1.setChecked(true);
+
+            if(DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN == true){
+
+            }
         }
         else
         {
