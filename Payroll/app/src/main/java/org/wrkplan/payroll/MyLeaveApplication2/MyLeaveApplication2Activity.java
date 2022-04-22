@@ -115,7 +115,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
     public static String status_message = "";
 
     long days;
-
+    Integer flag_datefield_check = 1;
 
 
     @Override
@@ -245,6 +245,12 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
             if(DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN == true){
 
+                txt_from_date.setText(DashboardActivity.from_date);
+                txt_to_date.setText(DashboardActivity.to_date);
+                if(!txt_from_date.getText().toString().trim().isEmpty() &&
+                !txt_to_date.getText().toString().isEmpty()){
+                    txt_total_number.setText(get_date_difference(DashboardActivity.from_date,DashboardActivity.to_date));
+                }
             }
         }
         else
@@ -637,11 +643,14 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
 
 
-                else if(days<=0)
+               /* else if(days<=0)
+                {
+                    Toast.makeText(MyLeaveApplication2Activity.this, "'To Date' should be greater than 'From Date'", Toast.LENGTH_SHORT).show();
+                }*/ //---commented by satabhisha
+                else if(Integer.parseInt(txt_total_number.getText().toString())<0)
                 {
                     Toast.makeText(MyLeaveApplication2Activity.this, "'To Date' should be greater than 'From Date'", Toast.LENGTH_SHORT).show();
                 }
-
                 else
                 {
                     saveLeaveInfo();
@@ -1176,7 +1185,66 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
         }
     }
 
+    //---------Date Difference function, code starts(added on 22nd April, 2022)-------
+    public String get_date_difference(String fromDate, String toDate){
+        String dayDifference = "";
+        try {
+            //Dates to compare
+           /* String CurrentDate=  "09/24/2015";
+            String FinalDate=  "09/26/2015";*/
 
+            Date date1;
+            Date date2;
+
+//            SimpleDateFormat dates = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat dates = new SimpleDateFormat("dd-MMM-yyyy");
+
+            //Setting dates
+            date1 = dates.parse(fromDate);
+            date2 = dates.parse(toDate);
+
+            //Comparing dates
+            long difference = Math.abs(date1.getTime() - date2.getTime());
+//            long difference = date1.getTime() - date2.getTime();
+            long differenceDates = difference / (24 * 60 * 60 * 1000);
+
+            if (date2.getTime() < date1.getTime()) {
+                Toast.makeText(getApplicationContext(), "To Date should be graeter than \"From Date\"", Toast.LENGTH_LONG).show();
+                flag_datefield_check = 0;
+
+//                    edt_date_to_select.setText("");
+//                    edt_date_to_select.setText(edt_from_date_select.getText().toString());
+//                    calendarPicker(myCalendarToDate, edt_date_to_select);
+              /*  AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Please enter valid date")
+                        .setCancelable(false)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                dialog.dismiss();
+
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();*/
+                dayDifference = Long.toString(-(differenceDates+1));
+                dayDifference = dayDifference;
+            }else if(date2.getTime() >= date1.getTime()){
+                //Convert long to String
+                flag_datefield_check = 1;
+                dayDifference = Long.toString(differenceDates+1);
+            }
+//            dayDifference = Long.toString(differenceDates+1);
+
+            Log.e("HERE","HERE: " + dayDifference);
+
+
+        } catch (Exception exception) {
+            Log.e("DIDN'T WORK", "exception " + exception);
+        }
+        return dayDifference;
+    }
+    //---------Date Difference function, code ends-------
     private void GetLeave() {
         String url= Url.BASEURL() + "leave/" + "type/"+userSingletonModel.corporate_id;
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {

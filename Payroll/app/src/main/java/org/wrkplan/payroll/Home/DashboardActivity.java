@@ -1581,7 +1581,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         try {
             SimpleDateFormat inputformat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy");
             Date d1 = inputformat.parse(date);
-            String formateDate = new SimpleDateFormat("dd-MM-yyyy").format(d1);
+            String formateDate = new SimpleDateFormat("dd-MMM-yyyy").format(d1);
 //            Log.d("DraftDate1-=>", formateDate);
             FormattedDate = formateDate;
 
@@ -1723,9 +1723,11 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 startActivity(new Intent(DashboardActivity.this, MyLeaveApplication2Activity.class));
                 for(int i=0; i<selectedDateRangeList.size(); i++){
                 if(i==0){
-                    from_date = selectedDateRangeList.get(i).toString();
+//                    from_date = selectedDateRangeList.get(i).toString();
+                    from_date = getDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
                 }else{
-                    to_date = selectedDateRangeList.get(i).toString();
+//                    to_date = selectedDateRangeList.get(i).toString();
+                    to_date = getDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
                 }
 
             }
