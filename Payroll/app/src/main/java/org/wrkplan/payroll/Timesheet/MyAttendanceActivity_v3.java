@@ -50,6 +50,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.ImageUtil;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel;
 import org.wrkplan.payroll.Model.TimesheetMyAttendanceModel_v3;
@@ -172,7 +173,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.img_back:
-                Intent intent_myattendence = new Intent(MyAttendanceActivity_v3.this, HomeActivity.class);
+                Intent intent_myattendence = new Intent(MyAttendanceActivity_v3.this, DashboardActivity.class);
                 intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_myattendence);
                 break;
@@ -808,7 +809,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent_myattendence = new Intent(MyAttendanceActivity_v3.this, HomeActivity.class);
+        Intent intent_myattendence = new Intent(MyAttendanceActivity_v3.this, DashboardActivity.class);
         intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_myattendence);
     }

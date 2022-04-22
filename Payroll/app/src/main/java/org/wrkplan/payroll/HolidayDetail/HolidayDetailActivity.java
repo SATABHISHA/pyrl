@@ -40,6 +40,7 @@ import org.wrkplan.payroll.CompanyDocuments.CompanyDocumentsActivity;
 import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.EmployeeFacilitisModel.Facilitis;
 import org.wrkplan.payroll.HolidayModel.Holiday;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
@@ -99,7 +100,7 @@ public class HolidayDetailActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(HolidayDetailActivity.this, HomeActivity.class);
+        Intent intent = new Intent(HolidayDetailActivity.this, DashboardActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -154,7 +155,7 @@ public class HolidayDetailActivity extends AppCompatActivity implements View.OnC
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HolidayDetailActivity.this, HomeActivity.class);
+                Intent intent = new Intent(HolidayDetailActivity.this, DashboardActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 

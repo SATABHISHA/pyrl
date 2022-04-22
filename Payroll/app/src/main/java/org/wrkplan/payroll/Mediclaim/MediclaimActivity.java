@@ -29,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.Mediclaim.My_Mediclaim_Model;
 import org.wrkplan.payroll.Model.Mediclaim.Subordinate_Mediclaim_Model;
@@ -79,7 +80,7 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
             ll_recycler.setVisibility(View.VISIBLE);
             ll_1recycler.setVisibility(View.GONE);
 
-            Intent intent=new Intent(MediclaimActivity.this, HomeActivity.class);
+            Intent intent=new Intent(MediclaimActivity.this, DashboardActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
@@ -239,7 +240,7 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
                     ll_recycler.setVisibility(View.VISIBLE);
                     ll_1recycler.setVisibility(View.GONE);
 
-                    Intent intent=new Intent(MediclaimActivity.this, HomeActivity.class);
+                    Intent intent=new Intent(MediclaimActivity.this, DashboardActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }

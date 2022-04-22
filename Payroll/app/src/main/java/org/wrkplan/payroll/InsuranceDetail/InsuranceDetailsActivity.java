@@ -22,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.SETGET;
 import org.wrkplan.payroll.Model.UserSingletonModel;
@@ -49,7 +50,7 @@ public class InsuranceDetailsActivity extends AppCompatActivity  implements View
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(InsuranceDetailsActivity.this,HomeActivity.class);
+        Intent intent=new Intent(InsuranceDetailsActivity.this, DashboardActivity.class);
         startActivity(intent);
         finish();
     }
@@ -290,7 +291,7 @@ public class InsuranceDetailsActivity extends AppCompatActivity  implements View
                 break;
 
             case R.id.bt_close:
-                Intent intent=new Intent(InsuranceDetailsActivity.this,HomeActivity.class);
+                Intent intent=new Intent(InsuranceDetailsActivity.this,DashboardActivity.class);
                 startActivity(intent);
                 finish();
 

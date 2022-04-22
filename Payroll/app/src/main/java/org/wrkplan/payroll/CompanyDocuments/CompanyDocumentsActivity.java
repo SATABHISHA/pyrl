@@ -35,6 +35,7 @@ import org.json.JSONObject;
 import org.wrkplan.payroll.CompanyDocumentsModel.Documents;
 import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.EmployeeFacilitisModel.Facilitis;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Login.LoginActivity;
 import org.wrkplan.payroll.Model.UserSingletonModel;
@@ -56,7 +57,7 @@ public class CompanyDocumentsActivity extends AppCompatActivity implements View.
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(CompanyDocumentsActivity.this,HomeActivity.class);
+        Intent intent=new Intent(CompanyDocumentsActivity.this, DashboardActivity.class);
         startActivity(intent);
         finish();
     }
@@ -75,7 +76,7 @@ public class CompanyDocumentsActivity extends AppCompatActivity implements View.
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(CompanyDocumentsActivity.this, HomeActivity.class);
+                Intent intent=new Intent(CompanyDocumentsActivity.this, DashboardActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -146,7 +147,7 @@ public class CompanyDocumentsActivity extends AppCompatActivity implements View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_back:
-                Intent intent=new Intent(CompanyDocumentsActivity.this,HomeActivity.class);
+                Intent intent=new Intent(CompanyDocumentsActivity.this,DashboardActivity.class);
                 startActivity(intent);
                 finish();
                 break;

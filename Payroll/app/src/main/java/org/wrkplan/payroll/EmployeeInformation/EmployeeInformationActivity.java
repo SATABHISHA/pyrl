@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.wrkplan.payroll.CompanyDocuments.CompanyDocumentsActivity;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
@@ -52,7 +53,7 @@ public class EmployeeInformationActivity extends AppCompatActivity implements Vi
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(EmployeeInformationActivity.this, HomeActivity.class);
+                Intent intent=new Intent(EmployeeInformationActivity.this, DashboardActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -84,7 +85,7 @@ public class EmployeeInformationActivity extends AppCompatActivity implements Vi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_back:
-                Intent intent=new Intent(EmployeeInformationActivity.this,HomeActivity.class);
+                Intent intent=new Intent(EmployeeInformationActivity.this,DashboardActivity.class);
                 startActivity(intent);
                 finish();
                 break;

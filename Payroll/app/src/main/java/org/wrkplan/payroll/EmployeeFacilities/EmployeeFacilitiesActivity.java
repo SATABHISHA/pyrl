@@ -29,6 +29,7 @@ import org.wrkplan.payroll.CompanyDocuments.CompanyDocumentsActivity;
 import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.EmployeeFacilitisModel.Facilitis;
 import org.wrkplan.payroll.HolidayModel.Holiday;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
@@ -44,7 +45,7 @@ public class EmployeeFacilitiesActivity extends AppCompatActivity implements Vie
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(EmployeeFacilitiesActivity.this,HomeActivity.class);
+        Intent intent=new Intent(EmployeeFacilitiesActivity.this, DashboardActivity.class);
         startActivity(intent);
         finish();
     }
@@ -64,7 +65,7 @@ public class EmployeeFacilitiesActivity extends AppCompatActivity implements Vie
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(EmployeeFacilitiesActivity.this, HomeActivity.class);
+                Intent intent=new Intent(EmployeeFacilitiesActivity.this, DashboardActivity.class);
                 startActivity(intent);
                 finish();
             }

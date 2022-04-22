@@ -39,6 +39,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Leave_Balance.LeaveBalanceActivity;
 import org.wrkplan.payroll.Model.Load_Spinner_Model;
@@ -77,7 +78,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_back:
-                Intent intent = new Intent(ReportHomeListActivity.this, HomeActivity.class);
+                Intent intent = new Intent(ReportHomeListActivity.this, DashboardActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;

@@ -26,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.CompanyDocuments.CompanyDocumentsActivity;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.Load_Spinner_Model;
 import org.wrkplan.payroll.Model.UserSingletonModel;
@@ -49,7 +50,7 @@ public class LeaveBalanceActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(LeaveBalanceActivity.this,HomeActivity.class);
+        Intent intent=new Intent(LeaveBalanceActivity.this, DashboardActivity.class);
         startActivity(intent);
         finish();
     }

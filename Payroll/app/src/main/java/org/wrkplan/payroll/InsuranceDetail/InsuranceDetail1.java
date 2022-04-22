@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.InsuramceModel;
 import org.wrkplan.payroll.Model.UserSingletonModel;
@@ -119,7 +120,7 @@ public class InsuranceDetail1 extends AppCompatActivity implements View.OnClickL
         bt_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(InsuranceDetail1.this,HomeActivity.class);
+                Intent intent=new Intent(InsuranceDetail1.this, DashboardActivity.class);
                 startActivity(intent);
                 finish();
 
@@ -355,7 +356,7 @@ public class InsuranceDetail1 extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(InsuranceDetail1.this, HomeActivity.class);
+        Intent intent=new Intent(InsuranceDetail1.this, DashboardActivity.class);
         startActivity(intent);
         finish();
     }
@@ -364,7 +365,7 @@ public class InsuranceDetail1 extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_back:
-                Intent intent=new Intent(InsuranceDetail1.this, HomeActivity.class);
+                Intent intent=new Intent(InsuranceDetail1.this, DashboardActivity.class);
                 startActivity(intent);
                 finish();
                 break;

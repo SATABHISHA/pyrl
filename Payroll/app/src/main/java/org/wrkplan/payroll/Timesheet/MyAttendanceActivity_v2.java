@@ -28,6 +28,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.R;
@@ -198,7 +199,7 @@ public class MyAttendanceActivity_v2 extends AppCompatActivity implements View.O
 
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent_dashboard = new Intent(MyAttendanceActivity_v2.this, HomeActivity.class);
+        Intent intent_dashboard = new Intent(MyAttendanceActivity_v2.this, DashboardActivity.class);
         intent_dashboard.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_dashboard);
     }

@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Home.HomeActivity;
 import org.wrkplan.payroll.Model.LTAModel;
 import org.wrkplan.payroll.Model.OutDoorListModel;
@@ -81,7 +82,7 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.img_back:
-                Intent intent_home = new Intent(this, HomeActivity.class);
+                Intent intent_home = new Intent(this, DashboardActivity.class);
                 intent_home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_home);
                 break;
@@ -202,7 +203,7 @@ public class LtaListActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-        Intent intent_home = new Intent(this, HomeActivity.class);
+        Intent intent_home = new Intent(this, DashboardActivity.class);
         intent_home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_home);
     }
