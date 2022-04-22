@@ -175,7 +175,7 @@ public class MyLeaveApplicationActivity extends AppCompatActivity implements Vie
         switch (v.getId()){
             case R.id.img_back:
                 Intent intent=new Intent(MyLeaveApplicationActivity.this,LeaveBalanceActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
             default:
