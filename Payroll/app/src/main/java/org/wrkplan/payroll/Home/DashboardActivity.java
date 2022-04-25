@@ -1967,6 +1967,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     //---get current day date, code ends---
                     ColorDrawable color = new ColorDrawable(Color.parseColor("#ff9933"));
                     caldroidFragment.setBackgroundDrawableForDate(color, today);
+                    /*if (Calendar.DAY_OF_WEEK == Calendar.SUNDAY) {
+
+                        caldroidFragment.setBackgroundDrawableForDate(color, Calendar.DAY_OF_WEEK);
+                    }*/
 
 
 //                    lv1.setAdapter(new HolidayDetailActivity.Nr());
