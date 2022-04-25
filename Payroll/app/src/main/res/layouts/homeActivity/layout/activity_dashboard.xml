@@ -438,9 +438,10 @@
                         android:id="@+id/rl_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#ffffff"
+                        android:background="@drawable/activity_dashboard_calendar_shape"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
+                        android:layout_marginTop="1dp"
                         android:orientation="vertical" >
 
                         <RelativeLayout
