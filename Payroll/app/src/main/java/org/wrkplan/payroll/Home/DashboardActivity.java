@@ -126,7 +126,7 @@ import java.util.Locale;
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, LocationListener, NavigationView.OnNavigationItemSelectedListener, ConnectivityReceiver.ConnectivityReceiverListener {
 
     //------Dashboard variable, code starts-----
-    TextView tv_fullname,tv_companynam, txt_corid, txt_emp_name, txt_designation, txt_department, txt_supervisor1, txt_supervisor2;
+    TextView tv_fullname,tv_companynam, txt_corid, txt_emp_name, txt_designation, txt_department, txt_supervisor1, txt_supervisor2, tv_designation;
     androidx.appcompat.app.AlertDialog.Builder builder;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -304,10 +304,12 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         final View header = navigationView.getHeaderView(0);
         tv_fullname=header.findViewById(R.id.tv_fullname);
         tv_companynam=header.findViewById(R.id.tv_companynam);
+        tv_designation=header.findViewById(R.id.tv_designation);
         //  ed_userpassword=findViewById(R.id.ed_userpassword);
         coordinatorLayout=findViewById(R.id.cordinatorLayout);
         tv_fullname.setText(userSingletonModel.getFull_employee_name());
         tv_companynam.setText(userSingletonModel.getCompany_name());
+        tv_designation.setText(userSingletonModel.getDesignation_name());
         navigationView.setNavigationItemSelectedListener(this);
         //-----------------------END OF NAVIGATION DRAWER PORTIONS--------------------//
 
@@ -366,7 +368,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         txt_corid.setText(userSingletonModel.getEmployee_code());
         txt_emp_name.setText(userSingletonModel.getFull_employee_name());
-//        txt_designation.setText(userSingletonModel.getE);
+        txt_designation.setText(userSingletonModel.getDesignation_name());
         txt_department.setText(userSingletonModel.getSub_department_name());
         txt_supervisor1.setText(userSingletonModel.getSupervisor_1());
         txt_supervisor2.setText(userSingletonModel.getSupervisor_2());

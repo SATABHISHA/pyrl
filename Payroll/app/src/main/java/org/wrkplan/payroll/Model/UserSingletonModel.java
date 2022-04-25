@@ -22,7 +22,7 @@ public class UserSingletonModel {
             confirmation_date,sub_department_name,pf_amount,gratuity_amount,sub_id,nominee_name,reference_status,lta_eligible_emp,
             full_employee_name,vpf_yn,vpf_pnc,p_tax,archive_date,nominee_relation,salary_on_appointment,confirmation_basic,
             cause_of_termination_of_service,amount_of_gratuity_claimed,amount_of_gratuit_paid,date_of_payment_of_gratuity,gratuity_witness1,
-            gratuity_witness2,gratuity_remarks,employee_image,esi_no,supervisor_1_name,supervisor_2_name;
+            gratuity_witness2,gratuity_remarks,employee_image,esi_no,supervisor_1_name,supervisor_2_name, designation_name;
 
     //----company variables
     public  String company_id,company_code,company_name,corporate_id,logo_path,active_yn,address_line1,address_line2,state,
@@ -40,6 +40,10 @@ public  String casual_leave,earn_leave,sick_leave,comp_off,maternal_leave,patern
 
     public static UserSingletonModel getUserSingletonModel() {
         return userSingletonModel;
+    }
+
+    public String getDesignation_name() {
+        return designation_name;
     }
 
     public String getUser_id() {
@@ -578,6 +582,11 @@ public  String casual_leave,earn_leave,sick_leave,comp_off,maternal_leave,patern
     //---------Getter method ends-----------------
 
     //---------setter method starts-----------------
+
+
+    public void setDesignation_name(String designation_name) {
+        this.designation_name = designation_name;
+    }
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;

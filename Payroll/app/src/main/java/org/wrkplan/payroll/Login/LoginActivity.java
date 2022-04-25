@@ -119,6 +119,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
           userSingletonModel.setDepartment_id(sharedPreferences.getString("department_id", ""));
           userSingletonModel.setDesignation_id(sharedPreferences.getString("designation_id", ""));
+          userSingletonModel.setDesignation_name(sharedPreferences.getString("designation_name", ""));
           userSingletonModel.setDob(sharedPreferences.getString("dob", ""));
           userSingletonModel.setDoj(sharedPreferences.getString("doj", ""));
           userSingletonModel.setDate_of_rehiring(sharedPreferences.getString("date_of_rehiring", ""));
@@ -309,6 +310,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         {
             final ProgressDialog loading = ProgressDialog.show(LoginActivity.this, "Authenticating", "Please wait while logging", false, false);
             String url= Url.BASEURL() + "login/"+userid+"/"+username+"/"+password;
+            Log.d("LoginUrl-=>",url);
             StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -348,6 +350,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 editor.putString("employee_lname", jb_employee.getString("employee_lname"));
                                 editor.putString("department_id", jb_employee.getString("department_id"));
                                 editor.putString("designation_id", jb_employee.getString("designation_id"));
+                                editor.putString("designation_name", jb_employee.getString("designation_name"));
                                 editor.putString("dob", jb_employee.getString("dob"));
                                 editor.putString("doj", jb_employee.getString("doj"));
                                 editor.putString("date_of_rehiring", jb_employee.getString("date_of_rehiring"));
@@ -498,6 +501,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             userSingletonModel.setDepartment_id(jb_employee.getString("department_id"));
                             userSingletonModel.setDesignation_id(jb_employee.getString("designation_id"));
+                            userSingletonModel.setDesignation_name(jb_employee.getString("designation_name"));
                             userSingletonModel.setDob(jb_employee.getString("dob"));
                             userSingletonModel.setDoj(jb_employee.getString("doj"));
                             userSingletonModel.setDate_of_rehiring(jb_employee.getString("date_of_rehiring"));
