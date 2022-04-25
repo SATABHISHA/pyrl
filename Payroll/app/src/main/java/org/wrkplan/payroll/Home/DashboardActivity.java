@@ -153,7 +153,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     //----Attendance variable, code starts-----
     RelativeLayout rl_out, rl_in;
-    TextView tv_out, tv_in, txt_in_time, txt_in_time_abbrebiation, txt_out_time, txt_out_time_abbrebiation;
+    TextView tv_out, tv_in, txt_in_time, txt_in_time_abbrebiation, txt_out_time, txt_out_time_abbrebiation, tv_today_date;
     CheckBox chck_wrk_frm_home;
     EditText ed_wrk_frm_home_detail;
     public static int timesheet_id, work_from_home_flag;
@@ -966,6 +966,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         chck_wrk_frm_home = findViewById(R.id.chck_wrk_frm_home);
         chck_wrk_frm_home = findViewById(R.id.chck_wrk_frm_home);
         ed_wrk_frm_home_detail = findViewById(R.id.ed_wrk_frm_home_detail);
+        tv_today_date = findViewById(R.id.tv_today_date);
 
         chck_wrk_frm_home.setOnClickListener(this);
         tv_in.setOnClickListener(this);
@@ -973,6 +974,16 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         statusCheck();
         getLocation();
         load_data_check_od_duty();
+
+        //=========get current date and set curretnt date, code starts========
+        Date c = Calendar.getInstance().getTime();
+        System.out.println("Current time => " + c);
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+        String formattedDate = df.format(c);
+
+        tv_today_date.setText(formattedDate);
+        //=========get current date and set curretnt date, code ends========
     }
 
     @Override
@@ -1658,12 +1669,40 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         }
         return  FormattedDate;
     }
+    public String getFullDayNameFormatFromCalendar(String date){
+        String FormattedFullDayName = "";
+        try {
+            SimpleDateFormat inputformat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy");
+            Date d1 = inputformat.parse(date);
+            String formateDate = new SimpleDateFormat("EEEE").format(d1);
+//            Log.d("DraftDate1-=>", formateDate);
+            FormattedFullDayName = formateDate;
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  FormattedFullDayName;
+    }
     public void LoadCalendarData(Bundle savedInstanceState){
         txt_date = findViewById(R.id.txt_date);
         txt_day_name = findViewById(R.id.txt_day_name);
         txt_holiday_name = findViewById(R.id.txt_holiday_name);
         tv_custombtn_leave_apply = findViewById(R.id.tv_custombtn_leave_apply);
         tv_custombtn_od_apply = findViewById(R.id.tv_custombtn_od_apply);
+
+        //=========get current date and set curretnt date, code starts========
+        Date c = Calendar.getInstance().getTime();
+        System.out.println("Current time => " + c);
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+        SimpleDateFormat day_name = new SimpleDateFormat("EEEE", Locale.getDefault());
+
+        String formattedDate = df.format(c);
+        String formattedDayName = day_name.format(c);
+
+        txt_date.setText(formattedDate);
+        txt_day_name.setText(formattedDayName);
+        //=========get current date and set curretnt date, code ends========
 
         caldroidFragment = new CaldroidFragment();
         // If Activity is created after rotation
@@ -1715,6 +1754,23 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     caldroidFragment.setBackgroundDrawableForDate(color, date);
                     caldroidFragment.refreshView();
                     selectedDateRangeList.add(date);
+
+                    String date_range = "", day_name="";
+                    for(int i=0; i<selectedDateRangeList.size(); i++) {
+                        if (i == 0) {
+//                    from_date = selectedDateRangeList.get(i).toString();
+                            from_date = getDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
+                            date_range = from_date;
+                            day_name = getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
+                        } else {
+//                    to_date = selectedDateRangeList.get(i).toString();
+                            to_date = getDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
+                            date_range = date_range+" to "+to_date;
+                            day_name = day_name+" to "+getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
+                        }
+                    }
+                    txt_date.setText(date_range);
+                    txt_day_name.setText(day_name);
                 }else if(count>2){
                     for(int i=0; i<selectedDateRangeList.size(); i++){
 
@@ -1749,6 +1805,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                             //sdf.applyPattern("d MMM YYYY");
                             String sMyDate = sdf.format(myDate);
                             txt_date.setText(sMyDate);
+                            txt_day_name.setText("");
                             txt_holiday_name.setText(arrayList1.get(j).getHoliday_name());
                         }
                     }

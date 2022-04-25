@@ -214,6 +214,7 @@
                             android:textSize="17sp" />
 
                         <TextView
+                            android:id="@+id/tv_today_date"
                             android:layout_width="100dp"
                             android:layout_height="28dp"
                             android:layout_alignParentRight="true"
@@ -482,7 +483,7 @@
                         android:layout_below="@id/txt_day_name"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="0dp"
-                        android:text="Good Friday"
+                        android:text=""
                         android:textColor="#FB4E4E"
                         android:textSize="14sp" />
                     

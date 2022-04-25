@@ -189,7 +189,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                                    public void onClick(DialogInterface dialog, int id) {
                                        DashboardActivity.DashboardToMyODApplicationRequestNewCreateYN = false;
                                        Intent intent_odlist = new Intent(OutDoorRequestActivity.this,OutdoorListActivity.class);
-                                       intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                       intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                        startActivity(intent_odlist);
                                        dialog.cancel();
                                    }
