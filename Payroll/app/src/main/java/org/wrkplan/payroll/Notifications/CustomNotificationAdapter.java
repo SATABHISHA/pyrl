@@ -91,11 +91,11 @@ public class CustomNotificationAdapter extends RecyclerView.Adapter<CustomNotifi
                     final int position = getAdapterPosition();
 
                     if (notificationModelArrayList.get(position).getEvent_name().contentEquals("Leave Application")){
-                        /*DashboardActivity.event_id = notificationModelArrayList.get(position).getEvent_id();
+                        DashboardActivity.event_id = notificationModelArrayList.get(position).getEvent_id();
                         DashboardActivity.NotificationPendingItemsYN = true;
                         Url.isSubordinateLeaveApplication=true;
                         Intent i = new Intent(context, MyLeaveApplication2Activity.class);
-                        context.startActivity(i);*/
+                        context.startActivity(i);
 
                     }else if (notificationModelArrayList.get(position).getEvent_name().contentEquals("OD Application")){
                        /* DashboardActivity.event_id = notificationModelArrayList.get(position).getEvent_id();

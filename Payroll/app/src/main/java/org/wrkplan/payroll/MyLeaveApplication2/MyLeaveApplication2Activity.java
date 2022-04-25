@@ -123,7 +123,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
         //  super.onBackPressed();
         if(Url.isSubordinateLeaveApplication == true){
             Intent intent = new Intent(MyLeaveApplication2Activity.this, SubordinateLeaveApplicationActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }else {
             if (txt_leave_status1.getText().toString().equals("Save") || txt_leave_status1.getText().toString().equals("Return")) {
@@ -137,7 +137,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                                 Url.isMyLeaveApplication = true;
 
                                 Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
 //                            finish();
                             }
@@ -160,7 +160,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
             } else {
                 DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN = false;
                 Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 //            finish();
 
@@ -761,9 +761,9 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
 
                 Intent intent = new Intent(MyLeaveApplication2Activity.this, SubordinateLeaveApplicationActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                finish();
+//                finish();
 
                 // }
             }
