@@ -1,6 +1,7 @@
 package org.wrkplan.payroll.Notifications;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +13,15 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.Home.CustomDashboardPendingItemsListAdapter;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Model.DashboardPendingItemModel;
 import org.wrkplan.payroll.Model.NotificationModel;
 import org.wrkplan.payroll.Model.UserSingletonModel;
+import org.wrkplan.payroll.MyLeaveApplication2.MyLeaveApplication2Activity;
+import org.wrkplan.payroll.OutDoorDuty.OutDoorRequestActivity;
+import org.wrkplan.payroll.OutDoorDuty.SubordinateOutDoorRequestActivity;
 import org.wrkplan.payroll.R;
 
 import java.util.ArrayList;
@@ -25,6 +31,7 @@ public class CustomNotificationAdapter extends RecyclerView.Adapter<CustomNotifi
     public static ArrayList<NotificationModel> notificationModelArrayList;
     private Context context;
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
+    RelativeLayout relative_layout;
 
 //    public static ProgressDialog loading;
 //    public static TextView tv_download;
@@ -65,7 +72,7 @@ public class CustomNotificationAdapter extends RecyclerView.Adapter<CustomNotifi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_event_name_abbrebiation, tv_message;
-        RelativeLayout rl_event_name_abbrebiation;
+        RelativeLayout rl_event_name_abbrebiation, relative_layout;
 
 
 
@@ -76,6 +83,29 @@ public class CustomNotificationAdapter extends RecyclerView.Adapter<CustomNotifi
             tv_message = itemView.findViewById(R.id.tv_message);
 
             rl_event_name_abbrebiation = itemView.findViewById(R.id.rl_event_name_abbrebiation);
+            relative_layout = itemView.findViewById(R.id.relative_layout);
+
+            relative_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final int position = getAdapterPosition();
+
+                    if (notificationModelArrayList.get(position).getEvent_name().contentEquals("Leave Application")){
+                        DashboardActivity.event_id = notificationModelArrayList.get(position).getEvent_id();
+                        DashboardActivity.NotificationPendingItemsYN = true;
+                        Url.isSubordinateLeaveApplication=true;
+                        Intent i = new Intent(context, MyLeaveApplication2Activity.class);
+                        context.startActivity(i);
+
+                    }else if (notificationModelArrayList.get(position).getEvent_name().contentEquals("OD Application")){
+                        DashboardActivity.event_id = notificationModelArrayList.get(position).getEvent_id();
+                        DashboardActivity.NotificationPendingItemsYN = true;
+
+                        Intent i = new Intent(context, SubordinateOutDoorRequestActivity.class);
+                        context.startActivity(i);
+                    }
+                }
+            });
 
         }
 
