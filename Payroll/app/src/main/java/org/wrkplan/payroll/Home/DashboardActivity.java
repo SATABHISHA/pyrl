@@ -72,6 +72,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -134,7 +135,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     CoordinatorLayout coordinatorLayout;
     LinearLayout Linear;
     Context context;
-    ImageView img_logout;
+    ImageView img_logout, img_userprofile;
     //------Dashboard variable, code ends-----
 
     //----Calendar variable, code starts---
@@ -305,12 +306,26 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         tv_fullname=header.findViewById(R.id.tv_fullname);
         tv_companynam=header.findViewById(R.id.tv_companynam);
         tv_designation=header.findViewById(R.id.tv_designation);
+        img_userprofile=header.findViewById(R.id.img_userprofile);
         //  ed_userpassword=findViewById(R.id.ed_userpassword);
         coordinatorLayout=findViewById(R.id.cordinatorLayout);
         tv_fullname.setText(userSingletonModel.getFull_employee_name());
         tv_companynam.setText(userSingletonModel.getCompany_name());
         tv_designation.setText(userSingletonModel.getDesignation_name());
         navigationView.setNavigationItemSelectedListener(this);
+
+        Log.d("Gender-=>",userSingletonModel.getGender());
+        if(!userSingletonModel.getEmployee_image().contentEquals("")){
+//            Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(image_url).getContent());
+
+            Picasso.with(context).load(userSingletonModel.getEmployee_image()).into(img_userprofile);
+        }else {
+            if (userSingletonModel.getGender().contentEquals("F")) {
+                img_userprofile.setBackgroundResource(R.drawable.woman);
+            } else if (userSingletonModel.getGender().contentEquals("M")) {
+                img_userprofile.setBackgroundResource(R.drawable.employeemale);
+            }
+        }
         //-----------------------END OF NAVIGATION DRAWER PORTIONS--------------------//
 
         img_logout.setOnClickListener(new View.OnClickListener() {
