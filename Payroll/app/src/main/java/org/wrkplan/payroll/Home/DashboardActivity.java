@@ -134,6 +134,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     CoordinatorLayout coordinatorLayout;
     LinearLayout Linear;
     Context context;
+    ImageView img_logout;
     //------Dashboard variable, code ends-----
 
     //----Calendar variable, code starts---
@@ -284,6 +285,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     //=========///----Dashboard(includes navigation drawer), code starts---///=======
     public void LoadDashboardData(){
         Linear=findViewById(R.id.Linear);
+        img_logout=findViewById(R.id.img_logout);
         sharedPreferences = getSharedPreferences("loginref", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         context = DashboardActivity.this;
@@ -308,6 +310,49 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         tv_companynam.setText(userSingletonModel.getCompany_name());
         navigationView.setNavigationItemSelectedListener(this);
         //-----------------------END OF NAVIGATION DRAWER PORTIONS--------------------//
+
+        img_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                builder.setMessage("Are you sure you want to exit?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                LoginActivity.ed_userpassword.setText("");
+                                editor.remove("username");
+                                editor.remove("userid");
+                                editor.remove("savelogin");
+                                editor.clear();
+                                editor.commit();
+//                                a.addCategory(Intent.CATEGORY_HOME);
+//                                a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                Intent intent=new Intent(DashboardActivity.this,LoginActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+//                                finish();
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //  Action for 'NO' Button
+                               /* Intent intent=new Intent(DashboardActivity.this,HomeActivity.class);
+                                startActivity(intent);*/
+//                                finish();
+                                dialog.cancel();
+
+                            }
+                        });
+                //Creating dialog box
+                androidx.appcompat.app.AlertDialog alert_logout = builder.create();
+                //Setting the title manually
+                alert_logout.setTitle("Logout");
+                alert_logout.show();
+            }
+        });
 
     }
 
@@ -359,8 +404,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 //  Action for 'NO' Button
-                                Intent intent=new Intent(DashboardActivity.this,HomeActivity.class);
-                                startActivity(intent);
+                               /* Intent intent=new Intent(DashboardActivity.this,HomeActivity.class);
+                                startActivity(intent);*/
 //                                finish();
                                 dialog.cancel();
 
