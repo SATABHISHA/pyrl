@@ -315,11 +315,12 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         navigationView.setNavigationItemSelectedListener(this);
 
         Log.d("Gender-=>",userSingletonModel.getGender());
-        if(!userSingletonModel.getEmployee_image().contentEquals("")){
+        Log.d("ImageUrl-=>",userSingletonModel.getEmployee_image());
+        if(!userSingletonModel.getEmployee_image().trim().contentEquals("")){
 //            Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(image_url).getContent());
 
             Picasso.with(context).load(userSingletonModel.getEmployee_image()).into(img_userprofile);
-        }else {
+        }else if(userSingletonModel.getEmployee_image().trim().contentEquals("")){
             if (userSingletonModel.getGender().contentEquals("F")) {
                 img_userprofile.setBackgroundResource(R.drawable.woman);
             } else if (userSingletonModel.getGender().contentEquals("M")) {
