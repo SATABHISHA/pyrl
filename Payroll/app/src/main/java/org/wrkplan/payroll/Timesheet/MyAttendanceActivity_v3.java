@@ -864,6 +864,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
         View dialog = li2.inflate(R.layout.activity_myattendancev3_selfie_popup, null);
         TextView tv_button_yes = dialog.findViewById(R.id.tv_button_yes);
         TextView tv_button_no = dialog.findViewById(R.id.tv_button_no);
+        TextView tv_button_cancel = dialog.findViewById(R.id.tv_button_cancel);
 
 
         androidx.appcompat.app.AlertDialog.Builder alert = new androidx.appcompat.app.AlertDialog.Builder(this);
@@ -901,6 +902,12 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
 //                saveInOut("OUT","BREAK_STARTS");
                 save_in_out_data(InOut, work_from_home_flag, work_from_home_detail, message, "");
 
+            }
+        });
+        tv_button_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
             }
         });
         //-------custom dialog code ends=========
