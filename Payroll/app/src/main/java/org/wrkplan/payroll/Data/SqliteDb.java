@@ -67,6 +67,12 @@ public class SqliteDb extends SQLiteOpenHelper {
         db.execSQL("delete from "+ TABLE_NAME);
         db.close();
     }
+    public void deleteNotificationData(String notification_id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from NOTIFICATIONDETAILS where notification_id='"+notification_id+"'");
+        db.close();
+    }
 
     public void insertNotificationData(String employee_id, String insertYN,String title, String notification_id, String event_name, String event_id, String event_owner_id, String event_owner, String message ){
         SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();

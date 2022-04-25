@@ -39,6 +39,13 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+        try {
+            db = openOrCreateDatabase("Payroll", MODE_PRIVATE, null);
+            db.execSQL("CREATE TABLE IF NOT EXISTS NOTIFICATIONDETAILS(employee_id text,insertYN text, title text, notification_id text, event_name text,event_id text, event_owner_id text, event_owner text, message text)");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         LoadNotificationData();
     }
 
@@ -60,12 +67,13 @@ public class NotificationActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                Toast.makeText(NotificationActivity.this, "on Swiped ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NotificationActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
                 //Remove swiped item from list and notify the RecyclerView
                 int position = viewHolder.getAdapterPosition();
                 notificationModelArrayList1.remove(position);
 //                customNotificationAdapter.notifyDataSetChanged();
 
+                sqliteDb.deleteNotificationData(notificationModelArrayList1.get(position).getNotification_id());
                 LoadDataFromSqlite();
             }
         };
@@ -79,12 +87,6 @@ public class NotificationActivity extends AppCompatActivity {
 
         //==========Recycler code initializing and setting layoutManager ends=====
 
-        try {
-            db = openOrCreateDatabase("Payroll", MODE_PRIVATE, null);
-            db.execSQL("CREATE TABLE IF NOT EXISTS NOTIFICATIONDETAILS(employee_id text,insertYN text, title text, notification_id text, event_name text,event_id text, event_owner_id text, event_owner text, message text)");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
