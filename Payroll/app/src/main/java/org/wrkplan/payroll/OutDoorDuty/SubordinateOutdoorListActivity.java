@@ -197,7 +197,7 @@ public class SubordinateOutdoorListActivity extends AppCompatActivity implements
     public void onBackPressed() {
 //        super.onBackPressed();
         Intent intent_odlist = new Intent(this,OutdoorListActivity.class);
-        intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_odlist);
     }
 
@@ -206,7 +206,7 @@ public class SubordinateOutdoorListActivity extends AppCompatActivity implements
         switch (v.getId()) {
             case R.id.img_back:
                 Intent intent_odlist = new Intent(this,OutdoorListActivity.class);
-                intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_odlist);
                 break;
         }

@@ -93,7 +93,7 @@ public class SubordinateOutDoorRequestActivity extends AppCompatActivity impleme
 //           case R.id.img_back:
            case R.id.btn_cancel:
                Intent intent_subordinate_odlist = new Intent(this,SubordinateOutdoorListActivity.class);
-               intent_subordinate_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//               intent_subordinate_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                startActivity(intent_subordinate_odlist);
                break;
            default:

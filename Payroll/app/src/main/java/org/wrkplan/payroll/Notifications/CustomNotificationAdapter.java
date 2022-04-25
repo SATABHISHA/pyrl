@@ -98,11 +98,12 @@ public class CustomNotificationAdapter extends RecyclerView.Adapter<CustomNotifi
                         context.startActivity(i);
 
                     }else if (notificationModelArrayList.get(position).getEvent_name().contentEquals("OD Application")){
-                       /* DashboardActivity.event_id = notificationModelArrayList.get(position).getEvent_id();
+                        DashboardActivity.event_id = notificationModelArrayList.get(position).getEvent_id();
+                        DashboardActivity.event_owner_id = notificationModelArrayList.get(position).getEvent_owner_id();
                         DashboardActivity.NotificationPendingItemsYN = true;
 
                         Intent i = new Intent(context, SubordinateOutDoorRequestActivity.class);
-                        context.startActivity(i);*/
+                        context.startActivity(i);
                     }
                 }
             });
