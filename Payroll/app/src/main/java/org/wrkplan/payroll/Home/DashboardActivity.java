@@ -1768,7 +1768,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 //---get current day date, code starts---
 
                 if (count <= 2) {
-                    ColorDrawable color = new ColorDrawable(Color.parseColor("#E4FCAD"));
+                    ColorDrawable color = new ColorDrawable(Color.parseColor("#0000FF"));
                     caldroidFragment.setBackgroundDrawableForDate(color, date);
                     caldroidFragment.refreshView();
                     selectedDateRangeList.add(date);
@@ -1937,7 +1937,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         String draft_date_otput_format = outputFormat.format(draft_date_current_format);
 
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                        ColorDrawable color = new ColorDrawable(Color.parseColor("#c2c2c2"));
+                        ColorDrawable color = new ColorDrawable(Color.parseColor("#0000FF"));
                         Log.d("DraftDate-=>", draft_date_otput_format.toString());
                         caldroidFragment.setBackgroundDrawableForDate(color, dateFormat.parse(draft_date_otput_format));
 
@@ -1965,7 +1965,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     String fDate = new SimpleDateFormat("MM-dd-yyyy").format(cDate);
                     Date today = (Date) myFormat.parse(fDate);
                     //---get current day date, code ends---
-                    ColorDrawable color = new ColorDrawable(Color.parseColor("#E4FCAD"));
+                    ColorDrawable color = new ColorDrawable(Color.parseColor("#ff9933"));
                     caldroidFragment.setBackgroundDrawableForDate(color, today);
 
 
