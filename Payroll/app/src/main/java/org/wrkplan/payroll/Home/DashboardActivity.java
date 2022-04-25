@@ -322,9 +322,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             Picasso.with(context).load(userSingletonModel.getEmployee_image()).into(img_userprofile);
         }else if(userSingletonModel.getEmployee_image().trim().contentEquals("")){
             if (userSingletonModel.getGender().contentEquals("F")) {
-                img_userprofile.setBackgroundResource(R.drawable.woman);
+                img_userprofile.setImageResource(R.drawable.woman);
             } else if (userSingletonModel.getGender().contentEquals("M")) {
-                img_userprofile.setBackgroundResource(R.drawable.employeemale);
+                img_userprofile.setImageResource(R.drawable.employeemale);
             }
         }
         //-----------------------END OF NAVIGATION DRAWER PORTIONS--------------------//
