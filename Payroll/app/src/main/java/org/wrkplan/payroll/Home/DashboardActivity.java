@@ -1981,7 +1981,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         caldroidFragment.setBackgroundDrawableForDate(color, Calendar.DAY_OF_WEEK);
                     }*/
 
-
 //                    lv1.setAdapter(new HolidayDetailActivity.Nr());
                 } catch (JSONException e) {
                     e.printStackTrace();
