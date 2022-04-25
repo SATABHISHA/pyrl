@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,11 +28,12 @@ public class NotificationActivity extends AppCompatActivity {
     LinearLayout ll_recycler;
     RecyclerView recycler_view;
     TextView tv_nodata;
-    ArrayList<NotificationModel> notificationModelArrayList = new ArrayList<>();
+    public ArrayList<NotificationModel> notificationModelArrayList1 = new ArrayList<>();
     SqliteDb sqliteDb=new SqliteDb(this);
     SQLiteDatabase db;
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     ImageView img_back;
+    CustomNotificationAdapter customNotificationAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,10 +48,35 @@ public class NotificationActivity extends AppCompatActivity {
         tv_nodata = findViewById(R.id.tv_nodata);
         recycler_view = findViewById(R.id.recycler_view);
 
+
         //==========Recycler code initializing and setting layoutManager starts======
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                Toast.makeText(NotificationActivity.this, "on Move", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                Toast.makeText(NotificationActivity.this, "on Swiped ", Toast.LENGTH_SHORT).show();
+                //Remove swiped item from list and notify the RecyclerView
+                int position = viewHolder.getAdapterPosition();
+                notificationModelArrayList1.remove(position);
+//                customNotificationAdapter.notifyDataSetChanged();
+
+                LoadDataFromSqlite();
+            }
+        };
+
         recycler_view = findViewById(R.id.recycler_view);
         recycler_view.setHasFixedSize(true);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recycler_view);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
+
+
         //==========Recycler code initializing and setting layoutManager ends=====
 
         try {
@@ -69,10 +97,11 @@ public class NotificationActivity extends AppCompatActivity {
 
     public void LoadDataFromSqlite(){
 
-        if(!notificationModelArrayList.isEmpty()){
-            notificationModelArrayList.clear();
+        if(!notificationModelArrayList1.isEmpty()){
+            notificationModelArrayList1.clear();
         }
-        notificationModelArrayList = sqliteDb.getNotificationDataFromSqlite(userSingletonModel.getEmployee_id());
-        recycler_view.setAdapter(new CustomNotificationAdapter(this, notificationModelArrayList));
+        notificationModelArrayList1 = sqliteDb.getNotificationDataFromSqlite(userSingletonModel.getEmployee_id());
+        recycler_view.setAdapter(new CustomNotificationAdapter(this, notificationModelArrayList1));
+//        recycler_view.setAdapter(customNotificationAdapter);
     }
 }
