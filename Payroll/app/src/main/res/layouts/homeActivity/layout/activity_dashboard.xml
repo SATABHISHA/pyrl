@@ -462,7 +462,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/rl_date"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:text="13-Apr-2022"
                         android:textColor="#444444"
                         android:textSize="16sp" />
@@ -494,7 +494,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="20dp"
                         android:layout_below="@id/txt_holiday_name"
                         android:orientation="horizontal">
                         <RelativeLayout

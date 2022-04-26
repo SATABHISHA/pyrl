@@ -64,12 +64,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_designation"
         android:layout_centerHorizontal="true"
-        android:autoSizeMinTextSize="13sp"
         android:layout_marginBottom="10dp"
+        android:autoSizeMinTextSize="13sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:gravity="center"
         android:text="DemoIndia"
         android:textColor="#18629B"
-        android:textSize="18sp"></TextView>
+        android:textSize="12sp"></TextView>
 
 
 
