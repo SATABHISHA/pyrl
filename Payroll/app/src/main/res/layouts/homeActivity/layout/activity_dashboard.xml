@@ -209,7 +209,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="8dp"
-                            android:text="Attendance Detail"
+                            android:text="Attendance"
                             android:textColor="#ffffff"
                             android:textSize="17sp" />
 
@@ -629,7 +629,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="8dp"
-                            android:text="Salary Slip"
+                            android:text="Pay Slip"
                             android:textColor="#ffffff"
                             android:textSize="17sp" />
 

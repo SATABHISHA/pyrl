@@ -961,7 +961,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             }else if(jsonObject1.getString("status").contentEquals("false")){
                 ll_recycler.setVisibility(View.GONE);
                 tv_nodata.setVisibility(View.VISIBLE);
-                tv_nodata.setText(jsonObject1.getString("message"));
+//                tv_nodata.setText(jsonObject1.getString("message"));
+                tv_nodata.setText("No Pending Actions");
             }
 
         } catch (JSONException e) {
