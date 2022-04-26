@@ -201,8 +201,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        LoadDashboardData();
         LoadCalendarData(savedInstanceState);
+        LoadDashboardData();
         LoadAttendanceData();
         LoadPendingItems();
         LoadSalaryData();
@@ -1772,9 +1772,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             Calendar cal = Calendar.getInstance();
             args.putInt(CaldroidFragment.MONTH, cal.get(Calendar.MONTH) + 1);
             args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
+            args.putBoolean(CaldroidFragment.ENABLE_CLICK_ON_DISABLED_DATES, true);
             caldroidFragment.setArguments(args);
-//            args.putBoolean(CaldroidFragment.ENABLE_CLICK_ON_DISABLED_DATES, true); //---this code creates problem and disables the click on date after single date range selection
-            caldroidFragment.setArguments(args);
+           /* args.putBoolean(CaldroidFragment.ENABLE_CLICK_ON_DISABLED_DATES, true); //---this code creates problem and disables the click on date after single date range selection
+            caldroidFragment.setArguments(args);*/
 
             // Attach to the activity
             FragmentTransaction t = getSupportFragmentManager().beginTransaction();
@@ -1802,7 +1803,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onSelectDate(Date date, View view) {
                 getholiday("1");
+                txt_holiday_name.setText("");
                count = count + 1;
+
 
 
                 // Toast.makeText(getApplicationContext(), formatter.format(date), Toast.LENGTH_SHORT).show();
@@ -1812,7 +1815,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                 //---get current day date, code starts---
 
-                if (count <= 2) {
+              /*  if (count <= 1) {
                     ColorDrawable color = new ColorDrawable(Color.parseColor("#85C1E9"));
                     caldroidFragment.setBackgroundDrawableForDate(color, date);
                     caldroidFragment.refreshView();
@@ -1834,7 +1837,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     }
                     txt_date.setText(date_range);
                     txt_day_name.setText(day_name);
-                }else if(count>2){
+                }else if(count>1){
                     for(int i=0; i<selectedDateRangeList.size(); i++){
 
                         caldroidFragment.clearBackgroundDrawableForDate(selectedDateRangeList.get(i));
@@ -1846,7 +1849,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     selectedDateRangeList.clear();
                     count = 0;
 
-                }
+                } */ //---temporary commented on 26th April
                 //---get current day date, code ends---
 
 
@@ -1861,6 +1864,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         if (formateDate.equals(arrayList1.get(j).getFrom_date())) {
 
                             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ENGLISH);
+                            SimpleDateFormat sdf_day = new SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ENGLISH);
                             Date myDate = null;
                             try {
                                 myDate = sdf.parse(arrayList1.get(j).getFrom_date());
@@ -1868,10 +1872,12 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                                 e.printStackTrace();
                             }
                             sdf.applyPattern("EEE, d MMM yyyy");
+                            sdf_day.applyPattern("EEEE");
                             //sdf.applyPattern("d MMM YYYY");
                             String sMyDate = sdf.format(myDate);
+                            String sDay = sdf_day.format(myDate);
                             txt_date.setText(sMyDate);
-                            txt_day_name.setText("");
+                            txt_day_name.setText(sDay);
                             txt_holiday_name.setText(arrayList1.get(j).getHoliday_name());
                         }
                     }
