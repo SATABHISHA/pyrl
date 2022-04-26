@@ -1711,6 +1711,32 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         }
         return  FormattedFullDayName;
     }
+    public void getSundayDatesAndColorDate(){
+        List<Date> sundayDatesList = new ArrayList<>();
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH,1);
+        int month = cal.get(Calendar.MONTH);
+        do {
+            int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+            if (dayOfWeek == Calendar.SUNDAY)
+                sundayDatesList.add(cal.getTime());
+            cal.add(Calendar.DAY_OF_MONTH, 1);
+        } while (cal.get(Calendar.MONTH) == month);
+
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        for (Date date : sundayDatesList) {
+            System.out.println(fmt.format(date));
+            ColorDrawable color = new ColorDrawable(Color.parseColor("#E4FCAD"));
+            Log.d("DraftDate-=>", fmt.format(date));
+            try {
+                caldroidFragment.setBackgroundDrawableForDate(color, dateFormat.parse(fmt.format(date)));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public void LoadCalendarData(Bundle savedInstanceState){
         txt_date = findViewById(R.id.txt_date);
         txt_day_name = findViewById(R.id.txt_day_name);
@@ -1756,7 +1782,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             t.commit();
         }
 
-            getholiday("1");
+        getholiday("1");
+//        getSundayDatesAndColorDate();
 
 
         //arrayList.get(position).getFrom_date();
@@ -1764,6 +1791,13 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
         final CaldroidListener listener = new CaldroidListener() {
 
+
+            @Override
+            public void onChangeMonth(int month, int year) {
+                super.onChangeMonth(month, year);
+//                getSundayDatesAndColorDate();
+
+            }
 
             @Override
             public void onSelectDate(Date date, View view) {
@@ -1806,6 +1840,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         caldroidFragment.clearBackgroundDrawableForDate(selectedDateRangeList.get(i));
                         caldroidFragment.refreshView();
                         getholiday("1");
+//                        getSundayDatesAndColorDate();
 
                     }
                     selectedDateRangeList.clear();
@@ -1980,6 +2015,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     //---get current day date, code ends---
                     ColorDrawable color = new ColorDrawable(Color.parseColor("#ff9933"));
                     caldroidFragment.setBackgroundDrawableForDate(color, today);
+
                     /*if (Calendar.DAY_OF_WEEK == Calendar.SUNDAY) {
 
                         caldroidFragment.setBackgroundDrawableForDate(color, Calendar.DAY_OF_WEEK);
