@@ -1747,7 +1747,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             args.putInt(CaldroidFragment.MONTH, cal.get(Calendar.MONTH) + 1);
             args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
             caldroidFragment.setArguments(args);
-            args.putBoolean(CaldroidFragment.ENABLE_CLICK_ON_DISABLED_DATES, true);
+//            args.putBoolean(CaldroidFragment.ENABLE_CLICK_ON_DISABLED_DATES, true); //---this code creates problem and disables the click on date after single date range selection
             caldroidFragment.setArguments(args);
 
             // Attach to the activity
@@ -1767,6 +1767,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void onSelectDate(Date date, View view) {
+                getholiday("1");
                count = count + 1;
 
 
@@ -1804,6 +1805,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                         caldroidFragment.clearBackgroundDrawableForDate(selectedDateRangeList.get(i));
                         caldroidFragment.refreshView();
+                        getholiday("1");
+
                     }
                     selectedDateRangeList.clear();
                     count = 0;
@@ -1947,7 +1950,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         String draft_date_otput_format = outputFormat.format(draft_date_current_format);
 
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                        ColorDrawable color = new ColorDrawable(Color.parseColor("#85C1E9"));
+                        ColorDrawable color = new ColorDrawable(Color.parseColor("#E4FCAD"));
                         Log.d("DraftDate-=>", draft_date_otput_format.toString());
                         caldroidFragment.setBackgroundDrawableForDate(color, dateFormat.parse(draft_date_otput_format));
 
