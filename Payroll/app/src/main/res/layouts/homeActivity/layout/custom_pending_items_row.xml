@@ -53,11 +53,27 @@
     android:layout_centerVertical="true"/>
 
             <TextView
-                android:id="@+id/tv_event_status"
+                android:id="@+id/tv_event_owner_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_toRightOf="@id/rl_event_name_abbrebiation"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="Earned Leave"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_event_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_event_owner_name"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginRight="20dp"
                 android:layout_toRightOf="@id/rl_event_name_abbrebiation"
                 android:clickable="false"
@@ -83,7 +99,7 @@
                 android:textColor="#7E82A6"
                 android:textSize="16sp" />
 
-            <TextView
+<!--            <TextView
                 android:id="@+id/tv_event_owner_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +113,7 @@
                 android:focusableInTouchMode="false"
                 android:text="Earned Leave"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp" />-->
 
            
 

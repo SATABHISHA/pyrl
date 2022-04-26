@@ -18,6 +18,7 @@ import org.wrkplan.payroll.Model.OutDoorLogListModel;
 import org.wrkplan.payroll.Model.UserSingletonModel;
 import org.wrkplan.payroll.MyLeaveApplication2.MyLeaveApplication2Activity;
 import org.wrkplan.payroll.OutDoorDuty.OutDoorRequestActivity;
+import org.wrkplan.payroll.OutDoorDuty.SubordinateOutDoorRequestActivity;
 import org.wrkplan.payroll.OutDoorDutyLog.CustomSubordinateOdDutyLogListAdapter;
 import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogDetailActivity;
 import org.wrkplan.payroll.OutDoorDutyLog.OdDutyLogEmployeeTaskActivity;
@@ -118,7 +119,7 @@ public class CustomDashboardPendingItemsListAdapter extends RecyclerView.Adapter
                         DashboardActivity.LeaveType = dashboardPendingItemModelArrayList.get(position).getEvent_type();
                         DashboardActivity.NotificationPendingItemsYN = true;
 
-                        Intent i = new Intent(context, OutDoorRequestActivity.class);
+                        Intent i = new Intent(context, SubordinateOutDoorRequestActivity.class);
                         context.startActivity(i);
                     }
 
