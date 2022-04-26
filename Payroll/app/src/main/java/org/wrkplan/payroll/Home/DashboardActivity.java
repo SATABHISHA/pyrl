@@ -385,9 +385,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         txt_corid.setText(userSingletonModel.getEmployee_code());
         txt_emp_name.setText(userSingletonModel.getFull_employee_name());
         txt_designation.setText(userSingletonModel.getDesignation_name());
-        txt_department.setText(userSingletonModel.getSub_department_name());
-        txt_supervisor1.setText(userSingletonModel.getSupervisor_1());
-        txt_supervisor2.setText(userSingletonModel.getSupervisor_2());
+        txt_department.setText(userSingletonModel.getCompany_name());
+        txt_supervisor1.setText(userSingletonModel.getSupervisor_1_name());
+        txt_supervisor2.setText(userSingletonModel.getSupervisor_2_name());
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
