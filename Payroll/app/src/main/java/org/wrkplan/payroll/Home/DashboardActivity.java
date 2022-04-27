@@ -88,6 +88,7 @@ import org.wrkplan.payroll.Data.SqliteDb;
 import org.wrkplan.payroll.EmployeeDocuments.EmployeeDocumentsActivity;
 import org.wrkplan.payroll.EmployeeFacilities.EmployeeFacilitiesActivity;
 import org.wrkplan.payroll.EmployeeInformation.EmployeeInformationActivity;
+import org.wrkplan.payroll.HolidayDetail.CaldroidSampleCustomFragment;
 import org.wrkplan.payroll.HolidayDetail.HolidayDetailActivity;
 import org.wrkplan.payroll.HolidayModel.Holiday;
 import org.wrkplan.payroll.InsuranceDetail.InsuranceDetail1;
@@ -121,6 +122,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -201,8 +203,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-//        LoadCalendarData(savedInstanceState);
-        LoadCalendarData();
+        LoadCalendarData(savedInstanceState);
+//        LoadCalendarData();
         LoadDashboardData();
         LoadAttendanceData();
         LoadPendingItems();
@@ -1726,12 +1728,48 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         }
         return  FormattedFullDayName;
     }
-    public void getSundayDatesAndColorDate(){
+    public void getYearlySundayDatesAndColorDate(int year, int current_month){
+//        int year =2009;
+//        int year = 2010;
+//        int month = Calendar.JANUARY;
+        int month = current_month;
+        List<Date> sundayDatesList = new ArrayList<>();
+        Calendar cal = new GregorianCalendar(year, month, 1);
+        do {
+            // get the day of the week for the current day
+            int day = cal.get(Calendar.DAY_OF_WEEK);
+            // check if it is a Saturday or Sunday
+            if (day == Calendar.SUNDAY) {
+                // print the day - but you could add them to a list or whatever
+                System.out.println(cal.get(Calendar.DAY_OF_MONTH));
+//                Log.d("SundayDates-=>", String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
+                sundayDatesList.add(cal.getTime());
+
+            }
+            // advance to the next day
+            cal.add(Calendar.DAY_OF_YEAR, 1);
+        }  while (cal.get(Calendar.MONTH) == month);
+
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        for (Date date : sundayDatesList) {
+            System.out.println(fmt.format(date));
+            ColorDrawable color = new ColorDrawable(Color.parseColor("#E4FCAD"));
+            Log.d("DraftDate-=>", fmt.format(date));
+            try {
+                caldroidFragment.setBackgroundDrawableForDate(color, dateFormat.parse(fmt.format(date)));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void getSundayDatesAndColorDate(int current_month){
         List<Date> sundayDatesList = new ArrayList<>();
 
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DAY_OF_MONTH,1);
-        int month = cal.get(Calendar.MONTH);
+//        int month = cal.get(Calendar.MONTH);
+        int month = current_month;
         do {
             int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
             if (dayOfWeek == Calendar.SUNDAY)
@@ -1780,7 +1818,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         }
         return dates;
     }
-    public void LoadCalendarData(){
+    public void LoadCalendarData(Bundle savedInstanceState){
         txt_date = findViewById(R.id.txt_date);
         txt_day_name = findViewById(R.id.txt_day_name);
         txt_holiday_name = findViewById(R.id.txt_holiday_name);
@@ -1801,9 +1839,14 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         txt_day_name.setText(formattedDayName);
         //=========get current date and set curretnt date, code ends========
 
+
         caldroidFragment = new CaldroidFragment();
         // If Activity is created after rotation
-//        this.savedInstanceState = savedInstanceState;
+        getholiday("1");
+        getYearlySundayDatesAndColorDate(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH));
+//        caldroidFragment = new CaldroidSampleCustomFragment();
+        this.savedInstanceState = savedInstanceState;
+
         if (savedInstanceState != null) {
             caldroidFragment.restoreStatesFromKey(savedInstanceState,
                     "CALDROID_SAVED_STATE");
@@ -1820,12 +1863,12 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
            /* args.putBoolean(CaldroidFragment.ENABLE_CLICK_ON_DISABLED_DATES, true); //---this code creates problem and disables the click on date after single date range selection
             caldroidFragment.setArguments(args);*/
             // Attach to the activity
-            FragmentTransaction t = getSupportFragmentManager().beginTransaction();
-            t.replace(R.id.calendar_date_list, caldroidFragment);
-            t.commit();
-        }
 
-        getholiday("1");
+        }
+        FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+        t.replace(R.id.calendar_date_list, caldroidFragment);
+        t.commit();
+//        getholiday("1");
 //        getSundayDatesAndColorDate();
 
 
@@ -1836,15 +1879,25 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
 
             @Override
+            public void onCaldroidViewCreated() {
+                super.onCaldroidViewCreated();
+                  getholiday("1");
+                getYearlySundayDatesAndColorDate(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH));
+            }
+
+            @Override
             public void onChangeMonth(int month, int year) {
-                super.onChangeMonth(month, year);
-//                getSundayDatesAndColorDate();
+//                super.onChangeMonth(month, year);
+//                getSundayDatesAndColorDate(month);
+                getYearlySundayDatesAndColorDate(year,  month-1);
+                getholiday("1");
 
             }
 
             @Override
             public void onSelectDate(Date date, View view) {
                 getholiday("1");
+                getYearlySundayDatesAndColorDate(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH));
                 txt_holiday_name.setText("");
                count = count + 1;
 
