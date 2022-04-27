@@ -1878,9 +1878,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                             date_range = date_range+" to "+to_date;
                             day_name = day_name+" to "+getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
                             for(int j=0; j<getAllDateRange(from_date_for_range,to_date_for_range).size(); j++){
-                                caldroidFragment.setBackgroundDrawableForDate(color, getAllDateRange(from_date_for_range,to_date_for_range).get(i));
+                                caldroidFragment.setBackgroundDrawableForDate(color, getAllDateRange(from_date_for_range,to_date_for_range).get(j));
                                 caldroidFragment.refreshView();
-                                Log.d("RangeDates-=>", getAllDateRange(from_date_for_range,to_date_for_range).get(i).toString());
+                                Log.d("RangeDates-=>", getAllDateRange(from_date_for_range,to_date_for_range).get(j).toString());
                             }
                         }
                     }
@@ -1892,7 +1892,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                         caldroidFragment.clearBackgroundDrawableForDate(selectedDateRangeList.get(i));
                         caldroidFragment.refreshView();
-                        getholiday("1");
+
 //                        getSundayDatesAndColorDate();
 
                     }
@@ -1906,6 +1906,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                     selectedDateRangeList.clear();
                     count = 0;
+                    getholiday("1");
 
                 }  //---temporary commented on 26th April
                 //---get current day date, code ends---
