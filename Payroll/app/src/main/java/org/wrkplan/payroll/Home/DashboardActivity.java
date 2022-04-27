@@ -201,7 +201,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        LoadCalendarData(savedInstanceState);
+//        LoadCalendarData(savedInstanceState);
+        LoadCalendarData();
         LoadDashboardData();
         LoadAttendanceData();
         LoadPendingItems();
@@ -1779,7 +1780,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         }
         return dates;
     }
-    public void LoadCalendarData(Bundle savedInstanceState){
+    public void LoadCalendarData(){
         txt_date = findViewById(R.id.txt_date);
         txt_day_name = findViewById(R.id.txt_day_name);
         txt_holiday_name = findViewById(R.id.txt_holiday_name);
@@ -1802,7 +1803,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         caldroidFragment = new CaldroidFragment();
         // If Activity is created after rotation
-        this.savedInstanceState = savedInstanceState;
+//        this.savedInstanceState = savedInstanceState;
         if (savedInstanceState != null) {
             caldroidFragment.restoreStatesFromKey(savedInstanceState,
                     "CALDROID_SAVED_STATE");
