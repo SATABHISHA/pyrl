@@ -1749,7 +1749,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             // advance to the next day
             cal.add(Calendar.DAY_OF_YEAR, 1);
         }  while (cal.get(Calendar.MONTH) == month);
-
         SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         for (Date date : sundayDatesList) {
