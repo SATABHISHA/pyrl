@@ -1754,7 +1754,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         for (Date date : sundayDatesList) {
             System.out.println(fmt.format(date));
-            ColorDrawable color = new ColorDrawable(Color.parseColor("#E4FCAD"));
+            ColorDrawable color = new ColorDrawable(Color.parseColor("#FB4E4E"));
             Log.d("DraftDate-=>", fmt.format(date));
             try {
                 caldroidFragment.setBackgroundDrawableForDate(color, dateFormat.parse(fmt.format(date)));
@@ -1889,7 +1889,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             public void onChangeMonth(int month, int year) {
 //                super.onChangeMonth(month, year);
 //                getSundayDatesAndColorDate(month);
-                getYearlySundayDatesAndColorDate(year,  month-1);
+                getYearlySundayDatesAndColorDate(year,  month-2);
+                getYearlySundayDatesAndColorDate(year,  month);
                 getholiday("1");
 
             }
@@ -1961,6 +1962,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     selectedDateRangeList.clear();
                     count = 0;
                     getholiday("1");
+                    getYearlySundayDatesAndColorDate(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH));
 
                 }  //---temporary commented on 26th April
                 //---get current day date, code ends---
@@ -2081,7 +2083,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         String from_date = jb1.getString("from_date");
                         String total_days = jb1.getString("total_days");
                         String id = jb1.getString("id");
-                        String to_date=jb1.getString("to_date");
+                        String to_date = jb1.getString("to_date");
                         Holiday holiday = new Holiday();
                         holiday.setHoliday_name(holiday_name);
                         holiday.setFrom_date(from_date);
@@ -2089,27 +2091,32 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         holiday.setId(id);
                         holiday.setTo_date(to_date);
                         arrayList1.add(holiday);
+                    }
 
+                        DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
                         for (int j = 0; j < arrayList1.size(); j++) {
                             dateString = arrayList1.get(j).getFrom_date();
 
                             holiday_name1 = arrayList1.get(j).getHoliday_name();
 
 
+                            Date draft_date_current_format = inputFormat.parse(dateString);
+                            Log.d("datenew==", dateString);
+                            String draft_date_otput_format = outputFormat.format(draft_date_current_format);
+
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                            ColorDrawable color = new ColorDrawable(Color.parseColor("#E4FCAD"));
+                            Log.d("DraftDate-=>", draft_date_otput_format.toString());
+                            caldroidFragment.setBackgroundDrawableForDate(color, dateFormat.parse(draft_date_otput_format));
+                            Log.d("dateString-=>", dateString);
                         }
-                        DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
-                        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
-                        Date draft_date_current_format = inputFormat.parse(dateString);
-                        Log.d("datenew==", dateString);
-                        String draft_date_otput_format = outputFormat.format(draft_date_current_format);
-
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                        ColorDrawable color = new ColorDrawable(Color.parseColor("#E4FCAD"));
-                        Log.d("DraftDate-=>", draft_date_otput_format.toString());
-                        caldroidFragment.setBackgroundDrawableForDate(color, dateFormat.parse(draft_date_otput_format));
 
 
-                        Log.d("dateString-=>", dateString);
+
+
+
+
                         /*SimpleDateFormat myFormat1 = new SimpleDateFormat("dd/MM/yyyy");
                         selectDate = myFormat1.parse(dateString);
 
@@ -2125,7 +2132,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         // caldroidFragment.setTextColorForDate(color, selectDate);
 
 
-                    }
+
 
                     //---get current day date, code starts---
                     Date cDate = new Date();
