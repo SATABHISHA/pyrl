@@ -1819,7 +1819,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             caldroidFragment.setArguments(args);
            /* args.putBoolean(CaldroidFragment.ENABLE_CLICK_ON_DISABLED_DATES, true); //---this code creates problem and disables the click on date after single date range selection
             caldroidFragment.setArguments(args);*/
-
             // Attach to the activity
             FragmentTransaction t = getSupportFragmentManager().beginTransaction();
             t.replace(R.id.calendar_date_list, caldroidFragment);
