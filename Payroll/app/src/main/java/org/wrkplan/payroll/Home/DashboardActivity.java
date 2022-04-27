@@ -149,7 +149,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     List<Date> selectedDateRangeList = new ArrayList<>();
     public static int count = 0;
     public static Boolean DashboardToMyLeaveApplicationRequestNewCreateYN = false , DashboardToMyODApplicationRequestNewCreateYN = false;
-    public static String from_date = "", to_date = "";
+    public static String from_date = "", to_date = "", from_date_for_range = "", to_date_for_range = "";
     //----Calendar variable, code ends---
 
     //----Attendance variable, code starts-----
@@ -1697,6 +1697,20 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         }
         return  FormattedDate;
     }
+    public String getRangeDateFormatFromCalendar(String date){
+        String FormattedDate = "";
+        try {
+            SimpleDateFormat inputformat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy");
+            Date d1 = inputformat.parse(date);
+            String formateDate = new SimpleDateFormat("dd/MM/yyyy").format(d1);
+//            Log.d("DraftDate1-=>", formateDate);
+            FormattedDate = formateDate;
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  FormattedDate;
+    }
     public String getFullDayNameFormatFromCalendar(String date){
         String FormattedFullDayName = "";
         try {
@@ -1736,6 +1750,34 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 e.printStackTrace();
             }
         }
+    }
+
+    public List<Date> getAllDateRange(String from_date, String to_date){
+        List<Date> dates = new ArrayList<Date>();
+
+
+        DateFormat formatter ;
+
+        try {
+            formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Date startDate = (Date) formatter.parse(from_date);
+            Date endDate = (Date) formatter.parse(to_date);
+            long interval = 24 * 1000 * 60 * 60; // 1 hour in millis
+            long endTime = endDate.getTime(); // create your endtime here, possibly using Calendar or Date
+            long curTime = startDate.getTime();
+            while (curTime <= endTime) {
+                dates.add(new Date(curTime));
+                curTime += interval;
+            }
+            for (int i = 0; i < dates.size(); i++) {
+                Date lDate = (Date) dates.get(i);
+                String ds = formatter.format(lDate);
+//                System.out.println(" Date is ..." + ds);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return dates;
     }
     public void LoadCalendarData(Bundle savedInstanceState){
         txt_date = findViewById(R.id.txt_date);
@@ -1815,7 +1857,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                 //---get current day date, code starts---
 
-              /*  if (count <= 1) {
+                if (count <= 2) {
                     ColorDrawable color = new ColorDrawable(Color.parseColor("#85C1E9"));
                     caldroidFragment.setBackgroundDrawableForDate(color, date);
                     caldroidFragment.refreshView();
@@ -1826,18 +1868,26 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         if (i == 0) {
 //                    from_date = selectedDateRangeList.get(i).toString();
                             from_date = getDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
+                            from_date_for_range = getRangeDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
                             date_range = from_date;
                             day_name = getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
                         } else {
 //                    to_date = selectedDateRangeList.get(i).toString();
                             to_date = getDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
+                            to_date_for_range = getRangeDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
                             date_range = date_range+" to "+to_date;
                             day_name = day_name+" to "+getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
+                            for(int j=0; j<getAllDateRange(from_date_for_range,to_date_for_range).size(); j++){
+                                caldroidFragment.setBackgroundDrawableForDate(color, getAllDateRange(from_date_for_range,to_date_for_range).get(i));
+                                caldroidFragment.refreshView();
+                                Log.d("RangeDates-=>", getAllDateRange(from_date_for_range,to_date_for_range).get(i).toString());
+                            }
                         }
                     }
                     txt_date.setText(date_range);
                     txt_day_name.setText(day_name);
-                }else if(count>1){
+                }else if(count>2){
+
                     for(int i=0; i<selectedDateRangeList.size(); i++){
 
                         caldroidFragment.clearBackgroundDrawableForDate(selectedDateRangeList.get(i));
@@ -1846,10 +1896,18 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 //                        getSundayDatesAndColorDate();
 
                     }
+
+                    for(int j=0; j<getAllDateRange(from_date_for_range,to_date_for_range).size(); j++){
+                        caldroidFragment.clearBackgroundDrawableForDate(getAllDateRange(from_date_for_range,to_date_for_range).get(j));
+                        caldroidFragment.refreshView();
+                        Log.d("ClearRangeDates-=>", getAllDateRange(from_date_for_range,to_date_for_range).get(j).toString());
+
+                    }
+
                     selectedDateRangeList.clear();
                     count = 0;
 
-                } */ //---temporary commented on 26th April
+                }  //---temporary commented on 26th April
                 //---get current day date, code ends---
 
 
