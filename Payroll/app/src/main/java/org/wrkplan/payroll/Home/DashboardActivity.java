@@ -1884,6 +1884,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                             }
                         }
                     }
+
                     txt_date.setText(date_range);
                     txt_day_name.setText(day_name);
                 }else if(count>2){
