@@ -34,7 +34,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_centerVertical="true"
-                android:background="#c2c2c2">
+                android:background="@drawable/activity_dashboard_pending_items_shape">
 
                 <TextView
                     android:id="@+id/tv_event_name_abbrebiation"

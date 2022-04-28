@@ -69,10 +69,12 @@ public class CustomDashboardPendingItemsListAdapter extends RecyclerView.Adapter
 
         if (dashboardPendingItemModelArrayList.get(position).getEvent_name().contentEquals("Leave Application")){
             holder.tv_event_name_abbrebiation.setText("LA");
-            holder.rl_event_name_abbrebiation.setBackgroundColor(Color.parseColor("#9cc1e4"));
+//            holder.rl_event_name_abbrebiation.setBackgroundColor(Color.parseColor("#9cc1e4"));
+            holder.rl_event_name_abbrebiation.setBackgroundResource(R.drawable.activity_dashboard_pending_items_la_shape);
         }else if (dashboardPendingItemModelArrayList.get(position).getEvent_name().contentEquals("OD Application")){
             holder.tv_event_name_abbrebiation.setText("OD");
-            holder.rl_event_name_abbrebiation.setBackgroundColor(Color.parseColor("#febf83"));
+//            holder.rl_event_name_abbrebiation.setBackgroundColor(Color.parseColor("#febf83"));
+            holder.rl_event_name_abbrebiation.setBackgroundResource(R.drawable.activity_dashboard_pending_items_od_shape);
         }
 
     }
