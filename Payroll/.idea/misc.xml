@@ -15,7 +15,11 @@
         <entry key="app/src/main/res/drawable/activity_dashboard_in_out_title.xml" value="0.127" />
         <entry key="app/src/main/res/drawable/activity_dashboard_in_time.xml" value="0.1485" />
         <entry key="app/src/main/res/drawable/activity_dashboard_in_title.xml" value="0.1485" />
+        <entry key="app/src/main/res/drawable/activity_dashboard_pending_items_la_shape.xml" value="0.127" />
+        <entry key="app/src/main/res/drawable/activity_dashboard_pending_items_od_shape.xml" value="0.127" />
+        <entry key="app/src/main/res/drawable/activity_dashboard_pending_items_shape.xml" value="0.127" />
         <entry key="app/src/main/res/drawable/activity_dashboard_salaryslip_btns.xml" value="0.107" />
+        <entry key="app/src/main/res/drawable/activity_dashboard_salaryslip_btns_shape.xml" value="0.127" />
         <entry key="app/src/main/res/drawable/activity_dashboard_shape.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/activity_dashboard_titlebar_shape.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/activity_dashboard_wfh_shape.xml" value="0.134" />
@@ -25,7 +29,9 @@
         <entry key="app/src/main/res/drawable/layout4.xml" value="0.1925925925925926" />
         <entry key="app/src/main/res/drawable/layout6.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/layout8.xml" value="0.1635" />
+        <entry key="app/src/main/res/drawable/layout_material_month_spinner_shape.xml" value="0.127" />
         <entry key="app/src/main/res/drawable/layout_material_spinner_dashboard.xml" value="0.1635" />
+        <entry key="app/src/main/res/drawable/layout_material_year_spinner_shape.xml" value="0.127" />
         <entry key="app/src/main/res/drawable/loglist_corner_radius_absent.xml" value="0.115" />
         <entry key="app/src/main/res/drawable/loglist_corner_radius_present.xml" value="0.115" />
         <entry key="app/src/main/res/drawable/od_duty_buttonshape.xml" value="0.1635" />
