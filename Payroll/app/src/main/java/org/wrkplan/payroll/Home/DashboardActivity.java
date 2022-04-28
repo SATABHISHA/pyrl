@@ -128,7 +128,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, LocationListener, NavigationView.OnNavigationItemSelectedListener, ConnectivityReceiver.ConnectivityReceiverListener {
-
     //------Dashboard variable, code starts-----
     TextView tv_fullname,tv_companynam, txt_corid, txt_emp_name, txt_designation, txt_department, txt_supervisor1, txt_supervisor2, tv_designation;
     androidx.appcompat.app.AlertDialog.Builder builder;
