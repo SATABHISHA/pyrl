@@ -2070,6 +2070,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void getholiday(String year_code) {
+        if (!arrayList.isEmpty()){
+            arrayList.clear();
+        }
         String url = Url.BASEURL() + "holidays/" + userSingletonModel.corporate_id + "/" + year_code;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -2092,6 +2095,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         holiday.setTo_date(to_date);
                         arrayList1.add(holiday);
                     }
+
 
                         DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
                         SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
