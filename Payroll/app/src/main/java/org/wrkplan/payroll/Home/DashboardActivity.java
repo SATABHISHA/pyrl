@@ -1822,6 +1822,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         return dates;
     }
 
+    public void LoadCalendarDataOnLaunch(Bundle savedInstanceState){
+
+    }
     public void LoadCalendarData(Bundle savedInstanceState){
         txt_date = findViewById(R.id.txt_date);
         txt_day_name = findViewById(R.id.txt_day_name);

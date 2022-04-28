@@ -230,7 +230,9 @@
 
                         <TextView
                             android:id="@+id/tv_today_date"
-                            android:layout_width="100dp"
+                            android:layout_width="wrap_content"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
                             android:layout_height="28dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
