@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -693,6 +694,35 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         }
 
+    boolean doubleBackToExitPressedOnce = false;
+    @Override
+    public void onBackPressed() {
+        if(doubleBackToExitPressedOnce)
+        {
+            //  super.onBackPressed();
+            Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
+
+        }
+        else {
+            doubleBackToExitPressedOnce = true;
+
+            Snackbar snackbar = Snackbar.make(coordinatorLayout, "Press BACK once more to exit", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+
+                }
+
+            }, 2000);
+        }
+    }
 
     @Override
     public void onClick(View v) {
