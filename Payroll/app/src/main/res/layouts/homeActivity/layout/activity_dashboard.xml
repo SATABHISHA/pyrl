@@ -70,10 +70,10 @@
                <RelativeLayout
                    android:id="@+id/rl_emp_detail"
                    android:layout_width="match_parent"
-                   android:layout_height="200dp"
-                   android:layout_marginLeft="20dp"
-                   android:layout_marginRight="20dp"
-                   android:layout_marginTop="20dp"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="12dp"
+                   android:layout_marginRight="12dp"
+                   android:layout_marginTop="12dp"
                    android:background="@drawable/activity_dashboard_shape">
 
                    <RelativeLayout
@@ -107,20 +107,23 @@
                            android:textSize="20sp"
                            android:layout_marginLeft="8dp"
                            android:textColor="#356B8C"/>
+
                        <TextView
                            android:id="@+id/txt_designation"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:text="SR MANAGER"
-                           android:textSize="15sp"
                            android:layout_marginLeft="8dp"
-                           android:textColor="#7B7B7B"/>
+                           android:text="SR MANAGER"
+                           android:textColor="#7B7B7B"
+                           android:textSize="13sp" />
+
                        <TextView
                            android:id="@+id/txt_department"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:text="Demo India"
-                           android:textSize="15sp"
+                           android:textSize="13sp"
+                           android:layout_marginTop="0dp"
                            android:layout_marginLeft="8dp"
                            android:textColor="#7B7B7B"/>
                    </LinearLayout>
@@ -131,8 +134,8 @@
                        android:layout_height="30dp"
                        android:layout_below="@id/emp_detail_title_bar"
                        android:layout_alignParentRight="true"
-                       android:layout_marginTop="14dp"
-                       android:layout_marginRight="8dp"
+                       android:layout_marginTop="10dp"
+                       android:layout_marginRight="10dp"
                        android:background="@drawable/activity_dashboard_emp_corpid_shape"
                        android:gravity="center"
                        android:text="Arb002"
@@ -140,49 +143,61 @@
 
                    <!--Sup1 Details -->
                    <LinearLayout
-                       android:layout_width="wrap_content"
+                       android:layout_width="match_parent"
                        android:layout_height="wrap_content"
+                       android:layout_below="@id/ll_emp_detail"
                        android:layout_marginTop="20.33dp"
-                       android:layout_below="@+id/ll_emp_detail"
+                       android:layout_marginBottom="20dp"
+                       android:layout_marginRight="8dp"
                        android:layout_marginLeft="8dp"
-                       android:orientation="vertical">
-                       <TextView
+                       android:orientation="horizontal">
+
+                       <LinearLayout
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:text="Supervisor 1"
-                           android:textColor="#000000"
-                           android:textSize="17sp"/>
-                       <TextView
-                           android:id="@+id/txt_supervisor1"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="B Banerjee"
-                           android:textColor="#7B7B7B"
-                           android:textSize="15sp"/>
-                   </LinearLayout>
+                           android:layout_weight="1"
+                           android:orientation="vertical">
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Supervisor 1"
+                               android:textColor="#000000"
+                               android:textSize="17sp" />
+
+                           <TextView
+                               android:id="@+id/txt_supervisor1"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="B Banerjee"
+                               android:textColor="#7B7B7B"
+                               android:textSize="15sp" />
+                       </LinearLayout>
 
                    <!--Sup2 Details -->
-                   <LinearLayout
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_marginTop="20.33dp"
-                       android:layout_below="@+id/ll_emp_detail"
-                       android:layout_alignParentRight="true"
-                       android:layout_marginRight="8dp"
-                       android:orientation="vertical">
-                       <TextView
+                       <LinearLayout
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:text="Supervisor 1"
-                           android:textColor="#000000"
-                           android:textSize="17sp"/>
-                       <TextView
-                           android:id="@+id/txt_supervisor2"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="B Banerjee"
-                           android:textColor="#7B7B7B"
-                           android:textSize="15sp"/>
+                           android:layout_marginRight="8dp"
+                           android:layout_weight="1"
+                           android:orientation="vertical">
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Supervisor 1"
+                               android:textColor="#000000"
+                               android:textSize="17sp" />
+
+                           <TextView
+                               android:id="@+id/txt_supervisor2"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:gravity="left"
+                               android:text="B Banerjee"
+                               android:textColor="#7B7B7B"
+                               android:textSize="15sp" />
+                       </LinearLayout>
                    </LinearLayout>
 
                </RelativeLayout>
@@ -193,9 +208,9 @@
                     android:id="@+id/rl_attendance_detail"
                     android:layout_width="match_parent"
                     android:layout_height="260dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/activity_dashboard_shape">
 
                     <RelativeLayout
@@ -432,9 +447,9 @@
                     android:id="@+id/rl_calendar_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/activity_dashboard_shape">
 
                     <RelativeLayout
@@ -543,9 +558,9 @@
                     android:id="@+id/rl_pending_items"
                     android:layout_width="match_parent"
                     android:layout_height="347dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="12dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/activity_dashboard_shape">
 
@@ -615,9 +630,9 @@
                     android:id="@+id/rl_salary_slip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="12dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/activity_dashboard_shape">
 

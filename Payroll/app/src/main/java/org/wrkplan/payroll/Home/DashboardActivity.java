@@ -296,7 +296,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         context = DashboardActivity.this;
         //--------------------NAVIGATION DRAWER PORTIONS--------------------------//
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Payroll Dashboard");
         setSupportActionBar(toolbar);
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open,
