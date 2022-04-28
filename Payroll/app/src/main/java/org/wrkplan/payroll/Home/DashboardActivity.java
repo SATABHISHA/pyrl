@@ -1756,7 +1756,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             ColorDrawable color = new ColorDrawable(Color.parseColor("#FB4E4E"));
             Log.d("DraftDate-=>", fmt.format(date));
             try {
-                caldroidFragment.setBackgroundDrawableForDate(color, dateFormat.parse(fmt.format(date)));
+//                caldroidFragment.setBackgroundDrawableForDate(color, dateFormat.parse(fmt.format(date)));
+                caldroidFragment.setTextColorForDate(R.color.caldroid_calendar_date_text_color,dateFormat.parse(fmt.format(date)));
             } catch (ParseException e) {
                 e.printStackTrace();
             }

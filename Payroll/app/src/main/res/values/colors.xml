@@ -9,4 +9,5 @@
     <color name="submit">#fe52ce</color>
     <color name="approoved">#1e9547</color>
     <color name="popup_text">#8A8A8A</color>
+    <color name="caldroid_calendar_date_text_color">#FB4E4E</color>
 </resources>
