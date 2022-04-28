@@ -244,107 +244,115 @@
                             android:textColor="#ffffff"
                             android:textSize="15sp" />
                     </RelativeLayout>
+
                     <LinearLayout
                         android:id="@+id/ll_wfh_in_out"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="1"
-                        android:gravity="center_horizontal"
                         android:layout_below="@id/rl_attendance_detail_title_bar"
-                        android:orientation="horizontal">
-                    <LinearLayout
-                        android:id="@+id/ll_wkh_detail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="75dp"
-                        android:background="@drawable/activity_dashboard_wfh_shape"
-                        android:layout_marginTop="13dp"
-                        android:layout_marginLeft="0dp"
-                        android:layout_weight="0.8"
-                        android:orientation="horizontal">
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginRight="13dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
 
                         <LinearLayout
-                            android:layout_width="60dp"
+                            android:id="@+id/ll_wkh_detail"
+                            android:layout_width="wrap_content"
                             android:layout_height="75dp"
-                            android:orientation="vertical">
-                            <CheckBox
-                                android:id="@+id/chck_wrk_frm_home"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/amber_50"
-                                android:layout_gravity="center_horizontal"
-                                android:textSize="13sp" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:textColor="#6C6C6C"
-                                android:textSize="10sp"
-                                android:text="Work\nFrom\nHome"/>
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="13dp"
+                            android:layout_weight="0.6"
+                            android:background="@drawable/activity_dashboard_wfh_shape"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="60dp"
+                                android:layout_height="75dp"
+                                android:orientation="vertical">
+
+                                <CheckBox
+                                    android:id="@+id/chck_wrk_frm_home"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:backgroundTint="@color/amber_50"
+                                    android:textSize="13sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="Work\nFrom\nHome"
+                                    android:textColor="#6C6C6C"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/ed_wrk_frm_home_detail"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="right|center_vertical"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_marginBottom="2dp"
+                                android:layout_weight="1"
+                                android:background="#ffffff"
+                                android:gravity="top"
+                                android:hint="Type Work From Home Reason"
+                                android:inputType="textMultiLine"
+                                android:padding="5dp"
+                                android:textColor="#7A7979"
+                                android:textSize="12sp" />
+
                         </LinearLayout>
-                        <EditText
-                            android:id="@+id/ed_wrk_frm_home_detail"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:hint="Type Work From Home Reason"
-                            android:layout_gravity="right"
-                            android:inputType="textMultiLine"
-                            android:padding="5dp"
-                            android:gravity="top"
-                            android:textSize="12sp"
-                            android:textColor="#7A7979"
-                            android:background="@drawable/layout6"
-                            android:layout_marginRight="1dp"
-                            android:layout_marginTop="1dp"
-                            android:layout_marginBottom="1dp"/>
 
-                    </LinearLayout>
+                        <RelativeLayout
+                            android:id="@+id/rl_out"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:layout_below="@id/rl_attendance_detail_title_bar"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginTop="13dp"
+                            android:layout_weight="0.02"
+                            android:background="@drawable/activity_dashboard_attendance_out_shape"
+                            android:minWidth="65dp"
+                            android:visibility="gone">
 
-                    <RelativeLayout
-                        android:id="@+id/rl_out"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:minWidth="65dp"
-                        android:layout_below="@id/rl_attendance_detail_title_bar"
-                        android:layout_marginTop="13dp"
-                        android:layout_marginLeft="13dp"
-                        android:layout_weight="0.02"
-                        android:visibility="gone"
-                        android:background="@drawable/activity_dashboard_attendance_out_shape">
+                            <TextView
+                                android:id="@+id/tv_out"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:gravity="center"
+                                android:text="OUT"
+                                android:textColor="#ffffff"
+                                android:textSize="30dp" />
 
-                        <TextView
-                            android:id="@+id/tv_out"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerInParent="true"
-                            android:gravity="center"
-                            android:text="OUT"
-                            android:textColor="#ffffff"
-                            android:textSize="30dp" />
+                        </RelativeLayout>
 
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/rl_in"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_weight="0.02"
-                        android:minWidth="65dp"
-                        android:layout_marginTop="13dp"
-                        android:layout_marginLeft="13dp"
-                        android:visibility="visible"
-                        android:background="@drawable/activity_dashboard_attendance_in_shape">
+                        <RelativeLayout
+                            android:id="@+id/rl_in"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginTop="13dp"
+                            android:layout_weight="0.03"
+                            android:background="@drawable/activity_dashboard_attendance_in_shape"
+                            android:minWidth="65dp"
+                            android:visibility="visible">
 
-                        <TextView
-                            android:id="@+id/tv_in"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerInParent="true"
-                            android:gravity="center"
-                            android:text="IN"
-                            android:textColor="#ffffff"
-                            android:textSize="30dp" />
+                            <TextView
+                                android:id="@+id/tv_in"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:gravity="center"
+                                android:text="IN"
+                                android:textColor="#ffffff"
+                                android:textSize="30dp" />
 
-                    </RelativeLayout>
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -353,7 +361,7 @@
                         android:layout_below="@id/ll_wfh_in_out"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="16dp"
-                        android:padding="1dp"
+                        android:padding="0dp"
                         android:background="@drawable/activity_dashboard_shape"
                         android:orientation="vertical">
                     <LinearLayout
@@ -578,7 +586,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="8dp"
-                            android:text="Pending Items"
+                            android:text="Pending Actions"
                             android:textColor="#ffffff"
                             android:textSize="17sp" />
                     </RelativeLayout>
@@ -680,7 +688,7 @@
                             android:orientation="horizontal"
                             android:layout_weight="1"
                             android:layout_marginRight="0dp"
-                            android:background="@drawable/layout_material_spinner_dashboard">
+                            android:background="@drawable/layout_material_month_spinner_shape">
 
                             <fr.ganfra.materialspinner.MaterialSpinner
                                 android:id="@+id/spinner_month"
@@ -707,35 +715,36 @@
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:background="#000000"/>
+                            android:background="#A17737"/>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:layout_marginLeft="0dp"
                             android:layout_weight="1"
-                            android:background="@drawable/layout_material_spinner_dashboard">
+                            android:background="@drawable/layout_material_year_spinner_shape">
+
                             <fr.ganfra.materialspinner.MaterialSpinner
                                 android:id="@+id/spinner_year"
-                                android:layout_width="match_parent"
+                                android:layout_width="125dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="0.5"
-                                android:paddingLeft="0dp"
+                                android:layout_gravity="center"
                                 android:layout_marginRight="10dp"
+                                android:layout_weight="0.5"
+                                android:background="@null"
                                 android:gravity="left"
-                                app:ms_multiline="false"
-                                app:ms_hintColor="#3C3C3C"
-                                app:ms_hintTextSize="15sp"
-                                app:ms_enableFloatingLabel="false"
-                                app:ms_enableErrorLabel="false"
-                                app:ms_thickness="0dp"
+                                android:overlapAnchor="false"
+                                android:paddingLeft="0dp"
+                                app:ms_alignLabels="true"
                                 app:ms_arrowColor="#c2c2c2"
                                 app:ms_arrowSize="0dp"
-                                android:background="@null"
-                                app:ms_alignLabels="true"
+                                app:ms_enableErrorLabel="false"
+                                app:ms_enableFloatingLabel="false"
                                 app:ms_hint="Year"
-                                android:layout_gravity="center"
-                                android:overlapAnchor="false"/>
+                                app:ms_hintColor="#3C3C3C"
+                                app:ms_hintTextSize="15sp"
+                                app:ms_multiline="false"
+                                app:ms_thickness="0dp" />
                         </LinearLayout>
 
                     </LinearLayout>
