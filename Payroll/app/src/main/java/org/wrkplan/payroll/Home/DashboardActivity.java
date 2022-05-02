@@ -1821,9 +1821,68 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         return dates;
     }
 
-    public void LoadCalendarDataOnLaunch(Bundle savedInstanceState){
+    //---------Date Difference function, code starts-------
+    public Long get_date_difference(String fromDate, String toDate){
+        Long dayDifference = Long.valueOf(0);
+        try {
+            //Dates to compare
+           /* String CurrentDate=  "09/24/2015";
+            String FinalDate=  "09/26/2015";*/
 
+            Date date1;
+            Date date2;
+
+//            SimpleDateFormat dates = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat dates = new SimpleDateFormat("dd-MMM-yyyy");
+
+            //Setting dates
+            date1 = dates.parse(fromDate);
+            date2 = dates.parse(toDate);
+
+            //Comparing dates
+            long difference = Math.abs(date1.getTime() - date2.getTime());
+//            long difference = date1.getTime() - date2.getTime();
+            long differenceDates = difference / (24 * 60 * 60 * 1000);
+
+            if (date2.getTime() < date1.getTime()) {
+                Toast.makeText(getApplicationContext(), "To Date should be graeter than \"From Date\"", Toast.LENGTH_LONG).show();
+//                flag_datefield_check = 0;
+
+//                    edt_date_to_select.setText("");
+//                    edt_date_to_select.setText(edt_from_date_select.getText().toString());
+//                    calendarPicker(myCalendarToDate, edt_date_to_select);
+              /*  AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Please enter valid date")
+                        .setCancelable(false)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                dialog.dismiss();
+
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();*/
+//                dayDifference = Long.toString(-(differenceDates+1));
+                dayDifference = -(differenceDates+1);
+                dayDifference = dayDifference;
+            }else if(date2.getTime() >= date1.getTime()){
+                //Convert long to String
+//                flag_datefield_check = 1;
+//                dayDifference = Long.toString(differenceDates+1);
+                dayDifference = differenceDates+1;
+            }
+//            dayDifference = Long.toString(differenceDates+1);
+
+            Log.e("HERE","HERE: " + dayDifference);
+
+
+        } catch (Exception exception) {
+            Log.e("DIDN'T WORK", "exception " + exception);
+        }
+        return dayDifference;
     }
+    //---------Date Difference function, code ends-------
     public void LoadCalendarData(Bundle savedInstanceState){
         txt_date = findViewById(R.id.txt_date);
         txt_day_name = findViewById(R.id.txt_day_name);
@@ -1935,7 +1994,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 //                    to_date = selectedDateRangeList.get(i).toString();
                             to_date = getDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
                             to_date_for_range = getRangeDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
+
                             date_range = date_range+" to "+to_date;
+                            Log.d("CountDays-=>", get_date_difference(from_date,to_date).toString());
                             day_name = day_name+" to "+getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
                             for(int j=0; j<getAllDateRange(from_date_for_range,to_date_for_range).size(); j++){
                                 caldroidFragment.setBackgroundDrawableForDate(color, getAllDateRange(from_date_for_range,to_date_for_range).get(j));
