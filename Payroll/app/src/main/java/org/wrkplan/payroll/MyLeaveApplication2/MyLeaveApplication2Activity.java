@@ -719,6 +719,9 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                                     Url.isSubordinateLeaveApplication = false;
                                     Url.isMyLeaveApplication=true;
 
+                                    DashboardActivity.from_date = "";
+                                    DashboardActivity.to_date = "";
+
                                     DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN = false;
                                     Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
                                     startActivity(intent);
@@ -744,6 +747,9 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 
                 else
                 {
+                    DashboardActivity.from_date = "";
+                    DashboardActivity.to_date = "";
+
                     DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN = false;
                     Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
                     startActivity(intent);

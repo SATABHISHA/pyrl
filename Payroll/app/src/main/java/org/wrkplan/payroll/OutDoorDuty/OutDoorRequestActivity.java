@@ -187,6 +187,9 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                                .setCancelable(false)
                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                    public void onClick(DialogInterface dialog, int id) {
+                                       OutdoorListActivity.new_create_yn = 0;
+                                       DashboardActivity.from_date = "";
+                                       DashboardActivity.to_date = "";
                                        DashboardActivity.DashboardToMyODApplicationRequestNewCreateYN = false;
                                        Intent intent_odlist = new Intent(OutDoorRequestActivity.this,OutdoorListActivity.class);
 //                                       intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -203,14 +206,16 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                        androidx.appcompat.app.AlertDialog alert = builder.create();
                        alert.show();
                    }else{
+                       OutdoorListActivity.new_create_yn = 0;
                        Intent intent_odlist = new Intent(this,OutdoorListActivity.class);
-                       intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                       intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                        startActivity(intent_odlist);
                    }
                }else {
 
+                   OutdoorListActivity.new_create_yn = 0;
                    Intent intent_odlist = new Intent(this, OutdoorListActivity.class);
-                   intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                   intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                    startActivity(intent_odlist);
                }
                break;

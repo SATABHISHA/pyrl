@@ -2144,15 +2144,18 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             public void onClick(View view) {
 
                 DashboardToMyODApplicationRequestNewCreateYN = true;
-                for(int i=0; i<selectedDateRangeList.size(); i++){
-                    if(i==0){
+                OutdoorListActivity.new_create_yn = 1;
+                if(!selectedDateRangeList.isEmpty()) {
+                    for (int i = 0; i < selectedDateRangeList.size(); i++) {
+                        if (i == 0) {
 //                    from_date = selectedDateRangeList.get(i).toString();
-                        from_date = getDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
-                    }else{
+                            from_date = getDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
+                        } else {
 //                    to_date = selectedDateRangeList.get(i).toString();
-                        to_date = getDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
-                    }
+                            to_date = getDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
+                        }
 
+                    }
                 }
 
                 startActivity(new Intent(DashboardActivity.this, OutDoorRequestActivity.class));
