@@ -22,7 +22,7 @@
                 android:layout_toRightOf="@id/img_back"
                 android:text="My OD Duty Log"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/img_back"

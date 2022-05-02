@@ -18,11 +18,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/img_back"
                 android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/img_back"
                 android:text="My Monthly Attendance Log"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
             <ImageView
                 android:id="@+id/img_back"
                 android:layout_width="40dp"
