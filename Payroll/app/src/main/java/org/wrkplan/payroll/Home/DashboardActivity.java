@@ -1845,7 +1845,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             long differenceDates = difference / (24 * 60 * 60 * 1000);
 
             if (date2.getTime() < date1.getTime()) {
-                Toast.makeText(getApplicationContext(), "To Date should be graeter than \"From Date\"", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "To Date should be graeter than \"From Date\"", Toast.LENGTH_LONG).show();
 //                flag_datefield_check = 0;
 
 //                    edt_date_to_select.setText("");
@@ -1997,11 +1997,31 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                             date_range = date_range+" to "+to_date;
                             Log.d("CountDays-=>", get_date_difference(from_date,to_date).toString());
-                            day_name = day_name+" to "+getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
-                            for(int j=0; j<getAllDateRange(from_date_for_range,to_date_for_range).size(); j++){
-                                caldroidFragment.setBackgroundDrawableForDate(color, getAllDateRange(from_date_for_range,to_date_for_range).get(j));
-                                caldroidFragment.refreshView();
-                                Log.d("RangeDates-=>", getAllDateRange(from_date_for_range,to_date_for_range).get(j).toString());
+                            if(get_date_difference(from_date,to_date) < 0){
+                                Toast.makeText(getApplicationContext(), "Invalid Date Selection", Toast.LENGTH_SHORT).show();
+                                for(int j=0; j<selectedDateRangeList.size(); j++){
+
+                                    caldroidFragment.clearBackgroundDrawableForDate(selectedDateRangeList.get(j));
+                                    caldroidFragment.refreshView();
+                                    date_range = "";
+                                    day_name = "";
+                                    from_date = "";
+                                    to_date = "";
+//                                    selectedDateRangeList.clear();
+
+//                        getSundayDatesAndColorDate();
+
+                                }
+                                if(!selectedDateRangeList.isEmpty()){
+                                    selectedDateRangeList.clear();
+                                }
+                            }else {
+                                day_name = day_name + " to " + getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
+                                for (int j = 0; j < getAllDateRange(from_date_for_range, to_date_for_range).size(); j++) {
+                                    caldroidFragment.setBackgroundDrawableForDate(color, getAllDateRange(from_date_for_range, to_date_for_range).get(j));
+                                    caldroidFragment.refreshView();
+                                    Log.d("RangeDates-=>", getAllDateRange(from_date_for_range, to_date_for_range).get(j).toString());
+                                }
                             }
                         }
                     }
