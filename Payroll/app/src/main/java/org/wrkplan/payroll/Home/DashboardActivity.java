@@ -2051,6 +2051,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     getholiday("1");
                     getYearlySundayDatesAndColorDate(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH));
 
+                    txt_date.setText("");
+                    txt_day_name.setText("");
+                    from_date = "";
+                    to_date = "";
                 }  //---temporary commented on 26th April
                 //---get current day date, code ends---
 
