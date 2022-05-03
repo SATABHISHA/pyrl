@@ -1997,7 +1997,13 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                             to_date = getDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
                             to_date_for_range = getRangeDateFormatFromCalendar(selectedDateRangeList.get(i).toString());
 
-                            date_range = date_range+" to "+to_date;
+                            if(from_date.contentEquals(to_date)){
+                                date_range = date_range;
+                                day_name = day_name;
+                            }else {
+                                date_range = date_range + " to " + to_date;
+                                day_name = day_name + " to " + getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
+                            }
                             Log.d("CountDays-=>", get_date_difference(from_date,to_date).toString());
                             /*if(get_date_difference(from_date,to_date) < 0){
                                 Toast.makeText(getApplicationContext(), "Invalid Date Selection", Toast.LENGTH_SHORT).show();
@@ -2018,7 +2024,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                                     selectedDateRangeList.clear();
                                 }
                             }*/ //else {
-                                day_name = day_name + " to " + getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
+//                                day_name = day_name + " to " + getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
                                 for (int j = 0; j < getAllDateRange(from_date_for_range, to_date_for_range).size(); j++) {
                                     caldroidFragment.setBackgroundDrawableForDate(color, getAllDateRange(from_date_for_range, to_date_for_range).get(j));
                                     caldroidFragment.refreshView();
