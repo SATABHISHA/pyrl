@@ -8,8 +8,8 @@ android {
         applicationId "org.wrkplan.payroll"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 42
-        versionName "1.40"
+        versionCode 44
+        versionName "1.42"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

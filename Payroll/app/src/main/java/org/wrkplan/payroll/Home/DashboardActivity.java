@@ -2007,7 +2007,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                                 day_name = day_name;
                             }else {
                                 date_range = date_range + " to " + to_date;
-                                day_name = day_name + " to " + getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
+                                day_name = "";
+//                                day_name = day_name + " to " + getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
                             }
                             Log.d("CountDays-=>", get_date_difference(from_date,to_date).toString());
                             /*if(get_date_difference(from_date,to_date) < 0){
@@ -2072,38 +2073,40 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 //---get current day date, code ends---
 
 
-                try {
-                    Date d1 = inputformat.parse(date.toString());
-                    Log.d("niladri=>", d1.toString());
-                    String formateDate = new SimpleDateFormat("dd/MM/yyyy").format(d1);
-                    Log.d("DraftDate1-=>", formateDate);
+                if(selectedDateRangeList.size() == 1) {
+                    try {
+                        Date d1 = inputformat.parse(date.toString());
+                        Log.d("niladri=>", d1.toString());
+                        String formateDate = new SimpleDateFormat("dd/MM/yyyy").format(d1);
+                        Log.d("DraftDate1-=>", formateDate);
 
 
-                    for (int j = 0; j < arrayList1.size(); j++) {
-                        if (formateDate.equals(arrayList1.get(j).getFrom_date())) {
+                        for (int j = 0; j < arrayList1.size(); j++) {
+                            if (formateDate.equals(arrayList1.get(j).getFrom_date())) {
 
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ENGLISH);
-                            SimpleDateFormat sdf_day = new SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ENGLISH);
-                            Date myDate = null;
-                            try {
-                                myDate = sdf.parse(arrayList1.get(j).getFrom_date());
-                            } catch (ParseException e) {
-                                e.printStackTrace();
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ENGLISH);
+                                SimpleDateFormat sdf_day = new SimpleDateFormat("dd/MM/yyyy", java.util.Locale.ENGLISH);
+                                Date myDate = null;
+                                try {
+                                    myDate = sdf.parse(arrayList1.get(j).getFrom_date());
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                sdf.applyPattern("EEE, d MMM yyyy");
+                                sdf_day.applyPattern("EEEE");
+                                //sdf.applyPattern("d MMM YYYY");
+                                String sMyDate = sdf.format(myDate);
+                                String sDay = sdf_day.format(myDate);
+                                txt_date.setText(sMyDate);
+                                txt_day_name.setText(sDay);
+                                txt_holiday_name.setText(arrayList1.get(j).getHoliday_name());
                             }
-                            sdf.applyPattern("EEE, d MMM yyyy");
-                            sdf_day.applyPattern("EEEE");
-                            //sdf.applyPattern("d MMM YYYY");
-                            String sMyDate = sdf.format(myDate);
-                            String sDay = sdf_day.format(myDate);
-                            txt_date.setText(sMyDate);
-                            txt_day_name.setText(sDay);
-                            txt_holiday_name.setText(arrayList1.get(j).getHoliday_name());
                         }
+
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
                 }
 
 
