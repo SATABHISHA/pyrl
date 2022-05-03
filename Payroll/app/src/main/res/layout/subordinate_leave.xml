@@ -84,20 +84,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10.5dp"
                 android:gravity="center"
-                android:textColor="#252525"
                 android:text="1"
                 android:textAlignment="center"
+                android:textColor="#252525"
                 android:textSize="22sp">
 
             </TextView>
+
             <TextView
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:text="Day(s)"
-                android:layout_marginTop="2.5dp"
                 android:layout_below="@id/txt_total_days"
-                android:gravity="center"
                 android:layout_centerVertical="true"
+                android:layout_marginTop="2.5dp"
+                android:gravity="center"
+                android:text="Day(s)"
                 android:textColor="#777575"
                 android:textSize="13sp">
 

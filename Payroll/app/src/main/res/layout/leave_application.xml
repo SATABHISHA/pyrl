@@ -81,7 +81,8 @@
                 android:text="1"
                 android:textAlignment="center"
                 android:textSize="22sp"
-                android:textStyle="bold">
+                android:textColor="#000000"
+                android:textStyle="normal">
 
             </TextView>
 
@@ -94,7 +95,7 @@
                 android:gravity="center"
                 android:text="Day(s)"
                 android:textColor="#777575"
-                android:textSize="12sp">
+                android:textSize="13sp">
 
             </TextView>
 

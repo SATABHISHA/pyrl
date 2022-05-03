@@ -26,7 +26,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="Subordinate Outdoor Duty Request"
                 android:textColor="#ffffff"
-                android:textSize="20sp"></TextView>
+                android:textSize="16sp"></TextView>
 
            <!-- <ImageView
                 android:id="@+id/img_back"
@@ -86,21 +86,22 @@
                     android:text="Employee Name"
                     android:textSize="15sp"
                     android:textColor="#788087"/>
+
                 <TextView
                     android:id="@+id/tv_emp_name"
-                    android:layout_toRightOf="@id/tv_emp_name_caption"
-                    android:layout_below="@id/tv_requisition_no"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
+                    android:layout_below="@id/tv_requisition_no"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
-                    android:text="Employee Name"
+                    android:layout_toRightOf="@id/tv_emp_name_caption"
+                    android:background="@drawable/layout6"
                     android:gravity="left|center"
                     android:paddingLeft="5dp"
-                    android:textSize="15sp"
-                    android:layout_marginLeft="10dp"
+                    android:text="Employee Name"
                     android:textColor="#3C3C3C"
-                    android:background="@drawable/layout6"
-                    android:layout_alignParentRight="true"/>
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/tv_od_dutytype_caption"
                     android:layout_below="@id/tv_emp_name_caption"
