@@ -68,11 +68,11 @@
                 android:gravity="center"
                 android:text="Year"
                 android:padding="3dp"
-                android:background="#ffffff"
+                android:background="#DDDDDD"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:textColor="#000"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:textStyle="bold">
 
             </TextView>

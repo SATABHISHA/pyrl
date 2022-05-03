@@ -24,11 +24,13 @@
         <entry key="app/src/main/res/drawable/activity_dashboard_shape.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/activity_dashboard_titlebar_shape.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/activity_dashboard_wfh_shape.xml" value="0.134" />
+        <entry key="app/src/main/res/drawable/activity_leave_balance_year_custom_border.xml" value="0.1325" />
         <entry key="app/src/main/res/drawable/activity_my_attendance_shape.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/activity_my_attendance_shape1.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/activity_myleaveapplctn_odreqst_button_border_shape.xml" value="0.127" />
         <entry key="app/src/main/res/drawable/button_border.xml" value="0.201" />
         <entry key="app/src/main/res/drawable/layout4.xml" value="0.1925925925925926" />
+        <entry key="app/src/main/res/drawable/layout5.xml" value="0.1325" />
         <entry key="app/src/main/res/drawable/layout6.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/layout8.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/layout_material_month_spinner_shape.xml" value="0.127" />
@@ -42,7 +44,7 @@
         <entry key="app/src/main/res/layout/cmpdocuments.xml" value="0.15" />
         <entry key="app/src/main/res/layout/empdocuments.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layout/empfasilities.xml" value="0.1634963768115942" />
-        <entry key="app/src/main/res/layout/leave_application.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/leave_application.xml" value="0.18" />
         <entry key="app/src/main/res/layout/popup.xml" value="0.1634963768115942" />
         <entry key="app/src/main/res/layout/subordinate_leave.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/MyLeaveApplication/layout/myleaveappplication.xml" value="0.2" />
@@ -65,7 +67,7 @@
         <entry key="app/src/main/res/layouts/homeActivity/layout/nav_header_home.xml" value="0.19752030782385635" />
         <entry key="app/src/main/res/layouts/insuranceDetailActivity/layout/activity_insurance_details_prev.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/insuranceDetailActivity/layout/insurance_main.xml" value="0.10815602836879433" />
-        <entry key="app/src/main/res/layouts/leaveBalanceActivity/layout/activity_leave_balance.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/leaveBalanceActivity/layout/activity_leave_balance.xml" value="0.18" />
         <entry key="app/src/main/res/layouts/loginActivity/layout/activity_login_new.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_document_pdf_viewer.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/lta/layout/activity_lta_documents.xml" value="0.10815602836879433" />
