@@ -58,7 +58,7 @@
         <entry key="app/src/main/res/layouts/employeeInformationActivity/layout/activity_employee_information.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/holidayDetailActivity/layout/activity_holiday_detail.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/holidayDetailActivity/layout/custom_cell.xml" value="0.18255664814023087" />
-        <entry key="app/src/main/res/layouts/homeActivity/layout/activity_dashboard.xml" value="0.2" />
+        <entry key="app/src/main/res/layouts/homeActivity/layout/activity_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/homeActivity/layout/activity_home.xml" value="0.17" />
         <entry key="app/src/main/res/layouts/homeActivity/layout/custom_pending_items_row.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/homeActivity/layout/dialog_change_password.xml" value="0.1" />

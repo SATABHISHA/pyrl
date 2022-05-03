@@ -420,15 +420,16 @@
                                 <TextView
                                     android:id="@+id/txt_in_time"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="25dp"
                                     android:textSize="20sp"
                                     android:textColor="#B7E500"
                                     android:text="05:48"/>
                                 <TextView
                                     android:id="@+id/txt_in_time_abbrebiation"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="26dp"
                                     android:layout_marginLeft="5dp"
+                                    android:gravity="bottom"
                                     android:textSize="12sp"
                                     android:textColor="#74706E"
                                     android:text="AM"/>
@@ -447,15 +448,16 @@
                                 <TextView
                                     android:id="@+id/txt_out_time"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="25dp"
                                     android:textSize="20sp"
                                     android:textColor="#F47960"
                                     android:text="05:48"/>
                                 <TextView
                                     android:id="@+id/txt_out_time_abbrebiation"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="26dp"
                                     android:layout_marginLeft="5dp"
+                                    android:gravity="bottom"
                                     android:textSize="12sp"
                                     android:textColor="#74706E"
                                     android:text="PM"/>
