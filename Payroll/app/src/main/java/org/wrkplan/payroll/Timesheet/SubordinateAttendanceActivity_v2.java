@@ -166,7 +166,7 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity implemen
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent_myattendence = new Intent(SubordinateAttendanceActivity_v2.this, MyAttendanceActivity_v3.class);
-        intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_myattendence);
     }
 
@@ -175,12 +175,12 @@ public class SubordinateAttendanceActivity_v2 extends AppCompatActivity implemen
         switch (v.getId()){
             case R.id.img_back:
                 Intent intent_myattendence = new Intent(SubordinateAttendanceActivity_v2.this, MyAttendanceActivity_v3.class);
-                intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_myattendence);
                 break;
             case R.id.tv_button_subordinate:
                 Intent intent = new Intent(SubordinateAttendanceActivity_v2.this,SubordinateMonthlyAttendanceLog.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
             default:

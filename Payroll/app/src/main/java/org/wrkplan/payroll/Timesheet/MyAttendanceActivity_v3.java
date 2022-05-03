@@ -174,7 +174,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
         switch (view.getId()){
             case R.id.img_back:
                 Intent intent_myattendence = new Intent(MyAttendanceActivity_v3.this, DashboardActivity.class);
-                intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_myattendence);
                 break;
            /* case R.id.rl_button:
@@ -244,12 +244,12 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
                 break;
             case R.id.btn_subordinate_attendance_log:
                 Intent intent_subordinate_attendance_log = new Intent(MyAttendanceActivity_v3.this, SubordinateAttendanceActivity_v2.class);
-                intent_subordinate_attendance_log.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent_subordinate_attendance_log.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_subordinate_attendance_log);
                 break;
             case R.id.btn_my_attendance_log:
                 Intent intent_my_attendance_log = new Intent(MyAttendanceActivity_v3.this, MyAttendanceLogActivity_v2.class);
-                intent_my_attendance_log.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent_my_attendance_log.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_my_attendance_log);
                 break;
             default:

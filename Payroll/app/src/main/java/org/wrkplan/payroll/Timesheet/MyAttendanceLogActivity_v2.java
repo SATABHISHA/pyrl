@@ -163,7 +163,7 @@ public class MyAttendanceLogActivity_v2 extends AppCompatActivity implements Vie
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent_myattendence = new Intent(MyAttendanceLogActivity_v2.this, MyAttendanceActivity_v3.class);
-        intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_myattendence);
     }
 
@@ -172,7 +172,7 @@ public class MyAttendanceLogActivity_v2 extends AppCompatActivity implements Vie
         switch (v.getId()){
             case R.id.img_back:
                 Intent intent_myattendence = new Intent(MyAttendanceLogActivity_v2.this, MyAttendanceActivity_v3.class);
-                intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent_myattendence.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_myattendence);
                 break;
             case R.id.imgbtn_prev:

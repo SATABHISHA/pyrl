@@ -944,13 +944,13 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                                             if (LtaListActivity.EmployeeType == "Supervisor"){
                                                 loading.dismiss();
                                                 Intent intent = new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class);
-                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
 
                                             }else if (LtaListActivity.EmployeeType == "Employee") {
                                                 loading.dismiss();
                                                 Intent intent = new Intent(LtaRequestActivity.this, LtaListActivity.class);
-                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
 
                                             }

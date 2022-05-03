@@ -115,7 +115,7 @@ public class EmployeeFacilitiesActivity extends AppCompatActivity implements Vie
         switch (v.getId()) {
             case R.id.img_back:
                 Intent intent_home = new Intent(this, HomeActivity.class);
-                intent_home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent_home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_home);
                 break;
         }

@@ -177,7 +177,7 @@ public class SubordinateOdDutyLogListActivity extends AppCompatActivity implemen
     public void onBackPressed() {
 //        super.onBackPressed();
         Intent intent_od_duty_loglist = new Intent(this, OdDutyLogListActivity.class);
-        intent_od_duty_loglist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent_od_duty_loglist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_od_duty_loglist);
     }
 
@@ -186,7 +186,7 @@ public class SubordinateOdDutyLogListActivity extends AppCompatActivity implemen
         switch (v.getId()) {
             case R.id.img_back:
                 Intent intent_od_duty_loglist = new Intent(this, OdDutyLogListActivity.class);
-                intent_od_duty_loglist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent_od_duty_loglist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_od_duty_loglist);
                 break;
         }

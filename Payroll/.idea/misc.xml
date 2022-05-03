@@ -63,6 +63,7 @@
         <entry key="app/src/main/res/layouts/homeActivity/layout/custom_pending_items_row.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/homeActivity/layout/dialog_change_password.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/homeActivity/layout/nav_header_home.xml" value="0.19752030782385635" />
+        <entry key="app/src/main/res/layouts/insuranceDetailActivity/layout/activity_insurance_details_prev.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/insuranceDetailActivity/layout/insurance_main.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/leaveBalanceActivity/layout/activity_leave_balance.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/loginActivity/layout/activity_login_new.xml" value="0.10815602836879433" />
@@ -90,7 +91,7 @@
         <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/od_duty_log_employee_task_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/od_duty_log_list_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/subordinate_od_duty_log_list_activity.xml" value="0.10815602836879433" />
-        <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_outdoor_list.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_outdoor_list.xml" value="0.15" />
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_outdoor_list_custom_row.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_outdoor_request.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_subordinate_outdoor_list.xml" value="0.10815602836879433" />

@@ -122,6 +122,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -1982,6 +1983,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     caldroidFragment.refreshView();
                     selectedDateRangeList.add(date);
 
+                    Collections.sort(selectedDateRangeList);
                     String date_range = "", day_name="";
                     for(int i=0; i<selectedDateRangeList.size(); i++) {
                         if (i == 0) {
@@ -1997,7 +1999,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                             date_range = date_range+" to "+to_date;
                             Log.d("CountDays-=>", get_date_difference(from_date,to_date).toString());
-                            if(get_date_difference(from_date,to_date) < 0){
+                            /*if(get_date_difference(from_date,to_date) < 0){
                                 Toast.makeText(getApplicationContext(), "Invalid Date Selection", Toast.LENGTH_SHORT).show();
                                 for(int j=0; j<selectedDateRangeList.size(); j++){
 
@@ -2015,13 +2017,13 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                                 if(!selectedDateRangeList.isEmpty()){
                                     selectedDateRangeList.clear();
                                 }
-                            }else {
+                            }*/ //else {
                                 day_name = day_name + " to " + getFullDayNameFormatFromCalendar(selectedDateRangeList.get(i).toString());
                                 for (int j = 0; j < getAllDateRange(from_date_for_range, to_date_for_range).size(); j++) {
                                     caldroidFragment.setBackgroundDrawableForDate(color, getAllDateRange(from_date_for_range, to_date_for_range).get(j));
                                     caldroidFragment.refreshView();
                                     Log.d("RangeDates-=>", getAllDateRange(from_date_for_range, to_date_for_range).get(j).toString());
-                                }
+//                                }
                             }
                         }
                     }

@@ -68,7 +68,7 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
             ll_1recycler.setVisibility(View.GONE);
 
             Intent intent=new Intent(MediclaimActivity.this,MediclaimActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
         if(Url.isMyMediclaim==true)
@@ -81,7 +81,7 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
             ll_1recycler.setVisibility(View.GONE);
 
             Intent intent=new Intent(MediclaimActivity.this, DashboardActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
     }
@@ -228,7 +228,7 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
                     ll_1recycler.setVisibility(View.GONE);
 
                     Intent intent=new Intent(MediclaimActivity.this,MediclaimActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
                 if(Url.isMyMediclaim==true)
@@ -241,7 +241,7 @@ public class MediclaimActivity extends AppCompatActivity implements View.OnClick
                     ll_1recycler.setVisibility(View.GONE);
 
                     Intent intent=new Intent(MediclaimActivity.this, DashboardActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
                 break;
