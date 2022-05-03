@@ -156,7 +156,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     //----Calendar variable, code ends---
 
     //----Attendance variable, code starts-----
-    RelativeLayout rl_out, rl_in;
+    RelativeLayout rl_out, rl_in, rl_attendance_complete;
     TextView tv_out, tv_in, txt_in_time, txt_in_time_abbrebiation, txt_out_time, txt_out_time_abbrebiation, tv_today_date;
     CheckBox chck_wrk_frm_home;
     EditText ed_wrk_frm_home_detail;
@@ -982,6 +982,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     public void LoadAttendanceData(){
         rl_out = findViewById(R.id.rl_out);
         rl_in = findViewById(R.id.rl_in);
+        rl_attendance_complete = findViewById(R.id.rl_attendance_complete);
         tv_out = findViewById(R.id.tv_out);
         tv_in = findViewById(R.id.tv_in);
         txt_in_time = findViewById(R.id.txt_in_time);
@@ -1394,6 +1395,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                         rl_in.setVisibility(View.VISIBLE);
                         rl_out.setVisibility(View.GONE);
+                        rl_attendance_complete.setVisibility(View.GONE);
                     } else if (jsonObject.getString("timesheet_in_out_action").trim().contentEquals("OUT")) {
                         if (jsonObject.getInt("work_from_home_flag_branch") == 1) {
 //                            chck_wrk_frm_home.setVisibility(View.VISIBLE); //--added on 8th oct
@@ -1412,6 +1414,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                         rl_in.setVisibility(View.GONE);
                         rl_out.setVisibility(View.VISIBLE);
+                        rl_attendance_complete.setVisibility(View.GONE);
                     } else {
 //                        chck_wrk_frm_home.setVisibility(View.GONE); //--added on 8th oct
 
@@ -1423,6 +1426,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                         rl_in.setVisibility(View.GONE);
                         rl_out.setVisibility(View.GONE);
+                        rl_attendance_complete.setVisibility(View.VISIBLE);
                     }
                 } else {
 //                    chck_wrk_frm_home.setVisibility(View.GONE); //--added on 8th oct
@@ -1435,6 +1439,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                     rl_in.setVisibility(View.GONE);
                     rl_out.setVisibility(View.GONE);
+                    rl_attendance_complete.setVisibility(View.VISIBLE);
                 }
 
                 DateFormat inputFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss");

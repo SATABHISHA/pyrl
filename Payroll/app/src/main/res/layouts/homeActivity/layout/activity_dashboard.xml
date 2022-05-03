@@ -314,7 +314,7 @@
                             android:layout_below="@id/rl_attendance_detail_title_bar"
                             android:layout_marginLeft="13dp"
                             android:layout_marginTop="13dp"
-                            android:layout_weight="0.02"
+                            android:layout_weight="0.05"
                             android:background="@drawable/activity_dashboard_attendance_out_shape"
                             android:minWidth="65dp"
                             android:visibility="gone">
@@ -337,7 +337,7 @@
                             android:layout_height="75dp"
                             android:layout_marginLeft="13dp"
                             android:layout_marginTop="13dp"
-                            android:layout_weight="0.03"
+                            android:layout_weight="0.05"
                             android:background="@drawable/activity_dashboard_attendance_in_shape"
                             android:minWidth="65dp"
                             android:visibility="visible">
@@ -351,6 +351,19 @@
                                 android:text="IN"
                                 android:textColor="#ffffff"
                                 android:textSize="30dp" />
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/rl_attendance_complete"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginTop="13dp"
+                            android:layout_weight="0.05"
+                            android:background="@drawable/dashboard_attendance_complete"
+                            android:minWidth="65dp"
+                            android:visibility="gone">
+
 
                         </RelativeLayout>
                     </LinearLayout>
