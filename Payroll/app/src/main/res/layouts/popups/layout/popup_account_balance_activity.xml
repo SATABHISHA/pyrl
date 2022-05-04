@@ -164,12 +164,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rl_1">
+            <View
+                android:id="@+id/view_bottom_top_border_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#AE8F8D8D"/>
 
             <Button
                 android:id="@+id/btn_ok"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_below="@id/view_bottom_top_border_line"
                 android:background="@drawable/activity_mediclaim_amount_balance_bottom_custom_shape"
                 android:gravity="center"
                 android:text="ok"
