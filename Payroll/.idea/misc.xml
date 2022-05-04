@@ -6,11 +6,14 @@
         <entry key="../../../../../../Volumes/SatabhishaSSD/SSDUser/SSDLibrary/SSDAndroidSdk/platforms/android-30/data/res/layout/simple_spinner_dropdown_item.xml" value="0.21920289855072464" />
         <entry key="../../../../../../Volumes/SatabhishaSSD/SSDUser/SSDLibrary/SSDAndroidSdk/platforms/android-30/data/res/layout/simple_spinner_item.xml" value="0.21920289855072464" />
         <entry key="../../../../../../layout/custom_preview.xml" value="0.20208333333333334" />
+        <entry key="app/src/main/res/drawable/activity_chng_pswd_cancelbtn_custom_shape.xml" value="0.1495" />
+        <entry key="app/src/main/res/drawable/activity_chng_pwd_submitbtn_custom_shape.xml" value="0.1495" />
         <entry key="app/src/main/res/drawable/activity_dashboard_attendance_date_shape.xml" value="0.134" />
         <entry key="app/src/main/res/drawable/activity_dashboard_attendance_in_shape.xml" value="0.134" />
         <entry key="app/src/main/res/drawable/activity_dashboard_attendance_out_shape.xml" value="0.134" />
         <entry key="app/src/main/res/drawable/activity_dashboard_calendar_btns_shape.xml" value="0.138" />
         <entry key="app/src/main/res/drawable/activity_dashboard_calendar_shape.xml" value="0.1485" />
+        <entry key="app/src/main/res/drawable/activity_dashboard_change_password_custom_shape.xml" value="0.1495" />
         <entry key="app/src/main/res/drawable/activity_dashboard_emp_corpid_shape.xml" value="0.107" />
         <entry key="app/src/main/res/drawable/activity_dashboard_in_out_time.xml" value="0.127" />
         <entry key="app/src/main/res/drawable/activity_dashboard_in_out_title.xml" value="0.127" />
@@ -66,7 +69,7 @@
         <entry key="app/src/main/res/layouts/homeActivity/layout/activity_dashboard.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/layouts/homeActivity/layout/activity_home.xml" value="0.17" />
         <entry key="app/src/main/res/layouts/homeActivity/layout/custom_pending_items_row.xml" value="0.25" />
-        <entry key="app/src/main/res/layouts/homeActivity/layout/dialog_change_password.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/homeActivity/layout/dialog_change_password.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/homeActivity/layout/nav_header_home.xml" value="0.19752030782385635" />
         <entry key="app/src/main/res/layouts/insuranceDetailActivity/layout/activity_insurance_details_prev.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/insuranceDetailActivity/layout/insurance_main.xml" value="0.10815602836879433" />

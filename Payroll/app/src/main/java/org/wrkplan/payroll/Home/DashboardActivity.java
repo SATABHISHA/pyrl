@@ -499,6 +499,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 //                        alert.setCancelable(false);
                 //Creating an alert dialog
                 final android.app.AlertDialog alertDialog = alert.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
                 alertDialog.show();
                 rl_submit.setClickable(false);
 //            tv_submit.setAlpha(0.5f);
