@@ -501,7 +501,6 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
 //                arrayList.add("2018 - 2019");
                 Load_Spinner_Data();
 
-
                 check_leave_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
