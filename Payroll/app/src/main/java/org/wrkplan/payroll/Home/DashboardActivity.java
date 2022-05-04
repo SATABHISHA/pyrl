@@ -306,7 +306,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+        builder = new androidx.appcompat.app.AlertDialog.Builder(this,R.style.CustomAlertDialog);
         NavigationView navigationView = findViewById(R.id.nav_view);
         final View header = navigationView.getHeaderView(0);
         tv_fullname=header.findViewById(R.id.tv_fullname);

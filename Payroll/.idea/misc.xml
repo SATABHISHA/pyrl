@@ -34,6 +34,7 @@
         <entry key="app/src/main/res/drawable/activity_my_attendance_shape1.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/activity_myleaveapplctn_odreqst_button_border_shape.xml" value="0.127" />
         <entry key="app/src/main/res/drawable/button_border.xml" value="0.201" />
+        <entry key="app/src/main/res/drawable/custom_default_popup.xml" value="0.1495" />
         <entry key="app/src/main/res/drawable/layout4.xml" value="0.1925925925925926" />
         <entry key="app/src/main/res/drawable/layout5.xml" value="0.1325" />
         <entry key="app/src/main/res/drawable/layout6.xml" value="0.23333333333333334" />
@@ -105,6 +106,7 @@
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_subordinate_outdoor_list.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_subordinate_outdoor_list_custom_row.xml" value="0.21" />
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_subordinate_outdoor_request.xml" value="0.21" />
+        <entry key="app/src/main/res/layouts/popups/layout/default_popup.xml" value="0.1403985507246377" />
         <entry key="app/src/main/res/layouts/popups/layout/popup_account_balance_activity.xml" value="0.17" />
         <entry key="app/src/main/res/layouts/report/layout/activity_home_pf_report_popup.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/report/layout/activity_home_report_list.xml" value="0.25" />
