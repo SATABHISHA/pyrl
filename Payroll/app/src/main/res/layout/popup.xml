@@ -6,7 +6,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00ffffff"
         android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/linearlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:background="@drawable/activity_mediclaim_amount_balance_titlebar_custom_shape">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leave Balance"
+                android:layout_marginLeft="0dp"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:textStyle="normal"
+                android:textSize="20sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -190,7 +212,8 @@
                 android:layout_weight="1"
                 android:paddingLeft="10dp"
                 android:textSize="15sp"
-                android:textColor="#000"></TextView>
+                android:textColor="#000"
+                android:layout_marginBottom="20dp"></TextView>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -198,10 +221,14 @@
                 android:textSize="15sp"
                 android:id="@+id/tv_paternal_leave"
                 android:textColor="#8a8a8a"></TextView>
+        </LinearLayout>
 
         </LinearLayout>
 
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="#AE8F8D8D"/>
         <Button
             android:id="@+id/bt_ok"
             android:layout_width="match_parent"
@@ -210,9 +237,9 @@
             android:textSize="15dp"
             android:gravity="center"
             android:textColor="#4A6688"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
             android:layout_gravity="center"
-            android:background="@drawable/layout9"></Button>
+            android:background="@drawable/activity_mediclaim_amount_balance_bottom_custom_shape"></Button>
 
     </LinearLayout>
 

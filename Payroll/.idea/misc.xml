@@ -33,6 +33,8 @@
         <entry key="app/src/main/res/drawable/activity_my_attendance_shape.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/activity_my_attendance_shape1.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/activity_myleaveapplctn_odreqst_button_border_shape.xml" value="0.127" />
+        <entry key="app/src/main/res/drawable/activity_selfie_bottom_right_corner_shape.xml" value="0.1605" />
+        <entry key="app/src/main/res/drawable/activity_selfie_bottomleft_corner_shap.xml" value="0.1605" />
         <entry key="app/src/main/res/drawable/button_border.xml" value="0.201" />
         <entry key="app/src/main/res/drawable/custom_default_popup.xml" value="0.1495" />
         <entry key="app/src/main/res/drawable/layout4.xml" value="0.1925925925925926" />
