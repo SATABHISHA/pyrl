@@ -1612,6 +1612,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         alert.setView(dialog);
         //Creating an alert dialog
         final androidx.appcompat.app.AlertDialog alertDialog = alert.create();
+//        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         alertDialog.show();
 
         tv_button_yes.setOnClickListener(new View.OnClickListener() {

@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -871,6 +873,8 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
         alert.setView(dialog);
         //Creating an alert dialog
         final androidx.appcompat.app.AlertDialog alertDialog = alert.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         alertDialog.show();
         tv_button_yes.setOnClickListener(new View.OnClickListener() {
             @Override
