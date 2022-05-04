@@ -15,7 +15,7 @@
         <item
             android:id="@+id/emp_facilities"
             android:icon="@drawable/facilities"
-            android:title="Employee Fecilities" />
+            android:title="Employee Facilities" />
         <item
             android:id="@+id/emp_documents"
             android:icon="@drawable/employee_docs"
