@@ -3,6 +3,8 @@ package org.wrkplan.payroll.Mediclaim;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -143,9 +145,9 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                 txt_balance_available = custom.findViewById(R.id.txt_balance_available);
                 btn_ok = custom.findViewById(R.id.btn_ok);
 
-
                 builder.setView(custom);
                 final AlertDialog dialog = builder.create();
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
 
 

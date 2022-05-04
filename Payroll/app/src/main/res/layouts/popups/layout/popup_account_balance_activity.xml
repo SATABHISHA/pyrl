@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:id="@+id/app"
-        android:background="#2e5772"
+        android:background="@drawable/activity_mediclaim_amount_balance_titlebar_custom_shape"
         android:theme="@style/AppTheme.AppBarOverlay">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -32,13 +32,14 @@
         android:id="@+id/rl_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="#00ffffff"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <RelativeLayout
             android:id="@+id/rl_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#ffffff"
             android:padding="20dp">
 
             <TextView
@@ -163,16 +164,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rl_1">
+
             <Button
                 android:id="@+id/btn_ok"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ok"
-                android:textSize="15dp"
-                android:gravity="center"
-                android:textColor="#444444"
                 android:layout_gravity="center"
-                android:background="@drawable/layout9"></Button>
+                android:background="@drawable/activity_mediclaim_amount_balance_bottom_custom_shape"
+                android:gravity="center"
+                android:text="ok"
+                android:textColor="#444444"
+                android:textSize="15dp"></Button>
 
         </RelativeLayout>
     </RelativeLayout>
