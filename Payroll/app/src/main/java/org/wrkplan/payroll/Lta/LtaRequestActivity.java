@@ -5,11 +5,13 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +20,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +41,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.wrkplan.payroll.AdvanceRequisition.AdvanceRequisitionActivity;
+import org.wrkplan.payroll.AdvanceRequisition.AdvanceRequisitionEntryActivity;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Leave_Balance.LeaveBalanceActivity;
 import org.wrkplan.payroll.Login.LoginActivity;
 import org.wrkplan.payroll.Model.Load_Spinner_Model;
@@ -421,7 +427,7 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
         }
     }
     private void AlertBox() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+       /* AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setMessage("You may lost any unsaved data. Do you really want to go back?");
         builder.setCancelable(true);
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -444,7 +450,58 @@ public class LtaRequestActivity extends AppCompatActivity implements View.OnClic
                 //Toast.makeText(context, "Delet item successfully of Position => "+position, Toast.LENGTH_SHORT).show();
             }
         });
-        builder.show();
+        builder.show();*/
+
+        //--------adding custom dialog on 14th may starts------
+        LayoutInflater li2 = LayoutInflater.from(this);
+        View dialog = li2.inflate(R.layout.popup_leave_odrqst_common, null);
+        final LinearLayout ll_yes_dashboard = dialog.findViewById(R.id.ll_yes_dashboard);
+        final LinearLayout ll_yes_list = dialog.findViewById(R.id.ll_yes_list);
+        final LinearLayout ll_no = dialog.findViewById(R.id.ll_no);
+
+        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
+        alert.setView(dialog);
+//                        alert.setCancelable(false);
+        //Creating an alert dialog
+        final android.app.AlertDialog alertDialog = alert.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        alertDialog.show();
+        ll_yes_dashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(!ltaDocumentsModelArrayList.isEmpty()){
+                    ltaDocumentsModelArrayList.clear();
+                }
+                if (LtaListActivity.EmployeeType == "Supervisor"){
+                    startActivity(new Intent(LtaRequestActivity.this, DashboardActivity.class));
+                }else if (LtaListActivity.EmployeeType == "Employee") {
+                    startActivity(new Intent(LtaRequestActivity.this, DashboardActivity.class));
+                }
+            }
+        });
+        ll_yes_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(!ltaDocumentsModelArrayList.isEmpty()){
+                    ltaDocumentsModelArrayList.clear();
+                }
+                if (LtaListActivity.EmployeeType == "Supervisor"){
+                    startActivity(new Intent(LtaRequestActivity.this, SubordinateLtaListActivity.class));
+                }else if (LtaListActivity.EmployeeType == "Employee") {
+                    startActivity(new Intent(LtaRequestActivity.this, LtaListActivity.class));
+                }
+            }
+        });
+        ll_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.cancel();
+            }
+        });
     }
     //-----function to add alert logic on back button, code ends-----
     //----function to load buttons acc to the logic, code starts

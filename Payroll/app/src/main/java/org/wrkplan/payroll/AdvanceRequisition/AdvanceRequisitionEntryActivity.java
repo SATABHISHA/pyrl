@@ -2,8 +2,11 @@ package org.wrkplan.payroll.AdvanceRequisition;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,8 +32,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Model.Requisition_Reason_Spinner_Model;
 import org.wrkplan.payroll.Model.UserSingletonModel;
+import org.wrkplan.payroll.MyLeaveApplication.MyLeaveApplicationActivity;
+import org.wrkplan.payroll.MyLeaveApplication2.MyLeaveApplication2Activity;
 import org.wrkplan.payroll.R;
 
 import java.text.SimpleDateFormat;
@@ -449,7 +455,7 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
     //-----function for Back button logic for Alert, code starts (added on 6-Aug-2021)---
     private void AlertBack() {
 
-        String message="You may lost any unsaved data. Do you really want to go back?";
+      /*  String message="You may lost any unsaved data. Do you really want to go back?";
 
         AlertDialog.Builder builder=new AlertDialog.Builder(AdvanceRequisitionEntryActivity.this);
         builder.setMessage(message);
@@ -465,7 +471,47 @@ public class AdvanceRequisitionEntryActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        builder.show();
+        builder.show();*/
+
+        //--------adding custom dialog on 14th may starts------
+        LayoutInflater li2 = LayoutInflater.from(this);
+        View dialog = li2.inflate(R.layout.popup_leave_odrqst_common, null);
+        final LinearLayout ll_yes_dashboard = dialog.findViewById(R.id.ll_yes_dashboard);
+        final LinearLayout ll_yes_list = dialog.findViewById(R.id.ll_yes_list);
+        final LinearLayout ll_no = dialog.findViewById(R.id.ll_no);
+
+        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
+        alert.setView(dialog);
+//                        alert.setCancelable(false);
+        //Creating an alert dialog
+        final android.app.AlertDialog alertDialog = alert.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        alertDialog.show();
+        ll_yes_dashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AdvanceRequisitionEntryActivity.this, DashboardActivity.class);
+                startActivity(intent);
+            }
+        });
+        ll_yes_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(AdvanceRequisitionEntryActivity.this, AdvanceRequisitionActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+        ll_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.cancel();
+            }
+        });
 
     }
     //-----function for Back button logic for Alert, code ends (added on 6-Aug-2021)---

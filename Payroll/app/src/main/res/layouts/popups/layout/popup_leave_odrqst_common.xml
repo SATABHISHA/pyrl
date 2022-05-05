@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:layout_gravity="center"
-                android:text="Any used data will be lost.\n Do you still want to continue?"
+                android:text="Any unsaved data will be lost.\n Do you still want to continue?"
                 android:gravity="center"
                 android:textColor="#4f4f4f"
                 android:textSize="18sp"

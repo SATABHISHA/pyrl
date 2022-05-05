@@ -33,6 +33,7 @@
         <entry key="app/src/main/res/drawable/activity_my_attendance_shape.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/activity_my_attendance_shape1.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/activity_myleaveapplctn_odreqst_button_border_shape.xml" value="0.127" />
+        <entry key="app/src/main/res/drawable/activity_salary_report_custombtn_shape.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/activity_selfie_bottom_right_corner_shape.xml" value="0.1605" />
         <entry key="app/src/main/res/drawable/activity_selfie_bottomleft_corner_shap.xml" value="0.1605" />
         <entry key="app/src/main/res/drawable/button_border.xml" value="0.201" />
@@ -61,7 +62,7 @@
         <entry key="app/src/main/res/layouts/SubodinateLeaveApplication/layout/subodinate_leave_application.xml" value="0.17" />
         <entry key="app/src/main/res/layouts/advanceRequisitionActivity/layout/activity_advance_requsition_list_custom_row.xml" value="0.11141304347826086" />
         <entry key="app/src/main/res/layouts/advanceRequisitionActivity/layout/activity_subordinate_requsition_list_custom_row.xml" value="0.11141304347826086" />
-        <entry key="app/src/main/res/layouts/advanceRequisitionActivity/layout/advance_requisititon_entry_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/advanceRequisitionActivity/layout/advance_requisititon_entry_activity.xml" value="0.17" />
         <entry key="app/src/main/res/layouts/advanceRequisitionActivity/layout/advance_requsation_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/companyDocumentsActivity/layout/activity_company_documents.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/employeeDocumentsActivity/layout/activity_employee_documents.xml" value="0.10815602836879433" />
@@ -112,7 +113,7 @@
         <entry key="app/src/main/res/layouts/popups/layout/default_popup.xml" value="0.1403985507246377" />
         <entry key="app/src/main/res/layouts/popups/layout/popup_account_balance_activity.xml" value="0.17" />
         <entry key="app/src/main/res/layouts/popups/layout/popup_leave_odrqst_common.xml" value="0.25" />
-        <entry key="app/src/main/res/layouts/report/layout/activity_home_pf_report_popup.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/report/layout/activity_home_pf_report_popup.xml" value="0.18" />
         <entry key="app/src/main/res/layouts/report/layout/activity_home_report_list.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/report/layout/activity_home_salary_report_popup.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/report/layout/activity_pdf_editor.xml" value="0.1" />

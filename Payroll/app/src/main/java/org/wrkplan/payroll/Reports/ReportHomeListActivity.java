@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.print.PDFPrint;
@@ -97,6 +99,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                 alert.setCancelable(false);
                 //Creating an alert dialog
                 final AlertDialog alertDialog = alert.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 alertDialog.show();
                 Load_Spinner_Data(spinner_year);
                 spinner_year.setSelection(1);
@@ -153,6 +156,7 @@ public class ReportHomeListActivity extends AppCompatActivity implements View.On
                 alert_salary_slip.setCancelable(false);
                 //Creating an alert dialog
                 final AlertDialog alertDialogSalarySlip = alert_salary_slip.create();
+                alertDialogSalarySlip.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 alertDialogSalarySlip.show();
 
                 //----making spinner_month default false, code starts---

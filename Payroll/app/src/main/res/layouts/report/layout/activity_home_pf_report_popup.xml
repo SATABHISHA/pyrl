@@ -6,17 +6,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F9F9F9"
+        android:background="#00ffffff"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="130dp"
+            android:orientation="vertical"
+            android:background="#00ffffff">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:padding="5dp"
-                android:background="#2e5772">
+                android:background="@drawable/activity_mediclaim_amount_balance_titlebar_custom_shape">
                 <TextView
                     android:id="@+id/tv_accountcode"
                     android:layout_width="250dp"
@@ -37,6 +38,10 @@
                     android:src="@drawable/cross"
                     android:layout_centerVertical="true"/>
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F9F9F9">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,14 +76,19 @@
                 </LinearLayout>
 
             </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#c2c2c2"/>
         <LinearLayout
             android:id="@+id/ll_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/layout6"
+            android:background="@drawable/activity_salary_report_custombtn_shape"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/tv_button_continue"
@@ -88,7 +98,7 @@
                 android:textSize="18sp"
                 android:textColor="#2E2E2E"
                 android:layout_weight="1"
-                android:background="@drawable/layout6"
+                android:background="@drawable/activity_salary_report_custombtn_shape"
                 android:text="Continue"/>
         </LinearLayout>
     </LinearLayout>
