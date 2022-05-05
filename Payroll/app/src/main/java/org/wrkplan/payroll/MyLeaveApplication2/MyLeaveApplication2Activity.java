@@ -7,8 +7,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -130,7 +133,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
         }else {
             if (txt_leave_status1.getText().toString().equals("Save") || txt_leave_status1.getText().toString().equals("Return")) {
                 Url.isSubordinateLeaveApplication = false;
-                builder.setMessage("You may lost any unsaved data. Do you really want to cancel?")
+               /* builder.setMessage("You may lost any unsaved data. Do you really want to cancel?")
                         .setCancelable(false)
 
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -158,7 +161,56 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                 AlertDialog alert = builder.create();
                 //Setting the title manually
                 alert.setTitle("Cancel!");
-                alert.show();
+                alert.show();*/
+                //--------adding custom dialog on 14th may starts------
+                LayoutInflater li2 = LayoutInflater.from(this);
+                View dialog = li2.inflate(R.layout.popup_leave_odrqst_common, null);
+                final LinearLayout ll_yes_dashboard = dialog.findViewById(R.id.ll_yes_dashboard);
+                final LinearLayout ll_yes_list = dialog.findViewById(R.id.ll_yes_list);
+                final LinearLayout ll_no = dialog.findViewById(R.id.ll_no);
+
+                android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
+                alert.setView(dialog);
+//                        alert.setCancelable(false);
+                //Creating an alert dialog
+                final android.app.AlertDialog alertDialog = alert.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                alertDialog.show();
+                ll_yes_dashboard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Url.isSubordinateLeaveApplication = false;
+                        Url.isMyLeaveApplication=true;
+
+                        DashboardActivity.from_date = "";
+                        DashboardActivity.to_date = "";
+                        Intent intent = new Intent(MyLeaveApplication2Activity.this, DashboardActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                ll_yes_list.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Url.isSubordinateLeaveApplication = false;
+                        Url.isMyLeaveApplication=true;
+
+                        DashboardActivity.from_date = "";
+                        DashboardActivity.to_date = "";
+
+                        Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                });
+                ll_no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                       alertDialog.cancel();
+                    }
+                });
+
+
             } else {
                 DashboardActivity.DashboardToMyLeaveApplicationRequestNewCreateYN = false;
                 Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
@@ -715,7 +767,7 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                 if (txt_leave_status1.getText().toString().equals("Save") || txt_leave_status1.getText().toString().equals("Return")
                         ||txt_leave_status1.getText().toString().equals("")) {
 
-                    builder.setMessage("You may lost any unsaved data. Do you really want to cancel?")
+                   /* builder.setMessage("You may lost any unsaved data. Do you really want to cancel?")
                             .setCancelable(false)
 
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -746,7 +798,55 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     AlertDialog alert = builder.create();
                     //Setting the title manually
                     alert.setTitle("Cancel!");
-                    alert.show();
+                    alert.show();*/
+                    //--------adding custom dialog on 14th may starts------
+                    LayoutInflater li2 = LayoutInflater.from(MyLeaveApplication2Activity.this);
+                    View dialog = li2.inflate(R.layout.popup_leave_odrqst_common, null);
+                    final LinearLayout ll_yes_dashboard = dialog.findViewById(R.id.ll_yes_dashboard);
+                    final LinearLayout ll_yes_list = dialog.findViewById(R.id.ll_yes_list);
+                    final LinearLayout ll_no = dialog.findViewById(R.id.ll_no);
+
+                    android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(MyLeaveApplication2Activity.this);
+                    alert.setView(dialog);
+//                        alert.setCancelable(false);
+                    //Creating an alert dialog
+                    final android.app.AlertDialog alertDialog = alert.create();
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                    alertDialog.show();
+                    ll_yes_dashboard.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Url.isSubordinateLeaveApplication = false;
+                            Url.isMyLeaveApplication=true;
+
+                            DashboardActivity.from_date = "";
+                            DashboardActivity.to_date = "";
+                            Intent intent = new Intent(MyLeaveApplication2Activity.this, DashboardActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    ll_yes_list.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Url.isSubordinateLeaveApplication = false;
+                            Url.isMyLeaveApplication=true;
+
+                            DashboardActivity.from_date = "";
+                            DashboardActivity.to_date = "";
+
+                            Intent intent = new Intent(MyLeaveApplication2Activity.this, MyLeaveApplicationActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    });
+                    ll_no.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.cancel();
+                        }
+                    });
+
                 }
 
                 else

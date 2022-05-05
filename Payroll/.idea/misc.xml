@@ -100,6 +100,7 @@
         <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/custom_subordinate_od_duty_log_list_row.xml" value="0.17" />
         <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/od_duty_log_detail_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/od_duty_log_employee_task_activity.xml" value="0.10815602836879433" />
+        <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/od_duty_log_employee_task_popup.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/od_duty_log_list_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/outDoorDutyActivity/layout/subordinate_od_duty_log_list_activity.xml" value="0.10815602836879433" />
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_outdoor_list.xml" value="0.15" />
@@ -110,6 +111,7 @@
         <entry key="app/src/main/res/layouts/outdoorActivity/layout/activity_subordinate_outdoor_request.xml" value="0.21" />
         <entry key="app/src/main/res/layouts/popups/layout/default_popup.xml" value="0.1403985507246377" />
         <entry key="app/src/main/res/layouts/popups/layout/popup_account_balance_activity.xml" value="0.17" />
+        <entry key="app/src/main/res/layouts/popups/layout/popup_leave_odrqst_common.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/report/layout/activity_home_pf_report_popup.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/report/layout/activity_home_report_list.xml" value="0.25" />
         <entry key="app/src/main/res/layouts/report/layout/activity_home_salary_report_popup.xml" value="0.25" />
