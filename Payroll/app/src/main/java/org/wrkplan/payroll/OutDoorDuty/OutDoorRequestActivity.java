@@ -8,8 +8,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,6 +22,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -45,6 +48,8 @@ import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
 import org.wrkplan.payroll.Home.DashboardActivity;
 import org.wrkplan.payroll.Model.UserSingletonModel;
+import org.wrkplan.payroll.MyLeaveApplication.MyLeaveApplicationActivity;
+import org.wrkplan.payroll.MyLeaveApplication2.MyLeaveApplication2Activity;
 import org.wrkplan.payroll.R;
 
 import java.text.DateFormat;
@@ -182,7 +187,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
 
                if(OutdoorListActivity.new_create_yn == 1){
                    if(!edt_from_date_select.getText().toString().isEmpty() || !ed_reason.getText().toString().isEmpty()){
-                       androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(OutDoorRequestActivity.this);
+                     /*  androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(OutDoorRequestActivity.this);
                        builder.setMessage("All unsaved data will be lost. Still want to cancel?")
                                .setCancelable(false)
                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -204,9 +209,54 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                                    }
                                });
                        androidx.appcompat.app.AlertDialog alert = builder.create();
-                       alert.show();
+                       alert.show();*/
+                       //--------adding custom dialog on 14th may starts------
+                       LayoutInflater li2 = LayoutInflater.from(this);
+                       View dialog = li2.inflate(R.layout.popup_leave_odrqst_common, null);
+                       final LinearLayout ll_yes_dashboard = dialog.findViewById(R.id.ll_yes_dashboard);
+                       final LinearLayout ll_yes_list = dialog.findViewById(R.id.ll_yes_list);
+                       final LinearLayout ll_no = dialog.findViewById(R.id.ll_no);
+
+                       android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
+                       alert.setView(dialog);
+//                        alert.setCancelable(false);
+                       //Creating an alert dialog
+                       final android.app.AlertDialog alertDialog = alert.create();
+                       alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                       alertDialog.show();
+                       ll_yes_dashboard.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View v) {
+                               OutdoorListActivity.new_create_yn = 0;
+                               DashboardActivity.from_date = "";
+                               DashboardActivity.to_date = "";
+                               Intent intent = new Intent(OutDoorRequestActivity.this, DashboardActivity.class);
+                               startActivity(intent);
+                           }
+                       });
+                       ll_yes_list.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View v) {
+                               OutdoorListActivity.new_create_yn = 0;
+                               DashboardActivity.from_date = "";
+                               DashboardActivity.to_date = "";
+
+                               Intent intent = new Intent(OutDoorRequestActivity.this, MyLeaveApplicationActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                               startActivity(intent);
+                           }
+                       });
+                       ll_no.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View v) {
+                               alertDialog.cancel();
+                           }
+                       });
                    }else{
                        OutdoorListActivity.new_create_yn = 0;
+                       DashboardActivity.from_date = "";
+                       DashboardActivity.to_date = "";
                        Intent intent_odlist = new Intent(this,OutdoorListActivity.class);
 //                       intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                        startActivity(intent_odlist);
@@ -214,6 +264,8 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                }else {
 
                    OutdoorListActivity.new_create_yn = 0;
+                   DashboardActivity.from_date = "";
+                   DashboardActivity.to_date = "";
                    Intent intent_odlist = new Intent(this, OutdoorListActivity.class);
 //                   intent_odlist.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                    startActivity(intent_odlist);
