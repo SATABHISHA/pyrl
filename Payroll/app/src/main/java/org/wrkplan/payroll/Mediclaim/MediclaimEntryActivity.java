@@ -7,9 +7,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wrkplan.payroll.Config.Url;
+import org.wrkplan.payroll.Home.DashboardActivity;
+import org.wrkplan.payroll.Lta.LtaListActivity;
+import org.wrkplan.payroll.Lta.LtaRequestActivity;
+import org.wrkplan.payroll.Lta.SubordinateLtaListActivity;
 import org.wrkplan.payroll.Model.Mediclaim.Mediclaim_Details_Model;
 import org.wrkplan.payroll.Model.Mediclaim.Model_Base64;
 import org.wrkplan.payroll.Model.Mediclaim.Subordinate_Mediclaim_Details_Model;
@@ -897,7 +903,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
     //-----function for Back button logic for Alert, code starts (added on 6-Aug-2021)---
     private void AlertBack() {
 
-        String message="You may lost any unsaved data. Do you really want to go back?";
+       /* String message="You may lost any unsaved data. Do you really want to go back?";
 
         AlertDialog.Builder builder=new AlertDialog.Builder(MediclaimEntryActivity.this);
         builder.setMessage(message);
@@ -913,7 +919,44 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
                 dialog.dismiss();
             }
         });
-        builder.show();
+        builder.show();*/
+
+        //--------adding custom dialog on 14th may starts------
+        LayoutInflater li2 = LayoutInflater.from(this);
+        View dialog = li2.inflate(R.layout.popup_leave_odrqst_common, null);
+        final LinearLayout ll_yes_dashboard = dialog.findViewById(R.id.ll_yes_dashboard);
+        final LinearLayout ll_yes_list = dialog.findViewById(R.id.ll_yes_list);
+        final LinearLayout ll_no = dialog.findViewById(R.id.ll_no);
+
+        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
+        alert.setView(dialog);
+//                        alert.setCancelable(false);
+        //Creating an alert dialog
+        final android.app.AlertDialog alertDialog = alert.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        alertDialog.show();
+        ll_yes_dashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               startActivity(new Intent(MediclaimEntryActivity.this, DashboardActivity.class ));
+            }
+        });
+        ll_yes_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(MediclaimEntryActivity.this, MediclaimActivity.class ));
+
+            }
+        });
+        ll_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.cancel();
+            }
+        });
     }
     //-----function for Back button logic for Alert, code ends (added on 6-Aug-2021)---
 
@@ -1071,7 +1114,7 @@ public class MediclaimEntryActivity extends AppCompatActivity implements View.On
 
 
                         Intent intent = new Intent(MediclaimEntryActivity.this, MediclaimActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         //finish(); // commented by sr
                         //    Toast.makeText(getApplicationContext(),""+message,Toast.LENGTH_LONG).show();
