@@ -60,7 +60,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:focusableInTouchMode="true"
                 android:orientation="vertical"
                 android:background="@drawable/activity_chng_pswd_cancelbtn_custom_shape"
                 android:layout_weight="1">
@@ -88,7 +87,6 @@
                 android:id="@+id/ll_yes_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:focusableInTouchMode="true"
                 android:background="#ffffff"
                 android:layout_weight="1">
                 <LinearLayout
