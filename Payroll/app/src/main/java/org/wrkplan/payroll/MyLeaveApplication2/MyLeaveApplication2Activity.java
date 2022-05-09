@@ -558,7 +558,6 @@ public class MyLeaveApplication2Activity extends AppCompatActivity implements Vi
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         // String item = parent.getItemAtPosition(position).toString();
                         //  Toast.makeText(parent.getContext(), "Selected: " + item,          Toast.LENGTH_LONG).show();
-
                         //  GetData(item.replace(" ", ""));
 
                         String item=load_spinner_models.get(position).getFinancial_year_code();
