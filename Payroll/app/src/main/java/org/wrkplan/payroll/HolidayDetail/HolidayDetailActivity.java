@@ -311,7 +311,8 @@ public class HolidayDetailActivity extends AppCompatActivity implements View.OnC
                         String draft_date_otput_format = outputFormat.format(draft_date_current_format);
 
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                        ColorDrawable color = new ColorDrawable(Color.parseColor("#c2c2c2"));
+//                        ColorDrawable color = new ColorDrawable(Color.parseColor("#c2c2c2"));
+                        ColorDrawable color = new ColorDrawable(Color.parseColor("#E4FCAD"));
                         Log.d("DraftDate-=>", draft_date_otput_format.toString());
                         caldroidFragment.setBackgroundDrawableForDate(color, dateFormat.parse(draft_date_otput_format));
 
