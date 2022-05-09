@@ -19,13 +19,13 @@
                 android:id="@+id/tv_requisition_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/img_back"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@id/rl_btn_new"
+                android:layout_toRightOf="@id/img_back"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
             <ImageView
                 android:id="@+id/img_back"
                 android:layout_width="40dp"
