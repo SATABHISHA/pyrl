@@ -68,7 +68,7 @@ public class AdvanceRequisitionActivity extends AppCompatActivity implements Vie
             ll_1recycler.setVisibility(View.GONE);
 
             Intent intent=new Intent(AdvanceRequisitionActivity.this,AdvanceRequisitionActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
         if(Url.isMyRequisition==true)
@@ -81,7 +81,7 @@ public class AdvanceRequisitionActivity extends AppCompatActivity implements Vie
             ll_1recycler.setVisibility(View.GONE);
 
             Intent intent=new Intent(AdvanceRequisitionActivity.this, DashboardActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
 
@@ -329,7 +329,32 @@ public class AdvanceRequisitionActivity extends AppCompatActivity implements Vie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_back:
-                onBackPressed();
+//                onBackPressed();
+                if(Url.isSubordinateRequisition==true)
+                {
+
+                    rl_btn_new.setVisibility(View.GONE);
+                    btn_subadv_req.setVisibility(View.GONE);
+                    ll_recycler.setVisibility(View.VISIBLE);
+                    ll_1recycler.setVisibility(View.GONE);
+
+                    Intent intent=new Intent(AdvanceRequisitionActivity.this,AdvanceRequisitionActivity.class);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                if(Url.isMyRequisition==true)
+                {
+
+                    Url.isSubordinateRequisition=false;
+                    rl_btn_new.setVisibility(View.VISIBLE);
+                    btn_subadv_req.setVisibility(View.VISIBLE);
+                    ll_recycler.setVisibility(View.VISIBLE);
+                    ll_1recycler.setVisibility(View.GONE);
+
+                    Intent intent=new Intent(AdvanceRequisitionActivity.this, DashboardActivity.class);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
                 break;
         }
     }

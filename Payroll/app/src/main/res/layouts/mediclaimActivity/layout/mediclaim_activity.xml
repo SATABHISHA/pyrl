@@ -25,7 +25,7 @@
                 android:layout_toLeftOf="@id/rl_btn_new"
                 android:layout_toRightOf="@id/img_back"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/img_back"
@@ -38,16 +38,21 @@
                 android:id="@+id/rl_btn_new"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:background="#3e7aa1"
+                android:background="#2e5772"
                 android:layout_alignParentRight="true">
+
                 <TextView
                     android:id="@+id/tv_btn_new_rqst"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="New"
-                    android:textSize="18sp"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/activity_myleaveapplctn_odreqst_button_border_shape"
                     android:gravity="center"
-                    android:textColor="#ffffff"/>
+                    android:text="New"
+                    android:textColor="#242424"
+                    android:textSize="16sp" />
             </RelativeLayout>
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>

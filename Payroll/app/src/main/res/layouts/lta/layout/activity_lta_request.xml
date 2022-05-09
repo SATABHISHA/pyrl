@@ -25,7 +25,7 @@
                 android:layout_marginRight="10dp"
                 android:text="My LTA Requisition Detail"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <!--<ImageView
                 android:id="@+id/img_back"

@@ -25,7 +25,7 @@
                 android:layout_marginRight="10dp"
                 android:text="My Medical Reimb Detail"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
