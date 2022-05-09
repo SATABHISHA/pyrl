@@ -47,10 +47,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
             <TextView
                 android:id="@+id/tv_nodata"
                 android:layout_width="wrap_content"
@@ -63,26 +61,35 @@
             <ListView
                 android:id="@+id/lv1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible"></ListView>
+                android:layout_height="match_parent"
+                android:layout_above="@id/rl_btn"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:visibility="visible" />
 
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-            <Button
+            <RelativeLayout
+                android:id="@+id/rl_btn"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="OK"
-                android:id="@+id/btn_ok"
-                android:textSize="19sp"
-                android:textColor="#000"
-                android:layout_alignParentBottom="true">
+                android:layout_alignParentBottom="true"
+                >
 
-            </Button>
+                <Button
+                    android:id="@+id/btn_ok"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:text="OK"
+                    android:textColor="#000"
+                    android:textSize="19sp">
+
+                </Button>
+
+            </RelativeLayout>
 
         </RelativeLayout>
+
 
 
 

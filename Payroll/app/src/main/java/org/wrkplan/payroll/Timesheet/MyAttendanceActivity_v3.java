@@ -949,7 +949,7 @@ public class MyAttendanceActivity_v3 extends AppCompatActivity implements View.O
                 if (result.length > 0 && result[0] == PackageManager.PERMISSION_GRANTED) {
 //                    Toast.makeText(MyAttendanceActivity_v3.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(MyAttendanceActivity_v3.this, "Permission Canceled, Now your application cannot access CAMERA.", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(MyAttendanceActivity_v3.this, "Permission Canceled, Now your application cannot access CAMERA.", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
