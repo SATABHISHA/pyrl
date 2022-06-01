@@ -91,22 +91,26 @@
                            android:textColor="#ffffff"
                            android:textSize="17sp" />
                    </RelativeLayout>
+
                    <LinearLayout
                        android:id="@+id/ll_emp_detail"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_below="@+id/emp_detail_title_bar"
+                       android:layout_alignParentLeft="true"
                        android:layout_marginTop="6dp"
+                       android:layout_marginRight="15dp"
+                       android:layout_toLeftOf="@+id/txt_corid"
                        android:orientation="vertical">
 
                        <TextView
                            android:id="@+id/txt_emp_name"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:text="B Banerjee"
-                           android:textSize="20sp"
                            android:layout_marginLeft="8dp"
-                           android:textColor="#356B8C"/>
+                           android:text="B Banerjee"
+                           android:textColor="#356B8C"
+                           android:textSize="20sp" />
 
                        <TextView
                            android:id="@+id/txt_designation"
@@ -121,11 +125,11 @@
                            android:id="@+id/txt_department"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:text="Demo India"
-                           android:textSize="13sp"
-                           android:layout_marginTop="0dp"
                            android:layout_marginLeft="8dp"
-                           android:textColor="#7B7B7B"/>
+                           android:layout_marginTop="0dp"
+                           android:text="Demo India"
+                           android:textColor="#7B7B7B"
+                           android:textSize="13sp" />
                    </LinearLayout>
 
                    <TextView
@@ -163,7 +167,7 @@
                                android:layout_height="wrap_content"
                                android:text="Supervisor 1"
                                android:textColor="#000000"
-                               android:textSize="17sp" />
+                               android:textSize="14sp" />
 
                            <TextView
                                android:id="@+id/txt_supervisor1"
@@ -185,9 +189,9 @@
                            <TextView
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
-                               android:text="Supervisor 1"
+                               android:text="Supervisor 2"
                                android:textColor="#000000"
-                               android:textSize="17sp" />
+                               android:textSize="14sp" />
 
                            <TextView
                                android:id="@+id/txt_supervisor2"

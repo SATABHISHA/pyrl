@@ -190,6 +190,7 @@ public class CompanyDocumentsActivity extends AppCompatActivity implements View.
 
                     // concatinate above fileExtension to fileName
                     fileName += "." + fileExtension;
+                    Log.d("FileUrl-=>", fileName);
 
                     try {
                         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(fileUrl))
