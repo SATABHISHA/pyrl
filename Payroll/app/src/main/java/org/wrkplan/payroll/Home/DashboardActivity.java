@@ -1,5 +1,7 @@
 package org.wrkplan.payroll.Home;
 
+import static com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -11,8 +13,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -71,6 +75,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.InstallStateUpdatedListener;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.InstallStatus;
+import com.google.android.play.core.install.model.UpdateAvailability;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 import com.squareup.picasso.Picasso;
@@ -199,6 +210,15 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     public static String event_id = "", event_owner_id = "", LeaveType = "";
     public static Boolean NotificationPendingItemsYN = false;
     //------Notification, code ends-----
+
+    //------variable for version update, code starts
+    private AppUpdateManager mAppUpdateManager;
+    private int RC_APP_UPDATE = 999;
+    private int inAppUpdateType;
+    private com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask;
+    private InstallStateUpdatedListener installStateUpdatedListener;
+    //------variable for version update, code ends
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -212,9 +232,112 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         LoadSalaryData();
         LoadNotificationData();
         LoadEmployeeData();
+        CheckForAppUpdateAndDownload(); //---added on 2nd June, 2022 after dashboard's modification
+
+
 
     }
 
+    //-------added on 4th Sept code for version update, starts----
+
+    public void CheckForAppUpdateAndDownload(){
+        //----added on 20th July for version update, starts----
+        mAppUpdateManager = AppUpdateManagerFactory.create(DashboardActivity.this);
+        // Returns an intent object that you use to check for an update.
+        appUpdateInfoTask = mAppUpdateManager.getAppUpdateInfo();
+        //lambda operation used for below listener
+        //For flexible update
+        installStateUpdatedListener = installState -> {
+            if (installState.installStatus() == InstallStatus.DOWNLOADED) {
+                popupSnackbarForCompleteUpdate();
+            }
+        };
+        mAppUpdateManager.registerListener(installStateUpdatedListener);
+
+        //For Flexible
+        inAppUpdateType = AppUpdateType.FLEXIBLE;//1
+        inAppUpdate();
+        //----added on 20th July for version update, ends----
+    }
+
+
+   /* @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_APP_UPDATE) {
+            //when user clicks update button
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(DashboardActivity.this, "App download starts...", Toast.LENGTH_LONG).show();
+            } else if (resultCode != RESULT_CANCELED) {
+                //if you want to request the update again just call checkUpdate()
+                Toast.makeText(DashboardActivity.this, "App download canceled.", Toast.LENGTH_LONG).show();
+            } else if (resultCode == RESULT_IN_APP_UPDATE_FAILED) {
+                Toast.makeText(DashboardActivity.this, "App download failed.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }*/ //---app update code is written inside camera section onActivityResult(as we cann't use it twice)
+    @Override
+    protected void onDestroy() {
+        mAppUpdateManager.unregisterListener(installStateUpdatedListener);
+        super.onDestroy();
+    }
+
+    private void inAppUpdate() {
+
+        try {
+            // Checks that the platform will allow the specified type of update.
+            appUpdateInfoTask.addOnSuccessListener(new com.google.android.play.core.tasks.OnSuccessListener<AppUpdateInfo>() {
+                @Override
+                public void onSuccess(AppUpdateInfo appUpdateInfo) {
+                    if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                            // For a flexible update, use AppUpdateType.FLEXIBLE
+                            && appUpdateInfo.isUpdateTypeAllowed(inAppUpdateType)) {
+                        // Request the update.
+
+                        try {
+                            mAppUpdateManager.startUpdateFlowForResult(
+                                    // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                                    appUpdateInfo,
+                                    // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
+                                    inAppUpdateType,
+                                    // The current activity making the update request.
+                                    DashboardActivity.this,
+                                    // Include a request code to later monitor this update request.
+                                    RC_APP_UPDATE);
+                        } catch (IntentSender.SendIntentException ignored) {
+
+                        }
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void popupSnackbarForCompleteUpdate() {
+        try {
+            com.google.android.material.snackbar.Snackbar snackbar =
+                    com.google.android.material.snackbar.Snackbar.make(
+                            findViewById(R.id.cordinatorLayout),
+                            "An update has just been downloaded.\nRestart to update",
+                            com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE);
+
+            snackbar.setAction("INSTALL", view -> {
+                if (mAppUpdateManager != null){
+                    mAppUpdateManager.completeUpdate();
+                }
+            });
+            snackbar.setActionTextColor(Color.parseColor("#ffffff"));
+            snackbar.show();
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+    //-------added on 4th Sept code for version update, ends----
 
      //========///----Notification, code starts---///=======
      public void LoadNotificationData(){
@@ -1673,6 +1796,20 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 //            recognize(base64String);
 //            Log.d("base64-=>",base64String);
         }
+
+        //----code for app update, starts----
+        if (requestCode == RC_APP_UPDATE) {
+            //when user clicks update button
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(DashboardActivity.this, "App download starts...", Toast.LENGTH_LONG).show();
+            } else if (resultCode != RESULT_CANCELED) {
+                //if you want to request the update again just call checkUpdate()
+                Toast.makeText(DashboardActivity.this, "App download canceled.", Toast.LENGTH_LONG).show();
+            } else if (resultCode == RESULT_IN_APP_UPDATE_FAILED) {
+                Toast.makeText(DashboardActivity.this, "App download failed.", Toast.LENGTH_LONG).show();
+            }
+        }
+        //----code for app update, ends----
     }
     public void EnableRuntimePermission(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(DashboardActivity.this,

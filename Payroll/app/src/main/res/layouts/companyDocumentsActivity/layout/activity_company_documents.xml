@@ -65,13 +65,13 @@
                 android:layout_above="@id/rl_btn"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="15dp"
                 android:visibility="visible" />
 
             <RelativeLayout
                 android:id="@+id/rl_btn"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="0dp"
                 android:layout_alignParentBottom="true"
                 >
 
@@ -81,7 +81,7 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentBottom="true"
                     android:text="OK"
-                    android:textColor="#000"
+                    android:textColor="#000000"
                     android:textSize="19sp">
 
                 </Button>
