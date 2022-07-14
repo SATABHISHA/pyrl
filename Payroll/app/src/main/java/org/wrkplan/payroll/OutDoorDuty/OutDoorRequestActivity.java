@@ -441,6 +441,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
         //------Spinner code starts------
         List<String> spinnerList_od_duty_type = new ArrayList<>();
         spinnerList_od_duty_type.add("Work From Home");
+        spinnerList_od_duty_type.add("Outdoor Duty");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(OutDoorRequestActivity.this, android.R.layout.simple_spinner_item, spinnerList_od_duty_type);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -522,6 +523,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                     //------Spinner code starts(added on 21st may)------
                     List<String> spinnerList_od_duty_type = new ArrayList<>();
                     spinnerList_od_duty_type.add("Work From Home");
+                    spinnerList_od_duty_type.add("Outdoor Duty");
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(OutDoorRequestActivity.this, android.R.layout.simple_spinner_item, spinnerList_od_duty_type);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -559,6 +561,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                     //------Spinner code starts(added on 21st may)------
                     List<String> spinnerList_od_duty_type = new ArrayList<>();
                     spinnerList_od_duty_type.add("Work From Home");
+                    spinnerList_od_duty_type.add("Outdoor Duty");
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(OutDoorRequestActivity.this, android.R.layout.simple_spinner_item, spinnerList_od_duty_type);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -615,6 +618,7 @@ public class OutDoorRequestActivity extends AppCompatActivity implements View.On
                     //------Spinner code starts(added on 25th may)------
                     List<String> spinnerList_od_duty_type = new ArrayList<>();
                     spinnerList_od_duty_type.add("Work From Home");
+                    spinnerList_od_duty_type.add("Outdoor Duty");
 
                     ArrayAdapter<String> adapter_od_duty_type = new ArrayAdapter<String>(OutDoorRequestActivity.this, android.R.layout.simple_spinner_item, spinnerList_od_duty_type);
                     adapter_od_duty_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
