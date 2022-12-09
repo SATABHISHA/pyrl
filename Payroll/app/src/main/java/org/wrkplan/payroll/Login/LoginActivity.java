@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     SharedPreferences sharedPreferences,autofill;
     UserSingletonModel userSingletonModel=UserSingletonModel.getInstance();
 
-
     CheckBox checked_sign;
     SharedPreferences.Editor editor;
     SharedPreferences.Editor editor_autofill;
